@@ -1,10 +1,9 @@
+import React from 'react';
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+<h1>Flowerista</h1>
   );
 }
 
