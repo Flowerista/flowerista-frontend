@@ -1,14 +1,19 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
+import {testApi} from "../services/test-api/test-api-service";
+
 const rootReducer = combineReducers({
+	[testApi.reducerPath]: testApi.reducer,
 })
 
 export const setupStore = () => {
 	return configureStore({
 		reducer: rootReducer,
+
 		middleware: (getDefaultMiddleware) =>
 			 getDefaultMiddleware()
+					.concat(testApi.middleware)
 	})
 }
 
