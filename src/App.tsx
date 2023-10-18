@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.scss';
-import {useTestFetchQuery} from './services/test-api/test-api-service';
+import {HomePage} from './pages/HomePage';
+import {Route, Routes} from 'react-router-dom';
+import {MainLayout} from './layouts/MainLayout';
 
 function App() {
-  const {data ,isLoading}= useTestFetchQuery("");
   return (
-    isLoading ? <h1>Loading...</h1> :
-    <h1>{data.name}</h1>
+     <MainLayout>
+       <Routes>
+         <Route path="/" element={<HomePage/>}/>
+       </Routes>
+     </MainLayout>
   );
 }
 

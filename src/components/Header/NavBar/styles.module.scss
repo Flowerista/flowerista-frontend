@@ -1,0 +1,20 @@
+.navbar{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	&__menu{
+		display: flex;
+		li{
+			margin-right: 55px;
+			&:last-of-type{
+				margin-right: 0;
+			}
+		}
+	}
+	a{
+		cursor: pointer;
+		color: #2C1607;
+
+	}
+}
