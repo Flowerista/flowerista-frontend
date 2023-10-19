@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import { AboutUs } from '../../components/AboutUs/AboutUs';
 import { Reviews } from '../../components/Reviews/Reviews';
+import {HomeSwiper} from './HomeSwiper';
 
-export interface IHomePage {
-}
 
-export const HomePage: FC<IHomePage> = () => {
+export const HomePage: FC = () => {
 	return (
-		 <div>
+     <main>
+       <HomeSwiper/>
 			 <AboutUs/>
 			 <Reviews/>
-		 </div>
+		 </main>
 	);
 };
 
