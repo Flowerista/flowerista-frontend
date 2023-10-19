@@ -1,13 +1,12 @@
 import {FC} from 'react';
+import {HomeSwiper} from './HomeSwiper';
 
-export interface IHomePage {
-}
 
-export const HomePage: FC<IHomePage> = () => {
+export const HomePage: FC = () => {
 	return (
-		 <div>
-			 
-		 </div>
+		 <main>
+			 <HomeSwiper/>
+		 </main>
 	);
 };
 
