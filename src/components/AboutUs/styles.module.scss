@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+.section {
+    &__title {
+        font-family: $main-font;
+        font-size: 32px;
+    }
+}
+.content {
+    display: flex;
+    gap: 20px;
+    margin-top: 50px;
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: end;
+        &__autor {
+            font-family: $main-font;
+            font-size: 14px;
+            font-style: italic;
+            line-height: 150%;
+        }
+    }
+    &__center {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding-top: 94px;
+        color: #2C1607;
+        font-family: $main-font;
+        font-size: 16px;
+        line-height: 150%; 
+    }
+    &__descr {
+        width: 412px;
+    }
+    &__link {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
