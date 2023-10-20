@@ -9,14 +9,14 @@ export interface INavBar {
 
 export const NavBar: FC<INavBar> = () => {
 	return (
-		 <div className={styles.navbar}>
+		 <nav className={styles.navbar}>
 			 <ul className={styles.navbar__menu}>
 				 <li><Link to={Route.Catalog}>Catalog</Link></li>
 				 <li><Link to={Route.AboutUs}>About us</Link></li>
 				 <li><Link to={Route.DeliveryAndPayment}>Delivery & payment</Link></li>
 			 </ul>
 			 <ParametersMenu/>
-		 </div>
+		 </nav>
 	);
 };
 

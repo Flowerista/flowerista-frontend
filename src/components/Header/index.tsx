@@ -5,10 +5,10 @@ import {Logo} from './Logo';
 
 export const Header = () => {
 	return (
-		 <div className={styles.container}>
-			 <Logo/>
+		 <header className={styles.container}>
+			 <Logo type={"header"}/>
 			 <NavBar/>
-		 </div>
+		 </header>
 	);
 };
 

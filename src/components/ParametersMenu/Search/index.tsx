@@ -7,9 +7,10 @@ export interface ISearch {
 
 export const Search: FC<ISearch> = () => {
 	return (
-		 <div className={styles.search}>
-       <BsSearch style={{fontSize:"24px",cursor:"pointer"}}/>
-		 </div>
+		 <form className={styles.search}>
+       <button><BsSearch style={{fontSize:"24px",cursor:"pointer"}}/></button>
+			 <input type="text" placeholder={"Flower"}/>
+		 </form>
 	);
 };
 
