@@ -1,6 +1,7 @@
 .swiper{
 	user-select: none;
 	position: relative;
+	margin-bottom: 50px;
 	&__slide{
 		position: relative;
 	}
@@ -9,20 +10,6 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-	}
-
-	&__btns{
-		position: relative;
-		top: -300px;
-		display: flex;
-		justify-content: space-between;
-		max-width: 1200px;
-		margin: 0 auto;
-		cursor: pointer;
-		z-index: 100;
-		&:first-of-type{
-			background-image: url("../../../assets/image/swiper/arrow_1.svg");
-		}
 	}
 
 	&__second{

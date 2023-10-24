@@ -3,7 +3,7 @@ import {Header} from '../../components/Header';
 import {Footer} from '../../components/Footer';
 
 export interface IMainLayout {
-	children:ReactNode
+	children?:ReactNode
 }
 
 export const MainLayout: FC<IMainLayout> = ({children}) => {
