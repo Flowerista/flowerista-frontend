@@ -1,0 +1,29 @@
+@import "../../styles/variables.scss";
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: $main-font;
+    color: #2C1607;
+    font-weight: 400;
+    &__title {
+        font-size: 32px;
+    }
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        line-height: 150%; /* 24px */
+        a{
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.content{
+    margin-top: 50px;
+    display: flex;
+}

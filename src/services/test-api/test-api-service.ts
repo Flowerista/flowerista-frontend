@@ -7,7 +7,7 @@ export const testApi = createApi({
 	endpoints: (build) => ({
 		testFetch: build.query<any,any>({
 			query: () => ({
-				url: `/test`,
+				url: `/bouquete/bs`,
 			}),
 		}),
 	})
