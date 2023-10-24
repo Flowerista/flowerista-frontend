@@ -7,14 +7,14 @@ import {Subscribe} from './Subscribe';
 
 export const Footer: FC = () => {
 	return (
-		 <div className={styles.footer}>
+		 <footer className={styles.footer}>
 			<div className={styles.footer__container}>
 				<Name/>
 				<Links/>
 				<Contacts/>
 				<Subscribe/>
 			</div>
-		 </div>
+		 </footer>
 	);
 };
 

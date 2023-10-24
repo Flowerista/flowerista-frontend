@@ -5,4 +5,6 @@ export enum Route {
 	Profile = "/profile",
 	Cart = "/cart",
 	Product = "/product",
+	Home = "/",
+	Cart = "/cart"
 }
