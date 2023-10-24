@@ -3,6 +3,7 @@ export enum Route {
 	AboutUs = "/about-us",
 	DeliveryAndPayment = "/delivery-payment",
 	Profile = "/profile",
+	Cart = "/cart",
+	Product = "/product",
 	Home = "/",
-	Cart = "/cart"
 }
