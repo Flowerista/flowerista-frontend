@@ -1,9 +1,8 @@
-@import "../../styles/variables.scss";
 .section {
-    margin-top: 168px;
-    margin-bottom: 142px;
+    margin-top: 120px;
+    margin-bottom: 120px;
     &__title {
-        font-family: $main-font;
+        font-family: 'Work Sans', sans-serif;;
         font-size: 32px;
     }
 }
@@ -21,11 +20,11 @@
     color:#2C1607;
     max-width: 304px;
     &__title {
-        font-family: $main-font;
+        font-family: 'Work Sans', sans-serif;;
         font-size: 20px;
     }
     &__text {
-        font-family: $main-font;
+        font-family: 'Work Sans', sans-serif;;
         font-size: 16px;
         line-height: 150%; /* 24px */
     }
