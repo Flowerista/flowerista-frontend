@@ -42,6 +42,11 @@
 				&:last-of-type{
 					margin-right: 0;
 				}
+				a{
+					&:hover{
+						color: #e7a9a7;
+					}
+				}
 			}
 		}
 	}

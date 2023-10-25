@@ -1,6 +1,5 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import SwiperCore from 'swiper';
 import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import BgImage from '../../../assets/image/swiper/first.png'
 import secondSwipe from '../../../assets/image/swiper/second_swiper.png'
@@ -10,36 +9,23 @@ import textBgImage from '../../../assets/image/swiper/second.png'
 import fourthSwiper from '../../../assets/image/swiper/fourth_swiper.png'
 import fourthSwiperText from '../../../assets/image/swiper/fourth_swiper-text.png'
 
-import arrowPrev from '../../../assets/image/swiper/arrow_2.svg'
-import arrowNext from '../../../assets/image/swiper/arrow_1.svg'
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
 import styles from './styles.module.scss';
 
-SwiperCore.use([Navigation, Pagination,Autoplay]);
+import 'swiper/scss';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+
 
 export const HomeSwiper = () => {
-	const prevRef = useRef<HTMLDivElement>(null);
-	const nextRef = useRef<HTMLDivElement>(null);
 	return (
 		 <div className={styles.swiper}>
 			 <Swiper
 				  loop={true}
 				  autoplay={{delay:2500,disableOnInteraction:false}}
 					pagination={{ clickable: true }}
-				  navigation={{enabled:true,prevEl:prevRef?.current,nextEl:nextRef?.current}}
+				  navigation
 					modules={[Navigation, Pagination,Autoplay]}
-					onSwiper={(swiper:any) => {
-							swiper.params.navigation.prevEl = prevRef?.current
-							swiper.params.navigation.nextEl = nextRef?.current
 
-							swiper.navigation.destroy()
-							swiper.navigation.init()
-							swiper.navigation.update()
-					}}
 					className={"homeSwiper"}
 			 >
 				 <SwiperSlide>
@@ -79,12 +65,7 @@ export const HomeSwiper = () => {
 						 <img src={fourthSwiper} alt="first_swiper" />
 					 </div>
 				 </SwiperSlide>
-
 			 </Swiper>
-		<div className={styles.swiper__btns}>
-			<div ref={prevRef}><img src={arrowPrev} alt="" /></div>
-			<div ref={nextRef}><img src={arrowNext} alt="" /></div>
-		</div>
 		 </div>
 	);
 };

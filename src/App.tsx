@@ -2,6 +2,7 @@ import React from 'react';
 import {HomePage} from './pages/HomePage';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {MainLayout} from './layouts/MainLayout';
+import {NotFoundPage} from './pages/NotFoundPage';
 import {CatalogPage} from './pages/CatalogPage';
 import PageTransition from './components/PageTransition';
 
@@ -11,6 +12,7 @@ function App() {
      <MainLayout>
        <PageTransition location={location.pathname}>
        <Routes>
+         <Route path="*" element={<NotFoundPage />} />
          <Route path="/" element={<HomePage/>}/>
          <Route path="/catalog" element={<CatalogPage/>}/>
        </Routes>
