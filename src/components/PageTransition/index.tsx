@@ -8,7 +8,6 @@ interface IPageTransition {
 }
 
 const PageTransition:FC<IPageTransition>= ({ children, location }) => {
-	console.log(location)
 	return (
 		 <TransitionGroup>
 			 <CSSTransition
