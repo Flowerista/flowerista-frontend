@@ -1,0 +1,14 @@
+.catalog{
+	min-height: 100vh;
+	&__name{
+		color: #E7A9A7;
+		margin-bottom: 50px;
+	}
+	&__dropDown{
+		display: flex;
+		justify-content: space-between;
+		&_items{
+			display: flex;
+		}
+	}
+}
