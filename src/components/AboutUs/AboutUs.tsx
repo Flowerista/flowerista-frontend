@@ -12,12 +12,15 @@ export interface IAboutUs {
 export const AboutUs: FC<IAboutUs> = () => {
 	return (
         <section className={styles.section}>
-            <div className={styles.section__title}>About Us</div>
+            {/* <div className={styles.section__title}>About Us</div> */}
             <div className={styles.content}>
                 <div className={styles.content__left}>
-                    <p className={styles.content__left__autor}>Anna . florist</p>
-                    <div className={styles.wrapper__img_small}>
-                        <img src={SmallImg} alt="" />
+                    <div className={styles.section__title}>About Us</div>
+                    <div>
+                        <p className={styles.content__left__autor}>Anna . florist</p>
+                        <div className={styles.wrapper__img_small}>
+                            <img src={SmallImg} alt="" />
+                        </div>
                     </div>
                 </div>
                 <div className={styles.content__center}>
@@ -39,11 +42,10 @@ export const AboutUs: FC<IAboutUs> = () => {
                             Join us on a journey through the enchanting world of flowers and gifts, and we promise to brighten each day with color and fragrance
                         </p>
                     </div>
-                    <div className={styles.content__link}>
-                        <Link to={Route.AboutUs}>
-                            more about
+                    <div className={styles.content__link__wrapper}>
+                        <Link to={Route.AboutUs} className={styles.content__link}>
+                            more about <BsArrowRight style={{fontSize: "24px"}}/>
                         </Link>
-                        <BsArrowRight style={{fontSize: "24px", opacity: '.4'}}/>
                     </div>
                 </div>
                 <div className={styles.content__right}>
