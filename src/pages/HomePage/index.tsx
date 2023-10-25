@@ -2,8 +2,6 @@ import {FC} from 'react';
 import {AboutUs} from '../../components/AboutUs/AboutUs';
 import {Reviews} from '../../components/Reviews/Reviews';
 import {HomeSwiper} from './HomeSwiper';
-import { Bestsellers } from '../../components/SectionsFlower/Bestsellers/Bestsellers';
-import { Sale } from '../../components/SectionsFlower/Sale/Sale';
 import {CatalogBox} from '../../components/CatalogBox';
 import styles from './styles.module.scss'
 
@@ -15,8 +13,8 @@ export const HomePage: FC = () => {
 		     <CatalogBox text={"New arrivals"}/>
 		     <CatalogBox text={"Bouquet in a box"}/>
 	     </div>
-        <Bestsellers/>
-			  <Sale/>
+        {/*<Bestsellers/>*/}
+			  {/*<Sale/>*/}
 			 <AboutUs/>
 			 <Reviews/>
 		 </main>
