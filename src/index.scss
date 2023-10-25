@@ -38,3 +38,18 @@
 .swiper-pagination-bullet-active{
 	background: #FFFFFF !important;
 }
+
+.swiper-button-prev,.swiper-button-next{
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 200px !important;
+}
+
+.swiper-button-prev{
+	background-image: url("../src/assets/image/swiper/arrow_2.svg");
+
+}
+
+.swiper-button-next{
+	background-image: url("../src/assets/image/swiper/arrow_1.svg");
+}

@@ -1,20 +1,32 @@
-.navbar{
+.navbar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	&__menu{
+
+	&__menu {
 		display: flex;
-		li{
+
+		li {
 			margin-right: 55px;
-			&:last-of-type{
+
+			&:last-of-type {
 				margin-right: 0;
 			}
-		}
-	}
-	a{
-		cursor: pointer;
-		color: #2C1607;
 
+			a {
+				cursor: pointer;
+				color: #2C1607;
+				border-bottom: 2px solid transparent;
+				transition: border-bottom 0.3s ease;
+
+				&:hover {
+					border-bottom: 2px solid #e7a9a7;
+				}
+				&.active {
+          border-bottom: 2px solid #e7a9a7;
+        }
+			}
+		}
 	}
 }
