@@ -6,22 +6,13 @@ import { IFlowerCard } from '../../../types/flower';
 
 interface IFlowerItem {
     id: number;
-    flowers: any[];
-    colors: any[];
-    itemCode: string;
     name: string;
-    defaultPrice: number;
-    discount: number;
-    discountPrice: number;
-    size: any;
-    quantity: number;
-    soldQuantity: number;
-}
-
-interface IFlowersDataAnswer {
-    _embedded: {
-        bouqueteDtoList: IFlowerItem[]
+    imageUrls: {
+        [key: string]: string;
     }
+    defaultPrice: number;
+    discount?: number;
+    discountPrice?: number;
 }
 
 
@@ -33,7 +24,7 @@ export const Bestsellers: FC = () => {
     if (error) {
         return <h1>Error</h1>
     }
-    const flowerData: IFlowerItem[] = data?._embedded?.bouqueteDtoList
+    const flowerData: IFlowerItem[] = [...data]
     const newData: IFlowerCard[] = flowerData.map(item => (
         {
             id: item.id,
@@ -41,13 +32,13 @@ export const Bestsellers: FC = () => {
             defaultPrice: item.defaultPrice,
             discount: item?.discount,
             discountPrice: item?.discountPrice,
+            img: item?.imageUrls['1']
         }
     ))
-    console.log(newData);
     
     return (
         <>
-            <SectionFlower title='Bestsellers' data={newData}/>
+            <SectionFlower title='Bestsellers' data={newData} style={{marginTop: '120px'}}/>
         </>
     )
 }

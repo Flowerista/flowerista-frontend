@@ -1,6 +1,7 @@
 .card {
     width: 252px;
     position: relative;
+    transition: all .7s;
     &__sale {
         border-top-left-radius: 26px;
     }
@@ -28,6 +29,9 @@
     }
     &__name{
         font-size: 18px;
+        &:hover {
+            text-decoration: underline;
+        }
     }
     &__desc{
         display: flex;
@@ -88,6 +92,11 @@
     color: #E7A9A7;
     font-size: 24px;
     cursor: pointer;
+    svg{
+        &:hover {
+            filter: drop-shadow(0 0 0.75rem crimson);
+        }
+    }
 }
 
 .sale{

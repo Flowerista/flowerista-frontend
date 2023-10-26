@@ -26,18 +26,20 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
             </div>
             <div className={styles.card__footer}>
                 <div className={styles.card__name}>
-                    {name}
+                    <Link to={`${Route.Product}:${id}`}>
+                        {name}
+                    </Link>
                 </div>
                 <div className={styles.card__desc}>
                     <div className={styles.price__wrapper}>
-                        {discountPrice && 
+                        {discountPrice &&
                             <div className={styles.price_old}>
                                 <p>{defaultPrice}</p>
                                 <span> UAH</span>
                             </div>
                         }
                         <div className={styles.price}>
-                            {defaultPrice}
+                            {discountPrice || defaultPrice}
                             <span> UAH</span>
                         </div>
                     </div>
