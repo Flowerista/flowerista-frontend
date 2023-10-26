@@ -3,6 +3,8 @@ import styles from './styles.module.scss';
 import { SectionFlower } from '../SectionFlower';
 import { testApi } from '../../../services/test-api/test-api-service';
 import { IFlowerCard } from '../../../types/flower';
+import { loadavg } from 'os';
+import { SkeletonCard } from '../../Skeletons/SkeletonCard/SkeletonCard';
 
 interface IFlowerItem {
     id: number;
@@ -19,7 +21,15 @@ interface IFlowerItem {
 export const Bestsellers: FC = () => {
     const { data, error, isLoading } = testApi.useTestFetchQuery('')
     if (isLoading) {
-        return <h1>Loading...</h1>
+        return (
+            <div style={{display: 'flex', marginTop: '120px'}} >
+                <SkeletonCard/>
+                <SkeletonCard/>
+                <SkeletonCard/>
+                <SkeletonCard/>
+                <SkeletonCard/>
+            </div>
+        )
     }
     if (error) {
         return <h1>Error</h1>
