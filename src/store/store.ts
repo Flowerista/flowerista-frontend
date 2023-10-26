@@ -1,10 +1,10 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
+import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
 
-import {testApi} from "../services/test-api/test-api-service";
 
 const rootReducer = combineReducers({
-	[testApi.reducerPath]: testApi.reducer,
+	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 })
 
 export const setupStore = () => {
@@ -13,7 +13,7 @@ export const setupStore = () => {
 
 		middleware: (getDefaultMiddleware) =>
 			 getDefaultMiddleware()
-					.concat(testApi.middleware)
+					.concat(bouqueteApi.middleware)
 	})
 }
 

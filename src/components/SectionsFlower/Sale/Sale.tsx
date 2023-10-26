@@ -1,23 +1,12 @@
-import { FC } from 'react'
-import styles from './styles.module.scss';
-import { SectionFlower } from '../SectionFlower';
-import { testApi } from '../../../services/test-api/test-api-service';
-import { IFlowerCard } from '../../../types/flower';
-import { SkeletonCard } from '../../Skeletons/SkeletonCard/SkeletonCard';
+import {FC} from 'react'
+import {SectionFlower} from '../SectionFlower';
+import {SkeletonCard} from '../../Skeletons/SkeletonCard/SkeletonCard';
+import {useGetTopSellersQuery} from '../../../services/bouquete-api/bouquete-api-service';
 
-interface IFlowerItem {
-    id: number;
-    name: string;
-    imageUrls: {
-        [key: string]: string;
-    }
-    defaultPrice: number;
-    discount?: number;
-    discountPrice?: number;
-}
 
 export const Sale: FC = () => {
-    const { data, error, isLoading } = testApi.useTestFetchQuery('')
+  const { data, error, isLoading } = useGetTopSellersQuery('')
+
     if (isLoading) {
         return (
             <div style={{display: 'flex', marginTop: '120px', marginBottom: '120px'}}>
@@ -29,24 +18,14 @@ export const Sale: FC = () => {
             </div>
         )
     }
+
     if (error) {
-        return <h1>Error</h1>
+        return <h1>Something Was Wrong!</h1>
     }
-    const flowerData: IFlowerItem[] = [...data]
-    const newData: IFlowerCard[] = flowerData.map(item => (
-        {
-            id: item.id,
-            name: item.name,
-            defaultPrice: item.defaultPrice,
-            discount: item?.discount,
-            discountPrice: item?.discountPrice,
-            img: item?.imageUrls['1']
-        }
-    ))
-    
+
     return (
         <>
-            <SectionFlower title='Sale' data={newData} style={{marginTop: '120px', marginBottom: '120px'}}/>
+            <SectionFlower title='Sale' data={data} style={{marginTop: '120px', marginBottom: '120px'}}/>
         </>
     )
 }

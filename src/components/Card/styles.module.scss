@@ -92,9 +92,11 @@
     color: #E7A9A7;
     font-size: 24px;
     cursor: pointer;
+    transition: all 0.3s;
     svg{
         &:hover {
             filter: drop-shadow(0 0 0.75rem crimson);
+            transition: all 0.3s;
         }
     }
 }

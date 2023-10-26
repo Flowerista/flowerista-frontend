@@ -4,8 +4,8 @@ import {Reviews} from '../../components/Reviews/Reviews';
 import {HomeSwiper} from './HomeSwiper';
 import {CatalogBox} from '../../components/CatalogBox';
 import styles from './styles.module.scss'
-import {Sale} from '../../components/SectionsFlower/Sale/Sale';
 import {Bestsellers} from '../../components/SectionsFlower/Bestsellers/Bestsellers';
+import {Sale} from '../../components/SectionsFlower/Sale/Sale';
 
 export const HomePage: FC = () => {
 	return (
