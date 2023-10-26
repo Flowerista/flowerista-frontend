@@ -1,0 +1,75 @@
+$animation: skeleton-loading 1s linear infinite alternate;
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+.card {
+    width: 252px;
+    height: 396px;
+    transition: all .7s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    opacity: 0.7;
+    &__img {
+        animation: $animation;
+        border-radius: 5%;
+        height: 280px;
+    }
+    &__footer{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__name {
+        border-radius: 10px;
+        height: 21px;
+        width: 110px;
+        animation: $animation;
+    }
+    &__desc{
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__price {
+        height: 24px;
+        width: 90px;
+        border-radius: 10px;
+        animation: $animation;
+        &_old {
+            height: 16px;
+            width: 70px;
+            border-radius: 10px;
+            animation: $animation;
+        }
+    }
+
+
+    &:hover{
+        box-shadow: 0px 0px 25px 0px rgba(109, 101, 89, 0.08);
+    }
+}
+
+.cart{
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    animation: $animation;
+}
