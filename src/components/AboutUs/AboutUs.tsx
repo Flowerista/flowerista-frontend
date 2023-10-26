@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
 import {Link} from 'react-router-dom';
-import {Route} from '../../data/routes';
+import {DataRoute} from '../../data/routes';
 import BigImg from '../../assets/image/about_us/big_img.png';
 import SmallImg from '../../assets/image/about_us/small_img.png';
 import {BsArrowRight} from 'react-icons/bs';
@@ -43,7 +43,7 @@ export const AboutUs: FC<IAboutUs> = () => {
                         </p>
                     </div>
                     <div className={styles.content__link__wrapper}>
-                        <Link to={Route.AboutUs} className={styles.content__link}>
+                        <Link to={DataRoute.AboutUs} className={styles.content__link}>
                             more about <BsArrowRight style={{fontSize: "24px"}}/>
                         </Link>
                     </div>

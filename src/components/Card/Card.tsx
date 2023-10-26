@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
+import {FC, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Route} from '../../data/routes';
-import { BsBagFill, BsHeart, BsHeartFill } from 'react-icons/bs';
+import {DataRoute} from '../../data/routes';
+import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
 import styles from './styles.module.scss';
-import { IFlowerCard } from '../../types/flower';
+import {IFlowerCard} from '../../types/flower';
 
 const toCart = () => {
     alert('added to cart')
@@ -16,7 +16,7 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
     <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
         <div className={styles.card__wrapper}>
             <div className={styles.card__img}>
-                <Link to={`${Route.Product}:${id}`}>
+                <Link to={`${DataRoute.Product}:${id}`}>
                     <img 
                         src={ img || defaultImg } alt="flower" />
                 </Link>
@@ -26,7 +26,7 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
             </div>
             <div className={styles.card__footer}>
                 <div className={styles.card__name}>
-                    <Link to={`${Route.Product}:${id}`}>
+                    <Link to={`${DataRoute.Product}:${id}`}>
                         {name}
                     </Link>
                 </div>

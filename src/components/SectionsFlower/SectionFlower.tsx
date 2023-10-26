@@ -1,12 +1,12 @@
-import { FC, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
-import { Route } from '../../data/routes';
-import { BsArrowRight } from 'react-icons/bs';
+import {FC, ReactNode} from 'react';
+import {Link} from 'react-router-dom';
+import {BsArrowRight} from 'react-icons/bs';
 
-import { IFlowerCard } from '../../types/flower';
+import {IFlowerCard} from '../../types/flower';
 
 import styles from './styles.module.scss';
-import { Card } from '../Card/Card';
+import {Card} from '../Card/Card';
+import {DataRoute} from '../../data/routes';
 
 export interface ISectionsFlower {
     children?: ReactNode;
@@ -21,7 +21,7 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
       <div className={styles.head}>
         <div className={styles.head__title}>{title}</div>
         <div className={styles.head__link__wrapper}>
-            <Link to={Route.Catalog} className={styles.head__link}>
+            <Link to={DataRoute.Catalog} className={styles.head__link}>
                 see all <BsArrowRight style={{fontSize: "24px"}}/>
             </Link>
         </div>
