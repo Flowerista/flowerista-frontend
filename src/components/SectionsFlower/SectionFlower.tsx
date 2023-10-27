@@ -1,16 +1,15 @@
-import { FC, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
-import { Route } from '../../data/routes';
-import { BsArrowRight } from 'react-icons/bs';
+import {FC} from 'react';
+import {Link} from 'react-router-dom';
+import {BsArrowRight} from 'react-icons/bs';
 
-import { IFlowerCard } from '../../types/flower';
+import {IFlowerCard} from '../../interface/flower';
 
 import styles from './styles.module.scss';
-import { Card } from '../Card/Card';
+import {Card} from '../Card/Card';
+import {DataRoute} from '../../data/routes';
 
 export interface ISectionsFlower {
-    children?: ReactNode;
-    data: IFlowerCard[];
+    data: IFlowerCard[] | undefined;
     title: string;
     style?: object;
 }
@@ -21,21 +20,21 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
       <div className={styles.head}>
         <div className={styles.head__title}>{title}</div>
         <div className={styles.head__link__wrapper}>
-            <Link to={Route.Catalog} className={styles.head__link}>
+            <Link to={DataRoute.Catalog} className={styles.head__link}>
                 see all <BsArrowRight style={{fontSize: "24px"}}/>
             </Link>
         </div>
       </div>
       <div className={styles.content}>
-        {data && data.map(({id, name, discount, defaultPrice, discountPrice, img}) => (
-          <Card 
-            id={id}
-            name={name}
-            discount={discount}
-            defaultPrice={defaultPrice} 
-            discountPrice={discountPrice}
-            img={img}
-            key={id}
+        {data && data.map((item) => (
+          <Card
+            id={item?.id}
+            name={item?.name}
+            discount={item?.discount}
+            defaultPrice={item?.defaultPrice}
+            discountPrice={item?.discountPrice}
+            img={item?.imageUrls}
+            key={item?.id}
           />
         ))}
       </div>

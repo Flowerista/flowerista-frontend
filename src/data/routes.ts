@@ -1,4 +1,4 @@
-export enum Route {
+export enum DataRoute {
 	Catalog = "/catalog",
 	AboutUs = "/about-us",
 	DeliveryAndPayment = "/delivery-payment",

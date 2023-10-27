@@ -1,0 +1,42 @@
+.container{
+	display: flex;
+	overflow: hidden;
+	&__info{
+		max-width: 720px;
+		h1{
+			margin-bottom: 50px;
+			font-size: 32px;
+			font-weight: 400;
+			line-height: 38px;
+
+		}
+		&_content{
+			margin-bottom: 50px;
+			h2{
+				font-size: 20px;
+				font-weight: 400;
+				line-height: 23px;
+
+			}
+
+			li{
+				list-style-type: disc;
+				margin-bottom: 10px;
+				&:last-of-type{
+					margin-bottom: 30px;
+				}
+			}
+
+			p{
+				margin-bottom: 50px;
+				&:last-of-type{
+					margin-bottom: 200px;
+				}
+			}
+		}
+	}
+	&__image{
+		position: absolute;
+		left: 61%;
+	}
+}

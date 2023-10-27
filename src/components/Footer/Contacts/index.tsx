@@ -11,8 +11,8 @@ export const Contacts: FC = () => {
 			 <a href="tel:380 99 999 99 99">+380 99 999 99 99</a>
 			 <a href="tel:380 99 999 99 99">+380 99 999 99 99</a>
 			 <ul>
-				 <li><Link to={"https://uk-ua.facebook.com/"} target={"_blank"}><BsInstagram/></Link></li>
-				 <li><Link to={"https://www.instagram.com/"} target={"_blank"}><BsFacebook/></Link></li>
+				 <li><Link to={"https://www.instagram.com"} target={"_blank"}><BsInstagram/></Link></li>
+				 <li><Link to={"https://uk-ua.facebook.com"} target={"_blank"}><BsFacebook/></Link></li>
 				 <li><Link to={"https://ru.pinterest.com"} target={"_blank"}><BsPinterest/></Link></li>
 			 </ul>
 		 </nav>

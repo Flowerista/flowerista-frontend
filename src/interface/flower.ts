@@ -4,5 +4,5 @@ export interface IFlowerCard {
     defaultPrice: number;
     discount?: number;
     discountPrice?: number;
-    img?: string 
+    imageUrls?: string[]
 }
