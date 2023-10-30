@@ -1,0 +1,132 @@
+.about_us {
+    color: #231104;
+    font-family: Work Sans, sans-serif;
+    font-weight: 400;
+}
+
+.section {
+    &_1 {
+        display: flex;
+        gap: 20px;
+        .img__wrapper {
+            display: block;
+            width: 736px;
+            height: 351px;
+        }
+        .descr {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 520px;
+            &__wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                font-size: 16px;
+                line-height: 150%; /* 24px */
+            }
+        }
+        
+    }
+    &_2 {
+        margin-top: 120px;
+        .list {
+            &__wrapper {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                margin-top: 50px;
+            }
+            &__col {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 50%;
+            }
+            &__title {
+                font-size: 20px;
+            }
+            &__items {
+                margin-left: 26px;
+                font-size: 16px;
+                line-height: 150%; /* 24px */
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            &__item {
+                list-style: disc;
+            }
+        }
+    }
+    &_3 {
+        margin-top: 120px;
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 500;
+            line-height: 150%; /* 21px */
+        }
+        .img__wrapper {
+            margin-top: 10px;
+            width: 100%;
+        }
+    }
+    &_4 {
+        margin-top: 120px;
+        margin-bottom: 107px;
+        .team {
+            &__wrapper {
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 37px;
+            }
+            &__img {
+                width: 416px;
+                height: 353px;
+            }
+            &__item {
+                display: flex;
+                gap: 20px;
+            }
+            &__text {
+                max-width: 516px;
+
+            }
+            &__name {
+                font-size: 32px;
+                line-height: normal;
+            }
+            &__job {
+                margin-top: 5px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%; /* 24px */
+                color:  #C24A51;
+            }
+            &__descr {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                font-size: 16px;
+                line-height: 150%; /* 24px */
+            }
+        }
+    }
+}
+.title {
+    font-size: 32px;
+    line-height: normal;
+}
+.flower {
+    position: absolute;
+    top: 1862px;
+    right: 0; 
+    padding: 19px 0 12.8px 25px;
+    z-index: -1;
+}
