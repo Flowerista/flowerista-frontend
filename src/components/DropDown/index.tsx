@@ -1,23 +1,13 @@
 import React, {FC, useState} from 'react';
-import topArrow from '../../assets/image/dropDown/top_arrow.png'
-import bottomArrow from '../../assets/image/dropDown/botton_arrow.png'
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-interface IDropDownProps {
-	text: string
-	items:{key: string, value: string}[]
-}
-
-
-export const DropDown: FC<IDropDownProps> = ({text,items}) => {
+export const DropDown: FC<any> = ({ items, toggleFilter,name,setName }) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const [selected, setSelected] = useState<string>(text);
 
-
-
-	const handleItemClick = (item: string) => {
-		setSelected(item);
+	const handleItemClick = ({item, menu}:{item:any,menu:string}) => {
+		toggleFilter({item :item.name, menu});
 		setIsActive(false);
+		setName(item.name);
 	};
 
 	return (
@@ -28,28 +18,19 @@ export const DropDown: FC<IDropDownProps> = ({text,items}) => {
 					}}
 					className={styles.dropDown__btn}
 			 >
-				 {selected}
-				 <span>
-					 {isActive?<img src={topArrow} alt=""/>:<img src={bottomArrow} alt=""/>}
-				 </span>
+				 {name}
 			 </div>
-			 <div
-					className={`${styles.dropDown__content} ${isActive ? styles.active :""}`}
-			 >
-				 {items.map(item =>(
-					  <div
-						   key={item.key}
-							 onClick={(e:any) => {
-								 handleItemClick(e.target.textContent);
-							 }}
+			 <div className={`${styles.dropDown__content} ${isActive ? styles.active : ''}`}>
+				 {items?.map((item: any) => (
+						<div
+							 key={item.id}
+							 onClick={(e: any) => handleItemClick({item:item,menu:name})} // Обработчик клика на элементе
 							 className={styles.item}
-					  >
-						  {item.value}
-					  </div>
+						>
+							{item.name}
+						</div>
 				 ))}
-
 			 </div>
 		 </div>
 	);
 };
-

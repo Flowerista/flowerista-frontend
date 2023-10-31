@@ -2,6 +2,15 @@
 	z-index: 999;
 	width: 200px;
 	position: relative;
+	border: 1px none #e7a9a7;
+	border-left-style: solid;
+
+	&:nth-child(1){
+		border-left: none;
+	}
+	&:nth-child(3){
+		border-right: 1px solid #e7a9a7;
+	}
 
 	&__btn{
 		cursor: pointer;
@@ -21,6 +30,7 @@
 		width: 100%;
 		display: none;
 		opacity: 0;
+		border: 1px solid #e7a9a7;
 
 		.item{
 			padding: 10px;
