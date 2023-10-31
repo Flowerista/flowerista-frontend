@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
 import {DropDown} from '../../components/DropDown';
+import { Pagination } from '../../components/Pagination/Pagination';
 
 export interface ICatalogPage {
 }
@@ -26,6 +27,7 @@ export const CatalogPage: FC<ICatalogPage> = () => {
 				 </div>
 				 <DropDown text={"new"} items={flowers}/>
 			 </div>
+			 <Pagination />
 		 </div>
 	);
 };
