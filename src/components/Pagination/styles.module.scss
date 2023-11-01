@@ -11,6 +11,10 @@
         justify-content: center;
         align-items: center;
     }
+    &__container {
+        margin-top: 100px;
+        margin-bottom: 120px;
+    }
     &__item {
         display: flex;
         box-sizing: border-box;
@@ -56,4 +60,12 @@
             background-color: #231104;
             opacity: .9;
         }
+}
+
+.flower__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    row-gap: 100px;
+    column-gap: 4px;
 }
