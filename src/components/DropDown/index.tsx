@@ -4,8 +4,8 @@ import styles from './styles.module.scss';
 export const DropDown: FC<any> = ({ items, toggleFilter,name,setName }) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
 
-	const handleItemClick = ({item, menu}:{item:any,menu:string}) => {
-		toggleFilter({item :item.name, menu});
+	const handleItemClick = ({item, menu,id}:{item:any,menu:string,id:number}) => {
+		toggleFilter({item :item.name, menu,id});
 		setIsActive(false);
 		setName(item.name);
 	};
@@ -24,7 +24,7 @@ export const DropDown: FC<any> = ({ items, toggleFilter,name,setName }) => {
 				 {items?.map((item: any) => (
 						<div
 							 key={item.id}
-							 onClick={(e: any) => handleItemClick({item:item,menu:name})} // Обработчик клика на элементе
+							 onClick={(e: any) => handleItemClick({item:item,menu:name,id:item.id})} // Обработчик клика на элементе
 							 className={styles.item}
 						>
 							{item.name}

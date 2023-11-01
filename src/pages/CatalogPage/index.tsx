@@ -2,37 +2,42 @@ import {FC, useState} from 'react';
 import styles from './styles.module.scss';
 import {DropDown} from '../../components/DropDown';
 import x from '../../assets/image/hresik.png'
-import {useGetColorsQuery, useGetFlowersQuery} from '../../services/filters-api/filters-api-service';
+import {
+	useGetBouqueteQuery,
+	useGetColorsQuery,
+	useGetFlowersQuery,
+} from '../../services/filters-api/filters-api-service';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {setFlowerIds} from '../../store/filtration/filtration.slice';
 
 export interface ICatalogPage {
 }
 
 export const CatalogPage: FC<ICatalogPage> = () => {
 	const {data,isLoading,error}=useGetFlowersQuery("")
-	// const {data:allData}=useGetAllDtaQuery("")
-	// console.log(allData)
+const {flowerIds}=useAppSelector(state => state.filtration)
+
+	const {data:allData}=useGetBouqueteQuery({flowersIdS:flowerIds})
+	console.log(allData)
+
 	const {data:colors,isLoading:IsLoadingColors,error:err}=useGetColorsQuery("")
 	const [flower, setFlower] = useState<string>("flower");
 	const [color, setColor] = useState<string>("color");
 
-	// const colors = [
-	// 	{ id: 1, name: "dark" },
-	// 	{ id: 2, name: "blue" },
-	// 	{ id: 3, name: "purple" },
-	// 	{ id: 4, name: "red" },
-	// 	{ id: 5, name: "white" }
-	// ];
+	const dispatch = useAppDispatch()
 
-	const [selectedItems, setSelectedItems] = useState<{ item: string; menu: string }[]>([]);
 
-	const toggleFilter = ({ item, menu }: { item: string; menu: string }) => {
+	const [selectedItems, setSelectedItems] = useState<{ item: string; menu: string,id:number }[]>([]);
+
+	const toggleFilter = ({ item, menu ,id}: { item: string; menu: string ,id:number}) => {
 		if (selectedItems.some((selectedItem) => selectedItem.item === item && selectedItem.menu === menu)) {
 			const newSelectedItems = selectedItems.filter(
 				 (selectedItem) => selectedItem.item !== item || selectedItem.menu !== menu
 			);
 			setSelectedItems(newSelectedItems);
 		} else {
-			setSelectedItems([...selectedItems, { item, menu }]);
+			setSelectedItems([...selectedItems, { item, menu,id }]);
+			dispatch(setFlowerIds(id))
 		}
 
 		if (menu === "flower") {
@@ -73,7 +78,7 @@ export const CatalogPage: FC<ICatalogPage> = () => {
 
 			 <div className={styles.catalog__selectedItemsContainer}>
 				 {selectedItems.map((item) => (
-					  <div className={styles.catalog__selectedItem} key={item.item} onClick={() => toggleFilter({item:item.item,menu:item.menu})}>
+					  <div className={styles.catalog__selectedItem} key={item.item} onClick={() => toggleFilter({item:item.item,menu:item.menu,id:item.id})}>
             {item.item} <span><img src={x} alt=""/></span>
           </div>
 				 ))}

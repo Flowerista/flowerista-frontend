@@ -2,9 +2,11 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
 import {filtersApi} from '../services/filters-api/filters-api-service';
+import {filtrationSlice} from './filtration/filtration.slice'
 
 
 const rootReducer = combineReducers({
+		 filtration: filtrationSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[filtersApi.reducerPath]: filtersApi.reducer,
 })
