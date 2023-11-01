@@ -2,15 +2,16 @@ import {FC, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
+
 import styles from './styles.module.scss';
 
 export interface IFlowerCard {
     id: number;
     name: string;
     defaultPrice: number;
-    discount?: number;
-    discountPrice?: number;
-    img?: string[]
+    discount: number | null;
+    discountPrice: number | null;
+    img?: string
 }
 
 
@@ -26,7 +27,7 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
             <div className={styles.card__img}>
                 <Link to={`${DataRoute.Product}:${id}`}>
                     <img 
-                        src={img&& img[1]} alt="flower" />
+                        src={img} alt="flower" />
                 </Link>
                 <div className={styles.like} onClick={() => setLiked(state => !state)}>
                     { liked ? <BsHeartFill/> : <BsHeart/> }

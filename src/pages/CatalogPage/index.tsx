@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
 import styles from './styles.module.scss';
 import {DropDown} from '../../components/DropDown';
+import { Pagination } from '../../components/Pagination/Pagination';
 import x from '../../assets/image/hresik.png'
 import {
 	useGetBouqueteQuery,
@@ -75,6 +76,7 @@ const {flowerIds}=useAppSelector(state => state.filtration)
 						  name={color}/>
 				 </div>
 			 </div>
+			 <Pagination />
 
 			 <div className={styles.catalog__selectedItemsContainer}>
 				 {selectedItems.map((item) => (

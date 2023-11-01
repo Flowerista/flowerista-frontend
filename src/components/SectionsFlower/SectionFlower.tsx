@@ -28,13 +28,13 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
       <div className={styles.content}>
         {data && data.map((item) => (
           <Card
-            id={item?.id}
-            name={item?.name}
-            discount={item?.discount}
-            defaultPrice={item?.defaultPrice}
-            discountPrice={item?.discountPrice}
-            img={item?.imageUrls}
-            key={item?.id}
+            id={item.id}
+            name={item.name}
+            discount={item.discount}
+            defaultPrice={item.defaultPrice}
+            discountPrice={item.discountPrice}
+            img={item.imageUrls?.['1']}
+            key={item.id}
           />
         ))}
       </div>
