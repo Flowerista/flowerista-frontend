@@ -7,18 +7,16 @@ import {IFlower} from '../../interface/flower';
 interface IDropDown {
 	items: IFlower[] | undefined;
   toggleFilter: (item: {item:string,menu:string,id:number}) => void;
-  setName: (item: string) => void;
   name: string;
 
 }
 
-export const DropDown: FC<IDropDown> = ({ items, toggleFilter,name,setName }) => {
+export const DropDown: FC<IDropDown> = ({ items, toggleFilter,name }) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
 
 	const handleItemClick = ({item, menu,id}:{item:any,menu:string,id:number}) => {
 		toggleFilter({item :item.name, menu,id});
 		setIsActive(false);
-		setName(item.name);
 	};
 
 	return (
@@ -38,7 +36,7 @@ export const DropDown: FC<IDropDown> = ({ items, toggleFilter,name,setName }) =>
 				 {items?.map((item) => (
 						<div
 							 key={item.id}
-							 onClick={() => handleItemClick({item:item,menu:name,id:item.id})} // Обработчик клика на элементе
+							 onClick={(e) => handleItemClick({item:item,menu:name,id:item.id})} // Обработчик клика на элементе
 							 className={styles.item}
 						>
 							{item.name}

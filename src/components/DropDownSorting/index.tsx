@@ -37,7 +37,7 @@ export const DropDownSorting: FC<IDropDownSorting> = ({ items, toggleFilter,name
 				 {items?.map((item) => (
 						<div
 							 key={item.id}
-							 onClick={() => handleItemClick(item)} // Обработчик клика на элементе
+							 onClick={(e) => handleItemClick(item)} // Обработчик клика на элементе
 							 className={styles.item}
 						>
 							{item.name}

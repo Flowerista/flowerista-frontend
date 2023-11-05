@@ -21,8 +21,6 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 
 export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
-	const [flower, setFlower] = useState<string>("flower");
-	const [color, setColor] = useState<string>("color");
 	const [sortingName, setSortingName] = useState<string>("sorting");
 
 	const {data:colors,isLoading:flowersLoading}=useGetColorsQuery("")
@@ -79,8 +77,6 @@ export const Filters: FC = () => {
 
 	const resetFilters = () => {
 		dispatch(clearFilters([]))
-		setFlower('flower');
-		setColor('color');
 	}
 
 
@@ -94,13 +90,11 @@ export const Filters: FC = () => {
 					 <DropDown
 						  items={flowers}
 						  toggleFilter={addFlower}
-						  setName={setFlower}
-						  name={flower}/>
+						  name={"flower"}/>
 					 <DropDown
 						  items={colors}
 						  toggleFilter={addColor}
-						  setName={setColor}
-						  name={color}/>
+						  name={"color"}/>
 					 <DropDownPrice
 						  min={0}
 						  max={9999}
