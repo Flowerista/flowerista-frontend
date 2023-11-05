@@ -1,91 +1,86 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './styles.module.scss';
-import {DropDown} from '../../components/DropDown';
-import { Pagination } from '../../components/Pagination/Pagination';
-import x from '../../assets/image/hresik.png'
-import {
-	useGetBouqueteQuery,
-	useGetColorsQuery,
-	useGetFlowersQuery,
-} from '../../services/filters-api/filters-api-service';
-import {useAppDispatch, useAppSelector} from '../../store/store';
-import {setFlowerIds} from '../../store/filtration/filtration.slice';
+import {Pagination} from '../../components/Pagination/Pagination';
+import {Filters} from './Filters';
+import {useGetAllFlowersQuery} from '../../services/bouquete-api/bouquete-api-service';
+import {IFetchAllFlowers} from '../../interface/flower';
+import {Card} from '../../components/Card/Card';
+import {SkeletonCard} from '../../components/Skeletons/SkeletonCard/SkeletonCard';
+import {useAppSelector} from '../../store/store';
+import {useDebounce} from '../../hooks/useDebounce';
+import {Link} from 'react-router-dom';
+import {DataRoute} from '../../data/routes';
 
 export interface ICatalogPage {
 }
 
 export const CatalogPage: FC<ICatalogPage> = () => {
-	const {data,isLoading,error}=useGetFlowersQuery("")
-const {flowerIds}=useAppSelector(state => state.filtration)
 
-	const {data:allData}=useGetBouqueteQuery({flowersIdS:flowerIds})
-	console.log(allData)
+	const {filters}=useAppSelector(state => state.filtration)
+	const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500)
+	const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500)
 
-	const {data:colors,isLoading:IsLoadingColors,error:err}=useGetColorsQuery("")
-	const [flower, setFlower] = useState<string>("flower");
-	const [color, setColor] = useState<string>("color");
-
-	const dispatch = useAppDispatch()
-
-
-	const [selectedItems, setSelectedItems] = useState<{ item: string; menu: string,id:number }[]>([]);
-
-	const toggleFilter = ({ item, menu ,id}: { item: string; menu: string ,id:number}) => {
-		if (selectedItems.some((selectedItem) => selectedItem.item === item && selectedItem.menu === menu)) {
-			const newSelectedItems = selectedItems.filter(
-				 (selectedItem) => selectedItem.item !== item || selectedItem.menu !== menu
-			);
-			setSelectedItems(newSelectedItems);
-		} else {
-			setSelectedItems([...selectedItems, { item, menu,id }]);
-			dispatch(setFlowerIds(id))
-		}
-
-		if (menu === "flower") {
-			setFlower('flower');
-		} else {
-			setColor('color');
-		}
-	};
-
-
-	const resetFilters = () => {
-		setSelectedItems([]);
-		setFlower('flower');
-		setColor('color');
+	const dataFetch: IFetchAllFlowers = {
+		flowerIds: filters.flowerIds.map((item) => item.id).join(","),
+		colorIds: filters.colorIds.map((item) => item.id).join(","),
+		minPrice: debouncedMinPrice,
+		maxPrice: debouncedMaxPrice,
+		sortByNewest: filters.sortByNewest,
+		sortByPriceHighToLow:  filters.sortByPriceHighToLow,
+		sortByPriceLowToHigh: filters.sortByPriceLowToHigh,
+		page: filters.page
 	}
 
-	if (error){
-		return <div>Something Was Wrong!</div>
+	useEffect(() => {
+		setDataState(dataFetch);
+	}, [filters,debouncedMaxPrice,debouncedMinPrice]);
+
+
+	const [dataState, setDataState] = useState(dataFetch)
+
+	const { data, error } = useGetAllFlowersQuery(dataState)
+
+	const handlePageClick = (event: any) => {
+		const newPage = event.selected + 1
+		setDataState((state) => ({...state, page: newPage}))
+	}
+
+	if (error) {
+		return <h1>Something Was Wrong!</h1>
 	}
 
 	return (
 		 <div className={styles.catalog}>
-			 <div className={styles.catalog__name}>Home | Catalog</div>
-          <div className={styles.catalog__dropDown}>
-				 <div className={styles.catalog__dropDown_items}>
-					 <DropDown
-						  items={data}
-						  toggleFilter={toggleFilter}
-						  setName={setFlower}
-						  name={flower}/>
-					 <DropDown
-						  items={colors}
-						  toggleFilter={toggleFilter}
-						  setName={setColor}
-						  name={color}/>
-				 </div>
-			 </div>
-			 <Pagination />
-
-			 <div className={styles.catalog__selectedItemsContainer}>
-				 {selectedItems.map((item) => (
-					  <div className={styles.catalog__selectedItem} key={item.item} onClick={() => toggleFilter({item:item.item,menu:item.menu,id:item.id})}>
-            {item.item} <span><img src={x} alt=""/></span>
-          </div>
-				 ))}
-			 {selectedItems.length > 0 && <button className={styles.catalog__resetBtn} onClick={resetFilters}>clear filters</button>}
-			 </div>
+			 <div className={styles.catalog__name}><Link to={DataRoute.Home} >Home</Link> | Catalog</div>
+			 <Filters/>
+			 {data &&
+				  <div className={styles.flower__wrapper}>
+					  {data ? data.content.map(item => (
+							 <Card
+								  id={item.id}
+								  name={item.name}
+								  discount={item.discount}
+								  defaultPrice={item.defaultPrice}
+								  discountPrice={item.discountPrice}
+								  img={item.imageUrls?.['1']}
+								  key={item.id}
+							 />
+					  )) :			 <div style={{display: 'flex', marginTop: '50px', flexWrap: 'wrap', rowGap: '100px', marginBottom: '120px'}} >
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+						  <SkeletonCard/>
+					  </div>}
+				  </div>}
+			 <Pagination data={data} handlePageClick={handlePageClick}/>
 		 </div>
 	);
 };

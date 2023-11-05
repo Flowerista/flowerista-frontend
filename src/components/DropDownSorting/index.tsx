@@ -2,23 +2,22 @@ import React, {FC, useState} from 'react';
 import styles from './styles.module.scss';
 import topArrow from '../../assets/image/dropDown/top_arrow.png'
 import bottomArrow from '../../assets/image/dropDown/botton_arrow.png'
-import {IFlower} from '../../interface/flower';
+import tick from '../../assets/image/dropDown/tick.png'
 
-interface IDropDown {
-	items: IFlower[] | undefined;
-  toggleFilter: (item: {item:string,menu:string,id:number}) => void;
-  setName: (item: string) => void;
-  name: string;
-
+interface IDropDownSorting{
+	items:{item:string,name:string,id:number,sort:boolean}[]
+	toggleFilter:(item:{item:string,name:string,id:number,sort:boolean})=>void
+	name:string
+	setName:(name:string)=>void
 }
 
-export const DropDown: FC<IDropDown> = ({ items, toggleFilter,name,setName }) => {
+export const DropDownSorting: FC<IDropDownSorting> = ({ items, toggleFilter,name,setName }) => {
 	const [isActive, setIsActive] = useState<boolean>(false);
 
-	const handleItemClick = ({item, menu,id}:{item:any,menu:string,id:number}) => {
-		toggleFilter({item :item.name, menu,id});
+	const handleItemClick = (value:{item:string,name:string,id:number,sort:boolean}) => {
+		toggleFilter(value);
 		setIsActive(false);
-		setName(item.name);
+		setName(value.name);
 	};
 
 	return (
@@ -38,10 +37,11 @@ export const DropDown: FC<IDropDown> = ({ items, toggleFilter,name,setName }) =>
 				 {items?.map((item) => (
 						<div
 							 key={item.id}
-							 onClick={() => handleItemClick({item:item,menu:name,id:item.id})} // Обработчик клика на элементе
+							 onClick={() => handleItemClick(item)} // Обработчик клика на элементе
 							 className={styles.item}
 						>
 							{item.name}
+							{item.sort ? <img src={tick} alt="tick"/>:""}
 						</div>
 				 ))}
 			 </div>

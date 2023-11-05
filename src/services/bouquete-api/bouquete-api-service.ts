@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
-import {IFlowerCard, IAllFlower, IFetchAllFlowers } from '../../interface/flower';
+import {IAllFlower, IFetchAllFlowers, IFlower, IFlowerCard} from '../../interface/flower';
 
 export const bouqueteApi = createApi({
 	reducerPath: 'bouqueteApi',
@@ -15,23 +15,36 @@ export const bouqueteApi = createApi({
 				url: `/bouquete/ts`,
 			}),
 		}),
+		getColors: build.query<IFlower[],any>({
+			query: () => ({
+				url: `/color`
+			}),
+		}),
+		getFlowers: build.query<IFlower[],any>({
+			query: () => ({
+				url: `/flower`,
+			}),
+		}),
 		getAllFlowers: build.query<IAllFlower,IFetchAllFlowers>({
 			query: (data) => ({
-				url: `/bouquete`,
-				params: {
-					// Remove underlining where necessary
-					_flowerIds: data.flowerIds, 
-					_colorIds: data.colorIds,
-					_minPrice: data.minPrice,
-					_maxPrice: data.maxPrice,
-					_sortByNewest: data.sortByNewest,
-					_sortByPriceHighToLow: data.sortByPriceHighToLow,
-					_sortByPriceLowToHigh: data.sortByPriceLowToHigh,
-					page: data.page
-				}
+				url: `/bouquete?page=${data.page}
+							${data.flowerIds?.length === 0 ?"":`&flowerIds=${data.flowerIds}`}
+							${data.colorIds?.length === 0 ?"":`&colorIds=${data.colorIds}`}
+							${data.minPrice && data.minPrice > 0 ?`&minPrice=${data.minPrice}`:''}
+							${data.maxPrice && data.maxPrice < 9999 ?`&maxPrice=${data.maxPrice}`:''}
+							${data.sortByNewest ?`&sortByNewest=${data.sortByNewest}`:""}
+							${data.sortByPriceHighToLow ?`&sortByPriceHighToLow=${data.sortByPriceHighToLow}`:""}
+							${data.sortByPriceLowToHigh ?`&sortByPriceLowToHigh=${data.sortByPriceLowToHigh}`:""}
+							`
+				,
 			}),
 		}),
 	})
 })
 
-export const { useGetBestsellersQuery,useGetTopSellersQuery, useGetAllFlowersQuery } = bouqueteApi;
+export const { useGetBestsellersQuery
+	,useGetTopSellersQuery
+	, useGetAllFlowersQuery,
+	useGetColorsQuery,
+	useGetFlowersQuery
+} = bouqueteApi;

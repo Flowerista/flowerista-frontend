@@ -48,8 +48,8 @@ export interface IAllFlower {
 }
 
 export interface IFetchAllFlowers {
-	flowerIds?: number[];
-	colorIds?: number[];
+	flowerIds?: number[]|string;
+	colorIds?: number[] | string;
 	minPrice?: number;
 	maxPrice?: number;
 	sortByNewest: boolean;
@@ -57,3 +57,9 @@ export interface IFetchAllFlowers {
 	sortByPriceLowToHigh: boolean;
 	page: number;
 }
+
+export interface IFlower{
+    id: number;
+    name: string
+}
+

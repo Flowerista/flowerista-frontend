@@ -43,3 +43,12 @@
 		padding: 0;
 	}
 }
+
+
+.flower__wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 50px;
+	row-gap: 100px;
+	column-gap: 4px;
+}
