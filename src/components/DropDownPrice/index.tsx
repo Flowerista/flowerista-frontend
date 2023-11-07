@@ -8,13 +8,11 @@ import classnames from 'classnames'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setMaxValue, setMinValue} from '../../store/filtration/filtration.slice';
 
-const MIN= 0
-const MAX= 9999
 
 export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const {maxPrice,minPrice}=useAppSelector(state => state.filtration.filters)
+	const {maxPrice,minPrice,max:maxRange,min:minRange}=useAppSelector(state => state.filtration.filters)
 
 	const minInputRef = useRef<HTMLInputElement>(null);
 	const maxInputRef = useRef<HTMLInputElement>(null);
@@ -29,11 +27,11 @@ export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 		 [min, max]
 	);
 
-	// Set width of the range to decrease from the left side
+// Set width of the range to decrease from the left side
 	useEffect(() => {
 		if (maxValRef.current) {
-			const minPercent = getPercent(minPrice);
-			const maxPercent = getPercent(+maxValRef.current.value); // Precede with '+' to convert the value from type string to type number
+			const minPercent = getPercent(Math.min(minPrice, minRange)); // Ограничиваем minPrice до 3500
+			const maxPercent = getPercent(Math.min(+maxValRef.current.value, maxRange)); // Ограничиваем maxVal до 3500
 
 			if (range.current) {
 				range.current.style.left = `${minPercent}%`;
@@ -42,17 +40,18 @@ export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 		}
 	}, [minPrice, getPercent]);
 
-	// Set width of the range to decrease from the right side
+// Set width of the range to decrease from the right side
 	useEffect(() => {
 		if (minValRef.current) {
-			const minPercent = getPercent(+minValRef.current.value);
-			const maxPercent = getPercent(maxPrice);
+			const minPercent = getPercent(Math.min(+minValRef.current.value, minRange)); // Ограничиваем minVal до 3500
+			const maxPercent = getPercent(Math.min(maxPrice, maxRange)); // Ограничиваем maxPrice до 3500
 
 			if (range.current) {
 				range.current.style.width = `${maxPercent - minPercent}%`;
 			}
 		}
 	}, [maxPrice, getPercent]);
+
 
 	// Get min and max values when their state changes
 	useEffect(() => {
@@ -71,9 +70,34 @@ export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 			 </div>
 			 <div className={`${styles.dropDown__content} ${isActive ? styles.active : ''}`}>
 				 <div className={styles.dropDown__content__inputs}>
-					 <input type="number" ref={minInputRef} min={min}  placeholder={MIN.toString()} onChange={event =>dispatch(setMinValue(+(event.target.value))) } />
+					 <input
+						  type="number"
+						  ref={minInputRef}
+						  min={min}
+						  max={maxRange}
+						  placeholder={minRange.toString()}
+						  onChange={event => {
+							  const value = +event.target.value;
+							  if (value <= maxRange) {
+								  dispatch(setMinValue(value));
+							  }
+						  }}
+					 />
 					 <div></div>
-					 <input type="number" ref={maxInputRef} max={max} placeholder={MAX.toString()} onChange={event =>dispatch(setMaxValue(+event.target.value)) } />
+					 <input
+						  type="number"
+						  ref={maxInputRef}
+						  min={minRange}
+						  max={max}
+						  placeholder={maxRange.toString()}
+						  onChange={event => {
+							  const value = +event.target.value;
+							  if (value >= minRange) {
+								  dispatch(setMaxValue(value));
+							  }
+						  }}
+
+					 />
 				 </div>
 				 <div className={styles.dropDown__content__range}>
 					 <input

@@ -7,12 +7,20 @@ import {
 	removeColorId,
 	removeFlowerId,
 	removeMinMaxValues,
+	setMaxNumber,
+	setMaxValue,
+	setMiNumber,
+	setMinValue,
 	setSortByNewest,
 	setSortByPriceHighToLow,
 	setSortByPriceLowToHigh,
 } from '../../../store/filtration/filtration.slice';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {useGetColorsQuery, useGetFlowersQuery} from '../../../services/bouquete-api/bouquete-api-service';
+import {
+	useGetColorsQuery,
+	useGetFlowersQuery,
+	useGetRangePriceQuery,
+} from '../../../services/bouquete-api/bouquete-api-service';
 import styles from '../styles.module.scss'
 import {DropDown} from '../../../components/DropDown';
 import {DropDownPrice} from '../../../components/DropDownPrice';
@@ -21,11 +29,12 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 
 export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
+	const { data:priceRange}=useGetRangePriceQuery("")
 	const [sortingName, setSortingName] = useState<string>("sorting");
 
 	const {data:colors,isLoading:flowersLoading}=useGetColorsQuery("")
 	const {data:flowers,isLoading:colorsLoading}=useGetFlowersQuery("")
-	const {flowerIds,colorIds,maxPrice,minPrice}=useAppSelector(state => state.filtration.filters)
+	const {flowerIds,colorIds,maxPrice,minPrice,min,max}=useAppSelector(state => state.filtration.filters)
 
 	const maxMinValues= [{item:`${minPrice}-${maxPrice}`,menu:"minMax",id:42}]
 
@@ -36,7 +45,18 @@ export const Filters: FC = () => {
 	]
 
 
-	useEffect(()=>{},[maxMinValues])
+	useEffect(()=>{
+	},[maxMinValues])
+
+
+	useEffect(()=>{
+		if (priceRange){
+			dispatch(setMiNumber(priceRange.minPrice))
+			dispatch(setMaxNumber(priceRange.maxPrice))
+			dispatch(setMinValue(priceRange.minPrice))
+			dispatch(setMaxValue(priceRange.maxPrice))
+		}
+	},[priceRange])
 
 	const addFlower = (item:{item:string,menu:string,id:number})=>{
 		dispatch(addFlowersId(item))
@@ -96,8 +116,8 @@ export const Filters: FC = () => {
 						  toggleFilter={addColor}
 						  name={"color"}/>
 					 <DropDownPrice
-						  min={0}
-						  max={9999}
+						  min={min}
+						  max={max}
 					 />
 				 </div>
 				 <DropDownSorting
@@ -110,7 +130,7 @@ export const Filters: FC = () => {
 			 <div className={styles.catalog__selectedItemsContainer}>
 				 {[...flowerIds,...colorIds,...maxMinValues].map((item) => (
 					  item.menu === "minMax"?
-									 minPrice> 0 || maxPrice < 9999 ? 	   <div className={styles.catalog__selectedItem} key={item.item} onClick={()=>removeHandler(item)}>
+									 minPrice> min || maxPrice < max ? 	   <div className={styles.catalog__selectedItem} key={item.item} onClick={()=>removeHandler(item)}>
 											 {item.item} <span><img src={x} alt=""/></span>
 										 </div>: ""
 						   :

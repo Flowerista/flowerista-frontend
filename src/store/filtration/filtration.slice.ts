@@ -4,6 +4,8 @@ interface IInitialState{
 	filters: {
 		flowerIds: {item:string,menu:string,id:number}[];
 		colorIds: {item:string,menu:string,id:number}[];
+		min: number;
+		max: number;
 		minPrice: number;
 		maxPrice: number;
 		sortByNewest: boolean;
@@ -16,6 +18,8 @@ interface IInitialState{
 
 const initialState: IInitialState ={
 filters:{
+	max:0,
+	min:0,
 	flowerIds:[],
 	colorIds:[],
 	minPrice:0,
@@ -74,6 +78,12 @@ export const filtrationSlice = createSlice({
 		setSortByPriceLowToHigh: (state,{payload}) => {
 			state.filters.sortByPriceLowToHigh = payload
 		},
+		setMiNumber: (state, { payload }) => {
+			state.filters.min = payload
+		},
+		setMaxNumber: (state,{payload})=>{
+			state.filters.max=payload
+		}
 
 	},
 
@@ -89,5 +99,7 @@ export const {  addFlowersId,
 	removeMinMaxValues,
 	 setSortByPriceLowToHigh,
 	setSortByPriceHighToLow,
-	setSortByNewest
+	setSortByNewest,
+	 setMaxNumber,
+	 setMiNumber
 } = filtrationSlice.actions

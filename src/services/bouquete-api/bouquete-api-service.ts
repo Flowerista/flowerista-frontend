@@ -25,6 +25,12 @@ export const bouqueteApi = createApi({
 				url: `/flower`,
 			}),
 		}),
+		getRangePrice: build.query<{minPrice:number,maxPrice:number},any>({
+			query: () => ({
+				url: `/bouquete/price-range
+`,
+			}),
+		}),
 		getAllFlowers: build.query<IAllFlower,IFetchAllFlowers>({
 			query: (data) => ({
 				url: `/bouquete?page=${data.page}
@@ -46,5 +52,6 @@ export const { useGetBestsellersQuery
 	,useGetTopSellersQuery
 	, useGetAllFlowersQuery,
 	useGetColorsQuery,
-	useGetFlowersQuery
+	useGetFlowersQuery,
+	 useGetRangePriceQuery,
 } = bouqueteApi;

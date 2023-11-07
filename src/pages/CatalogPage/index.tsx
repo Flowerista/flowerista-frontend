@@ -15,7 +15,6 @@ export interface ICatalogPage {
 }
 
 export const CatalogPage: FC<ICatalogPage> = () => {
-
 	const {filters}=useAppSelector(state => state.filtration)
 	const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500)
 	const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500)
