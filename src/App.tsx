@@ -8,6 +8,8 @@ import PageTransition from './components/PageTransition';
 import {DataRoute} from './data/routes';
 import {DeliveryAndPaymentPage} from './pages/DeliveryAndPaymentPage';
 import { AboutUs } from './pages/AboutUs/AboutUs';
+import { Login } from './pages/Login/Login';
+import { Registration } from './pages/Registration/Registration';
 
 function App() {
   const location = useLocation();
@@ -20,6 +22,8 @@ function App() {
          <Route path={DataRoute.Catalog} element={<CatalogPage/>}/>
          <Route path={DataRoute.DeliveryAndPayment} element={<DeliveryAndPaymentPage/>}/>
          <Route path={DataRoute.AboutUs} element={<AboutUs/>}/>
+         <Route path={DataRoute.Login} element={<Login/>}/>
+         <Route path={DataRoute.Registration} element={<Registration/>}/>
        </Routes>
        </PageTransition>
      </MainLayout>

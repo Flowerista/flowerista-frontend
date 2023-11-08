@@ -1,0 +1,27 @@
+.label {
+    position: relative;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input {
+    display: flex;
+    width: 304px;
+    padding: 8px 0px;
+    align-items: center;
+    background-color: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    border-bottom: #C5B4B9 solid 2px;
+    &:focus{
+        border-bottom: #231104 solid 2px;
+    }
+    &_error {
+        border-bottom: #DF0D1A solid 2px;
+        &:focus{
+            border-bottom: #DF0D1A solid 2px;
+        }
+    }
+}
