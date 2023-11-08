@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import x from '../../../assets/image/hresik.png';
 import {
 	addColorsId,
@@ -31,6 +31,9 @@ export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
 	const { data:priceRange}=useGetRangePriceQuery("")
 	const [sortingName, setSortingName] = useState<string>("sorting");
+
+	const minInputRef = useRef<HTMLInputElement>(null);
+	const maxInputRef = useRef<HTMLInputElement>(null);
 
 	const {data:colors,isLoading:flowersLoading}=useGetColorsQuery("")
 	const {data:flowers,isLoading:colorsLoading}=useGetFlowersQuery("")
@@ -91,6 +94,12 @@ export const Filters: FC = () => {
 			dispatch(removeColorId(item))
 		}else if (item.menu === "minMax"){
 			dispatch(removeMinMaxValues())
+			if (minInputRef && minInputRef.current) {
+				minInputRef.current.value = "";
+			}
+			if (maxInputRef && maxInputRef.current) {
+				maxInputRef.current.value = "";
+			}
 		}
   }
 
@@ -118,6 +127,8 @@ export const Filters: FC = () => {
 					 <DropDownPrice
 						  min={min}
 						  max={max}
+						  minInputRef={minInputRef}
+						  maxInputRef={maxInputRef}
 					 />
 				 </div>
 				 <DropDownSorting
