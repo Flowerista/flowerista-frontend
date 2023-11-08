@@ -27,7 +27,7 @@ export const AboutUs: FC = () => {
             name: 'Anna',
             job: 'Florist',
             descr: [
-                'Katya is an experienced florist with over 6 years of career in the industry.',
+                'Anna is an experienced florist with over 6 years of career in the industry.',
                 'She began her journey in the art of floral design by working in some of the finest floral studios.',
                 'Throughout her career, she has been recognized with several prestigious awards in the field of floral art.',
                 'Her unique sense of style and inspiration from nature allow her to create bouquets that are genuine works of art.'
@@ -48,7 +48,7 @@ export const AboutUs: FC = () => {
             name: 'Ekaterina',
             job: 'Delivery Manager',
             descr: [
-                'Anna is our dependable delivery manager with an impressive track record of ensuring the timely delivery of our customers flowers.', 
+                'Ekaterina is our dependable delivery manager with an impressive track record of ensuring the timely delivery of our customers flowers.', 
                 'Her professionalism and attention to detail have made our delivery services impeccable.'
             ]
         },

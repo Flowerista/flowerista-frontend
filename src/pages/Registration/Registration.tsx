@@ -6,7 +6,6 @@ import { Form, FormTitle, FormButton, FormLink, InputsWrapper, PasswordInput, Em
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
-import { Name } from '../../components/Footer/Name';
 
 type Inputs = {
   password: string;
