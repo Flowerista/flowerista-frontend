@@ -4,11 +4,51 @@
 		color: #E7A9A7;
 		margin-bottom: 50px;
 	}
+
 	&__dropDown{
 		display: flex;
 		justify-content: space-between;
+		border: 1px solid #E7A9A7;
 		&_items{
 			display: flex;
+			&:nth-child(3){
+				border-right: 1px solid #E7A9A7;
+				background: red;
+			}
 		}
 	}
+
+	.catalog__selectedItemsContainer{
+		display: flex;
+		margin-top: 50px;
+	}
+
+	&__selectedItem{
+		display: flex;
+		align-items: center;
+		background: #C24A51;
+		color: #FCF7F0;
+		padding: 10px;
+		margin-right: 20px;
+		span{
+			margin-left: 10px;
+		}
+	}
+
+	&__resetBtn{
+		background: transparent;
+		color: #231104;
+		font-size: 16px;
+		text-decoration: underline #231104;
+		padding: 0;
+	}
+}
+
+
+.flower__wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 50px;
+	row-gap: 100px;
+	column-gap: 4px;
 }
