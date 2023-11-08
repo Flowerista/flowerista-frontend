@@ -6,4 +6,6 @@ export enum DataRoute {
 	Cart = "/cart",
 	Product = "/product",
 	Home = "/",
+	Login = "/login",
+	Registration = "/registration",
 }
