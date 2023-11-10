@@ -30,7 +30,7 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
 	const { data:priceRange}=useGetRangePriceQuery("")
-	const [sortingName, setSortingName] = useState<string>("sorting");
+	const [sortingName, setSortingName] = useState<string>("Sorting");
 
 	const minInputRef = useRef<HTMLInputElement>(null);
 	const maxInputRef = useRef<HTMLInputElement>(null);
@@ -119,11 +119,11 @@ export const Filters: FC = () => {
 					 <DropDown
 						  items={flowers}
 						  toggleFilter={addFlower}
-						  name={"flower"}/>
+						  name={"Flowers"}/>
 					 <DropDown
 						  items={colors}
 						  toggleFilter={addColor}
-						  name={"color"}/>
+						  name={"Colors"}/>
 					 <DropDownPrice
 						  min={min}
 						  max={max}
