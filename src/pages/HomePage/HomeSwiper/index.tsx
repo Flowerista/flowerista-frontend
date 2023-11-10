@@ -3,12 +3,10 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import BgImage from '../../../assets/image/swiper/first.png'
 import secondSwipe from '../../../assets/image/swiper/second_swiper.png'
-import thirdSwipe from '../../../assets/image/swiper/third_swiper.png'
-import thirdSwipeText from '../../../assets/image/swiper/third_swiper-text.png'
+import thirdSwiper from '../../../assets/image/swiper/third_swiper.png'
 import textBgImage from '../../../assets/image/swiper/second.png'
 import fourthSwiper from '../../../assets/image/swiper/fourth_swiper.png'
 import fourthSwiperText from '../../../assets/image/swiper/fourth_swiper-text.png'
-
 import styles from './styles.module.scss';
 
 import 'swiper/scss';
@@ -25,7 +23,6 @@ export const HomeSwiper = () => {
 					pagination={{ clickable: true }}
 				  navigation
 					modules={[Navigation, Pagination,Autoplay]}
-
 					className={"homeSwiper"}
 			 >
 				 <SwiperSlide>
@@ -47,22 +44,26 @@ export const HomeSwiper = () => {
 					 </div>
 				 </SwiperSlide>
 				 <SwiperSlide>
-					 <div className={`${styles.swiper__slide} ${styles.swiper__third}`}>
-						 <div className={`${styles.swiper__header} ${styles.swiper__third_header}`}>
-							 <h3>Experience autumn's vibrant hues and fragrant
-								 blossoms with our stunning floral creations </h3>
-							 <img src={thirdSwipeText} alt="text_image" />
-						 </div>
-						 <img src={thirdSwipe} alt="third_swiper" />
-					 </div>
-				 </SwiperSlide>
-				 <SwiperSlide>
 					 <div className={styles.swiper__slide}>
 						 <div className={`${styles.swiper__header} ${styles.swiper__fourth_header}`}>
 							 <h3>Experience the happiness that blooms with our freshly handpicked bouquets!</h3>
 							 <img src={fourthSwiperText} alt="text_image" />
 						 </div>
 						 <img src={fourthSwiper} alt="first_swiper" />
+					 </div>
+				 </SwiperSlide>
+				 <SwiperSlide>
+					 <div className={`${styles.swiper__slide} ${styles.swiper__third}`}>
+						 <div className={styles.swiper__third__header}>
+							 <div>
+								 <h1>Autumn Flowers:
+									 Brighten Your Day!</h1>
+								 <p>Experience autumn's vibrant hues and fragrant
+									 blossoms with our stunning floral creations</p>
+							 </div>
+							 <img src={thirdSwiper} alt="third_swiper" />
+
+						 </div>
 					 </div>
 				 </SwiperSlide>
 			 </Swiper>

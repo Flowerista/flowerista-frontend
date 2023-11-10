@@ -8,4 +8,6 @@ export enum DataRoute {
 	Home = "/",
 	Login = "/login",
 	Registration = "/registration",
+	RestoringAccess = '/restoring-access',
+	RestoringAccessSuccess = '/restoring-access/success'
 }

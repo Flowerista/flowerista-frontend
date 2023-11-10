@@ -39,7 +39,7 @@ export const Login: FC = () => {
                         <EmailInput register={register} error={errors.email?.message} />
                         <PasswordInput register={register} error={errors.password?.message}/>
                     </InputsWrapper>
-                    <Link to={DataRoute.Registration} className={styles.login__link}>
+                    <Link to={DataRoute.RestoringAccess} className={styles.login__link}>
                         Forgot your password?
                     </Link>
                     <FormButton text='Continue'/>

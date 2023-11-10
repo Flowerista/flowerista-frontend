@@ -7,17 +7,17 @@ import './styles.scss'
 import classnames from 'classnames'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setMaxValue, setMinValue} from '../../store/filtration/filtration.slice';
+import useOutside from '../../hooks/useOutside';
 
 interface IDropDownPrice{
 	min:number
 	max:number
 	minInputRef:RefObject<HTMLInputElement>;
 	maxInputRef:RefObject<HTMLInputElement>;
-}
 
 export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInputRef}) => {
+	const { isShow, setIsShow, ref } = useOutside(false)
 
-	const [isActive, setIsActive] = useState<boolean>(false);
 	const {maxPrice,minPrice,max:maxRange,min:minRange}=useAppSelector(state => state.filtration.filters)
 
 
@@ -72,15 +72,16 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 	return (
 		 <div className={styles.dropDown}>
 			 <div
+				  ref={ref}
 					onClick={() => {
-						setIsActive(!isActive);
+						setIsShow(!isShow);
 					}}
 					className={styles.dropDown__btn}
 			 >
 				 {"Price"}
-				 {isActive?<img src={topArrow} alt=""/>:<img src={bottomArrow} alt=""/>}
+				 {isShow?<img src={topArrow} alt=""/>:<img src={bottomArrow} alt=""/>}
 			 </div>
-			 <div className={`${styles.dropDown__content} ${isActive ? styles.active : ''}`}>
+			 <div className={`${styles.dropDown__content} ${isShow ? styles.active : ''}`}>
 				 <div className={styles.dropDown__content__inputs}>
 					 <input
 						  type="number"
