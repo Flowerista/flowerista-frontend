@@ -66,8 +66,8 @@ export const filtrationSlice = createSlice({
 			state.filters.maxPrice = payload
 		},
 		removeMinMaxValues: (state) => {
-			state.filters.minPrice = 0
-			state.filters.maxPrice = 9999
+			state.filters.minPrice = state.filters.min
+			state.filters.maxPrice = state.filters.max
 		},
 		setSortByNewest: (state,{payload}) => {
 			state.filters.sortByNewest = payload

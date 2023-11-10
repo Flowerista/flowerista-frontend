@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useCallback, useEffect, useRef} from 'react';
+import React, {ChangeEvent, FC, RefObject, useCallback, useEffect, useRef, useState} from 'react';
 import topArrow from '../../assets/image/dropDown/top_arrow.png'
 import bottomArrow from '../../assets/image/dropDown/botton_arrow.png'
 import styles from './styles.module.scss';
@@ -9,14 +9,18 @@ import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setMaxValue, setMinValue} from '../../store/filtration/filtration.slice';
 import useOutside from '../../hooks/useOutside';
 
+interface IDropDownPrice{
+	min:number
+	max:number
+	minInputRef:RefObject<HTMLInputElement>;
+	maxInputRef:RefObject<HTMLInputElement>;
 
-export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
+export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInputRef}) => {
 	const { isShow, setIsShow, ref } = useOutside(false)
 
 	const {maxPrice,minPrice,max:maxRange,min:minRange}=useAppSelector(state => state.filtration.filters)
 
-	const minInputRef = useRef<HTMLInputElement>(null);
-	const maxInputRef = useRef<HTMLInputElement>(null);
+
 	const minValRef = useRef<HTMLInputElement>(null);
 	const maxValRef = useRef<HTMLInputElement>(null);
 	const range = useRef<HTMLDivElement>(null)
@@ -31,27 +35,34 @@ export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 // Set width of the range to decrease from the left side
 	useEffect(() => {
 		if (maxValRef.current) {
-			const minPercent = getPercent(Math.min(minPrice, minRange)); // Ограничиваем minPrice до 3500
-			const maxPercent = getPercent(Math.min(+maxValRef.current.value, maxRange)); // Ограничиваем maxVal до 3500
+			const minPercent = getPercent(Math.max(minPrice, min));
+			const maxPercent = getPercent(Math.min(+maxValRef.current.value, maxRange));
 
 			if (range.current) {
 				range.current.style.left = `${minPercent}%`;
 				range.current.style.width = `${maxPercent - minPercent}%`;
 			}
 		}
-	}, [minPrice, getPercent]);
+	}, [minPrice, getPercent, maxValRef]);
 
 // Set width of the range to decrease from the right side
 	useEffect(() => {
 		if (minValRef.current) {
-			const minPercent = getPercent(Math.min(+minValRef.current.value, minRange)); // Ограничиваем minVal до 3500
-			const maxPercent = getPercent(Math.min(maxPrice, maxRange)); // Ограничиваем maxPrice до 3500
+			const minPercent = getPercent(Math.max(+minValRef.current.value, min));
+			const maxPercent = getPercent(Math.min(maxPrice, max));
 
 			if (range.current) {
 				range.current.style.width = `${maxPercent - minPercent}%`;
 			}
 		}
-	}, [maxPrice, getPercent]);
+	}, [maxPrice, getPercent, minValRef]);
+
+
+
+	// Get min and max values when their state changes
+	useEffect(() => {
+	}, [minPrice, maxPrice,]);
+
 
 
 	// Get min and max values when their state changes
@@ -82,6 +93,9 @@ export const DropDownPrice: FC<{min:number,max:number}> = ( {min,max}) => {
 							  const value = +event.target.value;
 							  if (value <= maxRange) {
 								  dispatch(setMinValue(value));
+							  } else {
+								  dispatch(setMinValue(maxRange));
+								  minInputRef.current!.value = maxRange.toString();
 							  }
 						  }}
 					 />
