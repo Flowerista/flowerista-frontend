@@ -8,7 +8,7 @@ export interface IMainLayout {
 
 export const MainLayout: FC<IMainLayout> = ({children}) => {
 	return (
-		 <div>
+		 <div style={{overflowX: 'hidden'}}>
 				<div className={"container"}>
 					<Header/>
 					{children}
