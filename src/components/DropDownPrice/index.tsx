@@ -14,6 +14,7 @@ interface IDropDownPrice{
 	max:number
 	minInputRef:RefObject<HTMLInputElement>;
 	maxInputRef:RefObject<HTMLInputElement>;
+}
 
 export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInputRef}) => {
 	const { isShow, setIsShow, ref } = useOutside(false)
