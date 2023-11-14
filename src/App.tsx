@@ -12,6 +12,7 @@ import { Login } from './pages/Login/Login';
 import { Registration } from './pages/Registration/Registration';
 import { RestoringAccess } from './pages/RestoringAccess/RestoringAccess';
 import { RestoringAccessSuccess } from './pages/RestoringAccess/RestoringAccessSuccess/RestoringAccessSuccess';
+import { PersonalInformation } from './pages/Profile/PersonalInformation/PersonalInformation';
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
          <Route path={DataRoute.Registration} element={<Registration/>}/>
          <Route path={DataRoute.RestoringAccess} element={<RestoringAccess/>}/>
          <Route path={DataRoute.RestoringAccessSuccess} element={<RestoringAccessSuccess/>}/>
+         <Route path={DataRoute.PersonalInformation} element={<PersonalInformation/>}/>
        </Routes>
        </PageTransition>
      </MainLayout>

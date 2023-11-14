@@ -10,3 +10,4 @@ export { default as NameInput } from './NameInput/NameInput';
 export { default as PasswordInput } from './PasswordInput/PasswordInput';
 export { default as PhoneInput } from './PhoneInput/PhoneInput';
 export { default as SurnameInput } from './SurnameInput/SurnameInput';
+export {default as TextInput} from './TextInput/TextInput';

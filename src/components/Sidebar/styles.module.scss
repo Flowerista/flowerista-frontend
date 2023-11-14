@@ -1,0 +1,31 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+    font-family: Work Sans, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    color: #231104;
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+.log_out {
+    color: #C24A51;
+}
+
+.arrow {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+}
