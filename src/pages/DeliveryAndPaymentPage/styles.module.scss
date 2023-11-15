@@ -36,7 +36,12 @@
 		}
 	}
 	&__image{
+		width: 666px;
+		height: 100%;
 		position: absolute;
-		left: 61%;
+		animation: none !important;
+		margin-left: 923px;
+		overflow: hidden;
+
 	}
 }
