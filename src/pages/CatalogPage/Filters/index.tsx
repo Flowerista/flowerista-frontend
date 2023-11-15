@@ -88,9 +88,9 @@ export const Filters: FC = () => {
 	}
 
 	const removeHandler = (item:{item:string,menu:string,id:number})=>{
-		if (item.menu==="flower"){
+		if (item.menu==="Flowers"){
 			dispatch(removeFlowerId(item))
-		}else if (item.menu ==="color") {
+		}else if (item.menu ==="Colors") {
 			dispatch(removeColorId(item))
 		}else if (item.menu === "minMax"){
 			dispatch(removeMinMaxValues())
@@ -106,6 +106,13 @@ export const Filters: FC = () => {
 
 	const resetFilters = () => {
 		dispatch(clearFilters([]))
+		dispatch(removeMinMaxValues())
+		if (minInputRef && minInputRef.current) {
+			minInputRef.current.value = "";
+		}
+		if (maxInputRef && maxInputRef.current) {
+			maxInputRef.current.value = "";
+		}
 	}
 
 

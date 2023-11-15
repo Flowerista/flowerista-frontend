@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, RefObject, useCallback, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, FC, RefObject, useCallback, useEffect, useRef} from 'react';
 import topArrow from '../../assets/image/dropDown/top_arrow.png'
 import bottomArrow from '../../assets/image/dropDown/botton_arrow.png'
 import styles from './styles.module.scss';
@@ -59,21 +59,14 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 	}, [maxPrice, getPercent, minValRef]);
 
 
-
-	// Get min and max values when their state changes
-	useEffect(() => {
-	}, [minPrice, maxPrice,]);
-
-
-
 	// Get min and max values when their state changes
 	useEffect(() => {
 	}, [minPrice, maxPrice,]);
 
 	return (
-		 <div className={styles.dropDown}>
+		 <div  ref={ref} className={styles.dropDown}>
 			 <div
-				  ref={ref}
+
 					onClick={() => {
 						setIsShow(!isShow);
 					}}
@@ -82,7 +75,7 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 				 {"Price"}
 				 {isShow?<img src={topArrow} alt=""/>:<img src={bottomArrow} alt=""/>}
 			 </div>
-			 <div className={`${styles.dropDown__content} ${isShow ? styles.active : ''}`}>
+			 <div ref={ref} className={`${styles.dropDown__content} ${isShow ? styles.active : ''}`}>
 				 <div className={styles.dropDown__content__inputs}>
 					 <input
 						  type="number"
@@ -92,7 +85,7 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 						  placeholder={minRange.toString()}
 						  onChange={event => {
 							  const value = +event.target.value;
-							  if (value <= maxRange) {
+							  if (value <= maxRange ) {
 								  dispatch(setMinValue(value));
 							  } else {
 								  dispatch(setMinValue(maxRange));
@@ -109,7 +102,7 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 						  placeholder={maxRange.toString()}
 						  onChange={event => {
 							  const value = +event.target.value;
-							  if (value >= minRange) {
+							  if (value >= minRange && value >= minPrice) {
 								  dispatch(setMaxValue(value));
 							  }
 						  }}
