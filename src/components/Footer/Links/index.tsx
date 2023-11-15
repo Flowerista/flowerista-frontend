@@ -7,9 +7,9 @@ import {DataRoute} from '../../../data/routes';
 export const Links: FC = () => {
 	return (
 		 <ul className={styles.footer__links}>
-			 <li><Link to={DataRoute.Catalog}>Catalog</Link></li>
-			 <li><Link to={DataRoute.AboutUs}>About us</Link></li>
-			 <li><Link to={DataRoute.DeliveryAndPayment}>Delivery & payment</Link></li>
+			 <li><Link to={DataRoute.Catalog} target={"_top"}>Catalog</Link></li>
+			 <li><Link to={DataRoute.AboutUs} target={"_top"}>About us</Link></li>
+			 <li><Link to={DataRoute.DeliveryAndPayment} target={"_top"}>Delivery & payment</Link></li>
 		 </ul>
 	);
 };
