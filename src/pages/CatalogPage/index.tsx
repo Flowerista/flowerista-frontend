@@ -27,7 +27,9 @@ export const CatalogPage: FC<ICatalogPage> = () => {
 		sortByNewest: filters.sortByNewest,
 		sortByPriceHighToLow:  filters.sortByPriceHighToLow,
 		sortByPriceLowToHigh: filters.sortByPriceLowToHigh,
-		page: filters.page
+		page: filters.page,
+		min:filters.min,
+		max:filters.max,
 	}
 
 	useEffect(() => {

@@ -36,8 +36,8 @@ export const bouqueteApi = createApi({
 				url: `/bouquete?page=${data.page}
 							${data.flowerIds?.length === 0 ?"":`&flowerIds=${data.flowerIds}`}
 							${data.colorIds?.length === 0 ?"":`&colorIds=${data.colorIds}`}
-							${data.minPrice && data.minPrice > 0 ?`&minPrice=${data.minPrice}`:''}
-							${data.maxPrice && data.maxPrice < 9999 ?`&maxPrice=${data.maxPrice}`:''}
+							${data.minPrice && data.minPrice > data.min ?`&minPrice=${data.minPrice}`:''}
+							${data.maxPrice && data.maxPrice < data.max ?`&maxPrice=${data.maxPrice}`:''}
 							${data.sortByNewest ?`&sortByNewest=${data.sortByNewest}`:""}
 							${data.sortByPriceHighToLow ?`&sortByPriceHighToLow=${data.sortByPriceHighToLow}`:""}
 							${data.sortByPriceLowToHigh ?`&sortByPriceLowToHigh=${data.sortByPriceLowToHigh}`:""}

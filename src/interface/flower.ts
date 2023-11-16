@@ -56,6 +56,8 @@ export interface IFetchAllFlowers {
 	sortByPriceHighToLow: boolean;
 	sortByPriceLowToHigh: boolean;
 	page: number;
+  min: number;
+  max: number;
 }
 
 export interface IFlower{
