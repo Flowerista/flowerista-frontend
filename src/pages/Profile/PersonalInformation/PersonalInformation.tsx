@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Sidebar } from '../../../components/Sidebar/Sidebar'
 
 import styles from './styles.module.scss';
@@ -12,6 +12,8 @@ import PasswordChange from '../../../components/Modals/PasswordChange/PasswordCh
 
 
 export const PersonalInformation: FC = () => {
+  const [showPasswordChange, setShowPasswordChange] = useState<boolean>(true)
+
   return (
     <>
       <div className={styles.page_nav}><Link to={DataRoute.Home} >Home</Link> | Profile</div>
@@ -23,7 +25,7 @@ export const PersonalInformation: FC = () => {
         </div>
         <Sidebar className={styles.sidebar}/>
       </div>
-      <PasswordChange />
+      <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange}/>
     </>
   )
 }

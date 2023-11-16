@@ -12,7 +12,15 @@ interface Inputs {
     passwordOld: string
 }
 
-const PasswordChange: FC = () => {
+interface PasswordChangeProps {
+    isOpen: boolean;
+    setOpen: (state: false) => void;
+}
+
+const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
+    const onClose = () => {
+        setOpen(false)
+    }
     const {
         register,
         handleSubmit,
@@ -27,7 +35,7 @@ const PasswordChange: FC = () => {
         reset()
     }
   return (
-    <Modal className={styles.modal}>
+    <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>
         <Title text='Password Change'/>
         <ol className={styles.modal__list}>
             <li className={styles.modal__item}>
