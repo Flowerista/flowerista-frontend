@@ -12,7 +12,6 @@ interface ButtonProps {
 
 export const Button: FC<ButtonProps> = ({text, style, colorMode = 'black', sizeMode = 'big', onClick}) => {
     const clazz = classNames(styles.btn, styles[colorMode], styles[sizeMode])
-    console.log(clazz);
     
     return (
         <button 

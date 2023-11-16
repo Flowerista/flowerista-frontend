@@ -10,6 +10,7 @@ import { Button } from '../../Button/Buttons';
 interface Inputs {
     passwordNew: string
     passwordOld: string
+    // exampleRequired: string
 }
 
 interface PasswordChangeProps {
@@ -47,8 +48,8 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
         </ol>
         <Form onSubmit={handleSubmit(onSubmit)}>
             <InputsWrapper>
-                <PasswordInput register={register} error={errors.passwordOld?.message}/>
-                <PasswordInput register={register} error={errors.passwordNew?.message}/>
+                <PasswordInput register={register} error={errors.passwordOld?.message} registerName={'passwordOld'} label={'Old password'}/>
+                <PasswordInput register={register} error={errors.passwordNew?.message} registerName={'passwordNew'} label={'New password'}/>
             </InputsWrapper>
             <Button text='Сhange password' style={{marginTop: '50px'}}/>
         </Form>
