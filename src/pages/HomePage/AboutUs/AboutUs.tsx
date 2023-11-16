@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
 import {Link} from 'react-router-dom';
-import {DataRoute} from '../../data/routes';
-import BigImg from '../../assets/image/about_us/big_img.png';
-import SmallImg from '../../assets/image/about_us/small_img.png';
+import {DataRoute} from '../../../data/routes';
+import BigImg from '../../../assets/image/about_us/big_img.png';
+import SmallImg from '../../../assets/image/about_us/small_img.png';
 import {BsArrowRight} from 'react-icons/bs';
 
 export interface IAboutUs {

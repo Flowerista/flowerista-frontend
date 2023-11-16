@@ -1,8 +1,10 @@
 import {FC} from 'react'
-import { Form, FormTitle, FormButton, PhoneInput, EmailInput, InputsWrapper } from '../../../../components/AppForm';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styles from './styles.module.scss';
+import { Form, PhoneInput, EmailInput, InputsWrapper } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Button/Buttons';
+import { Title } from '../../../../components/Title/Title';
 
+import styles from './styles.module.scss';
 interface Inputs  {
     email: string;
     phone: string;
@@ -27,7 +29,7 @@ export const ContactsForm: FC = () => {
     return (
         <div className={styles.form__wrapper}>
             <div className={styles.form__head}>
-            <FormTitle text='Contacts'/>
+            <Title text='Contacts'/>
             <p className={styles.form__descr}>Enter your details for quick ordering</p>
             </div>
             <div className={styles.form__body}>
@@ -36,7 +38,7 @@ export const ContactsForm: FC = () => {
                     <EmailInput register={register} error={errors.email?.message}/>
                     <PhoneInput control={control} error={errors.phone?.message}/>
                 </InputsWrapper>
-                <FormButton text='Save' colorMode='white' style={{marginTop: '40px'}}/>
+                <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
             </Form>
             </div>
         </div>

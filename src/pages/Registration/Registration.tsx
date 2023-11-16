@@ -2,7 +2,9 @@ import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 
 import { DataRoute } from '../../data/routes';
-import { Form, FormTitle, FormButton, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
+import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
+import { Button } from '../../components/Button/Buttons';
+import { Title } from '../../components/Title/Title';
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
@@ -55,7 +57,7 @@ export const Registration: FC = () => {
     return (
         <div className={styles.registration}>
             <div>
-                <FormTitle text='New account'/>
+                <Title text='New account'/>
 
                 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
                     <InputsWrapper>
@@ -65,7 +67,7 @@ export const Registration: FC = () => {
                         <PhoneInput control={control} error={errors.phone?.message} />
                         <PasswordInput register={register} error={errors.password?.message} />
                     </InputsWrapper>
-                    <FormButton text='Continue' style={{marginTop: '40px'}}/>
+                    <Button text='Continue' style={{marginTop: '40px'}}/>
                 </Form>
 
                 <FormLink to={DataRoute.Login} text='Already have an account? Log in'/>

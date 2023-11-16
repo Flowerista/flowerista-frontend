@@ -1,8 +1,10 @@
 import {FC} from 'react'
-import { Form, FormTitle, FormButton, NameInput, SurnameInput, PasswordInput, InputsWrapper } from '../../../../components/AppForm';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import styles from './styles.module.scss';
+import { Form, NameInput, SurnameInput, PasswordInput, InputsWrapper } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Button/Buttons';
+import { Title } from '../../../../components/Title/Title';
 
+import styles from './styles.module.scss';
 interface Inputs  {
     password: string;
     name: string;
@@ -27,7 +29,7 @@ export const PersonalInformationForm: FC = () => {
     return (
         <div className={styles.form__wrapper}>
             <div className={styles.form__head}>
-            <FormTitle text='Personal information'/>
+            <Title text='Personal information'/>
             <p className={styles.form__descr}>Enter your details for quick ordering</p>
             </div>
             <div className={styles.form__body}>
@@ -37,7 +39,7 @@ export const PersonalInformationForm: FC = () => {
                     <SurnameInput register={register} error={errors.surname?.message}/>
                     <PasswordInput register={register} error={errors.password?.message}/>
                 </InputsWrapper>
-                <FormButton text='Save' colorMode='white' style={{marginTop: '40px'}}/>
+                <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
             </Form>
             </div>
         </div>

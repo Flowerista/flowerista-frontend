@@ -1,6 +1,9 @@
 import {FC} from 'react'
-import { Form, FormTitle, FormButton, NameInput, SurnameInput, InputsWrapper, TextInput } from '../../../../components/AppForm';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Form, InputsWrapper, TextInput } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Button/Buttons';
+import { Title } from '../../../../components/Title/Title';
+
 import styles from './styles.module.scss';
 
 interface Inputs  {
@@ -29,7 +32,7 @@ export const AddressForm: FC = () => {
     return (
         <div className={styles.form__wrapper}>
             <div className={styles.form__head}>
-            <FormTitle text='Address'/>
+            <Title text='Address'/>
             <p className={styles.form__descr}>Enter your details for quick ordering</p>
             </div>
             <div className={styles.form__body}>
@@ -73,7 +76,7 @@ export const AddressForm: FC = () => {
                         />
                     </InputsWrapper>
                 </InputsWrapper>
-                <FormButton text='Save' colorMode='white' style={{marginTop: '40px'}}/>
+                <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
             </Form>
             </div>
         </div>

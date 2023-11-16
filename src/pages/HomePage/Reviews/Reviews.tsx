@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
-import Flower from '../../assets/image/reviews/flower.png'
+import Flower from '../../../assets/image/reviews/flower.png'
 
 
 export interface IReviews {

@@ -7,6 +7,7 @@ import { AddressForm } from './ProfileForms/AddressForm';
 import { ContactsForm } from './ProfileForms/ContactsForm';
 import { Link } from 'react-router-dom';
 import { DataRoute } from '../../../data/routes';
+import PasswordChange from '../../../components/Modals/PasswordChange/PasswordChange';
 
 
 
@@ -22,6 +23,7 @@ export const PersonalInformation: FC = () => {
         </div>
         <Sidebar className={styles.sidebar}/>
       </div>
+      <PasswordChange />
     </>
   )
 }

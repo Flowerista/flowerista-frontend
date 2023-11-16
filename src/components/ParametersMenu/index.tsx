@@ -12,7 +12,7 @@ export const ParametersMenu: FC = () => {
 		 <ul className={styles.parametersMenu}>
 			 <li><Search/></li>
 			 <li><Languages/></li>
-			 <li><Link to={DataRoute.Login}><BsFillPersonFill style={{fontSize:"24px"}}/></Link></li>
+			 <li><Link to={DataRoute.PersonalInformation}><BsFillPersonFill style={{fontSize:"24px"}}/></Link></li>
 			 <li><BsFillBagFill style={{fontSize:"24px"}}/></li>
 		 </ul>
 	);
