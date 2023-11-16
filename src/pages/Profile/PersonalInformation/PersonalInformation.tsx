@@ -12,14 +12,18 @@ import PasswordChange from '../../../components/Modals/PasswordChange/PasswordCh
 
 
 export const PersonalInformation: FC = () => {
-  const [showPasswordChange, setShowPasswordChange] = useState<boolean>(true)
+  const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
+  
+  const openPasswordModal = (): void =>  {
+    setShowPasswordChange(true)
+  }
 
   return (
     <>
       <div className={styles.page_nav}><Link to={DataRoute.Home} >Home</Link> | Profile</div>
       <div className={styles.information}>
         <div className={styles.forms__wrapper}>
-          <PersonalInformationForm/>
+          <PersonalInformationForm onOpen={openPasswordModal}/>
           <AddressForm/>
           <ContactsForm/>
         </div>

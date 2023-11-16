@@ -12,7 +12,11 @@ interface Inputs  {
     exampleRequired: string
 }
 
-export const PersonalInformationForm: FC = () => {
+interface PersonalFormProps{
+    onOpen: () => void;
+}
+
+export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
     const {
         register,
         handleSubmit,
@@ -37,7 +41,12 @@ export const PersonalInformationForm: FC = () => {
                 <InputsWrapper>
                     <NameInput register={register} error={errors.name?.message}/>
                     <SurnameInput register={register} error={errors.surname?.message}/>
-                    <PasswordInput register={register} error={errors.password?.message}/>
+                    <button 
+                        className={styles.password}
+                        onClick={onOpen}
+                    >
+                        Сhange password
+                    </button>
                 </InputsWrapper>
                 <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
             </Form>

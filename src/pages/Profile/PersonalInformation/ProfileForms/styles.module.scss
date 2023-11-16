@@ -22,3 +22,28 @@
         margin-top: 40px;
     }
 }
+
+.password {
+    color: #231104;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    text-decoration-line: underline;
+    background-color: inherit;
+    text-align: left;
+    width:fit-content;
+    cursor: pointer;
+    &:focus {
+        
+    }
+    &:hover {
+        color: #9C5A58;
+    }
+    &:active {
+        color: #231104;
+    }
+    &:disabled {
+        color: #C5B4B9;
+    }
+}
