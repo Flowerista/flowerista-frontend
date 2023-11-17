@@ -23,17 +23,7 @@ const PasswordInput: FC<IFormInput> = ({error, register, label = 'Password', pla
             defaultValue=''
             placeholder={placeholder}
             error={error}
-            register={register(registerName, {
-                required: 'Required',
-                minLength: {
-                    value: 8,
-                    message: 'Be at least 8 characters long'
-                },
-                pattern: {
-                    value: /(?=.*\d)/,
-                    message: 'The password must contain at least one number'
-                },
-            })}
+            register={register(registerName)}
         >
             <div 
                 className={styles.btn}

@@ -1,5 +1,7 @@
 import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 
 import { DataRoute } from '../../data/routes';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
@@ -10,13 +12,46 @@ import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
 
 type Inputs = {
-  password: string;
-  email: string;
-  name: string;
-  surname: string;
-  phone: string;
-  exampleRequired: string
+    name: string;
+    surname: string;
+    email: string;
+    phone: string;
+    password: string;
 }
+
+
+
+const schemaRegistration = yup
+  .object({
+    name: yup.string()
+             .min(2, 'Be at least 2 characters long')
+             .max(50, 'Length no more than 50 characters')
+             .matches(/^[^\s]+$/, 'Spaces are not allowed')
+             .matches(/^[A-Za-z]+$/, 'Only letters')
+             .required('Required'),
+    surname: yup.string()
+                .min(2, 'Be at least 2 characters long')
+                .max(50, 'Length no more than 50 characters')
+                .matches(/^[^\s]+$/, 'Spaces are not allowed')
+                .matches(/^[A-Za-z]+$/, 'Only letters')
+                .required('Required'),
+    email: yup.string()
+              .max(256, 'Length no more than 256 characters')
+              .email().required('Required'),
+    phone: yup.string()
+              .matches(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){12}(\s*)?$/, 'Incorrect phone format')
+              .required('Required'), // not correct,
+    password: yup.string()
+                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
+                 .min(8, 'Be at least 8 characters long')
+                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
+                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
+                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
+                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
+                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
+                 .required('Required'),
+  })
+  .required()
 
 export const Registration: FC = () => {
 
@@ -30,7 +65,8 @@ export const Registration: FC = () => {
         mode: 'onBlur',
         defaultValues: {
             phone: ''
-        }
+        },
+        resolver: yupResolver(schemaRegistration)
     })
 
     const upFirstChar = (str: string): string => {

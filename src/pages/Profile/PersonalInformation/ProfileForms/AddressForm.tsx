@@ -1,5 +1,7 @@
 import {FC} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 import { Form, InputsWrapper, TextInput } from '../../../../components/AppForm';
 import { Button } from '../../../../components/Button/Buttons';
 import { Title } from '../../../../components/Title/Title';
@@ -12,8 +14,25 @@ interface Inputs  {
     house: string;
     entrance: string;
     flat: string;
-    exampleRequired: string
 }
+
+const schemaAddress = yup
+  .object({
+    city: yup.string()
+             .matches(/^[A-Za-z]+$/, 'Only letters')
+             .required('Required'),
+    street: yup.string()
+               .matches(/^[A-Za-z]+$/, 'Only letters')
+               .required('Required'),
+    house: yup.string()
+              .matches(/^[A-Za-z\d]+$/, 'Only numbers and letters')
+              .required('Required'),
+    entrance: yup.string()
+                 .required('Required'), // not correct,
+    flat: yup.string()
+             .required('Required'),
+  })
+  .required()
 
 export const AddressForm: FC = () => {
     const {
@@ -22,7 +41,12 @@ export const AddressForm: FC = () => {
         formState: {errors},
         reset
     } = useForm<Inputs>({
-        mode: 'onBlur'
+        mode: 'onBlur',
+        defaultValues: {
+            entrance: ' ',
+            flat: ' '
+        },
+        resolver: yupResolver(schemaAddress)
     })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {

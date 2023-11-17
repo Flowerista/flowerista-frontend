@@ -1,4 +1,6 @@
-import {FC} from 'react'
+import {FC} from 'react';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 import Modal from '../Modal';
 import { Form, PasswordInput, InputsWrapper } from '../../AppForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -10,13 +12,35 @@ import { Button } from '../../Button/Buttons';
 interface Inputs {
     passwordNew: string
     passwordOld: string
-    // exampleRequired: string
 }
 
 interface PasswordChangeProps {
     isOpen: boolean;
     setOpen: (state: false) => void;
 }
+
+const schemaChangePassword = yup
+  .object({
+    passwordNew: yup.string()
+                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
+                 .min(8, 'Be at least 8 characters long')
+                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
+                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
+                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
+                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
+                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
+                 .required('Required'),
+    passwordOld: yup.string()
+                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
+                 .min(8, 'Be at least 8 characters long')
+                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
+                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
+                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
+                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
+                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
+                 .required('Required'),
+  })
+  .required()
 
 const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
     const onClose = () => {
@@ -28,7 +52,8 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
         formState: {errors},
         reset
     } = useForm<Inputs>({
-        mode: 'onBlur'
+        mode: 'onBlur',
+        resolver: yupResolver(schemaChangePassword)
     })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {

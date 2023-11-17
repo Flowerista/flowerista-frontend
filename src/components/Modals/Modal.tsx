@@ -1,4 +1,4 @@
-import { FC, CSSProperties, ReactNode, useEffect, KeyboardEvent } from 'react'
+import { FC, CSSProperties, ReactNode, useEffect} from 'react'
 import styles from './styles.module.scss'
 import { BsArrowLeft } from 'react-icons/bs'
 import classNames from 'classnames';

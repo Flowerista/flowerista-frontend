@@ -1,5 +1,7 @@
 import {FC} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
 import { Form, PhoneInput, EmailInput, InputsWrapper } from '../../../../components/AppForm';
 import { Button } from '../../../../components/Button/Buttons';
 import { Title } from '../../../../components/Title/Title';
@@ -8,8 +10,18 @@ import styles from './styles.module.scss';
 interface Inputs  {
     email: string;
     phone: string;
-    exampleRequired: string
 }
+
+const schemaContacts = yup
+  .object({
+    email: yup.string()
+              .max(256, 'Length no more than 256 characters')
+              .email().required('Required'),
+    phone: yup.string()
+              .matches(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){12}(\s*)?$/, 'Incorrect phone format')
+              .required('Required'), // not correct,
+  })
+  .required()
 
 export const ContactsForm: FC = () => {
     const {
@@ -19,7 +31,8 @@ export const ContactsForm: FC = () => {
         reset,
         control
     } = useForm<Inputs>({
-        mode: 'onBlur'
+        mode: 'onBlur',
+        resolver: yupResolver(schemaContacts)
     })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
