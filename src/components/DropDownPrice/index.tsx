@@ -72,7 +72,7 @@ export const DropDownPrice: FC<IDropDownPrice> = ( {min,max,maxInputRef,minInput
 					}}
 					className={styles.dropDown__btn}
 			 >
-				 {"Price"}
+				 {"price"}
 				 {isShow?<img src={topArrow} alt=""/>:<img src={bottomArrow} alt=""/>}
 			 </div>
 			 <div ref={ref} className={`${styles.dropDown__content} ${isShow ? styles.active : ''}`}>

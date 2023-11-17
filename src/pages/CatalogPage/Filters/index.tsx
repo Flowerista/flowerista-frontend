@@ -30,7 +30,7 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
 	const { data:priceRange}=useGetRangePriceQuery("")
-	const [sortingName, setSortingName] = useState<string>("Sorting");
+	const [sortingName, setSortingName] = useState<string>("new");
 
 	const minInputRef = useRef<HTMLInputElement>(null);
 	const maxInputRef = useRef<HTMLInputElement>(null);
@@ -43,8 +43,8 @@ export const Filters: FC = () => {
 
 	const sorting= [
 		{item:"sortByNewest",id:1,name:"New",sort:false},
-		{item:"sortByPriceHighToLow",id:2,name:"To Height Price",sort:false},
-		{item:"sortByPriceLowToHigh",id:3,name:"To Low Price",sort:false},
+		{item:"sortByPriceHighToLow",id:2,name:"High to Low Price",sort:false},
+		{item:"sortByPriceLowToHigh",id:3,name:"Low To High Price",sort:false},
 	]
 
 
@@ -88,9 +88,9 @@ export const Filters: FC = () => {
 	}
 
 	const removeHandler = (item:{item:string,menu:string,id:number})=>{
-		if (item.menu==="Flowers"){
+		if (item.menu==="flowers"){
 			dispatch(removeFlowerId(item))
-		}else if (item.menu ==="Colors") {
+		}else if (item.menu ==="colors") {
 			dispatch(removeColorId(item))
 		}else if (item.menu === "minMax"){
 			dispatch(removeMinMaxValues())
@@ -126,11 +126,11 @@ export const Filters: FC = () => {
 					 <DropDown
 						  items={flowers}
 						  toggleFilter={addFlower}
-						  name={"Flowers"}/>
+						  name={"flowers"}/>
 					 <DropDown
 						  items={colors}
 						  toggleFilter={addColor}
-						  name={"Colors"}/>
+						  name={"colors"}/>
 					 <DropDownPrice
 						  min={min}
 						  max={max}
