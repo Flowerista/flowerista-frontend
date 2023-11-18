@@ -12,6 +12,7 @@ import {Login} from './pages/Login/Login';
 import {Registration} from './pages/Registration/Registration';
 import {RestoringAccess} from './pages/RestoringAccess/RestoringAccess';
 import {RestoringAccessSuccess} from './pages/RestoringAccess/RestoringAccessSuccess/RestoringAccessSuccess';
+import {ProductPage} from './pages/ProductPage';
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
     <Route path={DataRoute.Registration} element={<MainLayout><Registration /></MainLayout>} />
     <Route path={DataRoute.RestoringAccess} element={<MainLayout><RestoringAccess /></MainLayout>} />
     <Route path={DataRoute.RestoringAccessSuccess} element={<MainLayout><RestoringAccessSuccess /></MainLayout>} />
+    <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
      </PageTransition>

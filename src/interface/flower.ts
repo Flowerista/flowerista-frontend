@@ -65,3 +65,29 @@ export interface IFlower{
     name: string
 }
 
+
+interface FlowerId {
+    id: number;
+    name: string;
+}
+
+export interface Size {
+    id: number;
+    size: string;
+    defaultPrice: number;
+    discount: number;
+    discountPrice: number;
+}
+
+interface ImageUrls {
+    [key: string]: string;
+}
+
+export interface IBouquetId {
+    id: number;
+    name: string;
+    itemCode: string;
+    imageUrls: ImageUrls;
+    sizes: Size[];
+    flowers: FlowerId[];
+}

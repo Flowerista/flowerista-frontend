@@ -25,7 +25,7 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
     <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
         <div className={styles.card__wrapper}>
             <div className={styles.card__img}>
-                <Link to={`${DataRoute.Product}:${id}`}>
+                <Link to={`${DataRoute.Product}/${id}`}>
                     <img 
                         src={img} alt="flower" />
                 </Link>

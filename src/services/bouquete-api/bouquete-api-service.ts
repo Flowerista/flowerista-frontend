@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
-import {IAllFlower, IFetchAllFlowers, IFlower, IFlowerCard} from '../../interface/flower';
+import {IAllFlower, IBouquetId, IFetchAllFlowers, IFlower, IFlowerCard} from '../../interface/flower';
+
 
 export const bouqueteApi = createApi({
 	reducerPath: 'bouqueteApi',
@@ -45,6 +46,12 @@ export const bouqueteApi = createApi({
 				,
 			}),
 		}),
+
+		getBouqueteById: build.query<IBouquetId,string>({
+			query: (id) => ({
+				url: `/bouquete/${id}`,
+			}),
+		}),
 	})
 })
 
@@ -54,4 +61,5 @@ export const { useGetBestsellersQuery
 	useGetColorsQuery,
 	useGetFlowersQuery,
 	 useGetRangePriceQuery,
+	 useGetBouqueteByIdQuery
 } = bouqueteApi;
