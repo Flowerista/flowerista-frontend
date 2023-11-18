@@ -2,6 +2,7 @@ import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import axios from 'axios';
 
 import { DataRoute } from '../../data/routes';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
@@ -10,6 +11,8 @@ import { Title } from '../../components/Title/Title';
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
+import { usePostRegistrationMutation } from '../../services/bouquete-api/bouquete-api-service';
+import { IRegister } from '../../interface/register';
 
 type Inputs = {
     name: string;
@@ -53,14 +56,38 @@ const schemaRegistration = yup
   })
   .required()
 
-export const Registration: FC = () => {
+  // add try catch
+const checkEmail = async (email: string) => {
+    let checked
+    await axios.get(`https://flowerista.onrender.com/api/auth/checkEmail/${email}`)
+            .then(response => {
+                checked = response.data
+            })
+            .catch(err => console.log(err))
+    return checked
+}
 
+const checkPhone = async (phone: number) => {
+    let checked
+    await axios.get(`https://flowerista.onrender.com/api/auth/checkPhone/${phone}`)
+            .then(response => {
+                checked = response.data
+            })
+            .catch(err => console.log(err))
+    return checked
+}
+
+
+
+export const Registration: FC = () => {
+    const [sendRequest, { error }] = usePostRegistrationMutation()
     const {
         register,
         handleSubmit,
         formState: {errors},
         reset,
-        control
+        control,
+        setError
     } = useForm<Inputs>({
         mode: 'onBlur',
         defaultValues: {
@@ -74,20 +101,35 @@ export const Registration: FC = () => {
         const newStr = strTrim.charAt(0).toUpperCase() + strTrim.slice(1).toLocaleLowerCase()
         return newStr
     }
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        const {password, email, name, surname, phone} = data
+    const onSubmit: SubmitHandler<Inputs> = async ({password, email, name, surname, phone}) => {
         const newName = upFirstChar(name)
         const newSurname = upFirstChar(surname)
-        const newPhone = phone.slice(4).replace(/\D/g, '')
-        const newData = {
+        const newPhone = +phone.slice(4).replace(/\D/g, '')
+        const newData: IRegister = {
             password,
             email,
-            name: newName,
-            surname: newSurname,
-            phone: newPhone
+            firstName: newName,
+            lastName: newSurname,
+            phoneNumber: newPhone
         }
-        alert(JSON.stringify(newData))
-        reset()
+        const checkedEmail = await checkEmail(email)
+        
+        if (checkedEmail) {
+            setError('email', {type: 'chackEmail', message: 'Mail already exists'})
+        } else {
+            const checkedPhone = await checkPhone(newPhone)
+            if (checkedPhone) {
+                setError('phone', {type: 'chackPhone', message: 'Phone already exists'})
+            } else {
+                sendRequest(newData)
+                if (error) {
+                    alert(error)
+                } else {
+                    alert(JSON.stringify(newData))
+                    reset()
+                }
+            }
+        }
     }
   
     return (
