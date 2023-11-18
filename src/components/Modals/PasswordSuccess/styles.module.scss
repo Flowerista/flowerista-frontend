@@ -1,7 +1,6 @@
 .modal {
     display: flex;
     flex-direction: column;
-    gap: 30px;
     align-items: center;
     &__list {
         width: 370px;
@@ -9,6 +8,9 @@
         flex-direction: column;
         gap: 18px;
         padding:50px
+    }
+    &__title {
+        text-align: center;
     }
     &__item {
         font-size: 16px;
@@ -18,4 +20,8 @@
         list-style:decimal;
         margin-left: 19px;
     }
+}
+
+.list__wrapper {
+    margin-top: 30px;
 }

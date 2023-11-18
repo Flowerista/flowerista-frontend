@@ -16,7 +16,8 @@ interface Inputs {
 
 interface PasswordChangeProps {
     isOpen: boolean;
-    setOpen: (state: false) => void;
+    setOpen: (state: boolean) => void;
+    showNext: (state: boolean) => void;
 }
 
 const schemaChangePassword = yup
@@ -42,9 +43,12 @@ const schemaChangePassword = yup
   })
   .required()
 
-const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
+const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) => {
     const onClose = () => {
         setOpen(false)
+    }
+    const showSuccessModal = () => {
+        showNext(true)
     }
     const {
         register,
@@ -59,6 +63,8 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen}) => {
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         alert(JSON.stringify(data))
         reset()
+        onClose()
+        showSuccessModal()
     }
   return (
     <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>

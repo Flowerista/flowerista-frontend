@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
@@ -13,6 +13,9 @@ import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
 import { usePostRegistrationMutation } from '../../services/bouquete-api/bouquete-api-service';
 import { IRegister } from '../../interface/register';
+import RegistrationCompleted from '../../components/Modals/RegistrationCompleted/RegistrationCompleted';
+import RegistrationError from '../../components/Modals/RegistrationError/RegistrationError';
+import { QueryStatus } from '@reduxjs/toolkit/query';
 
 type Inputs = {
     name: string;
@@ -80,7 +83,9 @@ const checkPhone = async (phone: number) => {
 
 
 export const Registration: FC = () => {
-    const [sendRequest, { error }] = usePostRegistrationMutation()
+    const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
+    const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
+    const [sendRequest] = usePostRegistrationMutation()
     const {
         register,
         handleSubmit,
@@ -121,12 +126,22 @@ export const Registration: FC = () => {
             if (checkedPhone) {
                 setError('phone', {type: 'chackPhone', message: 'Phone already exists'})
             } else {
-                sendRequest(newData)
-                if (error) {
-                    alert(error)
-                } else {
-                    alert(JSON.stringify(newData))
-                    reset()
+                try {
+                    sendRequest(newData)
+                    .then((response) => {
+                        if ('data' in response) {
+                            alert(JSON.stringify(newData))
+                            setShowRegisterCompleted(true)
+                            reset()
+                        } else if ('error' in response) {
+                            setShowRegisterError(true)
+                        }
+                        })
+                    .catch(() => {
+                        setShowRegisterError(true)
+                    })
+                } catch (error) {
+                    setShowRegisterError(true)
                 }
             }
         }
@@ -150,6 +165,8 @@ export const Registration: FC = () => {
 
                 <FormLink to={DataRoute.Login} text='Already have an account? Log in'/>
             </div>
+            <RegistrationCompleted isOpen={showRegisterCompleted} setOpen={setShowRegisterCompleted}/>
+            <RegistrationError isOpen={showRegisterError} setOpen={setShowRegisterError}/>
             <div className={styles.img}>
                 <img src={Flower} alt="flower" />
             </div>

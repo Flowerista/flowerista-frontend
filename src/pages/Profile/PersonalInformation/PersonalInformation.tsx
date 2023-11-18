@@ -8,11 +8,13 @@ import { ContactsForm } from './ProfileForms/ContactsForm';
 import { Link } from 'react-router-dom';
 import { DataRoute } from '../../../data/routes';
 import PasswordChange from '../../../components/Modals/PasswordChange/PasswordChange';
+import PasswordSuccess from '../../../components/Modals/PasswordSuccess/PasswordSuccess';
 
 
 
 export const PersonalInformation: FC = () => {
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
+  const [showPasswordSuccess, setShowPasswordSuccess] = useState<boolean>(false)
   
   const openPasswordModal = (): void =>  {
     setShowPasswordChange(true)
@@ -29,7 +31,8 @@ export const PersonalInformation: FC = () => {
         </div>
         <Sidebar className={styles.sidebar}/>
       </div>
-      <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange}/>
+      <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
+      <PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
     </>
   )
 }
