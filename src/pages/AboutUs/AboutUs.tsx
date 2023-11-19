@@ -144,7 +144,9 @@ export const AboutUs: FC = () => {
                 ))}
             </div>
             <div className={styles.flower}>
-                <img src={Flower} alt="flower" />
+                <div className={styles.flower__wrapper}>
+                    <img src={Flower} alt="flower" />
+                </div>
             </div>
         </section>
     </div>

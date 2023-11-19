@@ -30,7 +30,7 @@
         &:hover {
             border-radius: 100%;
             color: #fff;
-            background-color: #231104;
+            background-color: #E7A9A7;
             opacity: .9;
         }
     }
@@ -41,6 +41,12 @@
     border-radius: 100%;
     color: #fff;
     background-color: #231104;
+    &:hover {
+        border-radius: 100%;
+        color: #fff;
+        background-color: #231104;
+        opacity: .9;
+    }
 }
 
 .button {
@@ -54,12 +60,13 @@
     font-weight: 400;
     line-height: normal;
     color: #231104;
-    &:hover {
-            border-radius: 100%;
-            color: #fff;
-            background-color: #231104;
-            opacity: .9;
-        }
+    &:disabled {
+        color: #C5B4B9;
+    }
+}
+
+.disabled {
+    color: #C5B4B9;
 }
 
 .flower__wrapper {

@@ -5,4 +5,13 @@
     line-height: 150%; /* 24px */
     text-decoration-line: underline;
     margin-top: 20px;
+    &:hover {
+        color: #9C5A58;
+    }
+    &:active {
+        color: #231104;
+    }
+    &:disabled {
+        color: #C5B4B9;
+    }
 }

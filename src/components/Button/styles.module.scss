@@ -11,12 +11,31 @@
 .black {
     background-color: #231104;
     color: #FCF7F0;
+    &:hover{
+        background-color: #9C5A58;
+    }
+    &:active{
+        background-color: #231104;
+    }
+    &:disabled{
+        background-color: #C5B4B9;
+    }
 }
 
 .white {
     background-color: inherit;
     color: #231104;
     border: #231104 solid 2px;
+    &:hover {
+        border-color: #9C5A58;
+    }
+    &:active {
+        border-color: #231104;;
+    }
+    &:disabled{
+        color: #C5B4B9;
+        border-color: #C5B4B9;
+    }
 }
 
 .small {

@@ -127,6 +127,14 @@
     position: absolute;
     top: 1862px;
     right: 0; 
-    padding: 19px 0 12.8px 25px;
     z-index: -1;
+    &__wrapper {
+        position: relative;
+        height: 2100px;
+        padding: 19px 0 12.8px 25px;
+        img{
+            position:sticky;
+            top: 0;
+        }
+    }
 }

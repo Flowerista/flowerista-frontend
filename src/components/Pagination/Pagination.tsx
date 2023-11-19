@@ -28,6 +28,7 @@ export const Pagination: FC<IPagination> = ({data,handlePageClick}) => {
                   previousLinkClassName={styles.button}
                   nextLinkClassName={styles.button}
                   breakLinkClassName={styles.pagination__item}
+                  disabledLinkClassName={styles.disabled}
                />
            </div>
     )
