@@ -14,14 +14,15 @@ interface InputProps {
 const FormInput: FC<InputProps> = ({label, type, defaultValue, placeholder, register, error, children}) => {
   return (
     <label className={styles.label}>
-        <>{label}</>
         <input 
           className={`${styles.input} ${error ? styles.input_error : ''}`} 
           type={type}
           defaultValue={defaultValue ? defaultValue : ''} 
-          placeholder={placeholder}
+          // placeholder={placeholder}
           {...register}
+          required={true}
         />
+        <span>{label}</span>
         {children}
     </label>
   )
