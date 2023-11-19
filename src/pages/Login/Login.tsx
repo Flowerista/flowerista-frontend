@@ -2,9 +2,9 @@ import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
 
 import { DataRoute } from '../../data/routes';
+import { LoginSchema } from '../../utils/yup';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput} from '../../components/AppForm' 
 import { Button } from '../../components/Button/Buttons';
 import { Title } from '../../components/Title/Title';
@@ -17,24 +17,6 @@ type Inputs = {
     email: string;
 }
 
-const schemaLogin = yup
-  .object({
-    email: yup.string()
-              .max(256, 'Length no more than 256 characters')
-              .email()
-              .required('Required'),
-    password: yup.string()
-                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                 .min(8, 'Be at least 8 characters long')
-                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
-                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
-                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
-                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
-                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
-                 .required('Required'),
-  })
-  .required()
-
 export const Login: FC = () => {
     const {
         register,
@@ -43,7 +25,7 @@ export const Login: FC = () => {
         reset
     } = useForm<Inputs>({
         mode: 'onBlur',
-        resolver: yupResolver(schemaLogin)
+        resolver: yupResolver(LoginSchema)
     })
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {

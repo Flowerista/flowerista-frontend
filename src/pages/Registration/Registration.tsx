@@ -1,21 +1,21 @@
 import { FC, useState } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
 import axios from 'axios';
 
+import { RegisterSchema } from '../../utils/yup';
 import { DataRoute } from '../../data/routes';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
 import { Button } from '../../components/Button/Buttons';
 import { Title } from '../../components/Title/Title';
 
-import Flower from '../../assets/image/registration/flower.png'
-import styles from './styles.module.scss'
 import { usePostRegistrationMutation } from '../../services/bouquete-api/bouquete-api-service';
 import { IRegister } from '../../interface/register';
 import RegistrationCompleted from '../../components/Modals/RegistrationCompleted/RegistrationCompleted';
 import RegistrationError from '../../components/Modals/RegistrationError/RegistrationError';
-import { QueryStatus } from '@reduxjs/toolkit/query';
+
+import Flower from '../../assets/image/registration/flower.png'
+import styles from './styles.module.scss'
 
 type Inputs = {
     name: string;
@@ -24,40 +24,6 @@ type Inputs = {
     phone: string;
     password: string;
 }
-
-
-
-const schemaRegistration = yup
-  .object({
-    name: yup.string()
-             .min(2, 'Be at least 2 characters long')
-             .max(50, 'Length no more than 50 characters')
-             .matches(/^[^\s]+$/, 'Spaces are not allowed')
-             .matches(/^[A-Za-z]+$/, 'Only letters')
-             .required('Required'),
-    surname: yup.string()
-                .min(2, 'Be at least 2 characters long')
-                .max(50, 'Length no more than 50 characters')
-                .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                .matches(/^[A-Za-z]+$/, 'Only letters')
-                .required('Required'),
-    email: yup.string()
-              .max(256, 'Length no more than 256 characters')
-              .email().required('Required'),
-    phone: yup.string()
-              .matches(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){12}(\s*)?$/, 'Incorrect phone format')
-              .required('Required'), // not correct,
-    password: yup.string()
-                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                 .min(8, 'Be at least 8 characters long')
-                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
-                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
-                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
-                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
-                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
-                 .required('Required'),
-  })
-  .required()
 
   // add try catch
 const checkEmail = async (email: string) => {
@@ -80,8 +46,6 @@ const checkPhone = async (phone: number) => {
     return checked
 }
 
-
-
 export const Registration: FC = () => {
     const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
     const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
@@ -98,7 +62,7 @@ export const Registration: FC = () => {
         defaultValues: {
             phone: ''
         },
-        resolver: yupResolver(schemaRegistration)
+        resolver: yupResolver(RegisterSchema)
     })
 
     const upFirstChar = (str: string): string => {

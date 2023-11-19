@@ -1,17 +1,19 @@
 import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from "@hookform/resolvers/yup"
+
 import {Form, FormLink, InputsWrapper, EmailInput} from '../../components/AppForm'
 import { Button } from '../../components/Button/Buttons';
 import { Title } from '../../components/Title/Title';
 import { DataRoute } from '../../data/routes'
+import { RestoringAccessSchema } from '../../utils/yup';
 
 import Flower from '../../assets/image/restoring_access/restoring_access.png'
 import styles from './styles.module.scss'
 
 interface Inputs {
     email: string;
-    exampleRequired: string;
 }
 
 export const RestoringAccess: FC = () => {
@@ -21,7 +23,8 @@ export const RestoringAccess: FC = () => {
         formState: {errors},
         reset
     } = useForm<Inputs>({
-        mode: 'onBlur'
+        mode: 'onBlur',
+        resolver: yupResolver(RestoringAccessSchema)
     })
     const navigate = useNavigate();
 

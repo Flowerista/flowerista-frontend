@@ -1,7 +1,8 @@
 import {FC} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+
+import { PersonalInformationSchema } from '../../../../utils/yup';
 import { Form, NameInput, SurnameInput, InputsWrapper } from '../../../../components/AppForm';
 import { Button } from '../../../../components/Button/Buttons';
 import { Title } from '../../../../components/Title/Title';
@@ -16,23 +17,6 @@ interface PersonalFormProps{
     onOpen: () => void;
 }
 
-const schemaPersonalInfo = yup
-  .object({
-    name: yup.string()
-             .min(2, 'Be at least 2 characters long')
-             .max(50, 'Length no more than 50 characters')
-             .matches(/^[^\s]+$/, 'Spaces are not allowed')
-             .matches(/^[A-Za-z]+$/, 'Only letters')
-             .required('Required'),
-    surname: yup.string()
-                .min(2, 'Be at least 2 characters long')
-                .max(50, 'Length no more than 50 characters')
-                .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                .matches(/^[A-Za-z]+$/, 'Only letters')
-                .required('Required'),
-  })
-  .required()
-
 export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
     const {
         register,
@@ -41,7 +25,7 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
         reset
     } = useForm<Inputs>({
         mode: 'onBlur',
-        resolver: yupResolver(schemaPersonalInfo)
+        resolver: yupResolver(PersonalInformationSchema)
     })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {

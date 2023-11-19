@@ -1,13 +1,14 @@
 import {FC} from 'react';
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import Modal from '../Modal';
-import { Form, PasswordInput, InputsWrapper } from '../../AppForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import styles from './styles.module.scss'
+import Modal from '../Modal';
+import { Form, PasswordInput, InputsWrapper } from '../../AppForm';
+import { PasswordChangeSchema } from '../../../utils/yup';
 import { Title } from '../../Title/Title';
 import { Button } from '../../Button/Buttons';
+
+import styles from './styles.module.scss'
 
 interface Inputs {
     passwordNew: string
@@ -19,29 +20,6 @@ interface PasswordChangeProps {
     setOpen: (state: boolean) => void;
     showNext: (state: boolean) => void;
 }
-
-const schemaChangePassword = yup
-  .object({
-    passwordNew: yup.string()
-                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                 .min(8, 'Be at least 8 characters long')
-                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
-                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
-                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
-                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
-                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
-                 .required('Required'),
-    passwordOld: yup.string()
-                 .matches(/^[^\s]+$/, 'Spaces are not allowed')
-                 .min(8, 'Be at least 8 characters long')
-                 .matches(/.*[a-z].*/, 'The password must retain one lowercase letters')
-                 .matches(/.*[A-Z].*/, 'The password must retain one uppercase letters')
-                 .matches(/.*\d.*/, 'Include at least one numerical digit (0-9)')
-                 .matches(/.*[@$!%*?&].*/, 'Include at least one special character (!, @, #, $, %, *, ?, &)')
-                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Invalid password')
-                 .required('Required'),
-  })
-  .required()
 
 const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) => {
     const onClose = () => {
@@ -57,7 +35,7 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) =>
         reset
     } = useForm<Inputs>({
         mode: 'onBlur',
-        resolver: yupResolver(schemaChangePassword)
+        resolver: yupResolver(PasswordChangeSchema)
     })
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
