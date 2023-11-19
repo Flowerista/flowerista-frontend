@@ -9,9 +9,9 @@ interface SidebarPrors {
     className?: string;
 }
 
-export const Sidebar: React.FC<SidebarPrors> = (className, style) => {
+export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
   return (
-    <div className={`${styles.sidebar} ${className.className}`} style={style}>
+    <div className={`${styles.sidebar} ${className}`} style={style}>
         <ul className={styles.sidebar__menu}>
             <li>
                 <NavLink to={DataRoute.PersonalInformation}>

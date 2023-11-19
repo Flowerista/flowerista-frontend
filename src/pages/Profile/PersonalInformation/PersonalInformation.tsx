@@ -23,13 +23,21 @@ export const PersonalInformation: FC = () => {
   return (
     <>
       <div className={styles.page_nav}><Link to={DataRoute.Home} >Home</Link> | Profile</div>
+      
       <div className={styles.information}>
-        <div className={styles.forms__wrapper}>
-          <PersonalInformationForm onOpen={openPasswordModal}/>
-          <AddressForm/>
-          <ContactsForm/>
+        <div className={styles.content}>
+          <div className={styles.forms__wrapper}>
+            <PersonalInformationForm onOpen={openPasswordModal}/>
+            <AddressForm/>
+            <ContactsForm/>
+          </div>
         </div>
-        <Sidebar className={styles.sidebar}/>
+      <div className={styles.wrapper__main}>
+        <div className={styles.wrapper__second}>
+          <Sidebar className={styles.sidebar} />
+          <div></div>
+        </div>
+      </div>
       </div>
       <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
       <PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
