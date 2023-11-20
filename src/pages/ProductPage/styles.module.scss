@@ -1,0 +1,119 @@
+.productPage{
+	&__links{
+		color: #E7A9A7;
+		padding-bottom: 40px;
+		padding-top: 20px;
+	}
+
+	&__container{
+		display: flex;
+	}
+
+	&__images{
+		img{
+			width: 706px;
+			height: 680px;
+			object-fit: cover;
+		}
+	}
+
+	&__content{
+		max-width: 520px;
+		width: 100%;
+		margin-left: 55px;
+		&__infos{
+			margin-bottom: 40px;
+			h1{
+		font-family: "Work Sans", sans-serif;
+		font-size: 32px;
+		font-weight: 400;
+		line-height: 38px;
+		color: #231104;
+				margin-bottom: 20px;
+	}
+			&__span{
+		display: block;
+		font-family: Work Sans, serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 16px;
+		color: #231104;
+		padding-top: 20px;
+	}
+			&__flowers{
+		padding-top: 30px;
+		display: flex;
+	}
+			p{
+		margin-top:30px;
+	}
+		}
+
+		&__select{
+			margin-bottom: 40px;
+		}
+		&__price{
+			display: flex;
+			align-items: center;
+			.priceDiscount{
+				font-family: Work Sans, serif;
+				font-size: 20px;
+				font-weight: 400;
+				line-height: 23px;
+				margin-right: 20px;
+				text-decoration: line-through;
+			}
+			.defaultPrice{
+				font-family: Work Sans, serif;
+				font-size: 32px;
+				font-weight: 400;
+				line-height: 38px;
+				color: #231104;
+			}
+		}
+
+		&__btns{
+			display: flex;
+			margin-top: 25px;
+			margin-bottom: 50px;
+			div{
+				width: 200px;
+				display: flex;
+				justify-content: space-between;
+				margin-left: 20px;
+				align-items: center;
+				button{
+					height: 60px;
+					width: 60px;
+					border: 1px solid #E7A9A7;
+					color: #231104;
+					background: transparent;
+					cursor: pointer;
+					transition: all 0.5s ease-in-out;
+					&:hover{
+						background-color: #E7A9A7;
+						color: #FCF7F0;
+					}
+				}
+			}
+
+		}
+
+		&__link{
+			display: flex;
+			a{
+				margin-left: 20px;
+				display: flex;
+				img{
+					margin-left:15px;
+				}
+			}
+		}
+	}
+
+	&__recentlyViewed{
+		margin-top: 130px;
+		margin-bottom: 150px;
+		display: flex;
+	}
+}
