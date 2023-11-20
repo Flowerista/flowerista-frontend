@@ -6,7 +6,7 @@ const nameValid = yup.string()
     .min(2, AppErrors.minLengthName)
     .max(50, AppErrors.maxLengthName)
     .matches(/^[^\s]+$/, AppErrors.Spaces)
-    .matches(/^[A-Za-z]+$/, AppErrors.onlyLetters)
+    .matches(/^\p{L}+$/u, AppErrors.onlyLetters)
 
 const emailValid = yup.string()
     .required(AppErrors.RequiredField)
@@ -29,15 +29,15 @@ const passwordValid = yup.string()
 
 const cityValid = yup.string()
     .required(AppErrors.RequiredField)
-    .matches(/^[A-Za-z]+$/, AppErrors.onlyLetters)
+    .matches(/^\p{L}+$/u, AppErrors.onlyLetters)
 
 const streetValid = yup.string()
     .required(AppErrors.RequiredField)
-    .matches(/^[A-Za-z]+$/, AppErrors.onlyLetters)
+    .matches(/^\p{L}+$/u, AppErrors.onlyLetters)
 
 const houseValid = yup.string()
     .required(AppErrors.RequiredField)
-    .matches(/^[A-Za-z\d]+$/, AppErrors.onlyLettersOrNum)
+    .matches(/^[\p{L}\d]+$/u, AppErrors.onlyLettersOrNum)
 
 const entranceValid = yup.string()
     .required(AppErrors.RequiredField) // not correct,
