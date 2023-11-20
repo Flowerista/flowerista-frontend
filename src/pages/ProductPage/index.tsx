@@ -5,7 +5,7 @@ import {Link, useParams} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {ProductSelect} from './ProductSelect';
 import {Size} from '../../interface/flower';
-import {FormButton} from '../../components/AppForm';
+import {Button} from '../../components/Button/Buttons'
 import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
@@ -114,7 +114,7 @@ console.log(discountPrice ? `${<span>{discountPrice}</span>} UAH`:"")
 							<span className={styles.defaultPrice}>{price} UAH</span>
 						</div>
 						<div className={styles.productPage__content__btns}>
-								<FormButton text='Buy' onClick={()=>alert(submitItems)}/>
+								<Button text='Buy' onClick={()=>alert(submitItems)}/>
 							<div>
 								<button onClick={increaseQuantity}>+</button>
 								{quantity}
