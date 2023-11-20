@@ -34,16 +34,6 @@ const PhoneInput: FC<IFormInput> = ({error, control}) => {
         }
           control={control}
           name="phone"
-          rules={{
-            required:{
-              value: true,
-              message: 'Required'
-            },
-            pattern: {
-              value: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){12}(\s*)?$/,
-              message: 'Incorrect phone format'
-            }
-           }}
         />
     </div>
   )

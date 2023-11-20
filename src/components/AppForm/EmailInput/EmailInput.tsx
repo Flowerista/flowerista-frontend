@@ -16,14 +16,7 @@ const EmailInput: FC<IFormInput> = ({error, register}) => {
             defaultValue=''
             placeholder='example@example.com'
             error={error}
-            register={register("email", {
-                required: 'Required',
-                maxLength: 256,
-                pattern: {
-                  value: /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/,
-                  message: 'Not Pattern example@example.com'
-                }
-            })}
+            register={register("email")}
         />
         {error && <FormError error={error}/>}
     </div>

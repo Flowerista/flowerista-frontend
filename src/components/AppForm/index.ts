@@ -1,8 +1,6 @@
 export { default as Form } from "./Form/Form";
-export { default as FormTitle } from "./FormTitle/FormTitle";
 export { default as FormLink } from "./FormLink/FormLink";
 export { default as EmailInput } from "./EmailInput/EmailInput";
-export { default as FormButton } from "./FormButton/FormButton";
 export { default as FormError } from './FormError/FormError';
 export { default as FormInput } from './FormInput/FormInput';
 export { default as InputsWrapper } from './InputsWrapper/InputsWrapper';
@@ -10,3 +8,4 @@ export { default as NameInput } from './NameInput/NameInput';
 export { default as PasswordInput } from './PasswordInput/PasswordInput';
 export { default as PhoneInput } from './PhoneInput/PhoneInput';
 export { default as SurnameInput } from './SurnameInput/SurnameInput';
+export {default as TextInput} from './TextInput/TextInput';

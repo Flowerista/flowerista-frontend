@@ -16,21 +16,7 @@ const NameInput: FC<IFormInput> = ({error, register}) => {
             defaultValue=''
             placeholder='Name'
             error={error}
-            register={register("name", {
-                required: 'Required',
-                minLength: {
-                    value: 2,
-                    message: 'Be at least 2 characters long'
-                },
-                maxLength: {
-                    value: 50,
-                    message: 'Length no more than 50 characters'
-                },
-                parent: {
-                    value: /^[A-Za-z]+$/,
-                    message: 'Only P'
-                }
-            })}
+            register={register("name")}
         />
         {error && <FormError error={error}/>}
     </div>

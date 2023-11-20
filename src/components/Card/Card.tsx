@@ -52,9 +52,9 @@ export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discoun
                             <span> UAH</span>
                         </div>
                     </div>
-                    <div className={styles.cart} onClick={toCart}>
+                    <button className={styles.cart} onClick={toCart} >
                         <BsBagFill/>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

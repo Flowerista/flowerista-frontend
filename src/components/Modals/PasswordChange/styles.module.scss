@@ -1,0 +1,21 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    &__list {
+        width: 370px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding:50px
+    }
+    &__item {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%; /* 24px */
+        list-style:decimal;
+        margin-left: 19px;
+    }
+}

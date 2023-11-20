@@ -7,16 +7,19 @@ import {CatalogPage} from './pages/CatalogPage';
 import PageTransition from './components/PageTransition';
 import {DataRoute} from './data/routes';
 import {DeliveryAndPaymentPage} from './pages/DeliveryAndPaymentPage';
+
 import {AboutUs} from './pages/AboutUs/AboutUs';
 import {Login} from './pages/Login/Login';
 import {Registration} from './pages/Registration/Registration';
 import {RestoringAccess} from './pages/RestoringAccess/RestoringAccess';
 import {RestoringAccessSuccess} from './pages/RestoringAccess/RestoringAccessSuccess/RestoringAccessSuccess';
+import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalInformation';
 import {ProductPage} from './pages/ProductPage';
 
 function App() {
   const location = useLocation();
   return (
+
      <PageTransition location={location.pathname}>
   <Routes>
     <Route path={DataRoute.Home} element={<MainLayout><HomePage /></MainLayout>} />
@@ -28,9 +31,11 @@ function App() {
     <Route path={DataRoute.RestoringAccess} element={<MainLayout><RestoringAccess /></MainLayout>} />
     <Route path={DataRoute.RestoringAccessSuccess} element={<MainLayout><RestoringAccessSuccess /></MainLayout>} />
     <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
+    <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
      </PageTransition>
+
   );
 }
 

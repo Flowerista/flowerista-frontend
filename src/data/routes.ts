@@ -10,5 +10,8 @@ export enum DataRoute {
 	Registration = "/registration",
 	RestoringAccess = '/restoring-access',
 	RestoringAccessSuccess = '/restoring-access/success',
-	ProductId = "product/:productId"
+	PersonalInformation = '/profile/personal-information',
+	Orders = '/profile/orders',
+	Wishlist = '/profile/wishlist',
+	ProductId = "product/:productId",
 }

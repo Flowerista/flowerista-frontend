@@ -6,31 +6,24 @@ import styles from './styles.module.scss'
 import { BsEye, BsEyeSlash } from 'react-icons/bs'
 
 interface IFormInput {
-    error?: string
-    register: any
+    error?: string;
+    register: any;
+    label?: string;
+    placeholder?: string;
+    registerName?: string
 }
 
-const PasswordInput: FC<IFormInput> = ({error, register}) => {
-    const [showPassword, setShowPassword] = useState(false)
+const PasswordInput: FC<IFormInput> = ({error, register, label = 'Password', placeholder = 'Password', registerName = 'password'}) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false)
   return (
     <div>
         <FormInput
-            label='Password'
+            label={label}
             type={showPassword ? 'text' : 'password'}
             defaultValue=''
-            placeholder='Password'
+            placeholder={placeholder}
             error={error}
-            register={register("password", {
-                required: 'Required',
-                minLength: {
-                    value: 8,
-                    message: 'Be at least 8 characters long'
-                },
-                pattern: {
-                    value: /(?=.*\d)/,
-                    message: 'The password must contain at least one number'
-                },
-            })}
+            register={register(registerName)}
         >
             <div 
                 className={styles.btn}

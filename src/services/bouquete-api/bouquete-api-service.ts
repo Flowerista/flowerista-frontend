@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
 import {IAllFlower, IBouquetId, IFetchAllFlowers, IFlower, IFlowerCard} from '../../interface/flower';
-
+import { IRegister } from '../../interface/register';
 
 export const bouqueteApi = createApi({
 	reducerPath: 'bouqueteApi',
@@ -28,8 +28,7 @@ export const bouqueteApi = createApi({
 		}),
 		getRangePrice: build.query<{minPrice:number,maxPrice:number},any>({
 			query: () => ({
-				url: `/bouquete/price-range
-`,
+				url: `/bouquete/price-range`,
 			}),
 		}),
 		getAllFlowers: build.query<IAllFlower,IFetchAllFlowers>({
@@ -46,7 +45,29 @@ export const bouqueteApi = createApi({
 				,
 			}),
 		}),
-
+		getCheckEmail: build.query<boolean, string>({
+			query: (email) => ({
+				url: `/auth/checkEmail/`,
+				params: {
+					email
+				}
+			})
+		}),
+		getCheckPhone: build.query<boolean, number>({
+			query: (phone) => ({
+				url: `/auth/checkPhone/`,
+				params: {
+					phone
+				}
+			})
+		}),
+		postRegistration: build.mutation<{}, IRegister>({
+			query: (data) => ({
+				url: `/auth/register`,
+				method: 'POST',
+				body: data
+			})
+		}),
 		getBouqueteById: build.query<IBouquetId,string>({
 			query: (id) => ({
 				url: `/bouquete/${id}`,
@@ -55,11 +76,15 @@ export const bouqueteApi = createApi({
 	})
 })
 
-export const { useGetBestsellersQuery
-	,useGetTopSellersQuery
-	, useGetAllFlowersQuery,
+export const { 
+	useGetBestsellersQuery,
+	useGetTopSellersQuery, 
+	useGetAllFlowersQuery,
 	useGetColorsQuery,
 	useGetFlowersQuery,
-	 useGetRangePriceQuery,
-	 useGetBouqueteByIdQuery
+	useGetRangePriceQuery,
+	useGetBouqueteByIdQuery,
+  useGetCheckEmailQuery,
+	useGetCheckPhoneQuery,
+	usePostRegistrationMutation
 } = bouqueteApi;
