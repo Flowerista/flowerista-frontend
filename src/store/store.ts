@@ -2,10 +2,12 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
 import {filtrationSlice} from './filtration/filtration.slice'
+import {recentlyViewedSlice} from './recentlyViewed/recentlyViewed.slice'
 
 
 const rootReducer = combineReducers({
-		 filtration: filtrationSlice.reducer,
+	filtration: filtrationSlice.reducer,
+	recentlyViewed: recentlyViewedSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 })
 
