@@ -45,9 +45,11 @@
 
 .swiper-button-prev{
 	background-image: url("../src/assets/image/swiper/arrow_2.svg");
-
+	margin-left: 40px !important;
 }
 
 .swiper-button-next{
 	background-image: url("../src/assets/image/swiper/arrow_1.svg");
+	margin-right: 40px !important;
+
 }
