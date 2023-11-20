@@ -1,10 +1,9 @@
 import React from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {Autoplay, Navigation, Pagination} from 'swiper/modules';
+import {Navigation, Pagination} from 'swiper/modules';
 import BgImage from '../../../assets/image/swiper/first.png'
 import secondSwipe from '../../../assets/image/swiper/second_swiper.png'
 import thirdSwiper from '../../../assets/image/swiper/third_swiper.png'
-import textBgImage from '../../../assets/image/swiper/second.png'
 import fourthSwiper from '../../../assets/image/swiper/fourth_swiper.png'
 import fourthSwiperText from '../../../assets/image/swiper/fourth_swiper-text.png'
 import styles from './styles.module.scss';
@@ -22,14 +21,15 @@ export const HomeSwiper = () => {
 				  autoplay={{delay:2500,disableOnInteraction:false}}
 					pagination={{ clickable: true }}
 				  navigation
-					modules={[Navigation, Pagination,Autoplay]}
+				  // modules={[Navigation, Pagination,Autoplay]}
+				  modules={[Navigation, Pagination]}
 					className={"homeSwiper"}
 			 >
 				 <SwiperSlide>
 					 <div className={styles.swiper__slide}>
 						 <div className={styles.swiper__header}>
 							 <h3>Inspired by Nature </h3>
-							 <img src={textBgImage} alt="text_image" />
+							 <p>Our Unique Bouquets</p>
 						 </div>
 						 <img src={BgImage} alt="first_swiper" />
 					 </div>
@@ -37,7 +37,7 @@ export const HomeSwiper = () => {
 				 <SwiperSlide>
 					 <div className={`${styles.swiper__slide} ${styles.swiper__second}`}>
 						 <img src={secondSwipe} alt="second_swiper" />
-						 <div className={styles.swiper__second_header}>
+						 <div className={styles.swiper__second__header}>
 							 <h1>20% Off Summer Bouquets!</h1>
 							 <p>Discover the vibrant beauty of our summer floral arrangements at a special discounted rate.</p>
 						 </div>
