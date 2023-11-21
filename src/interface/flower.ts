@@ -90,4 +90,5 @@ export interface IBouquetId {
     imageUrls: ImageUrls;
     sizes: Size[];
     flowers: FlowerId[];
+    stockQuantity:number
 }
