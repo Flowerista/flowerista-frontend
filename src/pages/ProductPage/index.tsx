@@ -1,15 +1,15 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useCallback, useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import {useGetBouqueteByIdQuery} from '../../services/bouquete-api/bouquete-api-service';
 import {Link, useParams} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
-import {ProductSelect} from './ProductSelect';
 import {Size} from '../../interface/flower';
 import {Button} from '../../components/Button/Buttons'
 import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
 import {Card} from '../../components/Card/Card';
+import {ProductSelect} from './ProductSelect';
 
 export interface IProductPage {
 }
@@ -24,8 +24,7 @@ export const ProductPage: FC<IProductPage> = ( ) => {
 	const dispatch= useAppDispatch()
 	const {recentlyViewed}= useAppSelector(state => state.recentlyViewed)
 
-	console.log(typeof discountPrice)
-console.log(discountPrice ? `${<span>{discountPrice}</span>} UAH`:"")
+	console.log(data)
 
 	const submitItems= {
 		size:activeSize,
@@ -57,15 +56,17 @@ console.log(discountPrice ? `${<span>{discountPrice}</span>} UAH`:"")
 		setDiscountPrice(`${size.discountPrice ? size.discountPrice.toString() :""}`)
 	}
 
-	const increaseQuantity = () => {
-		setQuantity((prevQuantity) => prevQuantity + 1);
-	};
+	const increaseQuantity = useCallback(() => {
+		if (data && quantity < data.stockQuantity) {
+			setQuantity((prevQuantity) => prevQuantity + 1);
+		}
+	}, [data, quantity]);
 
-	const decreaseQuantity = () => {
+	const decreaseQuantity = useCallback(() => {
 		if (quantity > 1) {
 			setQuantity((prevQuantity) => prevQuantity - 1);
 		}
-	};
+	}, [quantity]);
 
 
 	if (isLoading){
@@ -108,28 +109,29 @@ console.log(discountPrice ? `${<span>{discountPrice}</span>} UAH`:"")
 						</div>
 						<div className={styles.productPage__content__price}>
 							<div className={styles.priceDiscount}>
-								{discountPrice ? <span>{discountPrice.toString()} UAH</span> : ""}
+								{discountPrice ? <span>{price.toString()} UAH</span> : ""}
 
 							</div>
-							<span className={styles.defaultPrice}>{price} UAH</span>
+							<span className={styles.defaultPrice}>{discountPrice ? discountPrice : price} UAH</span>
 						</div>
 						<div className={styles.productPage__content__btns}>
 								<Button text='Buy' onClick={()=>alert(submitItems)}/>
 							<div>
-								<button onClick={increaseQuantity}>+</button>
-								{quantity}
 								<button onClick={decreaseQuantity}>-</button>
+								{quantity}
+								<button onClick={increaseQuantity}>+</button>
 							</div>
 						</div>
 						<div className={styles.productPage__content__link}>
 							<span>more about</span>
-							<Link to={DataRoute.DeliveryAndPayment}>Delivery & payment <img src={arrow} alt="arrow"/></Link>
+							<Link to={DataRoute.DeliveryAndPayment} target={"_top"}>Delivery & payment <img src={arrow} alt="arrow"/></Link>
 						</div>
 					</div>
 			 </div>
 
 			 <div className={styles.productPage__recentlyViewed}>
-				 {
+				 <h1>Recently Viewed</h1>
+				 <div style={{display:"flex"}}>{
 					 recentlyViewed.map(item=>
 						  <Card
 								 id={item.id}
@@ -141,8 +143,7 @@ console.log(discountPrice ? `${<span>{discountPrice}</span>} UAH`:"")
 								 key={item.id}
 						  />
 					 )
-				 }
-
+				 }</div>
 			 </div>
 		 </div>
 	);
