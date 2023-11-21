@@ -17,7 +17,7 @@ export const AboutUs: FC<IAboutUs> = () => {
                 <div className={styles.content__left}>
                     <div className={styles.section__title}>About Us</div>
                     <div>
-                        <p className={styles.content__left__autor}>Anna . florist</p>
+                        <p className={styles.content__left__autor}>our team</p>
                         <div className={styles.wrapper__img_small}>
                             <img src={SmallImg} alt="" />
                         </div>
