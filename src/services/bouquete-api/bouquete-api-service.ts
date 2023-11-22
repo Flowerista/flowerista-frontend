@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/dist/query/react';
-import {IAllFlower, IBouquetId, IFetchAllFlowers, IFlower, IFlowerCard} from '../../interface/flower';
-import { IRegister } from '../../interface/register';
+import {IAllFlower, IBouquetId, IFetchAllFlowers, IFlower, IFlowerCard, ISearchBouquet} from '../../interface/flower';
+import {IRegister} from '../../interface/register';
 
 export const bouqueteApi = createApi({
 	reducerPath: 'bouqueteApi',
@@ -73,6 +73,11 @@ export const bouqueteApi = createApi({
 				url: `/bouquete/${id}`,
 			}),
 		}),
+		searchBouquetes: build.query<ISearchBouquet[],string>({
+			query: (searchTerm) => ({
+				url: `/bouquete/search?name=${searchTerm !== "" ? searchTerm :""}`,
+			}),
+		}),
 	})
 })
 
@@ -86,5 +91,6 @@ export const {
 	useGetBouqueteByIdQuery,
   useGetCheckEmailQuery,
 	useGetCheckPhoneQuery,
-	usePostRegistrationMutation
+	usePostRegistrationMutation,
+	 useSearchBouquetesQuery
 } = bouqueteApi;

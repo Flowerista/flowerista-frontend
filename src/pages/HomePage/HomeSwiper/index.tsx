@@ -1,6 +1,6 @@
 import React from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {Navigation, Pagination} from 'swiper/modules';
+import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import BgImage from '../../../assets/image/swiper/first.png'
 import secondSwipe from '../../../assets/image/swiper/second_swiper.png'
 import thirdSwiper from '../../../assets/image/swiper/third_swiper.png'
@@ -21,8 +21,7 @@ export const HomeSwiper = () => {
 				  autoplay={{delay:2500,disableOnInteraction:false}}
 					pagination={{ clickable: true }}
 				  navigation
-				  // modules={[Navigation, Pagination,Autoplay]}
-				  modules={[Navigation, Pagination]}
+				  modules={[Navigation, Pagination,Autoplay]}
 					className={"homeSwiper"}
 			 >
 				 <SwiperSlide>

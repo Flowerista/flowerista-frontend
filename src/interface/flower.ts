@@ -92,3 +92,13 @@ export interface IBouquetId {
     flowers: FlowerId[];
     stockQuantity:number
 }
+
+export interface ISearchBouquet{
+    name:string
+    id:number
+    defaultPrice: number;
+    discountPrice?: number;
+    discount?: number;
+    imageUrls: ImageUrls;
+
+}
