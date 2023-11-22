@@ -11,8 +11,8 @@ export const Search: FC = () => {
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const debouncedSearch = useDebounce(searchTerm,500)
-	const {error, data, isLoading} = useSearchBouquetesQuery(debouncedSearch)
-	console.log(data);
+	const { data} = useSearchBouquetesQuery(debouncedSearch)
+	
 	const handleInputChange = (e: { target: { value: SetStateAction<string>; }; }) => {
 		setSearchTerm(e.target.value);
 	}
