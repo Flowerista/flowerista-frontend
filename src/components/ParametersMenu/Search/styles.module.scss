@@ -37,3 +37,76 @@
 	}
 	}
 
+.searchResult{
+	position: absolute;
+	width: 376px;
+	z-index: 999;
+	background-color: #fcf7f0;
+	height: 600px;
+	overflow-y: scroll;
+	padding-left: 20px !important;
+	li{
+		a{
+			display: flex;
+			img{
+				width: 50px;
+				height: 60px;
+			}
+		}
+	}
+
+	&__content{
+
+		margin-left: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		span{
+			font-family: Work Sans, serif;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+			color: #231104;
+		}
+		div{
+			display: flex;
+			align-items: center;
+		}
+	}
+
+}
+
+.priceDiscount{
+	font-family: Work Sans, serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 19px;
+	text-decoration: line-through;
+	color: #B4B4B4;
+	margin-right: 10px;
+}
+
+.defaultPrice{
+	font-family: Work Sans, serif;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #231104;
+}
+
+.full{
+	height: 1px;
+	width: 100%;
+	background-color: #FFFFFF;
+	margin: 10px 0;
+}
+
+
+.searchResult::-webkit-scrollbar {
+	width: 2px;
+}
+
+.searchResult::-webkit-scrollbar-thumb {
+	background: #E7A9A7;
+	border-radius: 10px;
+}
