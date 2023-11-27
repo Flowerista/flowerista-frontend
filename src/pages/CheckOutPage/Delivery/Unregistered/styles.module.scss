@@ -1,0 +1,46 @@
+.Unregistered{
+	h1{
+		font-family: Work Sans, serif;
+		font-size: 32px;
+		font-weight: 400;
+		line-height: 38px;
+		color: #231104;
+	}
+	p{
+		font-family: Work Sans, serif;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		color: #231104;
+		width: 400px;
+		margin-top: 10px;
+	}
+	div{
+		display: flex;
+	}
+	a{
+		display: grid;
+		place-items: center;
+		width: 221px;
+		height: 60px;
+		margin-top: 30px;
+		transition: all 0.5s ease-in-out;
+	}
+	a:first-of-type{
+		color: #FFFFFF;
+		background-color: #231104;
+		cursor: pointer;
+		margin-right: 20px;
+		&:hover{
+			background-color: #9C5A58;
+		}
+	}
+	a:last-of-type{
+		background-color: transparent;
+		color: #231104;
+		border: 2px solid #231104;
+		&:hover{
+			border: 2px solid #9C5A58;
+		}
+	}
+}

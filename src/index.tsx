@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {setupStore} from './store/store';
 import {BrowserRouter} from 'react-router-dom';
-
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
 const store = setupStore();
 
@@ -16,9 +17,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <BrowserRouter>
-    <Provider store={store}>
-    <App />
-    </Provider>
+        <Provider store={store}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <App />
+            </LocalizationProvider>
+        </Provider>
     </BrowserRouter>
   </>
 );

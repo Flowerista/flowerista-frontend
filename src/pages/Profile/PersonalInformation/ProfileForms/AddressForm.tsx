@@ -1,15 +1,15 @@
 import {FC} from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from "@hookform/resolvers/yup"
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup'
 
-import { Form, InputsWrapper, TextInput } from '../../../../components/AppForm';
-import { Button } from '../../../../components/Button/Buttons';
-import { Title } from '../../../../components/Title/Title';
-import { AddressSchema } from '../../../../utils/yup';
+import {Form, InputsWrapper, TextInput} from '../../../../components/AppForm';
+import {Button} from '../../../../components/Button/Buttons';
+import {Title} from '../../../../components/Title/Title';
+import {AddressSchema} from '../../../../utils/yup';
 
 import styles from './styles.module.scss';
 
-interface Inputs  {
+export interface Inputs  {
     city: string;
     street: string;
     house: string;
