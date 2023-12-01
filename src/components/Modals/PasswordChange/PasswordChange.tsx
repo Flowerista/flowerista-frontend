@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, SubmitHandler } from 'react-hook-form';
-
 import Modal from '../Modal';
 import { Form, PasswordInput, InputsWrapper } from '../../AppForm';
 import { PasswordChangeSchema } from '../../../utils/yup';
