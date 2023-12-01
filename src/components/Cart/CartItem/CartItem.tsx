@@ -2,6 +2,10 @@ import {FC, CSSProperties} from 'react'
 
 import styles from './styles.module.scss'
 import { BsTrash3 } from 'react-icons/bs';
+import { useAppDispatch } from '../../../store/store';
+import { removeCartItem, incQuantity, decQuantity, ISize, changeSize, Size } from '../../../store/cart/cart.slice';
+import { DropDownSize } from '../DropDownSize/DropDownSize';
+import { generateCartID } from '../../../utils/helpers/generateCartID';
 
 interface CartItemProps {
     id: number;
@@ -10,21 +14,32 @@ interface CartItemProps {
     discount: number | null;
     discountPrice: number | null;
     img: string;
+    quantity: number;
+    sizes: ISize[];
+    currentSize: Size;
     className?: string;
     style?: CSSProperties;
 }
 
-const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img, className, style}) => {
+const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img, quantity, currentSize, sizes, className, style}) => {
+    const cartID = generateCartID(id, currentSize)
+    const dispatch = useAppDispatch()
     const onDelete = () => {
-        console.log(id);
+        dispatch(removeCartItem({cartID}))
     } 
 
     const onInc = () => {
-        console.log('inc');
+        dispatch(incQuantity({cartID}))
     }
     
     const onDec = () => {
-        console.log('dec');
+        if (quantity > 1) {
+            dispatch(decQuantity({cartID}));
+        }
+    }
+
+    const onChangeSize = (size: Size) => {
+        dispatch(changeSize({cartID,size}))
     }
 
   return (
@@ -34,7 +49,9 @@ const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img
         </div>
         <div className={styles.item__content}>
             <p className={styles.item__title}>{name}</p>
-            <div className={styles.item__selection}>medium</div>
+            <div className={styles.item__selection}>
+                <DropDownSize  name={currentSize} sizes={sizes.filter(item => item.size !== currentSize).map(item => item.size)} toggleSize={onChangeSize} />
+            </div>
             <div className={styles.price}>
                 <div className={styles.count}>
                     <button 
@@ -43,7 +60,7 @@ const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img
                     >
                         -
                     </button>
-                    <div className={styles.count__item}>1</div>
+                    <div className={styles.count__item}>{quantity}</div>
                     <button 
                         className={styles.count__btn}
                         onClick={onInc}
@@ -54,12 +71,12 @@ const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img
                 <div className={styles.price__item}>
                     {discountPrice &&
                         <div className={styles.price__old}>
-                            <p>{defaultPrice}</p>
+                            <p>{defaultPrice * quantity}</p>
                             <span> UAH</span>
                         </div>
                     }
                     <div className={styles.price__new}>
-                        {discountPrice || defaultPrice}
+                        {quantity * (discountPrice || defaultPrice)}
                         <span> UAH</span>
                     </div>
                 </div>

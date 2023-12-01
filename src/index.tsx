@@ -4,12 +4,11 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {setupStore} from './store/store';
 import {BrowserRouter} from 'react-router-dom';
+import { persistor, store } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react'
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
-
-const store = setupStore();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,10 +16,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <BrowserRouter>
-        <Provider store={store}>
+    <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
             <App />
             </LocalizationProvider>
+      </PersistGate>
         </Provider>
     </BrowserRouter>
   </>

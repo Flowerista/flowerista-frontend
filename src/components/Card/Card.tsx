@@ -4,23 +4,50 @@ import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
 
 import styles from './styles.module.scss';
+import { useAppDispatch } from '../../store/store';
+import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
+import { generateCartID } from '../../utils/helpers/generateCartID';
+
+
+export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
+
+export interface ISize {
+    id: number;
+    size: Size;
+    defaultPrice: number;
+    discount: number | null;
+    discountPrice: number | null;
+}
 
 export interface IFlowerCard {
     id: number;
     name: string;
+    imageUrls: Record<string, string>
     defaultPrice: number;
     discount: number | null;
     discountPrice: number | null;
-    img?: string
+    sizes: ISize[];
 }
 
-
-const toCart = () => {
-    alert('added to cart')
-}
-
-export const Card: FC<IFlowerCard> = ({id, name, defaultPrice, discount, discountPrice, img}) => {
+export const Card: FC<IFlowerCard> = (props) => {
+    const {id, name, imageUrls, defaultPrice, discount, discountPrice} = props;
     const [liked, setLiked] = useState(false)
+
+    const dispatch = useAppDispatch()
+
+    const toCart = () => {
+        const cartID = generateCartID(id, 'MEDIUM')
+        const flower: ICartItem = {
+            ...props,
+            currentSize: 'MEDIUM',
+            quantity: 1,
+            cartID: cartID,
+        }
+        dispatch(addCartItem(flower))
+    }
+
+    const img = imageUrls?.['1']
+
     return (
     <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
         <div className={styles.card__wrapper}>

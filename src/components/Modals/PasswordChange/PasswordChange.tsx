@@ -6,7 +6,7 @@ import Modal from '../Modal';
 import { Form, PasswordInput, InputsWrapper } from '../../AppForm';
 import { PasswordChangeSchema } from '../../../utils/yup';
 import { Title } from '../../Title/Title';
-import { Button } from '../../Button/Buttons';
+import { Button } from '../../Buttons/Button';
 
 import styles from './styles.module.scss'
 

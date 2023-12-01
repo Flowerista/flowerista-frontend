@@ -4,7 +4,7 @@ import {useGetBouqueteByIdQuery} from '../../services/bouquete-api/bouquete-api-
 import {Link, useParams} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {Size} from '../../interface/flower';
-import {Button} from '../../components/Button/Buttons'
+import {Button} from '../../components/Buttons/Button'
 import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
@@ -41,10 +41,11 @@ export const ProductPage: FC<IProductPage> = ( ) => {
 			dispatch(addToRecentlyViewed({
 				id:data.id,
 				name:data.name,
-				discount:data?.sizes[0]?.discountPrice ? 20 : "",
+				discount:data.sizes[1]?.discountPrice ? 20 : "",
 				defaultPrice:data?.sizes[0]?.defaultPrice.toString(),
 				discountPrice:data?.sizes[0]?.discountPrice ? data?.sizes[0]?.discountPrice.toString() :"",
-				img:data.imageUrls?.['1']
+				img:data.imageUrls,
+				sizes:data.sizes
 			}))
 		}
 	},[data])
@@ -139,7 +140,8 @@ export const ProductPage: FC<IProductPage> = ( ) => {
 								 discount={item.discount}
 								 defaultPrice={item.defaultPrice}
 								 discountPrice={item.discountPrice}
-								 img={item.img}
+								 imageUrls={item.img}
+								 sizes={item.sizes}
 								 key={item.id}
 						  />
 					 )

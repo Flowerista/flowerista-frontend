@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { DataRoute } from '../../data/routes';
 import { LoginSchema } from '../../utils/yup';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput} from '../../components/AppForm' 
-import { Button } from '../../components/Button/Buttons';
+import { Button } from '../../components/Buttons/Button';
 import { Title } from '../../components/Title/Title';
 
 import Flower from '../../assets/image/login/login_flower.png';

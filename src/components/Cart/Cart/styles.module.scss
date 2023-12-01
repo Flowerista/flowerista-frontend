@@ -1,0 +1,12 @@
+.cart {
+    height: calc( 100% - 198px );
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    gap: 40px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+        width: 0px;
+    }
+}

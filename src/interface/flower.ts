@@ -1,10 +1,20 @@
-export interface IFlowerCard {
+export type TSize = 'SMALL' | 'MEDIUM' | 'LARGE';
+export interface ISize {
     id: number;
-    name: string;
+    size: TSize;
     defaultPrice: number;
     discount: number | null;
     discountPrice: number | null;
-    imageUrls?: string[]
+}
+
+export interface IFlowerCard {
+    id: number;
+    name: string;
+    imageUrls: Record<string, string>
+    defaultPrice: number;
+    discount: number | null;
+    discountPrice: number | null;
+    sizes: ISize[];
 }
 
 export interface IFlowersItem {
@@ -13,9 +23,8 @@ export interface IFlowersItem {
     defaultPrice: number;
     discount: number | null;
     discountPrice: number| null;
-    imageUrls?: {
-        [key: string] : string
-    }
+    imageUrls: Record<string, string>
+    sizes: ISize[];
 }
 
 export interface IAllFlower {
@@ -79,15 +88,15 @@ export interface Size {
     discountPrice: number;
 }
 
-interface ImageUrls {
-    [key: string]: string;
-}
+// interface ImageUrls {
+//     [key: string]: string;
+// }
 
 export interface IBouquetId {
     id: number;
     name: string;
     itemCode: string;
-    imageUrls: ImageUrls;
+    imageUrls: Record<string, string>;
     sizes: Size[];
     flowers: FlowerId[];
     stockQuantity:number
@@ -99,6 +108,6 @@ export interface ISearchBouquet{
     defaultPrice: number;
     discountPrice?: number;
     discount?: number;
-    imageUrls: ImageUrls;
+    imageUrls: Record<string, string>;
 
 }

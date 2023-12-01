@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../../../components/Button/Buttons'
+import { Button } from '../../../components/Buttons/Button'
 import { Title } from '../../../components/Title/Title'
 import { DataRoute } from '../../../data/routes'
 
