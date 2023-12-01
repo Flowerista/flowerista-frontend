@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {TimePicker} from '@mui/x-date-pickers';
-import {Button} from '../../Button/Buttons';
+import {Button} from '../../Buttons/Button';
 
 const FirstTab = () => {
 	return (
