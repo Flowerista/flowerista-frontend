@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import styles from './styles.module.scss';
-import {Button} from '../../Button/Buttons';
+import {Button} from '../../Buttons/Button';
 
 export interface IPayWithLiqPay {
 }

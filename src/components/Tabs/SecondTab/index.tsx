@@ -1,6 +1,6 @@
 import {Inputs} from '../../../pages/Profile/PersonalInformation/ProfileForms/AddressForm';
 import {Form, InputsWrapper, TextInput} from '../../AppForm';
-import {Button} from '../../Button/Buttons';
+import {Button} from '../../Buttons/Button';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {AddressSchema} from '../../../utils/yup';
