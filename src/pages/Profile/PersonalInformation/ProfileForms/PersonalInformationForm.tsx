@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 
 import { PersonalInformationSchema } from '../../../../utils/yup';
 import { Form, NameInput, SurnameInput, InputsWrapper } from '../../../../components/AppForm';
-import { Button } from '../../../../components/Button/Buttons';
+import { Button } from '../../../../components/Buttons/Button';
 import { Title } from '../../../../components/Title/Title';
 
 import styles from './styles.module.scss';

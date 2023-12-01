@@ -63,8 +63,9 @@ export const CatalogPage: FC<ICatalogPage> = () => {
 								  discount={item.discount}
 								  defaultPrice={item.defaultPrice}
 								  discountPrice={item.discountPrice}
-								  img={item.imageUrls?.['1']}
+								  imageUrls={item.imageUrls}
 								  key={item.id}
+								  sizes={item.sizes}
 							 />
 					  )) :			 <div style={{display: 'flex', marginTop: '50px', flexWrap: 'wrap', rowGap: '100px', marginBottom: '120px'}} >
 						  <SkeletonCard/>

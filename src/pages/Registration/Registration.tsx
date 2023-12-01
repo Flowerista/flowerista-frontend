@@ -6,7 +6,7 @@ import axios from 'axios';
 import { RegisterSchema } from '../../utils/yup';
 import { DataRoute } from '../../data/routes';
 import { Form, FormLink, InputsWrapper, PasswordInput, EmailInput, NameInput, SurnameInput, PhoneInput} from '../../components/AppForm' 
-import { Button } from '../../components/Button/Buttons';
+import { Button } from '../../components/Buttons/Button';
 import { Title } from '../../components/Title/Title';
 
 import { usePostRegistrationMutation } from '../../services/bouquete-api/bouquete-api-service';

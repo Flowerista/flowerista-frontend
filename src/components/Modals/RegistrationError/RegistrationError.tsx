@@ -3,7 +3,7 @@ import Modal from '../Modal';
 
 import styles from './styles.module.scss'
 import { Title } from '../../Title/Title';
-import { Button } from '../../Button/Buttons';
+import { Button } from '../../Buttons/Button';
 import { useNavigate } from 'react-router-dom';
 import { DataRoute } from '../../../data/routes';
 
