@@ -1,0 +1,24 @@
+.firstTab{
+	margin-top: 30px;
+	form{
+		span{
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+			color: #231104;
+		}
+	}
+}
+.wrappPicker{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+	width: 300px;
+}
+.datePicker{
+	width: 150px;
+}
+.timePicker{
+	width: 135px;
+	border-radius: 0;
+}

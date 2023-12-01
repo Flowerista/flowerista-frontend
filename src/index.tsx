@@ -7,6 +7,8 @@ import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react'
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,9 +18,11 @@ root.render(
     <BrowserRouter>
     <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-    <App />
-    </PersistGate>
-    </Provider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <App />
+            </LocalizationProvider>
+      </PersistGate>
+        </Provider>
     </BrowserRouter>
   </>
 );

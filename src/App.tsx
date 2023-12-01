@@ -15,6 +15,7 @@ import {RestoringAccess} from './pages/RestoringAccess/RestoringAccess';
 import {RestoringAccessSuccess} from './pages/RestoringAccess/RestoringAccessSuccess/RestoringAccessSuccess';
 import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalInformation';
 import {ProductPage} from './pages/ProductPage';
+import {CheckOutPage} from './pages/CheckOutPage';
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
     <Route path={DataRoute.RestoringAccessSuccess} element={<MainLayout><RestoringAccessSuccess /></MainLayout>} />
     <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
     <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
+    <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
      </PageTransition>
