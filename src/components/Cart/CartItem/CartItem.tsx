@@ -50,7 +50,10 @@ const CartItem: FC<CartItemProps> = ({id, name, defaultPrice, discountPrice, img
         <div className={styles.item__content}>
             <p className={styles.item__title}>{name}</p>
             <div className={styles.item__selection}>
-                <DropDownSize  name={currentSize} sizes={sizes.filter(item => item.size !== currentSize).map(item => item.size)} toggleSize={onChangeSize} />
+                <DropDownSize  
+                    name={currentSize} 
+                    sizes={sizes.filter(item => item.size !== currentSize).map(item => item.size)} toggleSize={onChangeSize}  
+                />
             </div>
             <div className={styles.price}>
                 <div className={styles.count}>
