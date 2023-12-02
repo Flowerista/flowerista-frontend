@@ -5,19 +5,18 @@ import CartItem from "../CartItem/CartItem"
 import classNames from 'classnames';
 import styles from './styles.module.scss'
 
-
 interface CartListProps {
     className?: string
     style?: CSSProperties
-    scroll?: boolean;
+    mode: 'modal' | 'checkout';
 }
 
-export const Cart: FC<CartListProps> = ({className, style, scroll = false}) => {
+export const Cart: FC<CartListProps> = ({className, style, mode}) => {
     const {cart} = useAppSelector(state => state.cart)
 
     return (
         <div 
-            className={classNames(styles.cart, className, {[styles.scroll]: scroll})}
+            className={classNames(styles.cart, styles[mode], className)}
             style={style}
         >
             {cart.length > 0 && cart.map(({id, name, defaultPrice, discount, discountPrice, imageUrls, quantity, sizes, currentSize, cartID}) => (

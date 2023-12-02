@@ -3,6 +3,7 @@
 	width: 108px;
     padding-right: 10px;
 	position: relative;
+	background-color: inherit;
 
 	&__btn{
 		cursor: pointer;
@@ -23,8 +24,7 @@
 		left: 0;
 		display: none;
 		opacity: 0;
-		background: #fff;
-
+		background-color: inherit;
 		.item{
             margin-top: 10px;
 			cursor: pointer;

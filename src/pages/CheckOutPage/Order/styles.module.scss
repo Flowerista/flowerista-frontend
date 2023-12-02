@@ -1,5 +1,37 @@
 .order{
-	height: 950px;
+	height: 713px;
 	width: 100%;
 	background-color: #fcf7f0;
+	padding-top: 53px;
+	padding-left: 108px;
+	&__content {
+		max-width: 486px;
+		background-color: inherit;
+	}
+}
+
+.price {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid #E7A9A7;
+	width: 100%;
+	padding-top: 62.5px;
+	color: #231104;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+    &__item {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        span {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
 }

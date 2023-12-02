@@ -7,8 +7,11 @@ import { Button, Cart } from '../../index';
 import { BsArrowLeft } from 'react-icons/bs'
 import styles from './styles.module.scss'
 import { ModalProps } from '../../../interface/global';
+import { useNavigate } from 'react-router-dom';
+import { DataRoute } from '../../../data/routes';
 
 export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = true, setOpen}) => {
+    const navigate = useNavigate()
     const {cart} = useAppSelector(state => state.cart)
 
     const onClose = () => {
@@ -35,6 +38,9 @@ export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = 
     
     const totalPrice = getTotalPrice(cart)
 
+    const toCheckOut = () => {
+        navigate(DataRoute.CheckOut)
+    }
     return (
         <div 
             className={classNames(styles.modal)} 
@@ -45,7 +51,7 @@ export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = 
                 style={style}
                 onClick={(e) => e.stopPropagation()}
             >
-                <Cart />
+                <Cart mode='modal'/>
                 <div className={styles.modal__footer}>
                     <div className={styles.price}>
                         <p>Total price:</p>
@@ -55,7 +61,7 @@ export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = 
                         </div>
                     </div>
                     <div className={styles.btns}>
-                        <Button sizeMode='small' text='Check out' onClick={() => {}}/>
+                        <Button sizeMode='small' text='Check out' onClick={toCheckOut}/>
                         <Button sizeMode='small' colorMode='white' text='Сontinue shopping' onClick={onClose}/>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ interface IDropDown {
     name: Size;
 }
 
-export const DropDownSize: FC<IDropDown> = ({ sizes, toggleSize ,name }) => {
+export const DropDownSize: FC<IDropDown> = ({ sizes, toggleSize, name}) => {
 	const { isShow, setIsShow, ref } = useOutside(false)
 
 	const handleItemClick = (sise: Size) => {
