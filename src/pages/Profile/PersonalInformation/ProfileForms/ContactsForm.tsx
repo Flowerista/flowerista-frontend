@@ -41,7 +41,6 @@ export const ContactsForm: FC = () => {
                     <EmailInput register={register} error={errors.email?.message}/>
                     <PhoneInput control={control} error={errors.phone?.message}/>
                 </InputsWrapper>
-                <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
             </Form>
             </div>
         </div>

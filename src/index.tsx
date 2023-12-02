@@ -16,13 +16,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <BrowserRouter>
-    <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <App />
-            </LocalizationProvider>
-      </PersistGate>
-        </Provider>
+          </LocalizationProvider>
+        </PersistGate>
+      </Provider>
     </BrowserRouter>
   </>
 );
