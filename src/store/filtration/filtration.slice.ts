@@ -1,9 +1,15 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+
+interface IItem{
+	item:string
+	menu:string
+	id:number
+}
 
 interface IInitialState{
 	filters: {
-		flowerIds: {item:string,menu:string,id:number}[];
-		colorIds: {item:string,menu:string,id:number}[];
+		flowerIds: IItem[];
+		colorIds: IItem[];
 		min: number;
 		max: number;
 		minPrice: number;
@@ -36,11 +42,21 @@ export const filtrationSlice = createSlice({
 	name: 'filtration',
 	initialState,
 	reducers: {
-		addFlowersId: (state, { payload }) => {
-			state.filters.flowerIds.push(payload);
+		addFlowersId: (state, { payload }:PayloadAction<IItem>) => {
+			const { item, menu, id } = payload;
+			const isExisting = state.filters.flowerIds.some((flowerId) => flowerId.id === id);
+			if (!isExisting) {
+				state.filters.flowerIds.push({ item, menu, id });
+			}
 		},
-		addColorsId: (state, { payload }) => {
-			state.filters.colorIds.push(payload);
+		addColorsId: (state, { payload }:PayloadAction<IItem>) => {
+
+			const { item, menu, id } = payload;
+			const isExisting = state.filters.colorIds.some((colorId) => colorId.id === id);
+			if (!isExisting) {
+				state.filters.colorIds.push({ item, menu, id });
+			}
+
 		},
 		removeFlowerId: (state, { payload }) => {
 			const flowersIds = state.filters.flowerIds
