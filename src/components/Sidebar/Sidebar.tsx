@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { DataRoute } from '../../data/routes';
 import styles from './styles.module.scss';
 import { BsArrowRight } from 'react-icons/bs';
+import { useAppDispatch } from '../../store/store';
+import { logout } from '../../store/auth/auth.slice';
 
 interface SidebarPrors {
     style?: React.CSSProperties,
@@ -10,6 +12,7 @@ interface SidebarPrors {
 }
 
 export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
+    const dispatch = useAppDispatch()
   return (
     <div className={`${styles.sidebar} ${className}`} style={style}>
         <ul className={styles.sidebar__menu}>
@@ -46,7 +49,11 @@ export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
         </ul>
         <div className={styles.sidebar__item}>
             <div className={styles.arrow}></div>
-            <p className={styles.log_out}>Log out</p>
+            <button className={styles.log_out}
+                onClick={() => dispatch(logout())}
+            >
+                Log out
+            </button>
         </div>
     </div>
   )

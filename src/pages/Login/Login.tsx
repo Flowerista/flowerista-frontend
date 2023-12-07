@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import {useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from "@hookform/resolvers/yup"
 
 import { DataRoute } from '../../data/routes';
@@ -11,6 +11,8 @@ import { Title } from '../../components/Title/Title';
 
 import Flower from '../../assets/image/login/login_flower.png';
 import styles from './styles.module.scss'
+import { login } from '../../store/auth/auth.slice';
+import { useAppDispatch } from '../../store/store';
 
 type Inputs = {
     password: string;
@@ -18,6 +20,9 @@ type Inputs = {
 }
 
 export const Login: FC = () => {
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch()
     const {
         register,
         handleSubmit,
@@ -28,9 +33,11 @@ export const Login: FC = () => {
         resolver: yupResolver(LoginSchema)
     })
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<Inputs> = async(data) => {
+        await dispatch(login(data))
         alert(JSON.stringify(data))
         reset()
+        navigate(DataRoute.PersonalInformation)
     }
     
     return (

@@ -15,6 +15,7 @@ import {
 	REGISTER, 
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import { authSlice } from './auth/auth.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -25,6 +26,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	filtration: filtrationSlice.reducer,
 	recentlyViewed: recentlyViewedSlice.reducer,
+	auth: authSlice.reducer,
 	cart: cartSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 })
@@ -38,7 +40,7 @@ export const setupStore = () => {
 		middleware: (getDefaultMiddleware) =>
 			 getDefaultMiddleware({
 				serializableCheck: {
-					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'auth/login/fulfilled', 'auth/checkAuth/fulfilled', 'auth/logout/fulfilled']
 				},
 			  }).concat(bouqueteApi.middleware)
 	})
