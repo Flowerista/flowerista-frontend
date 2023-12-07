@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {HomePage} from './pages/HomePage';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {MainLayout} from './layouts/MainLayout';
@@ -16,8 +16,18 @@ import {RestoringAccessSuccess} from './pages/RestoringAccess/RestoringAccessSuc
 import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalInformation';
 import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
+import { useAppDispatch } from './store/store';
+import { checkAuth } from './store/auth/auth.slice';
 
 function App() {
+  const dispatch = useAppDispatch()
+  
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuth())
+    }
+}, [])
+  
   const location = useLocation();
   return (
 

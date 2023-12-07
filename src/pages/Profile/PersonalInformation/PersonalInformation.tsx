@@ -1,18 +1,27 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Sidebar } from '../../../components/Sidebar/Sidebar'
 
 import styles from './styles.module.scss';
 import { PersonalInformationForm } from './ProfileForms/PersonalInformationForm';
 import { AddressForm } from './ProfileForms/AddressForm';
 import { ContactsForm } from './ProfileForms/ContactsForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DataRoute } from '../../../data/routes';
 import PasswordChange from '../../../components/Modals/PasswordChange/PasswordChange';
 import PasswordSuccess from '../../../components/Modals/PasswordSuccess/PasswordSuccess';
+import { useAppSelector } from '../../../store/store';
 
 
 
 export const PersonalInformation: FC = () => {
+  const navigate = useNavigate()
+  const {isAuth} = useAppSelector(state => state.auth)
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(DataRoute.Login)
+    }
+  }, [isAuth]);
+
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
   const [showPasswordSuccess, setShowPasswordSuccess] = useState<boolean>(false)
   
