@@ -10,13 +10,14 @@
 			line-height: 28px;
 			color: #231104;
 		}
-		a{
+		button{
 			font-family: Sarabun, serif;
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 21px;
 			text-decoration: underline;
 			transition: all 0.5s ease-in-out;
+			background: transparent;
 			&:hover{
 				color: #9C5A58;
 				text-decoration: underline #9C5A58;
