@@ -11,6 +11,7 @@ import { RestoringAccessSchema } from '../../utils/yup';
 
 import Flower from '../../assets/image/restoring_access/restoring_access.png'
 import styles from './styles.module.scss'
+import {useResetPasswordMutation} from '../../services/AuthService/rtk-auth-service';
 
 interface Inputs {
     email: string;
@@ -28,8 +29,10 @@ export const RestoringAccess: FC = () => {
     })
     const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        alert(JSON.stringify(data))
+    const [resetPassword]=useResetPasswordMutation()
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        await resetPassword(String(data.email))
         navigate(DataRoute.RestoringAccessSuccess)
         reset()
     }
