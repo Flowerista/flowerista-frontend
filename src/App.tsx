@@ -18,6 +18,7 @@ import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
 import { useAppDispatch } from './store/store';
 import { checkAuth } from './store/auth/auth.slice';
+import {PasswordRecovery} from './pages/PasswordRecovery';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -44,6 +45,7 @@ function App() {
     <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
     <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
     <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
+    <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
      </PageTransition>
