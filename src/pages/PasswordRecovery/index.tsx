@@ -29,15 +29,10 @@ export const PasswordRecovery: FC = () => {
 
 	const onSubmit: SubmitHandler<{password:string,confirm_password:string}> = async(data) => {
 				try {
-					await axios.post(`${process.env.REACT_APP_API_URL}/changePassword`,{
+					await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/changePassword`,{
 						passwordRepeated:data.confirm_password,
-						password:data.password
-					},{
-						headers: {
-							'Authorization': `Bearer ${token}`,
-							'Content-Type': 'application/json',
-							'Access-Control-Allow-Origin': '*',
-						},
+						password:data.password,
+						token:token
 					})
 					reset()
 				}catch (e){
