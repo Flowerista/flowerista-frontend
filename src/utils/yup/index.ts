@@ -1,5 +1,5 @@
-import * as yup from "yup"
-import { AppErrors } from "../../data/errors"
+import * as yup from 'yup'
+import {AppErrors} from '../../data/errors'
 
 const nameValid = yup.string()
     .required(AppErrors.RequiredField)
@@ -91,3 +91,9 @@ export const PasswordChangeSchema = yup
         passwordNew: passwordValid,
         passwordOld: passwordValid,
     }).required()
+
+export const ResetPassword = yup
+   .object({
+     password: passwordValid,
+     confirm_password: passwordValid
+   }).required()
