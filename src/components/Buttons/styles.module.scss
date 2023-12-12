@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
+.clock {
+    font-size: 24px;
+}
+
 .black {
     background-color: #231104;
     color: #FCF7F0;
@@ -35,6 +39,16 @@
     &:disabled{
         color: #C5B4B9;
         border-color: #C5B4B9;
+    }
+    .clock {
+        color: #231104;
+    }
+}
+
+.loading {
+    &:disabled{
+        color: initial;
+        border-color: initial;
     }
 }
 
