@@ -20,8 +20,7 @@ export const PersonalInformation: FC = () => {
     if (!isAuth) {
       navigate(DataRoute.Login)
     }
-  }, [isAuth]);
-
+  }, []);
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
   const [showPasswordSuccess, setShowPasswordSuccess] = useState<boolean>(false)
   
@@ -32,7 +31,6 @@ export const PersonalInformation: FC = () => {
   return (
     <>
       <div className={styles.page_nav}><Link to={DataRoute.Home} >Home</Link> | Profile</div>
-      
       <div className={styles.information}>
         <div className={styles.content}>
           <div className={styles.forms__wrapper}>

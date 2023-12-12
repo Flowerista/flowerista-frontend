@@ -19,6 +19,7 @@ import {
 
 import storage from 'redux-persist/lib/storage'
 import { authSlice } from './auth/auth.slice';
+import { userSlice } from './user/user.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
 	recentlyViewed: recentlyViewedSlice.reducer,
 	auth: authSlice.reducer,
 	cart: cartSlice.reducer,
+	user: userSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })
@@ -44,7 +46,21 @@ export const setupStore = () => {
 		middleware: (getDefaultMiddleware) =>
 			 getDefaultMiddleware({
 				serializableCheck: {
-					ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, 'auth/login/fulfilled', 'auth/checkAuth/fulfilled', 'auth/logout/fulfilled']
+					ignoredActions: [
+						FLUSH, 
+						REHYDRATE, 
+						PAUSE, 
+						PERSIST, 
+						PURGE, 
+						REGISTER, 
+						'auth/login/fulfilled', 
+						'auth/checkAuth/fulfilled', 
+						'auth/logout/fulfilled',
+						'user/profile/fulfilled',
+						'user/changeAddress/fulfilled',
+						'user/changePassword/fulfilled',
+						'user/changePersonalInfo/fulfilled',
+					]
 				},
 			  }).concat(bouqueteApi.middleware)
 				  .concat(authServiceApi.middleware)
