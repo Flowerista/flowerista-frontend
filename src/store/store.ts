@@ -1,9 +1,11 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
+import {authServiceApi} from '../services/AuthService/rtk-auth-service';
 import {filtrationSlice} from './filtration/filtration.slice'
 import {recentlyViewedSlice} from './recentlyViewed/recentlyViewed.slice'
 import { cartSlice } from './cart/cart.slice';
+
 import { 
 	persistStore, 
 	persistReducer,
@@ -14,6 +16,7 @@ import {
 	PURGE,
 	REGISTER, 
 } from 'redux-persist'
+
 import storage from 'redux-persist/lib/storage'
 import { authSlice } from './auth/auth.slice';
 import { userSlice } from './user/user.slice';
@@ -31,6 +34,7 @@ const rootReducer = combineReducers({
 	cart: cartSlice.reducer,
 	user: userSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
+	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -59,6 +63,7 @@ export const setupStore = () => {
 					]
 				},
 			  }).concat(bouqueteApi.middleware)
+				  .concat(authServiceApi.middleware)
 	})
 }
 export const store = setupStore();
