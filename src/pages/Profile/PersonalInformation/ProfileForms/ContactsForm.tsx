@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -8,22 +8,32 @@ import { Button } from '../../../../components/Buttons/Button';
 import { Title } from '../../../../components/Title/Title';
 
 import styles from './styles.module.scss';
+import { useAppSelector } from '../../../../store/store';
 interface Inputs  {
     email: string;
     phone: string;
 }
 
 export const ContactsForm: FC = () => {
+
+    const {email, phoneNumber} = useAppSelector(state => state.user.user)
     const {
         register,
         handleSubmit,
         formState: {errors},
         reset,
-        control
+        control,
+        setValue
     } = useForm<Inputs>({
         mode: 'onBlur',
         resolver: yupResolver(ContactsSchema)
     })
+
+    useEffect(() => {
+      setValue('email', email)
+      setValue('phone', `${phoneNumber}`)
+    }, [])
+    
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         alert(JSON.stringify(data))
