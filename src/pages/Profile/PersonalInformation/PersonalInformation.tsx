@@ -16,11 +16,10 @@ import { getProfile } from '../../../store/user/user.slice';
 
 export const PersonalInformation: FC = () => {
   const navigate = useNavigate()
-  const {isAuth} = useAppSelector(state => state.auth)
   const {loadingStatus, errorStatus} = useAppSelector(state => state.user)
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (!isAuth) {
+    if (localStorage.getItem('token') === undefined) {
       navigate(DataRoute.Login)
     } else {
       dispatch(getProfile())

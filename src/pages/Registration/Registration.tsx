@@ -16,6 +16,7 @@ import RegistrationError from '../../components/Modals/RegistrationError/Registr
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
+import { upFirstChar } from '../../utils/helpers';
 
 type Inputs = {
     name: string;
@@ -65,11 +66,6 @@ export const Registration: FC = () => {
         resolver: yupResolver(RegisterSchema)
     })
 
-    const upFirstChar = (str: string): string => {
-        const strTrim = str.trim()
-        const newStr = strTrim.charAt(0).toUpperCase() + strTrim.slice(1).toLocaleLowerCase()
-        return newStr
-    }
     const onSubmit: SubmitHandler<Inputs> = async ({password, email, name, surname, phone}) => {
         const newName = upFirstChar(name)
         const newSurname = upFirstChar(surname)

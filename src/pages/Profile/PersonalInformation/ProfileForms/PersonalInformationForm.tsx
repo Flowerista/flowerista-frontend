@@ -10,6 +10,7 @@ import { Title } from '../../../../components/Title/Title';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import {changePersonalInfo } from '../../../../store/user/user.slice';
+import { upFirstChar } from '../../../../utils/helpers';
 interface Inputs  {
     name: string;
     surname: string;
@@ -41,7 +42,9 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
     
     
     const onSubmit: SubmitHandler<Inputs> = async ({name, surname}) => {
-        const data = {firstName: name, lastName: surname}
+        const newFirstName = upFirstChar(name)
+        const newLastName = upFirstChar(surname)
+        const data = {firstName: newFirstName, lastName: newLastName}
         await dispatch(changePersonalInfo(data))
         if (errorStatus.changePersonalInfo){
             alert('error')
