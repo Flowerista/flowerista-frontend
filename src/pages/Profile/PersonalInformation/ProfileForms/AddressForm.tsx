@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 
@@ -9,6 +9,7 @@ import { AddressSchema } from '../../../../utils/yup';
 
 
 import styles from './styles.module.scss';
+import { useAppSelector } from '../../../../store/store';
 
 export interface Inputs  {
     city: string;
@@ -19,19 +20,28 @@ export interface Inputs  {
 }
 
 export const AddressForm: FC = () => {
+
+    const {city, street, house,  entrance, flat} = useAppSelector(state => state.user.user.address)
+
     const {
         register,
         handleSubmit,
         formState: {errors},
-        reset
+        reset,
+        setValue
     } = useForm<Inputs>({
         mode: 'onBlur',
-        defaultValues: {
-            entrance: ' ',
-            flat: ' '
-        },
         resolver: yupResolver(AddressSchema)
     })
+
+    useEffect(() => {
+      setValue('city', city ? city : " ")
+      setValue('street', street ? street : " ")
+      setValue('house', house ? house : " ")
+      setValue('entrance', entrance ? entrance : " ")
+      setValue('flat', flat ? flat : " ")
+    }, [])
+    
     
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         alert(JSON.stringify(data))

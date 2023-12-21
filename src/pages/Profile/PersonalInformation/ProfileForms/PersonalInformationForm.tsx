@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -28,14 +28,17 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
         register,
         handleSubmit,
         formState: {errors},
+        setValue
     } = useForm<Inputs>({
         mode: 'onBlur',
         resolver: yupResolver(PersonalInformationSchema),
-        defaultValues: {
-            name: firstName,
-            surname: lastName
-        }
     })
+
+    useEffect(() => {
+      setValue('name', firstName)
+      setValue('surname', lastName)
+    }, [firstName])
+    
     
     const onSubmit: SubmitHandler<Inputs> = async ({name, surname}) => {
         const data = {firstName: name, lastName: surname}
