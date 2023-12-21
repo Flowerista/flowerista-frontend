@@ -8,18 +8,15 @@ export default class UserService {
     }
 
     static async changeAddress(address: IAddress): Promise<AxiosResponse> {
-        const data = JSON.stringify(address)
-        return $api.patch('/api/user/changeAddress', data)
+        return $api.patch('/api/user/changeAddress', address)
     }
 
-    static async changePersonalInfo(personalInfo: IPersonalInfo): Promise<AxiosResponse> {
-        const data = JSON.stringify(personalInfo)
-        return $api.patch('/api/user/changePersonalInfo', data)
+    static async changePersonalInfo(personalInfo: IPersonalInfo): Promise<AxiosResponse> {        
+        return $api.patch('/api/user/changePersonalInfo', personalInfo)
     }
 
     static async changePassword(passwords: IChangePassword): Promise<AxiosResponse> {
-        const data = JSON.stringify(passwords)
-        return $api.patch('/api/user/changePassword', data)
+        return $api.patch('/api/user/changePassword', passwords)
     }
 
 }
