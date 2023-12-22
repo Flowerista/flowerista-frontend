@@ -8,6 +8,8 @@ import { Title } from '../../Title/Title';
 import { Button } from '../../Buttons/Button';
 
 import styles from './styles.module.scss'
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { changePassword } from '../../../store/user/user.slice';
 
 interface Inputs {
     passwordNew: string
@@ -21,6 +23,9 @@ interface PasswordChangeProps {
 }
 
 const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) => {
+    const {errorStatus, loadingStatus} = useAppSelector(state => state.user)
+    const dispatch = useAppDispatch();
+
     const onClose = () => {
         setOpen(false)
     }
@@ -31,17 +36,26 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) =>
         register,
         handleSubmit,
         formState: {errors},
-        reset
+        reset,
     } = useForm<Inputs>({
         mode: 'onBlur',
         resolver: yupResolver(PasswordChangeSchema)
     })
     
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        alert(JSON.stringify(data))
-        reset()
-        onClose()
-        showSuccessModal()
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        const passwords = {
+            currentPassword: data.passwordOld,
+            newPassword: data.passwordNew
+        }
+        await dispatch(changePassword(passwords))
+        if (errorStatus.changePassword) {
+            alert('Error')
+        } else {
+            alert(JSON.stringify(data))
+            reset()
+            onClose()
+            showSuccessModal()
+        }
     }
   return (
     <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>
@@ -59,7 +73,7 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) =>
                 <PasswordInput register={register} error={errors.passwordOld?.message} registerName={'passwordOld'} label={'Old password'}/>
                 <PasswordInput register={register} error={errors.passwordNew?.message} registerName={'passwordNew'} label={'New password'}/>
             </InputsWrapper>
-            <Button text='Сhange password' style={{marginTop: '50px'}}/>
+            <Button text='Сhange password' style={{marginTop: '50px'}} loading={loadingStatus.changePassword}/>
         </Form>
     </Modal>
   )

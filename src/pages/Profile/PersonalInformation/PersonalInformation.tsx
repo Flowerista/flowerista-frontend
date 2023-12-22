@@ -18,8 +18,8 @@ export const PersonalInformation: FC = () => {
   const navigate = useNavigate()
   const {loadingStatus, errorStatus} = useAppSelector(state => state.user)
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (localStorage.getItem('token') === undefined) {
+  useEffect(() => { 
+    if (!localStorage.getItem('token')) {
       navigate(DataRoute.Login)
     } else {
       dispatch(getProfile())
