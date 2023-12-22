@@ -12,7 +12,7 @@ import { Title } from '../../components/Title/Title';
 import Flower from '../../assets/image/login/login_flower.png';
 import styles from './styles.module.scss'
 import { login } from '../../store/auth/auth.slice';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 
 type Inputs = {
     password: string;
@@ -21,8 +21,8 @@ type Inputs = {
 
 export const Login: FC = () => {
     const navigate = useNavigate();
-
     const dispatch = useAppDispatch()
+    const {loadingStatus} = useAppSelector(state => state.auth)
     const {
         register,
         handleSubmit,
@@ -53,7 +53,7 @@ export const Login: FC = () => {
                     <Link to={DataRoute.RestoringAccess} className={styles.login__link}>
                         Forgot your password?
                     </Link>
-                    <Button text='Continue'/>
+                    <Button text='Continue' loading={loadingStatus}/>
                 </Form>
 
                 <FormLink to={DataRoute.Registration} text='Not registered yet?'/>

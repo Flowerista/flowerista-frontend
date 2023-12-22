@@ -1,5 +1,5 @@
 import React  from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { DataRoute } from '../../data/routes';
 import styles from './styles.module.scss';
 import { BsArrowRight } from 'react-icons/bs';
@@ -13,6 +13,11 @@ interface SidebarPrors {
 
 export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const onLogout = () => {
+        dispatch(logout())
+        navigate(DataRoute.Login)
+    }
   return (
     <div className={`${styles.sidebar} ${className}`} style={style}>
         <ul className={styles.sidebar__menu}>
@@ -50,7 +55,7 @@ export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
         <div className={styles.sidebar__item}>
             <div className={styles.arrow}></div>
             <button className={styles.log_out}
-                onClick={() => dispatch(logout())}
+                onClick={onLogout}
             >
                 Log out
             </button>

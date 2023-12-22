@@ -59,8 +59,7 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
             <Title text='Personal information'/>
             <p className={styles.form__descr}>Enter your details for quick ordering</p>
             </div>
-            <div className={styles.form__body}>
-            {loadingStatus.getProfile ? 'Loading...' :    
+            <div className={styles.form__body}>   
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputsWrapper>
                         <NameInput register={register} error={errors.name?.message}/>
@@ -74,7 +73,6 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
                     </InputsWrapper>
                     <Button text='Save' colorMode='white' style={{marginTop: '40px'}} loading={loadingStatus.changePersonalInfo}/>
                 </Form>
-            }
             </div>
         </div>
     )
