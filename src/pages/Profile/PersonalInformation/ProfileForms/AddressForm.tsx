@@ -9,25 +9,26 @@ import { AddressSchema } from '../../../../utils/yup';
 
 
 import styles from './styles.module.scss';
-import { useAppSelector } from '../../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { changeAddress } from '../../../../store/user/user.slice';
 
 export interface Inputs  {
     city: string;
     street: string;
     house: string;
-    entrance: string;
-    flat: string;
+    entrance?: string;
+    flat?: string;
 }
 
 export const AddressForm: FC = () => {
 
-    const {city, street, house,  entrance, flat} = useAppSelector(state => state.user.user.address)
+    const {user:{address:{city, street, house,  entrance, flat}}, errorStatus, loadingStatus} = useAppSelector(state => state.user)
+    const dispatch = useAppDispatch()
 
     const {
         register,
         handleSubmit,
         formState: {errors},
-        reset,
         setValue
     } = useForm<Inputs>({
         mode: 'onBlur',
@@ -35,17 +36,29 @@ export const AddressForm: FC = () => {
     })
 
     useEffect(() => {
-      setValue('city', city ? city : " ")
-      setValue('street', street ? street : " ")
-      setValue('house', house ? house : " ")
-      setValue('entrance', entrance ? entrance : " ")
-      setValue('flat', flat ? flat : " ")
+      setValue('city', city ? city : "")
+      setValue('street', street ? street : "")
+      setValue('house', house ? house : "")
+      setValue('entrance', entrance ? entrance : "")
+      setValue('flat', flat ? flat : "")
     }, [])
     
     
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        alert(JSON.stringify(data))
-        reset()
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        const {city, street, house, entrance, flat} = data
+        const newAddress = {
+            city,
+            street,
+            house,
+            entrance: entrance ? entrance : null,
+            flat: flat ? flat : null
+        }
+        await dispatch(changeAddress(newAddress))
+        if (errorStatus.changeAddress) {
+            alert('Error')
+        } else {
+            alert(JSON.stringify(newAddress))
+        }
     }
     return (
         <div className={styles.form__wrapper}>
@@ -94,7 +107,7 @@ export const AddressForm: FC = () => {
                         />
                     </InputsWrapper>
                 </InputsWrapper>
-                <Button text='Save' colorMode='white' style={{marginTop: '40px'}}/>
+                <Button text='Save' colorMode='white' style={{marginTop: '40px'}} loading={loadingStatus.changeAddress}/>
             </Form>
             </div>
         </div>

@@ -20,7 +20,6 @@ const FormInput: FC<InputProps> = ({label, type, defaultValue, placeholder, regi
           defaultValue={defaultValue ? defaultValue : ''} 
           // placeholder={placeholder}
           {...register}
-          required={true}
         />
         <span>{label}</span>
         {children}
