@@ -6,3 +6,9 @@
 .delivery{
 	width: 520px;
 }
+
+.unregistered{
+	user-select: none;
+	pointer-events: none;
+	opacity: 0.5;
+}

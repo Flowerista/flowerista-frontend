@@ -2,20 +2,35 @@ import {FC} from 'react';
 import styles from './styles.module.scss';
 
 import addressImg from '../../../../assets/image/checkOut/address.png'
+import {useAppSelector} from '../../../../store/store';
 
 export interface IAddressInformation {
-	address:any
+	address: {
+		city: string | null
+		street: string | null
+		house: string | null
+		entrance: string | null
+		flat: string | null
+	} | undefined
+	type: string
 }
 
-export const AddressInformation: FC<IAddressInformation> = ({address}) => {
+export const AddressInformation: FC<IAddressInformation> = ({address, type}) => {
+	const {city, date, street, flat, entrance, house, time,shopDate,shopTime} = useAppSelector(state => state.checkout)
 	return (
 		 <div className={styles.address}>
 			 <img src={addressImg} alt="address-img"/>
 			 <div className={styles.addressWrapper}>
-				 <h4>By courier</h4>
+				 <h4>{type === 'courier' ? 'By courier' : 'Pick up by mail'}</h4>
 				 <div>
-					 <span>{address.streetAddress}</span>
-					 <span>{address.date} {" "} {address.time}</span>
+					 {type === 'courier' && <>
+						 <span>{city} {street} {house} {entrance} {flat}</span>
+						 <span>{date} {' '} {time}</span>
+					 </>}
+					 {type === 'mail' && <>
+						 <span>45 Peremohy St., Kyiv, Ukraine</span>
+						 <span>{shopDate} {' '} {shopTime}</span>
+					 </>}
 				 </div>
 			 </div>
 		 </div>

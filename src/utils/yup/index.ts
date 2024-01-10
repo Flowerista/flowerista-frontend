@@ -97,3 +97,16 @@ export const ResetPassword = yup
      password: passwordValid,
      confirm_password: passwordValid
    }).required()
+
+
+export const CheckOutAddressSchema = yup
+   .object({
+     city: cityValid,
+     street: streetValid,
+     house: houseValid,
+     entrance: entranceValid,
+     flat: flatValid,
+     date: yup.string().nullable().required("date is required"),
+     time: yup.string().nullable().required("time is required"),
+   }).required()
+

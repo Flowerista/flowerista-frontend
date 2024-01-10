@@ -4,22 +4,14 @@ import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
 import {authServiceApi} from '../services/AuthService/rtk-auth-service';
 import {filtrationSlice} from './filtration/filtration.slice'
 import {recentlyViewedSlice} from './recentlyViewed/recentlyViewed.slice'
-import { cartSlice } from './cart/cart.slice';
+import {cartSlice} from './cart/cart.slice';
 
-import { 
-	persistStore, 
-	persistReducer,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER, 
-} from 'redux-persist'
+import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE} from 'redux-persist'
 
 import storage from 'redux-persist/lib/storage'
-import { authSlice } from './auth/auth.slice';
-import { userSlice } from './user/user.slice';
+import {authSlice} from './auth/auth.slice';
+import {userSlice} from './user/user.slice';
+import {checkOutSlice} from './checkout/checkout.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -33,6 +25,7 @@ const rootReducer = combineReducers({
 	auth: authSlice.reducer,
 	cart: cartSlice.reducer,
 	user: userSlice.reducer,
+	checkout: checkOutSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })
