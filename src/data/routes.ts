@@ -14,6 +14,6 @@ export enum DataRoute {
 	Orders = '/profile/orders',
 	Wishlist = '/profile/wishlist',
 	ProductId = "product/:productId",
-	CheckOut = "check-out",
+	CheckOut = "checkout",
 	ChangePassword = "/changePassword"
 }

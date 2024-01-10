@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import {HomePage} from './pages/HomePage';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {MainLayout} from './layouts/MainLayout';
@@ -6,7 +7,6 @@ import {CatalogPage} from './pages/CatalogPage';
 import PageTransition from './components/PageTransition';
 import {DataRoute} from './data/routes';
 import {DeliveryAndPaymentPage} from './pages/DeliveryAndPaymentPage';
-
 import {AboutUs} from './pages/AboutUs/AboutUs';
 import {Login} from './pages/Login/Login';
 import {Registration} from './pages/Registration/Registration';
@@ -15,9 +15,14 @@ import {RestoringAccessSuccess} from './pages/RestoringAccess/RestoringAccessSuc
 import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalInformation';
 import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
+import {useAppDispatch, useAppSelector} from './store/store';
+import {getProfile} from './store/user/user.slice';
 import {PasswordRecovery} from './pages/PasswordRecovery';
 
 function App() {
+
+function App() {
+
   const location = useLocation();
   return (
 

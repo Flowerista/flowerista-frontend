@@ -1,30 +1,30 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
-import {NavLink} from 'react-router-dom';
-import {DataRoute} from '../../../../data/routes';
 import userImage from '../../../../assets/image/checkOut/user.png'
+import {IUser} from '../../../../interface/global';
 
 export interface IUserInformation {
-	user:any
-	setVisible:(visible:boolean)=>void
+	user: IUser
+	setVisible: (visible: boolean) => void
 
 }
 
-export const UserInformation: FC<IUserInformation> = ({user,setVisible}) => {
+export const UserInformation: FC<IUserInformation> = ({user, setVisible}) => {
 	return (
 		 <div className={styles.UserInformation}>
 			 <div className={styles.UserInformation__title}>
 				 <h1>Your Data</h1>
-				 <button onClick={()=>{
+				 <button onClick={() => {
 					 setVisible(true);
-				 }}>change</button>
+				 }}>change
+				 </button>
 			 </div>
 			 <div className={styles.UserInformation__content}>
 				 <img src={userImage} alt=""/>
 				 <div className={styles.UserInformation__content__user}>
-					 <span>{user.name}</span>
+					 <span>{user.firstName} {user.lastName}</span>
 					 <span>{user.email}</span>
-					 <span>{user.number}</span>
+					 <span>+380{user.phoneNumber}</span>
 				 </div>
 			 </div>
 		 </div>

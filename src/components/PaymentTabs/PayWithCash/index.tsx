@@ -25,7 +25,7 @@ export const PayWithCash: FC<IPayWithCash> = () => {
 					 I have read the Privacy policy and agree to receive news, emails and offers from Flowerista
 				 </label>
 			 </div>
-			 <Button text='Pay by LiqPay' colorMode='black' style={{marginTop: '25px',marginBottom:"120px"}}/>
+			 <Button text='Pay by cash' colorMode='black' style={{marginTop: '25px',marginBottom:"120px"}}/>
 		 </div>
 	);
 };
