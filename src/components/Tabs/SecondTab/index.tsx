@@ -61,7 +61,7 @@ const SecondTab:FC<InterfaceSecondTab> = ({setIsActive}) => {
 		resolver: yupResolver(CheckOutAddressSchema),
 	})
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => {
+	const onSubmit: SubmitHandler<any> = (data) => {
 		dispatch(setDate(dayjs(data.date).format('YYYY-MM-DD')))
 		dispatch(setTime(dayjs(data.time).format('HH:mm')))
 		dispatch(setCity(data.city))
