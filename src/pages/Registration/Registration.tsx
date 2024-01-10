@@ -16,6 +16,7 @@ import RegistrationError from '../../components/Modals/RegistrationError/Registr
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
+import { upFirstChar } from '../../utils/helpers';
 
 type Inputs = {
     name: string;
@@ -49,6 +50,7 @@ const checkPhone = async (phone: number) => {
 export const Registration: FC = () => {
     const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
     const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
     const [sendRequest] = usePostRegistrationMutation()
     const {
         register,
@@ -65,11 +67,8 @@ export const Registration: FC = () => {
         resolver: yupResolver(RegisterSchema)
     })
 
-    const upFirstChar = (str: string): string => {
-        const strTrim = str.trim()
-        const newStr = strTrim.charAt(0).toUpperCase() + strTrim.slice(1).toLocaleLowerCase()
-        return newStr
-    }
+    const toggleLoading = () => setLoading(loading => !loading)
+
     const onSubmit: SubmitHandler<Inputs> = async ({password, email, name, surname, phone}) => {
         const newName = upFirstChar(name)
         const newSurname = upFirstChar(surname)
@@ -81,14 +80,17 @@ export const Registration: FC = () => {
             lastName: newSurname,
             phoneNumber: newPhone
         }
+        toggleLoading()
         const checkedEmail = await checkEmail(email)
         
         if (checkedEmail) {
             setError('email', {type: 'chackEmail', message: 'Mail already exists'})
+            toggleLoading()
         } else {
             const checkedPhone = await checkPhone(newPhone)
             if (checkedPhone) {
                 setError('phone', {type: 'chackPhone', message: 'Phone already exists'})
+                toggleLoading()
             } else {
                 try {
                     sendRequest(newData)

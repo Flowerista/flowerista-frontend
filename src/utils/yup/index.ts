@@ -40,10 +40,8 @@ const houseValid = yup.string()
     .matches(/^[\p{L}\d]+$/u, AppErrors.onlyLettersOrNum)
 
 const entranceValid = yup.string()
-    .required(AppErrors.RequiredField) // not correct,
 
 const flatValid = yup.string()
-    .required(AppErrors.RequiredField) // not correct,
 
 export const  RegisterSchema = yup
     .object({
@@ -72,8 +70,8 @@ export const AddressSchema = yup
         house: houseValid,
         entrance: entranceValid,
         flat: flatValid,
-    }).required()
-
+    })
+    
 export const ContactsSchema = yup
     .object({
         email: emailValid,

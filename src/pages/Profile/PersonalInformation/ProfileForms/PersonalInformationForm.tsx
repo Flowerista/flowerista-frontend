@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -10,6 +10,7 @@ import { Title } from '../../../../components/Title/Title';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store/store';
 import {changePersonalInfo } from '../../../../store/user/user.slice';
+import { upFirstChar } from '../../../../utils/helpers';
 interface Inputs  {
     name: string;
     surname: string;
@@ -28,17 +29,22 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
         register,
         handleSubmit,
         formState: {errors},
+        setValue
     } = useForm<Inputs>({
         mode: 'onBlur',
         resolver: yupResolver(PersonalInformationSchema),
-        defaultValues: {
-            name: firstName,
-            surname: lastName
-        }
     })
+
+    useEffect(() => {
+      setValue('name', firstName)
+      setValue('surname', lastName)
+    }, [firstName])
+    
     
     const onSubmit: SubmitHandler<Inputs> = async ({name, surname}) => {
-        const data = {firstName: name, lastName: surname}
+        const newFirstName = upFirstChar(name)
+        const newLastName = upFirstChar(surname)
+        const data = {firstName: newFirstName, lastName: newLastName}
         await dispatch(changePersonalInfo(data))
         if (errorStatus.changePersonalInfo){
             alert('error')
@@ -53,8 +59,7 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
             <Title text='Personal information'/>
             <p className={styles.form__descr}>Enter your details for quick ordering</p>
             </div>
-            <div className={styles.form__body}>
-            {loadingStatus.getProfile ? 'Loading...' :    
+            <div className={styles.form__body}>   
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputsWrapper>
                         <NameInput register={register} error={errors.name?.message}/>
@@ -68,7 +73,6 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
                     </InputsWrapper>
                     <Button text='Save' colorMode='white' style={{marginTop: '40px'}} loading={loadingStatus.changePersonalInfo}/>
                 </Form>
-            }
             </div>
         </div>
     )

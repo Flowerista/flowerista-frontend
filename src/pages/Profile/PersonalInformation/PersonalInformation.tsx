@@ -9,16 +9,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { DataRoute } from '../../../data/routes';
 import PasswordChange from '../../../components/Modals/PasswordChange/PasswordChange';
 import PasswordSuccess from '../../../components/Modals/PasswordSuccess/PasswordSuccess';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { getProfile } from '../../../store/user/user.slice';
 
 
 
 export const PersonalInformation: FC = () => {
   const navigate = useNavigate()
-  const {isAuth} = useAppSelector(state => state.auth)
-  useEffect(() => {
-    if (!isAuth) {
+  const {loadingStatus, errorStatus} = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch();
+  useEffect(() => { 
+    if (!localStorage.getItem('token')) {
       navigate(DataRoute.Login)
+    } else {
+      dispatch(getProfile())
     }
   }, []);
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
@@ -26,6 +30,14 @@ export const PersonalInformation: FC = () => {
   
   const openPasswordModal = (): void =>  {
     setShowPasswordChange(true)
+  }
+
+  if (loadingStatus.getProfile) {
+    return <h1>Loading...</h1>
+  }
+
+  if (errorStatus.getProfile) {
+    return <h1>Error...</h1>
   }
 
   return (

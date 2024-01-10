@@ -24,6 +24,13 @@
     &:disabled{
         background-color: #C5B4B9;
     }
+    .clock {
+        color: #FCF7F0;
+    }
+}
+
+.black.loading:disabled{
+    background-color: #231104;
 }
 
 .white {
@@ -34,7 +41,7 @@
         border-color: #9C5A58;
     }
     &:active {
-        border-color: #231104;;
+        border-color: #231104;
     }
     &:disabled{
         color: #C5B4B9;
@@ -45,11 +52,8 @@
     }
 }
 
-.loading {
-    &:disabled{
-        color: initial;
-        border-color: initial;
-    }
+.white.loading:disabled {
+    border-color: #231104;
 }
 
 .small {

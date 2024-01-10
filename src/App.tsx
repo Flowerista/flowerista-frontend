@@ -7,7 +7,6 @@ import {CatalogPage} from './pages/CatalogPage';
 import PageTransition from './components/PageTransition';
 import {DataRoute} from './data/routes';
 import {DeliveryAndPaymentPage} from './pages/DeliveryAndPaymentPage';
-
 import {AboutUs} from './pages/AboutUs/AboutUs';
 import {Login} from './pages/Login/Login';
 import {Registration} from './pages/Registration/Registration';
@@ -21,18 +20,9 @@ import {getProfile} from './store/user/user.slice';
 import {PasswordRecovery} from './pages/PasswordRecovery';
 
 function App() {
-  const dispatch = useAppDispatch()
-  const {isAuth} = useAppSelector(state => state.auth)
-  
-  useEffect(() => {
-    // if (localStorage.getItem('token')) {
-    //   dispatch(checkAuth())
-    //     .then(() => {if(isAuth) {
-    //     }})
-    // }
-          dispatch(getProfile())
-  }, [])
-  
+
+function App() {
+
   const location = useLocation();
   return (
 
