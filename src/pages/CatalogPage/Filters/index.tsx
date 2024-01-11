@@ -29,89 +29,98 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 
 export const Filters: FC = () => {
 	const dispatch = useAppDispatch()
-	const { data:priceRange}=useGetRangePriceQuery("")
-	const [sortingName, setSortingName] = useState<string>("new");
+	const {data: priceRange} = useGetRangePriceQuery('')
+	const [sortingName, setSortingName] = useState<string>('new');
+
+	const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
 	const minInputRef = useRef<HTMLInputElement>(null);
 	const maxInputRef = useRef<HTMLInputElement>(null);
 
-	const {data:colors,isLoading:flowersLoading}=useGetColorsQuery("")
-	const {data:flowers,isLoading:colorsLoading}=useGetFlowersQuery("")
-	const {flowerIds,colorIds,maxPrice,minPrice,min,max}=useAppSelector(state => state.filtration.filters)
+	const {data: colors, isLoading: flowersLoading} = useGetColorsQuery('')
+	const {data: flowers, isLoading: colorsLoading} = useGetFlowersQuery('')
+	const {flowerIds, colorIds, maxPrice, minPrice, min, max} = useAppSelector(state => state.filtration.filters)
 
-	const maxMinValues= [{item:`${minPrice}-${maxPrice}`,menu:"minMax",id:42}]
+	const maxMinValues = [{item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42}]
 
-	const sorting= [
-		{item:"sortByNewest",id:1,name:"New",sort:false},
-		{item:"sortByPriceHighToLow",id:2,name:"High to Low Price",sort:false},
-		{item:"sortByPriceLowToHigh",id:3,name:"Low To High Price",sort:false},
-	]
-
-
-	useEffect(()=>{
-	},[maxMinValues])
+	const [sorting, setSorting] = useState([
+		{item: 'sortByNewest', id: 1, name: 'New', sort: false},
+		{item: 'sortByPriceHighToLow', id: 2, name: 'High to Low Price', sort: false},
+		{item: 'sortByPriceLowToHigh', id: 3, name: 'Low To High Price', sort: false},
+	])
 
 
-	useEffect(()=>{
-		if (priceRange){
+	useEffect(() => {
+	}, [maxMinValues])
+
+
+	useEffect(() => {
+		if (priceRange) {
 			dispatch(setMiNumber(priceRange.minPrice))
 			dispatch(setMaxNumber(priceRange.maxPrice))
 			dispatch(setMinValue(priceRange.minPrice))
 			dispatch(setMaxValue(priceRange.maxPrice))
 		}
-	},[priceRange])
+	}, [priceRange])
 
-	const addFlower = (item:{item:string,menu:string,id:number})=>{
+	const addFlower = (item: { item: string, menu: string, id: number }) => {
 		dispatch(addFlowersId(item))
 	}
-	const addColor = (item:{item:string,menu:string,id:number})=>{
+	const addColor = (item: { item: string, menu: string, id: number }) => {
 		dispatch(addColorsId(item))
 	}
 
-	const addSorting = (value:{item:string,name:string,id:number,sort:boolean})=>{
-		if (value.item==="sortByNewest"){
-			value.sort = true
-		dispatch(setSortByNewest(true))
+	const addSorting = (value: { item: string, name: string, id: number, sort: boolean }) => {
+
+		const updatedSorting = sorting.map(option => ({
+			...option,
+			sort: option.item === value.item,
+		}));
+
+		setSorting(updatedSorting);
+
+		if (value.item === 'sortByNewest') {
+			dispatch(setSortByNewest(true))
 			dispatch(setSortByPriceHighToLow(false))
 			dispatch(setSortByPriceLowToHigh(false))
-		}else if (value.item==="sortByPriceHighToLow"){
-			value.sort = true
+		} else if (value.item === 'sortByPriceHighToLow') {
 			dispatch(setSortByPriceHighToLow(true))
 			dispatch(setSortByPriceLowToHigh(false))
 			dispatch(setSortByNewest(false))
-		}else if (value.item==="sortByPriceLowToHigh"){
-			value.sort = true
+		} else if (value.item === 'sortByPriceLowToHigh') {
 			dispatch(setSortByPriceLowToHigh(true))
 			dispatch(setSortByPriceHighToLow(false))
 			dispatch(setSortByNewest(false))
 		}
 	}
 
-	const removeHandler = (item:{item:string,menu:string,id:number})=>{
-		if (item.menu==="flowers"){
+	const removeHandler = (item: { item: string, menu: string, id: number }) => {
+		if (item.menu === 'flowers') {
 			dispatch(removeFlowerId(item))
-		}else if (item.menu ==="colors") {
+		} else if (item.menu === 'colors') {
 			dispatch(removeColorId(item))
-		}else if (item.menu === "minMax"){
+		} else if (item.menu === 'minMax') {
 			dispatch(removeMinMaxValues())
 			if (minInputRef && minInputRef.current) {
-				minInputRef.current.value = "";
+				minInputRef.current.value = '';
 			}
 			if (maxInputRef && maxInputRef.current) {
-				maxInputRef.current.value = "";
+				maxInputRef.current.value = '';
 			}
 		}
-  }
-
+		const updatedSelectedItems = selectedItems.filter(selectedItem => selectedItem !== `${item.menu}_${item.id}`);
+		setSelectedItems(updatedSelectedItems);
+	}
 
 	const resetFilters = () => {
+		setSelectedItems([])
 		dispatch(clearFilters([]))
 		dispatch(removeMinMaxValues())
 		if (minInputRef && minInputRef.current) {
-			minInputRef.current.value = "";
+			minInputRef.current.value = '';
 		}
 		if (maxInputRef && maxInputRef.current) {
-			maxInputRef.current.value = "";
+			maxInputRef.current.value = '';
 		}
 	}
 
@@ -119,44 +128,52 @@ export const Filters: FC = () => {
 	return (
 		 <div className={styles.container}>
 			 {flowersLoading || colorsLoading ?
-				  <div>Loading...</div>
-				  :
-				  <div className={styles.catalog__dropDown}>
-				 <div className={styles.catalog__dropDown_items}>
-					 <DropDown
-						  items={flowers}
-						  toggleFilter={addFlower}
-						  name={"flowers"}/>
-					 <DropDown
-						  items={colors}
-						  toggleFilter={addColor}
-						  name={"colors"}/>
-					 <DropDownPrice
-						  min={min}
-						  max={max}
-						  minInputRef={minInputRef}
-						  maxInputRef={maxInputRef}
-					 />
-				 </div>
-				 <DropDownSorting
-					  items={sorting}
-					  toggleFilter={addSorting}
-					  setName={setSortingName}
-					  name={sortingName}/>
-			 </div>}
+					<div>Loading...</div>
+					:
+					<div className={styles.catalog__dropDown}>
+						<div className={styles.catalog__dropDown_items}>
+							<DropDown
+								 setSelectedItems={setSelectedItems}
+								 selectedItems={selectedItems}
+								 removeHandler={removeHandler}
+								 items={flowers}
+								 toggleFilter={addFlower}
+								 name={'flowers'}/>
+							<DropDown
+								 setSelectedItems={setSelectedItems}
+								 selectedItems={selectedItems}
+								 removeHandler={removeHandler}
+								 items={colors}
+								 toggleFilter={addColor}
+								 name={'colors'}/>
+							<DropDownPrice
+								 min={min}
+								 max={max}
+								 minInputRef={minInputRef}
+								 maxInputRef={maxInputRef}
+							/>
+						</div>
+						<DropDownSorting
+							 items={sorting}
+							 toggleFilter={addSorting}
+							 setName={setSortingName}
+							 name={sortingName}/>
+					</div>}
 
 			 <div className={styles.catalog__selectedItemsContainer}>
-				 {[...flowerIds,...colorIds,...maxMinValues].map((item) => (
-					  item.menu === "minMax"?
-									 minPrice> min || maxPrice < max ? 	   <div className={styles.catalog__selectedItem} key={item.item} onClick={()=>removeHandler(item)}>
-											 {item.item} <span><img src={x} alt=""/></span>
-										 </div>: ""
-						   :
-						   <div className={styles.catalog__selectedItem} key={item.item} onClick={()=>removeHandler(item)}>
-						  {item.item} <span><img src={x} alt=""/></span>
-					  </div>
+				 {[...flowerIds, ...colorIds, ...maxMinValues].map((item) => (
+						item.menu === 'minMax' ?
+							 minPrice > min || maxPrice < max ?
+									<div className={styles.catalog__selectedItem} key={item.item} onClick={() => removeHandler(item)}>
+										{item.item} <span><img src={x} alt=""/></span>
+									</div> : ''
+							 :
+							 <div className={styles.catalog__selectedItem} key={item.item} onClick={() => removeHandler(item)}>
+								 {item.item} <span><img src={x} alt=""/></span>
+							 </div>
 				 ))}
-				 {[...flowerIds,...colorIds].length > 0 && <button className={styles.catalog__resetBtn} onClick={resetFilters}>clear filters</button>}
+				 {[...flowerIds, ...colorIds].length > 0 &&
+						<button className={styles.catalog__resetBtn} onClick={resetFilters}>clear filters</button>}
 			 </div>
 		 </div>
 	);

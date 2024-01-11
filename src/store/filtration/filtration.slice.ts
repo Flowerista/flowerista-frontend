@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-interface IItem{
-	item:string
-	menu:string
-	id:number
+interface IItem {
+	item: string
+	menu: string
+	id: number
 }
 
-interface IInitialState{
+interface IInitialState {
 	filters: {
 		flowerIds: IItem[];
 		colorIds: IItem[];
@@ -22,19 +22,19 @@ interface IInitialState{
 }
 
 
-const initialState: IInitialState ={
-filters:{
-	max:0,
-	min:0,
-	flowerIds:[],
-	colorIds:[],
-	minPrice:0,
-	maxPrice:9999,
-	sortByNewest:false,
-	sortByPriceHighToLow:false,
-	sortByPriceLowToHigh:false,
-	page:1,
-}
+const initialState: IInitialState = {
+	filters: {
+		max: 0,
+		min: 0,
+		flowerIds: [],
+		colorIds: [],
+		minPrice: 0,
+		maxPrice: 9999,
+		sortByNewest: false,
+		sortByPriceHighToLow: false,
+		sortByPriceLowToHigh: false,
+		page: 1,
+	},
 
 }
 
@@ -42,80 +42,81 @@ export const filtrationSlice = createSlice({
 	name: 'filtration',
 	initialState,
 	reducers: {
-		addFlowersId: (state, { payload }:PayloadAction<IItem>) => {
-			const { item, menu, id } = payload;
+		addFlowersId: (state, {payload}: PayloadAction<IItem>) => {
+			const {item, menu, id} = payload;
 			const isExisting = state.filters.flowerIds.some((flowerId) => flowerId.id === id);
 			if (!isExisting) {
-				state.filters.flowerIds.push({ item, menu, id });
+				state.filters.flowerIds.push({item, menu, id});
 			}
 		},
-		addColorsId: (state, { payload }:PayloadAction<IItem>) => {
+		addColorsId: (state, {payload}: PayloadAction<IItem>) => {
 
-			const { item, menu, id } = payload;
+			const {item, menu, id} = payload;
 			const isExisting = state.filters.colorIds.some((colorId) => colorId.id === id);
 			if (!isExisting) {
-				state.filters.colorIds.push({ item, menu, id });
+				state.filters.colorIds.push({item, menu, id});
 			}
 
 		},
-		removeFlowerId: (state, { payload }) => {
+		removeFlowerId: (state, {payload}) => {
 			const flowersIds = state.filters.flowerIds
-			state.filters.flowerIds =flowersIds.filter(({id}) => {
+			state.filters.flowerIds = flowersIds.filter(({id}) => {
 				return id !== payload.id
 			})
 		},
-		removeColorId: (state, { payload }) => {
+		removeColorId: (state, {payload}) => {
 			const flowersIds = state.filters.colorIds
-			state.filters.colorIds =flowersIds.filter(({id}) => {
+			state.filters.colorIds = flowersIds.filter(({id}) => {
 				return id !== payload.id
 			})
 		},
 
-		clearFilters: (state, { payload }) => {
+		clearFilters: (state, {payload}) => {
 			state.filters.flowerIds = payload
 			state.filters.colorIds = payload
 		},
-		setMinValue: (state, { payload }) => {
+		setMinValue: (state, {payload}) => {
 			state.filters.minPrice = payload
 		},
-		setMaxValue: (state, { payload }) => {
+		setMaxValue: (state, {payload}) => {
 			state.filters.maxPrice = payload
 		},
 		removeMinMaxValues: (state) => {
 			state.filters.minPrice = state.filters.min
 			state.filters.maxPrice = state.filters.max
 		},
-		setSortByNewest: (state,{payload}) => {
+		setSortByNewest: (state, {payload}) => {
 			state.filters.sortByNewest = payload
 		},
-		setSortByPriceHighToLow: (state,{payload}) => {
+		setSortByPriceHighToLow: (state, {payload}) => {
 			state.filters.sortByPriceHighToLow = payload
 		},
-		setSortByPriceLowToHigh: (state,{payload}) => {
+		setSortByPriceLowToHigh: (state, {payload}) => {
 			state.filters.sortByPriceLowToHigh = payload
 		},
-		setMiNumber: (state, { payload }) => {
+		setMiNumber: (state, {payload}) => {
 			state.filters.min = payload
 		},
-		setMaxNumber: (state,{payload})=>{
-			state.filters.max=payload
-		}
+		setMaxNumber: (state, {payload}) => {
+			state.filters.max = payload
+		},
 
 	},
 
 })
 
-export const {  addFlowersId,
+export const {
+	addFlowersId,
 	addColorsId,
 	removeFlowerId,
 	removeColorId,
 	clearFilters,
-	 setMinValue,
-	 setMaxValue,
+	setMinValue,
+	setMaxValue,
 	removeMinMaxValues,
-	 setSortByPriceLowToHigh,
+	setSortByPriceLowToHigh,
 	setSortByPriceHighToLow,
 	setSortByNewest,
-	 setMaxNumber,
-	 setMiNumber
+	setMaxNumber,
+	setMiNumber,
 } = filtrationSlice.actions
