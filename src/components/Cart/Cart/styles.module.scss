@@ -1,36 +1,68 @@
 .cart {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    overflow-y: auto;
-    &::-webkit-scrollbar-button{
-        width: 0px
-    }
-    background-color: inherit;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar-button {
+		width: 0px
+	}
+
+	background-color: inherit;
 }
 
 .modal {
-    height: calc( 100% - 198px );
-    padding: 0 50px 20px 50px;
-    &::-webkit-scrollbar {
-        width: 0px;
-    }
+	height: calc(100% - 198px);
+	padding: 0 50px 20px 50px;
+
+	&::-webkit-scrollbar {
+		width: 0px;
+	}
 }
 
 .checkout {
-    margin-top: 30px;
-    padding-bottom: 20px;
-    height: 380px;
-    &::-webkit-scrollbar {
-        width: 2px;
-        height: 380px;
-        background-color: #fff;
-    }
-    &::-webkit-scrollbar-button{
-        display: none;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #E7A9A7;
-        min-height: 190px;
-    }
+	margin-top: 30px;
+	padding-bottom: 20px;
+	height: 380px;
+
+	&::-webkit-scrollbar {
+		width: 2px;
+		height: 380px;
+		background-color: #fff;
+	}
+
+	&::-webkit-scrollbar-button {
+		display: none;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: #E7A9A7;
+		min-height: 190px;
+	}
+}
+
+.cartEmpty {
+	display: grid;
+	place-items: center;
+	margin-top: 50px;
+
+	h1 {
+		font-family: Work Sans;
+		font-size: 32px;
+		font-weight: 400;
+		line-height: 38px;
+		color: #000000;
+	}
+
+	p {
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		padding: 20px 0;
+	}
+
+	img {
+		width: 464px;
+		height: 392px;
+	}
 }
