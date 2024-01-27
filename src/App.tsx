@@ -16,32 +16,34 @@ import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalI
 import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
+import {SecondLayout} from './layouts/SecondLayout';
 
 
 function App() {
 
-  const location = useLocation();
-  return (
+	const location = useLocation();
+	return (
 
-     <PageTransition location={location.pathname}>
-  <Routes>
-    <Route path={DataRoute.Home} element={<MainLayout><HomePage /></MainLayout>} />
-    <Route path={DataRoute.Catalog} element={<MainLayout><CatalogPage /></MainLayout>} />
-    <Route path={DataRoute.DeliveryAndPayment} element={<MainLayout><DeliveryAndPaymentPage /></MainLayout>} />
-    <Route path={DataRoute.AboutUs} element={<MainLayout><AboutUs /></MainLayout>} />
-    <Route path={DataRoute.Login} element={<MainLayout><Login /></MainLayout>} />
-    <Route path={DataRoute.Registration} element={<MainLayout><Registration /></MainLayout>} />
-    <Route path={DataRoute.RestoringAccess} element={<MainLayout><RestoringAccess /></MainLayout>} />
-    <Route path={DataRoute.RestoringAccessSuccess} element={<MainLayout><RestoringAccessSuccess /></MainLayout>} />
-    <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
-    <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
-    <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
-    <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
-    <Route path="*" element={<NotFoundPage />} />
-  </Routes>
-     </PageTransition>
+		 <PageTransition location={location.pathname}>
+			 <Routes>
+				 <Route path={DataRoute.Home} element={<MainLayout><HomePage/></MainLayout>}/>
+				 <Route path={DataRoute.Catalog} element={<MainLayout><CatalogPage/></MainLayout>}/>
+				 <Route path={DataRoute.DeliveryAndPayment} element={<MainLayout><DeliveryAndPaymentPage/></MainLayout>}/>
+				 <Route path={DataRoute.AboutUs} element={<MainLayout><AboutUs/></MainLayout>}/>
+				 <Route path={DataRoute.Login} element={<SecondLayout><Login/></SecondLayout>}/>
+				 <Route path={DataRoute.Registration} element={<SecondLayout><Registration/></SecondLayout>}/>
+				 <Route path={DataRoute.RestoringAccess} element={<SecondLayout><RestoringAccess/></SecondLayout>}/>
+				 <Route path={DataRoute.RestoringAccessSuccess}
+				        element={<SecondLayout><RestoringAccessSuccess/></SecondLayout>}/>
+				 <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage/></MainLayout>}/>
+				 <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
+				 <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
+				 <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
+				 <Route path="*" element={<NotFoundPage/>}/>
+			 </Routes>
+		 </PageTransition>
 
-  );
+	);
 }
 
 export default App;
