@@ -3,13 +3,16 @@ import styles from './styles.module.scss';
 import {useGetBouqueteByIdQuery} from '../../services/bouquete-api/bouquete-api-service';
 import {Link, useParams} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
-import {Size} from '../../interface/flower';
+import {ISize, Size} from '../../interface/flower';
 import {Button} from '../../components/Buttons/Button'
 import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
 import {Card} from '../../components/Card/Card';
 import {ProductSelect} from './ProductSelect';
+import { generateCartID } from '../../utils/helpers';
+import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
+import { setCartModalOpen } from '../../store/modals/modals.slice';
 import {useTranslation} from 'react-i18next';
 
 export interface IProductPage {
@@ -19,7 +22,7 @@ export const ProductPage: FC<IProductPage> = () => {
 	const {t} = useTranslation()
 	const {productId} = useParams<{ productId: string }>();
 	const {data, isLoading, error} = useGetBouqueteByIdQuery(`${productId}`)
-	const [activeSize, setActiveSize] = useState<string>('');
+	const [activeSize, setActiveSize] = useState<Size>('MEDIUM');
 	const [price, setPrice] = useState<string>('')
 	const [discountPrice, setDiscountPrice] = useState<string>('');
 	const [quantity, setQuantity] = useState<number>(1);
@@ -29,14 +32,41 @@ export const ProductPage: FC<IProductPage> = () => {
 	console.log(data)
 
 	const submitItems = {
-		size: activeSize,
-		price: price,
-		priceDiscount: discountPrice,
-		quantity: quantity,
+		size:activeSize,
+		price:price,
+		priceDiscount:discountPrice,
+		quantity:quantity,
 	}
 
-	useEffect(() => {
-		if (data) {
+	const toCart = () => {
+		if (data && productId) {
+			const {id, name, imageUrls, sizes} = data
+			const dataCurSize = sizes.find(el => el.size === activeSize)
+			if (dataCurSize) {
+				const defaultPrice = dataCurSize?.defaultPrice 
+				const discount = dataCurSize?.discount
+				const discountPrice = dataCurSize.discountPrice
+				const cartID = generateCartID(id, activeSize)
+				const flower: ICartItem = {
+					cartID,
+					id,
+					name,
+					imageUrls,
+					defaultPrice,
+					discount,
+					discountPrice,
+					sizes,
+					currentSize: activeSize,
+					quantity
+				}
+				dispatch(addCartItem(flower))
+				dispatch(setCartModalOpen(true))
+			}
+		}
+	}
+
+	useEffect(()=>{
+		if(data){
 			setActiveSize(data?.sizes[0]?.size)
 			setPrice(data?.sizes[0]?.defaultPrice.toString())
 			setDiscountPrice(data?.sizes[0]?.discountPrice ? data?.sizes[0]?.discountPrice.toString() : '')
@@ -53,7 +83,8 @@ export const ProductPage: FC<IProductPage> = () => {
 	}, [data])
 
 
-	const updateContent = (size: Size) => {
+
+	const updateContent = (size: ISize)=>{
 		setActiveSize(size.size)
 		setPrice(`${size.defaultPrice}`)
 		setDiscountPrice(`${size.discountPrice ? size.discountPrice.toString() : ''}`)

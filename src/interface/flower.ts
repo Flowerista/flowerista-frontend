@@ -80,12 +80,14 @@ interface FlowerId {
     name: string;
 }
 
-export interface Size {
+export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
+
+export interface ISize {
     id: number;
-    size: string;
+    size: Size;
     defaultPrice: number;
-    discount: number;
-    discountPrice: number;
+    discount: number | null;
+    discountPrice: number | null;
 }
 
 // interface ImageUrls {
@@ -97,7 +99,7 @@ export interface IBouquetId {
     name: string;
     itemCode: string;
     imageUrls: Record<string, string>;
-    sizes: Size[];
+    sizes: ISize[];
     flowers: FlowerId[];
     stockQuantity:number
 }
