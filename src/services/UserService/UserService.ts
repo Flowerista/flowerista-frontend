@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import $api from "../../http";
 import { IAddress, IChangePassword, IPersonalInfo, IUser } from "../../interface/global";
+import { IFlowerCard } from "../../interface/flower";
 
 export default class UserService {
     static async profile(): Promise<AxiosResponse<IUser>> {
@@ -17,6 +18,21 @@ export default class UserService {
 
     static async changePassword(passwords: IChangePassword): Promise<AxiosResponse> {
         return $api.patch('/api/user/changePassword', passwords)
+    }
+
+    static async wishlist(): Promise<AxiosResponse<IFlowerCard[]>> {
+        return $api.get<IFlowerCard[]>('api/user/wishlist')
+    }
+
+    static async addCardToWishlist(cardId: number): Promise<AxiosResponse> {
+        return $api.post('api/user/wishlist', cardId)
+    }
+
+    static async deleteCardFromWishlist(cardId: number): Promise<AxiosResponse> {
+        const config = {
+            data: Number(cardId)
+        }
+        return $api.delete('api/user/wishlist', config)
     }
 
 }

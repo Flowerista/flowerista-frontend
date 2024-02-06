@@ -19,7 +19,7 @@ $api.interceptors.response.use((config) => {
 }, (async (error: AxiosError) => {
     const originalRequest = error.config;
     // @ts-ignore
-    if (error.response?.status == 403 && error.config && originalRequest && !error.config._isRetry) { 
+    if (error.response?.status == 401 && error.config && originalRequest && !error.config._isRetry) { 
         // @ts-ignore
         originalRequest._isRetry = true;
         try {

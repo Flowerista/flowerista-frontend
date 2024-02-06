@@ -16,6 +16,8 @@ import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalI
 import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
+import { ProfileLayout } from './layouts/ProfileLayout';
+import { Wishlist } from './pages/Profile/Wishlist/Wishlist';
 
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
     <Route path={DataRoute.RestoringAccess} element={<MainLayout><RestoringAccess /></MainLayout>} />
     <Route path={DataRoute.RestoringAccessSuccess} element={<MainLayout><RestoringAccessSuccess /></MainLayout>} />
     <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage /></MainLayout>} />
-    <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
+    <Route path={DataRoute.PersonalInformation} element={<ProfileLayout pageName='Profile'><PersonalInformation/></ProfileLayout>}/>
+    <Route path={DataRoute.Wishlist} element={<ProfileLayout pageName='Wishlist'><Wishlist></Wishlist></ProfileLayout>} />
+    <Route path={DataRoute.Orders} element={<ProfileLayout pageName='Orders history'>'Orders'</ProfileLayout>} />
     <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
     <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
     <Route path="*" element={<NotFoundPage />} />

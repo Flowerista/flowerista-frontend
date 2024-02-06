@@ -11,6 +11,7 @@ import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, RE
 import storage from 'redux-persist/lib/storage'
 import {authSlice} from './auth/auth.slice';
 import {userSlice} from './user/user.slice';
+import {wishlistSlice} from './wishlist/wishlist.slice'
 import {checkOutSlice} from './checkout/checkout.slice';
 
 const persistConfig = {
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
 	auth: authSlice.reducer,
 	cart: cartSlice.reducer,
 	user: userSlice.reducer,
+	wishlist: wishlistSlice.reducer,
 	checkout: checkOutSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
@@ -53,6 +55,9 @@ export const setupStore = () => {
 						'user/changeAddress/fulfilled',
 						'user/changePassword/fulfilled',
 						'user/changePersonalInfo/fulfilled',
+						'wishlist/getWishlist/fulfilled',
+						'wishlist/addCard/fulfilled',
+						'wishlist/deleteCard/fulfilled',
 					]
 				},
 			  }).concat(bouqueteApi.middleware)

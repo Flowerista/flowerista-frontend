@@ -24,7 +24,6 @@ const FormInput: FC<InputProps> = ({label, type, defaultValue, placeholder, regi
           onChange={(e) => setValue(e.target.value)}
           // placeholder={placeholder}
           required={required}
-          {...register}
         />
         <span>{label}</span>
         {children}
