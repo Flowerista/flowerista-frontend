@@ -38,6 +38,7 @@ export const CartModal: FC<CartModalProps> = ({style, className}) => {
 
 		return () => {
 			document.body.removeEventListener('keyup', closeModal)
+			dispatch(setCartModalOpen(false))
 		}
 	}, [])
 
