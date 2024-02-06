@@ -12,6 +12,7 @@ import storage from 'redux-persist/lib/storage'
 import {authSlice} from './auth/auth.slice';
 import {userSlice} from './user/user.slice';
 import {checkOutSlice} from './checkout/checkout.slice';
+import { modalsSlice } from './modals/modals.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
 	cart: cartSlice.reducer,
 	user: userSlice.reducer,
 	checkout: checkOutSlice.reducer,
+	modals: modalsSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })
