@@ -1,23 +1,30 @@
-import {FC, useEffect} from 'react'
+import {CSSProperties, FC, useEffect} from 'react'
 import classNames from 'classnames';
-import {useAppSelector} from '../../../store/store';
+import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {getTotalPrice} from '../../../utils/helpers';
 import {Button, Cart} from '../../index';
 
 import {BsArrowLeft} from 'react-icons/bs'
 import styles from './styles.module.scss'
-import {ModalProps} from '../../../interface/global';
 import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../../data/routes';
+import {setCartModalOpen} from '../../../store/modals/modals.slice';
 import {useTranslation} from 'react-i18next';
 
-export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = true, setOpen}) => {
+interface CartModalProps {
+	className?: string
+	style?: CSSProperties
+}
+
+export const CartModal: FC<CartModalProps> = ({style, className}) => {
 	const {t} = useTranslation()
 	const navigate = useNavigate()
 	const {cart} = useAppSelector(state => state.cart)
+	const {modals} = useAppSelector(state => state.modals)
+	const dispatch = useAppDispatch()
 
 	const onClose = () => {
-		setOpen(false)
+		dispatch(setCartModalOpen(false))
 	}
 
 	useEffect(() => {
@@ -34,7 +41,7 @@ export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = 
 		}
 	}, [])
 
-	if (!isOpen) {
+	if (!modals.cartModalOpen) {
 		return null
 	}
 
@@ -63,14 +70,14 @@ export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = 
 						 </div>
 					 </div>
 					 <div className={styles.btns}>
-						 <Button sizeMode="small" text={`${t('cart.btn1')}`} onClick={toCheckOut}/>
-						 <Button sizeMode="small" colorMode="white" text={`${t('cart.btn2')}`} onClick={onClose}/>
+						 <Button sizeMode="small" text="Check out" onClick={toCheckOut} disabled={cart.length === 0}/>
+						 <Button sizeMode="small" colorMode="white" text="Сontinue shopping" onClick={onClose}/>
 					 </div>
 				 </div>
 				 <div
 						className={styles.modal__btn}
 						onClick={onClose}>
-					 <BsArrowLeft size={24}/>{t('cart.back')}
+					 <BsArrowLeft size={24}/>back
 				 </div>
 			 </div>
 		 </div>
