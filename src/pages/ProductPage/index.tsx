@@ -149,7 +149,7 @@ export const ProductPage: FC<IProductPage> = () => {
 						 <span className={styles.defaultPrice}>{discountPrice ? discountPrice : price} UAH</span>
 					 </div>
 					 <div className={styles.productPage__content__btns}>
-						 <Button text={`${t("product.buy")}`} onClick={() => alert(submitItems)}/>
+						 <Button text={`${t("product.buy")}`} onClick={toCart}/>
 						 <div>
 							 <button onClick={decreaseQuantity}>-</button>
 							 {quantity}
