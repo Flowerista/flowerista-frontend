@@ -17,7 +17,7 @@ import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
 import {SecondLayout} from './layouts/SecondLayout';
-
+import './i18n/i18n'
 
 function App() {
 
