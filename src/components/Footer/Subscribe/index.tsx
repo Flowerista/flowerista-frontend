@@ -1,17 +1,19 @@
 import styles from '../styles.module.scss';
 import {BsArrowRight} from 'react-icons/bs';
 import {FC} from 'react';
+import {useTranslation} from 'react-i18next';
 
 
 export const Subscribe: FC = () => {
+	const {t} = useTranslation()
 	return (
 		 <div className={styles.footer__subscribe}>
-			 <h3>Subscribe!</h3>
-			 <p>Stay up to date with the latest news.
-				 Subscribe to our newsletter and be the first to receive the latest offers.</p>
+			 <h3>{t('footer.subscribe')}</h3>
+			 <p>{t('footer.subscribe_description')}</p>
 			 <form>
 				 <input type="text" placeholder={'E-mail'}/>
-				 <button type={'submit'}><span>send{' '} </span> {' '}<BsArrowRight style={{fontSize: '24px', fill: 'white'}}/>
+				 <button type={'submit'}><span>{t('footer.btn')}{' '} </span> {' '}<BsArrowRight
+						style={{fontSize: '24px', fill: 'white'}}/>
 				 </button>
 			 </form>
 		 </div>

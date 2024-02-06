@@ -4,13 +4,15 @@ import TabContent from './TabContent';
 import SecondTab from './SecondTab';
 import FirstTab from './FirstTabs';
 import styles from './styles.module.scss'
+import {useTranslation} from 'react-i18next';
 
 interface ITab {
-	setType: (type:any) => void
-	setIsActive: (isActive:boolean) => void
+	setType: (type: any) => void
+	setIsActive: (isActive: boolean) => void
 }
 
-const Tabs: FC<ITab> = ({setType,setIsActive}) => {
+const Tabs: FC<ITab> = ({setType, setIsActive}) => {
+	const {t} = useTranslation()
 	const [activeTab, setActiveTab] = useState('tab1');
 
 	useEffect(() => {
@@ -20,8 +22,10 @@ const Tabs: FC<ITab> = ({setType,setIsActive}) => {
 	return (
 		 <div className={styles.tabs}>
 			 <ul className={styles.nav}>
-				 <TabNavItem title="Pickup of the flowers" id="tab1" activeTab={activeTab} setActiveTab={setActiveTab}/>
-				 <TabNavItem title="By courier " id="tab2" activeTab={activeTab} setActiveTab={setActiveTab}/>
+				 <TabNavItem title={`${t('checkout.authorized.delivery.btn1')}`} id="tab1" activeTab={activeTab}
+				             setActiveTab={setActiveTab}/>
+				 <TabNavItem title={`${t('checkout.authorized.delivery.btn2')}`} id="tab2" activeTab={activeTab}
+				             setActiveTab={setActiveTab}/>
 			 </ul>
 			 <div className="outlet">
 				 <TabContent id="tab1" activeTab={activeTab}>

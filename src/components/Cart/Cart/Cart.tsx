@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import styles from './styles.module.scss'
 
 import emptyImg from '../../../assets/image/cart/empty-cart.png'
+import {useTranslation} from 'react-i18next';
 
 interface CartListProps {
 	className?: string
@@ -15,15 +16,15 @@ interface CartListProps {
 
 export const Cart: FC<CartListProps> = ({className, style, mode}) => {
 	const {cart} = useAppSelector(state => state.cart)
-
+	const {t} = useTranslation()
 	return (
 		 <div
 				className={classNames(styles.cart, styles[mode], className)}
 				style={style}
 		 >
 			 {cart.length === 0 && <div className={styles.cartEmpty}>
-				 <h1>Cart is empty</h1>
-				 <p>But it's never too late to fix it :)</p>
+				 <h1>{t('cart.title')}</h1>
+				 <p>{t('cart.description')}</p>
 				 <img src={emptyImg} alt=""/>
 			 </div>}
 			 {cart.length > 0 && cart.map(({

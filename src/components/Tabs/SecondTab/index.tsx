@@ -18,10 +18,11 @@ import {
 import {CheckOutAddressSchema} from '../../../utils/yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {FC} from 'react';
+import {useTranslation} from 'react-i18next';
 
 
-interface InterfaceSecondTab{
-	setIsActive: (isActive:boolean) => void
+interface InterfaceSecondTab {
+	setIsActive: (isActive: boolean) => void
 
 }
 
@@ -37,9 +38,10 @@ interface Inputs {
 }
 
 
-const SecondTab:FC<InterfaceSecondTab> = ({setIsActive}) => {
+const SecondTab: FC<InterfaceSecondTab> = ({setIsActive}) => {
+	const {t} = useTranslation()
 	const dispatch = useAppDispatch()
-	const {city,street,entrance,flat,house,}=useAppSelector(state => state.checkout)
+	const {city, street, entrance, flat, house} = useAppSelector(state => state.checkout)
 	const {
 		control,
 		register,
@@ -164,28 +166,28 @@ const SecondTab:FC<InterfaceSecondTab> = ({setIsActive}) => {
 								control={control}
 								render={({field}) => (
 									 <div>
-									 <TimePicker
-											{...field}
-											className={styles.timePicker}
-											sx={{
-												'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-													border: 'none',
-													borderBottom: '2px solid #C5B4B9',
-													borderRadius: '0px',
-												},      // at page load
-												'& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-													border: 'none',
-													borderBottom: '2px solid #231104',
-													borderRadius: '0px',
-												},  // at hover state
-												'& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-													border: 'none',
-													borderBottom: '2px solid #231104',
-													borderRadius: '0px',
-												}, // at focused state
+										 <TimePicker
+												{...field}
+												className={styles.timePicker}
+												sx={{
+													'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+														border: 'none',
+														borderBottom: '2px solid #C5B4B9',
+														borderRadius: '0px',
+													},      // at page load
+													'& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+														border: 'none',
+														borderBottom: '2px solid #231104',
+														borderRadius: '0px',
+													},  // at hover state
+													'& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+														border: 'none',
+														borderBottom: '2px solid #231104',
+														borderRadius: '0px',
+													}, // at focused state
 
-											}}
-									 />
+												}}
+										 />
 										 {errors.time?.message && <FormError error={errors.time.message}/>}
 
 									 </div>
@@ -195,7 +197,7 @@ const SecondTab:FC<InterfaceSecondTab> = ({setIsActive}) => {
 
 					 </div>
 				 </InputsWrapper>
-				 <Button text="Continue" colorMode="black" style={{marginTop: '40px'}}/>
+				 <Button text={`${t('checkout.authorized.delivery.btn3')}`} colorMode="black" style={{marginTop: '40px'}}/>
 			 </Form>
 		 </div>
 	);

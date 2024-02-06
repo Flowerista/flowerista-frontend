@@ -2,30 +2,33 @@ import {FC} from 'react'
 import {SectionFlower} from '../SectionFlower';
 import {SkeletonCard} from '../../Skeletons/SkeletonCard/SkeletonCard';
 import {useGetTopSellersQuery} from '../../../services/bouquete-api/bouquete-api-service';
+import {useTranslation} from 'react-i18next';
 
 
 export const Sale: FC = () => {
-  const { data, error, isLoading } = useGetTopSellersQuery('')
+	const {t} = useTranslation()
 
-    if (isLoading) {
-        return (
-            <div style={{display: 'flex', marginTop: '120px', marginBottom: '120px'}}>
-                <SkeletonCard/>
-                <SkeletonCard/>
-                <SkeletonCard/>
-                <SkeletonCard/>
-                <SkeletonCard/>
-            </div>
-        )
-    }
+	const {data, error, isLoading} = useGetTopSellersQuery('')
 
-    if (error) {
-        return <h1>Something Was Wrong!</h1>
-    }
+	if (isLoading) {
+		return (
+			 <div style={{display: 'flex', marginTop: '120px', marginBottom: '120px'}}>
+				 <SkeletonCard/>
+				 <SkeletonCard/>
+				 <SkeletonCard/>
+				 <SkeletonCard/>
+				 <SkeletonCard/>
+			 </div>
+		)
+	}
 
-    return (
-        <>
-            <SectionFlower title='Sale' data={data} style={{marginTop: '120px', marginBottom: '120px'}}/>
-        </>
-    )
+	if (error) {
+		return <h1>Something Was Wrong!</h1>
+	}
+
+	return (
+		 <>
+			 <SectionFlower title={`${t('mainPage.sale')}`} data={data} style={{marginTop: '120px', marginBottom: '120px'}}/>
+		 </>
+	)
 }
