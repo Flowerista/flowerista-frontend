@@ -4,26 +4,30 @@ import TabContent from './TabContent';
 import styles from './styles.module.scss'
 import {PayWithLiqPay} from './PayWithLiqPay';
 import {PayWithCash} from './PayWithCash';
+import {useTranslation} from 'react-i18next';
 
 
 const PaymentTabs = () => {
-  const [activeTab, setActiveTab] = useState("tab1");
-  return (
-    <div className={styles.tabs}>
-      <ul className={styles.nav}>
-          <TabNavItem title="LiqPay" id="tab1" activeTab={activeTab} setActiveTab={setActiveTab}/>
-          <TabNavItem title="Payment in cash" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab}/>
-      </ul>
-      <div className="outlet">
-          <TabContent id="tab1" activeTab={activeTab}>
-            <PayWithLiqPay/>
-          </TabContent>
-          <TabContent id="tab2" activeTab={activeTab}>
-            <PayWithCash/>
-          </TabContent>
+	const {t} = useTranslation()
+	const [activeTab, setActiveTab] = useState('tab1');
+	return (
+		 <div className={styles.tabs}>
+			 <ul className={styles.nav}>
+				 <TabNavItem title={`${t('checkout.authorized.payment.btn1')}`} id="tab1" activeTab={activeTab}
+				             setActiveTab={setActiveTab}/>
+				 <TabNavItem title={`${t('checkout.authorized.payment.btn2')}`} id="tab2" activeTab={activeTab}
+				             setActiveTab={setActiveTab}/>
+			 </ul>
+			 <div className="outlet">
+				 <TabContent id="tab1" activeTab={activeTab}>
+					 <PayWithLiqPay/>
+				 </TabContent>
+				 <TabContent id="tab2" activeTab={activeTab}>
+					 <PayWithCash/>
+				 </TabContent>
 
-      </div>
-    </div>
-  );
+			 </div>
+		 </div>
+	);
 };
 export default PaymentTabs;

@@ -7,6 +7,7 @@ import {IFlowerCard} from '../../interface/flower';
 import styles from './styles.module.scss';
 import {Card} from '../Card/Card';
 import {DataRoute} from '../../data/routes';
+import {useTranslation} from 'react-i18next';
 
 export interface ISectionsFlower {
     data: IFlowerCard[] | undefined;
@@ -15,13 +16,14 @@ export interface ISectionsFlower {
 }
 
 export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
+  const {t} = useTranslation()
   return (
     <section style={style}>
       <div className={styles.head}>
         <div className={styles.head__title}>{title}</div>
         <div className={styles.head__link__wrapper}>
             <Link to={DataRoute.Catalog} className={styles.head__link}>
-                see all <BsArrowRight style={{fontSize: "24px"}}/>
+              {t("mainPage.btn-see-all")} <BsArrowRight style={{fontSize: "24px"}}/>
             </Link>
         </div>
       </div>

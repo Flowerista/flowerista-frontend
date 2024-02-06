@@ -6,6 +6,7 @@ import Tabs from '../Tabs';
 import {AddressInformation} from '../../pages/CheckOutPage/Delivery/AddressInformation';
 import {useAppDispatch} from '../../store/store';
 import {setCity, setEntrance, setFlat, setHouse, setStreet} from '../../store/checkout/checkout.slice';
+import {useTranslation} from 'react-i18next';
 
 interface IAccordion {
 	address: {
@@ -18,6 +19,7 @@ interface IAccordion {
 }
 
 export const Accordion: FC<IAccordion> = ({address}) => {
+	const {t} = useTranslation()
 	const [isActiveAccordion, setIsActiveAccordion] = useState(false);
 	const [type, setType] = useState<'mail' | 'courier'>('courier');
 	const [isActive, setIsActive] = useState<boolean>(false)
@@ -49,11 +51,11 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 				className={`${styles.accordion} ${isActiveAccordion ? `${styles.open}` : ''}`}
 		 >
 			 <div className={styles.title}>
-				 <span>Delivery</span>
+				 <span>{t('checkout.authorized.delivery.title')}</span>
 				 {isActive ? <button onClick={() => {
-						  setIsActive(false)
-						  handleClick()
-					  }}>change</button> :
+							setIsActive(false)
+							handleClick()
+						}}>{t('checkout.authorized.data.btn1')}</button> :
 						<img src={isActiveAccordion ? open : close} alt="image-accordion"/>}
 			 </div>
 			 <div className={styles.content} onClick={handleTabsClick}>

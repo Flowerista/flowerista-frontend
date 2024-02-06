@@ -25,9 +25,11 @@ import styles from '../styles.module.scss'
 import {DropDown} from '../../../components/DropDown';
 import {DropDownPrice} from '../../../components/DropDownPrice';
 import {DropDownSorting} from '../../../components/DropDownSorting';
+import {useTranslation} from 'react-i18next';
 
 
 export const Filters: FC = () => {
+	const {t} = useTranslation()
 	const dispatch = useAppDispatch()
 	const {data: priceRange} = useGetRangePriceQuery('')
 	const [sortingName, setSortingName] = useState<string>('new');
@@ -95,9 +97,9 @@ export const Filters: FC = () => {
 	}
 
 	const removeHandler = (item: { item: string, menu: string, id: number }) => {
-		if (item.menu === 'flowers') {
+		if (item.menu === 'flowers' || item.menu === 'квіти') {
 			dispatch(removeFlowerId(item))
-		} else if (item.menu === 'colors') {
+		} else if (item.menu === 'colors' || item.menu === 'кольори') {
 			dispatch(removeColorId(item))
 		} else if (item.menu === 'minMax') {
 			dispatch(removeMinMaxValues())
@@ -138,14 +140,14 @@ export const Filters: FC = () => {
 								 removeHandler={removeHandler}
 								 items={flowers}
 								 toggleFilter={addFlower}
-								 name={'flowers'}/>
+								 name={`${t('catalog.filters.flowers')}`}/>
 							<DropDown
 								 setSelectedItems={setSelectedItems}
 								 selectedItems={selectedItems}
 								 removeHandler={removeHandler}
 								 items={colors}
 								 toggleFilter={addColor}
-								 name={'colors'}/>
+								 name={`${t('catalog.filters.colors')}`}/>
 							<DropDownPrice
 								 min={min}
 								 max={max}
@@ -173,7 +175,7 @@ export const Filters: FC = () => {
 							 </div>
 				 ))}
 				 {[...flowerIds, ...colorIds].length > 0 &&
-						<button className={styles.catalog__resetBtn} onClick={resetFilters}>clear filters</button>}
+						<button className={styles.catalog__resetBtn} onClick={resetFilters}>{t('catalog.filters.clear')}</button>}
 			 </div>
 		 </div>
 	);

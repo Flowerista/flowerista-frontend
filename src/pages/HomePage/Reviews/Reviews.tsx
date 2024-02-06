@@ -1,32 +1,34 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
 import Flower from '../../../assets/image/reviews/flower.png'
+import {useTranslation} from 'react-i18next';
 
 
 export interface IReviews {
 }
 
 export const Reviews: FC<IReviews> = () => {
+	const {t} = useTranslation()
 	return (
-        <section className={styles.section}>
-            <div className={styles.section__title}>Reviews</div>
-            <div className={styles.content}>
-                <div className={styles.review}>
-                    <p className={styles.review__title}>Sarah</p>
-                    <p className={styles.review__text}>I ordered a bouquet for my daughter's graduation, and it was an absolute showstopper! The combination of colors and the freshness of the flowers made it truly exceptional. She couldn't stop smiling when she received...</p>
-                </div>
-                <div className={styles.review}>
-                    <p className={styles.review__title}>John</p>
-                    <p className={styles.review__text}>I've never been much of a flower person, but this bouquet completely changed my perspective. The scent and beauty of these flowers have added a new level of freshness and positivity to my home. I'm i...</p>
-                </div>
-                <div className={styles.wrapper_img}>
-                    <img src={Flower} alt="flower" />
-                </div>
-                <div className={styles.review}>
-                    <p className={styles.review__title}>Anna</p>
-                    <p className={styles.review__text}>I ordered a bouquet for my daughter's graduation, and it was an absolute showstopper! The combination of colors and the freshness of the flowers made it truly exceptional. She couldn't stop smiling when she received...</p>
-                </div>
-            </div>
-        </section>
+		 <section className={styles.section}>
+			 <div className={styles.section__title}>{t('mainPage.reviews')}</div>
+			 <div className={styles.content}>
+				 <div className={styles.review}>
+					 <p className={styles.review__title}>{t('mainPage.reviewsText.sarah.name')}</p>
+					 <p className={styles.review__text}>{t('mainPage.reviewsText.sarah.text')}</p>
+				 </div>
+				 <div className={styles.review}>
+					 <p className={styles.review__title}>{t('mainPage.reviewsText.john.name')}</p>
+					 <p className={styles.review__text}>{t('mainPage.reviewsText.john.text')}</p>
+				 </div>
+				 <div className={styles.wrapper_img}>
+					 <img src={Flower} alt="flower"/>
+				 </div>
+				 <div className={styles.review}>
+					 <p className={styles.review__title}>{t('mainPage.reviewsText.anna.name')}</p>
+					 <p className={styles.review__text}>{t('mainPage.reviewsText.anna.text')}</p>
+				 </div>
+			 </div>
+		 </section>
 	);
 };

@@ -11,50 +11,54 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {ResetPassword} from '../../utils/yup';
 import axios from 'axios';
 import {DataRoute} from '../../data/routes';
+import {useTranslation} from 'react-i18next';
 
 export const PasswordRecovery: FC = () => {
+	const {t} = useTranslation()
 	const navigate = useNavigate();
 
-	const token = new URLSearchParams(window.location.search).get("token")
+	const token = new URLSearchParams(window.location.search).get('token')
 
 	const {
 		register,
 		handleSubmit,
 		formState: {errors},
-		reset
-	} = useForm<{password:string,confirm_password:string}>({
+		reset,
+	} = useForm<{ password: string, confirm_password: string }>({
 		mode: 'onBlur',
-		resolver: yupResolver(ResetPassword)
+		resolver: yupResolver(ResetPassword),
 	})
 
-	const onSubmit: SubmitHandler<{password:string,confirm_password:string}> = async(data) => {
-				try {
-					await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/changePassword`,{
-						passwordRepeated:data.confirm_password,
-						password:data.password,
-						token:token
-					})
-					reset()
-				}catch (e){
-					console.log(e)
-				}
-				navigate(DataRoute.Home)
+	const onSubmit: SubmitHandler<{ password: string, confirm_password: string }> = async (data) => {
+		try {
+			await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/changePassword`, {
+				passwordRepeated: data.confirm_password,
+				password: data.password,
+				token: token,
+			})
+			reset()
+		} catch (e) {
+			console.log(e)
+		}
+		navigate(DataRoute.Home)
 	}
 
 	return (
 		 <div className={styles.restoring}>
 			 <div className={styles.restoring__wrapper}>
-				 <Title text='Password Recovery'/>
+				 <Title text={`${t('restoring.info.title')}`}/>
 				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
 					 <InputsWrapper>
-						 <PasswordInput registerName={"password"} placeholder={"Enter Password"} register={register} error={errors.password?.message} />
-						 <PasswordInput registerName={"confirm_password"} placeholder={"Enter Confirm Password"} register={register} error={errors.confirm_password?.message}/>
+						 <PasswordInput registerName={'password'} placeholder={'Enter Password'} register={register}
+						                error={errors.password?.message}/>
+						 <PasswordInput registerName={'confirm_password'} placeholder={'Enter Confirm Password'} register={register}
+						                error={errors.confirm_password?.message}/>
 					 </InputsWrapper>
-					 <Button text='Save'/>
+					 <Button text={`${t('restoring.info.btn1')}`}/>
 				 </Form>
 			 </div>
 			 <div className={styles.img}>
-				 <img src={Flower} alt="flower" />
+				 <img src={Flower} alt="flower"/>
 			 </div>
 		 </div>
 	)
