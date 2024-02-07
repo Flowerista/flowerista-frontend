@@ -9,13 +9,21 @@ export const authServiceApi = createApi({
 				url: `/auth/resetPassword`,
 				method: 'POST',
 				params: {
-					email:data
-				}
-			})
+					email: data,
+				},
+			}),
 		}),
-	})
+		subscription: build.mutation<any, any>({
+			query: (data) => ({
+				url: `/subscription`,
+				method: 'POST',
+				body: data,
+			}),
+		}),
+	}),
 })
 
 export const {
-useResetPasswordMutation
+	useSubscriptionMutation,
+	useResetPasswordMutation,
 } = authServiceApi;

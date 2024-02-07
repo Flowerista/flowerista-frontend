@@ -108,3 +108,7 @@ export const CheckOutAddressSchema = yup
      time: yup.string().nullable().required("time is required"),
    }).required()
 
+export const EmailSchema = yup
+   .object({
+     email: emailValid,
+   }).required()
