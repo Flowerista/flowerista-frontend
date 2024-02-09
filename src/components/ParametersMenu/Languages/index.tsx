@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import i18next from 'i18next';
 import {Language} from '../../../i18n/enums';
@@ -14,7 +14,15 @@ export const Languages: FC<ILanguages> = () => {
 	const changeLanguage = (language: string) => {
 		i18next.changeLanguage(language);
 		setCurrentLanguage(language);
+		localStorage.setItem('selectedLanguage', language);
 	};
+
+	useEffect(() => {
+		const selectedLanguage = localStorage.getItem('selectedLanguage');
+		if (selectedLanguage) {
+			changeLanguage(selectedLanguage);
+		}
+	}, [i18next.language]);
 
 	return (
 		 <div className={styles.container}>
