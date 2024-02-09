@@ -76,7 +76,8 @@ i18n
 	 .use(I18nextBrowserLanguageDetector)
 	 .init({
 		 resources,
-		 fallbackLng: Language.UA,
+		 lng: Language.EN,
+		 fallbackLng: Language.EN,
 		 interpolation: {
 			 escapeValue: false,
 		 },
