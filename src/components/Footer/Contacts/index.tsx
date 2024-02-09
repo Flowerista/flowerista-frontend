@@ -9,7 +9,7 @@ export const Contacts: FC = () => {
 	const {t} = useTranslation()
 	return (
 		 <nav className={styles.footer__contancts}>
-			 <h3>{t('footer.contacts')}</h3>
+			 <p>{t('footer.contacts')}</p>
 			 <a href="tel:380 99 999 99 99">+380 99 999 99 99</a>
 			 <a href="tel:380 99 999 99 99">+380 99 999 99 99</a>
 			 <ul>
