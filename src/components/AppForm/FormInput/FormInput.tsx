@@ -1,4 +1,4 @@
-import {FC, ReactNode, useState} from 'react';
+import {FC, ReactNode} from 'react';
 import styles from './styles.module.scss';
 
 interface InputProps {
@@ -22,17 +22,14 @@ const FormInput: FC<InputProps> = ({
 	                                   children,
 	                                   required = true,
                                    }) => {
-	const [value, setValue] = useState(defaultValue || '');
 	return (
 		 <label className={styles.label}>
 			 <input
-					{...register}
 					className={`${styles.input} ${error ? styles.input_error : ''}`}
 					type={type}
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
 					// placeholder={placeholder || ''}
 					required={required}
+					{...register}
 			 />
 			 <span>{label}</span>
 			 {children}
