@@ -19,7 +19,7 @@ export const Delivery: FC<IDelivery> = ({user}) => {
 		 <>
 			 <div className={styles.wrapper}>
 				 <div className={styles.delivery}>
-					 {user ? <UserInformation user={user} setVisible={setIsShow}/> : <Unregistered/>}
+					 {user?.phoneNumber ? <UserInformation user={user} setVisible={setIsShow}/> : <Unregistered/>}
 					 <div className={`${user ? '' : styles.unregistered}`}>
 						 <UserDelivery user={user}/>
 						 <UserPayment/>
