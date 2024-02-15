@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {Link, useNavigate} from 'react-router-dom';
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -14,21 +14,35 @@ import styles from './styles.module.scss'
 import {login} from '../../store/auth/auth.slice';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {useTranslation} from 'react-i18next';
+import axios from 'axios';
 
 type Inputs = {
 	password: string;
 	email: string;
 }
 
+// add try catch
+const checkEmail = async (email: string) => {
+	let checked
+	await axios.get(`https://flowerista.onrender.com/api/auth/checkEmail/${email}`)
+		 .then(response => {
+			 checked = response.data
+		 })
+		 .catch(err => console.log(err))
+	return checked
+}
+
 export const Login: FC = () => {
 	const {t} = useTranslation()
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch()
-	const {loadingStatus} = useAppSelector(state => state.auth)
+	const {loadingStatus, errorStatus} = useAppSelector(state => state.auth)
+	const [loading, setLoading] = useState<boolean>(false)
 	const {
 		register,
 		handleSubmit,
 		formState: {errors},
+		setError,
 		reset,
 	} = useForm<Inputs>({
 		mode: 'onBlur',
@@ -36,10 +50,22 @@ export const Login: FC = () => {
 	})
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		await dispatch(login(data))
-		alert(JSON.stringify(data))
-		reset()
-		navigate(DataRoute.PersonalInformation)
+		setLoading(true)
+		const checkedEmail = await checkEmail(data.email)
+		if (!checkedEmail) {
+			setError('email', {type: 'chackEmail', message: 'This email is not registered'})
+			setLoading(false)
+		} else {
+			await dispatch(login(data))
+			setLoading(false)
+			if (errorStatus) {
+				alert("Login failed. Wrong password or email not confirmed")
+			} else {
+				alert(JSON.stringify(data))
+				reset()
+				navigate(DataRoute.PersonalInformation)
+			}
+		}
 	}
 
 	return (
@@ -55,7 +81,7 @@ export const Login: FC = () => {
 					 <Link to={DataRoute.RestoringAccess} className={styles.login__link}>
 						 {t('login.btn1')}
 					 </Link>
-					 <Button text={`${t('login.btn2')}`} loading={loadingStatus}/>
+					 <Button text={`${t('login.btn2')}`} loading={loadingStatus || loading}/>
 				 </Form>
 
 				 <FormLink to={DataRoute.Registration} text={`${t(`login.btn3`)}`}/>
