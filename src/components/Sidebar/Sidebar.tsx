@@ -6,6 +6,7 @@ import {BsArrowRight} from 'react-icons/bs';
 import {useAppDispatch} from '../../store/store';
 import {logout} from '../../store/auth/auth.slice';
 import {useTranslation} from 'react-i18next';
+import { clearDataUser } from '../../store/user/user.slice';
 
 interface SidebarPrors {
 	style?: React.CSSProperties,
@@ -17,6 +18,7 @@ export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const onLogout = () => {
+		dispatch(clearDataUser())
 		dispatch(logout())
 		navigate(DataRoute.Login)
 	}
