@@ -2,7 +2,6 @@ import {useState} from 'react';
 import TabNavItem from './TabNavItem';
 import TabContent from './TabContent';
 import styles from './styles.module.scss'
-import {PayWithLiqPay} from './PayWithLiqPay';
 import {PayWithCash} from './PayWithCash';
 import {useTranslation} from 'react-i18next';
 
@@ -20,7 +19,7 @@ const PaymentTabs = () => {
 			 </ul>
 			 <div className="outlet">
 				 <TabContent id="tab1" activeTab={activeTab}>
-					 <PayWithLiqPay/>
+					 <div>213</div>
 				 </TabContent>
 				 <TabContent id="tab2" activeTab={activeTab}>
 					 <PayWithCash/>
