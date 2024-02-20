@@ -6,11 +6,11 @@ import {NavLink} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 
 
-export const CatalogBox: FC<{text:string}> = ({text}) => {
+export const CatalogBox: FC<{ text: string }> = ({text}) => {
 	return (
-		 <NavLink to={DataRoute.Catalog} className={styles.catalog}>
-					<h2>{text}</h2>
-			 {text ==="New arrivals"? <img src={firstImg} alt="catalog img"/>:<img src={secondImg} alt="catalog img"/>}
+		 <NavLink target={'_top'} to={DataRoute.Catalog} className={styles.catalog}>
+			 <h2>{text}</h2>
+			 {text === 'New arrivals' ? <img src={firstImg} alt="catalog img"/> : <img src={secondImg} alt="catalog img"/>}
 		 </NavLink>
 	);
 };

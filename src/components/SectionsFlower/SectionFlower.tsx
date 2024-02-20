@@ -22,7 +22,7 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
       <div className={styles.head}>
         <div className={styles.head__title}>{title}</div>
         <div className={styles.head__link__wrapper}>
-            <Link to={DataRoute.Catalog} className={styles.head__link}>
+            <Link target={'_top'} to={DataRoute.Catalog} className={styles.head__link}>
               {t("mainPage.btn-see-all")} <BsArrowRight style={{fontSize: "24px"}}/>
             </Link>
         </div>
