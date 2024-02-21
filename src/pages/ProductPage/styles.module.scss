@@ -24,7 +24,7 @@
 		&__infos{
 			margin-bottom: 40px;
 			h1{
-		font-family: "Work Sans", sans-serif;
+		font-family: var(--font-family-main);
 		font-size: 32px;
 		font-weight: 400;
 		line-height: 38px;
@@ -33,7 +33,7 @@
 	}
 			&__span{
 		display: block;
-		font-family: Work Sans, serif;
+		font-family: var(--font-family-main);
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 16px;
@@ -56,7 +56,7 @@
 			display: flex;
 			align-items: center;
 			.priceDiscount{
-				font-family: Work Sans, serif;
+				font-family: var(--font-family-main);
 				font-size: 20px;
 				font-weight: 400;
 				line-height: 23px;
@@ -64,7 +64,7 @@
 				text-decoration: line-through;
 			}
 			.defaultPrice{
-				font-family: Work Sans, serif;
+				font-family: var(--font-family-main);
 				font-size: 32px;
 				font-weight: 400;
 				line-height: 38px;
@@ -115,7 +115,7 @@
 		margin-top: 130px;
 		margin-bottom: 150px;
 		h1{
-			font-family: Work Sans, serif;
+			font-family: var(--font-family-main);
 			font-size: 32px;
 			font-weight: 400;
 			line-height: 38px;

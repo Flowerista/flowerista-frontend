@@ -7,7 +7,7 @@
 	justify-content: space-between;
 	align-items: center;
 	span{
-		font-family: Work Sans, serif;
+		font-family: var(--font-family-main);
 		font-size: 32px;
 		font-weight: 400;
 		line-height: 38px;
@@ -18,7 +18,7 @@
 		height: 10px;
 	}
 	button{
-		font-family: Sarabun, serif;
+		font-family: var(--font-family-main);
 		font-size: 16px;
 		font-weight: 400;
 		line-height: 21px;
