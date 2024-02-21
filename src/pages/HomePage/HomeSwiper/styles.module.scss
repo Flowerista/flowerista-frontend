@@ -15,7 +15,7 @@
 		transform: translate(-50%, -50%);
 
 		h3 {
-			font-family: Work Sans, serif;
+			font-family: var(--font-family-main);
 			font-size: 24px;
 			font-weight: 400;
 			line-height: 28px;
@@ -26,7 +26,7 @@
 		p {
 			width: 800px;
 			margin-bottom: 70px;
-			font-family: Cormorant Garamond, serif;
+			font-family: var(--font-family-second);
 			font-size: 90px;
 			font-weight: 500;
 			line-height: 90px;
@@ -53,7 +53,7 @@
 			margin: 0 auto 0 50px;
 
 			h1 {
-				font-family: "Cormorant Garamond", serif;
+				font-family: var(--font-family-second);
 				font-size: 68px;
 				font-weight: 500;
 				line-height: 65px;
@@ -63,7 +63,7 @@
 			}
 
 			p {
-				font-family: "Work Sans", serif;
+				font-family: var(--font-family-main);
 				font-size: 16px;
 				font-weight: 500;
 				line-height: 24px;
@@ -92,13 +92,13 @@
 					font-weight: 400;
 					line-height: 66px;
 					text-align: left;
-					font-family: "Cormorant Garamond", serif;
+					font-family: var(--font-family-second);
 					margin-left: 120px;
 					margin-bottom: 20px;
 				}
 
 				p {
-					font-family: "Work Sans", serif;
+					font-family: var(--font-family-main);
 					font-size: 16px;
 					font-weight: 400;
 					line-height: 24px;
@@ -129,7 +129,7 @@
 
 		p {
 			order: 1;
-			font-family: Cormorant Garamond, serif;
+			font-family: var(--font-family-second);
 			font-size: 80px;
 			font-weight: 500;
 			line-height: 80px;

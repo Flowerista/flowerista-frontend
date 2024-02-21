@@ -1,10 +1,9 @@
 .catalog{
 	cursor: pointer;
 	h2{
-		font-family: "Work Sans", serif;
-		font-size: 24px;
-		font-weight: 500;
-		line-height: 28px;
+		// font-family: var(--font-family-main);
+
 		margin-bottom: 10px;
+		font: 500 24px / 150% var(--font-family-main);
 	}
 }

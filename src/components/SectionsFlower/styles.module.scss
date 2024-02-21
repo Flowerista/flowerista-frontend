@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Work Sans', sans-serif;;
+    font-family: var(--font-family-main);
     color: #2C1607;
     font-weight: 400;
     &__title {

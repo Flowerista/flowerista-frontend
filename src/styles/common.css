@@ -1,0 +1,38 @@
+:root {
+    --font-family-main: 'Open Sans', serif;
+    --font-family-second: 'Cormorant Garamond', serif;
+
+    --line-weight-4: 400;
+    --line-weight-5: 500;
+    --line-weight-6: 600;
+
+    --line-height-global: 150%;
+
+    --title-1: var(--line-weight-4) 32px / var(--line-height-global) var(--font-family-main);
+    --title-2: var(--line-weight-4) 28px / var(--line-height-global) var(--font-family-main);
+
+    --subtitle-1-400: var(--line-weight-4) 24px / var(--line-height-global) var(--font-family-main);
+    --subtitle-2-400: var(--line-weight-4) 20px / var(--line-height-global) var(--font-family-main);
+    --subtitle-3-400: var(--line-weight-4) 18px / var(--line-height-global) var(--font-family-main);
+
+    --subtitle-1-500: var(--line-weight-5) 24px / var(--line-height-global) var(--font-family-main);
+    --subtitle-2-500: var(--line-weight-5) 20px / var(--line-height-global) var(--font-family-main);
+    --subtitle-3-500: var(--line-weight-5) 18px / var(--line-height-global) var(--font-family-main);
+
+    --body-1-400: var(--line-weight-4) 16px / var(--line-height-global) var(--font-family-main);
+    --body-2-400: var(--line-weight-4) 14px / var(--line-height-global) var(--font-family-main);
+
+    --body-1-500: var(--line-weight-5) 16px / var(--line-height-global) var(--font-family-main);
+
+    --caption-400: var(--line-weight-4) 12px / var(--line-height-global) var(--font-family-main);
+
+    --caption-500: var(--line-weight-5) 12px / var(--line-height-global) var(--font-family-main);
+
+    --heading-1-500: var(--line-weight-5) 90px / 80px var(--font-family-second);
+    --heading-2-500: var(--line-weight-5) 80px / 80px var(--font-family-second);
+    --heading-3-500: var(--line-weight-5) 70px / 80px var(--font-family-second);
+    --heading-4-500: var(--line-weight-5) 62px / 80px var(--font-family-second);
+
+    --heading-1-600: var(--line-weight-6) 90px / 80px var(--font-family-second);
+
+}

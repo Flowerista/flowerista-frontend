@@ -4,14 +4,14 @@
 		justify-content: space-between;
 		margin-bottom: 50px;
 		h1{
-			font-family: Work Sans, serif;
+			font-family: var(--font-family-main);
 			font-size: 24px;
 			font-weight: 500;
 			line-height: 28px;
 			color: #231104;
 		}
 		button{
-			font-family: Sarabun, serif;
+			font-family: var(--font-family-main);
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 21px;
@@ -31,7 +31,7 @@
 			margin-left: 20px;
 			span{
 				display: block;
-				font-family: Work Sans, serif;
+				font-family: var(--font-family-main);
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 24px;
