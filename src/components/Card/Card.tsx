@@ -9,6 +9,8 @@ import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
 import { generateCartID } from '../../utils/helpers/generateCartID';
 import { addCard, deleteCard } from '../../store/wishlist/wishlist.slice';
 import WishlistModal from '../Modals/WishlistModal/Wishlist';
+import { setCartModalOpen } from '../../store/modals/modals.slice';
+
 
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -46,6 +48,7 @@ export const Card: FC<IFlowerCard> = (props) => {
             cartID: cartID,
         }
         dispatch(addCartItem(flower))
+        dispatch(setCartModalOpen(true))
     }
 
     const toLike = async (id: number) => {

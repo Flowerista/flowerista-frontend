@@ -13,6 +13,7 @@ import {authSlice} from './auth/auth.slice';
 import {userSlice} from './user/user.slice';
 import {wishlistSlice} from './wishlist/wishlist.slice'
 import {checkOutSlice} from './checkout/checkout.slice';
+import { modalsSlice } from './modals/modals.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
 	user: userSlice.reducer,
 	wishlist: wishlistSlice.reducer,
 	checkout: checkOutSlice.reducer,
+	modals: modalsSlice.reducer,
 	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })

@@ -77,7 +77,11 @@ export const changePersonalInfo = createAsyncThunk(
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+        clearDataUser: (state) => {
+			state.user = initialState.user
+		},
+    },
     extraReducers: (builder) => {
         builder
             // getProfile
@@ -134,3 +138,5 @@ export const userSlice = createSlice({
             })
     }
 })
+
+export const {clearDataUser} = userSlice.actions 

@@ -13,7 +13,7 @@ export enum DataRoute {
 	PersonalInformation = '/profile/personal-information',
 	Orders = '/profile/orders',
 	Wishlist = '/profile/wishlist',
-	ProductId = "product/:productId",
-	CheckOut = "checkout",
+	ProductId = "/product/:productId",
+	CheckOut = "/checkout",
 	ChangePassword = "/changePassword"
 }

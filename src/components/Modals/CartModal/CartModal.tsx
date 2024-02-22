@@ -1,76 +1,86 @@
-import { FC, useEffect } from 'react'
+import {CSSProperties, FC, useEffect} from 'react'
 import classNames from 'classnames';
-import { useAppSelector } from '../../../store/store';
-import { getTotalPrice } from '../../../utils/helpers';
-import { Button, Cart } from '../../index';
+import {useAppDispatch, useAppSelector} from '../../../store/store';
+import {getTotalPrice} from '../../../utils/helpers';
+import {Button, Cart} from '../../index';
 
-import { BsArrowLeft } from 'react-icons/bs'
+import {BsArrowLeft} from 'react-icons/bs'
 import styles from './styles.module.scss'
-import { ModalProps } from '../../../interface/global';
-import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
+import {useNavigate} from 'react-router-dom';
+import {DataRoute} from '../../../data/routes';
+import {setCartModalOpen} from '../../../store/modals/modals.slice';
+import {useTranslation} from 'react-i18next';
 
-export const CartModal: FC<ModalProps> = ({children, style, className, isOpen = true, setOpen}) => {
-    const navigate = useNavigate()
-    const {cart} = useAppSelector(state => state.cart)
+interface CartModalProps {
+	className?: string
+	style?: CSSProperties
+}
 
-    const onClose = () => {
-        setOpen(false)
-    }
+export const CartModal: FC<CartModalProps> = ({style, className}) => {
+	const {t} = useTranslation()
+	const navigate = useNavigate()
+	const {cart} = useAppSelector(state => state.cart)
+	const {modals} = useAppSelector(state => state.modals)
+	const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        const closeModal = (e: any) => {
-            if (e.code === 'Escape') {
-                onClose()
-            }
-        };
+	const onClose = () => {
+		dispatch(setCartModalOpen(false))
+	}
 
-        document.body.addEventListener('keyup', (e: any) => closeModal(e))
+	useEffect(() => {
+		const closeModal = (e: any) => {
+			if (e.code === 'Escape') {
+				onClose()
+			}
+		};
 
-        return () => {
-            document.body.removeEventListener('keyup', closeModal)
-        }
-    }, [])
+		document.body.addEventListener('keyup', (e: any) => closeModal(e))
 
-    if(!isOpen){
-        return null
-    }
-    
-    const totalPrice = getTotalPrice(cart)
+		return () => {
+			document.body.removeEventListener('keyup', closeModal)
+			dispatch(setCartModalOpen(false))
+		}
+	}, [])
 
-    const toCheckOut = () => {
-        navigate(DataRoute.CheckOut)
-    }
-    return (
-        <div 
-            className={classNames(styles.modal)} 
-            onClick={onClose}
-        >
-            <div 
-                className={classNames(styles.modal__wrapper, className)}
-                style={style}
-                onClick={(e) => e.stopPropagation()}
-            >
-                <Cart mode='modal'/>
-                <div className={styles.modal__footer}>
-                    <div className={styles.price}>
-                        <p>Total price:</p>
-                        <div className={styles.price__item}>
-                            {totalPrice}
-                            <span> UAH</span>
-                        </div>
-                    </div>
-                    <div className={styles.btns}>
-                        <Button sizeMode='small' text='Check out' onClick={toCheckOut}/>
-                        <Button sizeMode='small' colorMode='white' text='Сontinue shopping' onClick={onClose}/>
-                    </div>
-                </div>
-                <div 
-                    className={styles.modal__btn}
-                    onClick={onClose}>
-                    <BsArrowLeft size={24}/>back
-                </div>
-            </div>
-        </div>
-    )
+	if (!modals.cartModalOpen) {
+		return null
+	}
+
+	const totalPrice = getTotalPrice(cart)
+
+	const toCheckOut = () => {
+		navigate(DataRoute.CheckOut)
+	}
+	return (
+		 <div
+				className={classNames(styles.modal)}
+				onClick={onClose}
+		 >
+			 <div
+					className={classNames(styles.modal__wrapper, className)}
+					style={style}
+					onClick={(e) => e.stopPropagation()}
+			 >
+				 <Cart mode="modal"/>
+				 <div className={styles.modal__footer}>
+					 <div className={styles.price}>
+						 <p>{t('cart.price')}</p>
+						 <div className={styles.price__item}>
+							 {totalPrice}
+							 <span> UAH</span>
+						 </div>
+					 </div>
+					 <div className={styles.btns}>
+						 <Button sizeMode="small" text="Check out" onClick={toCheckOut} disabled={cart.length === 0}/>
+						 <Button sizeMode="small" colorMode="white" text="Сontinue shopping" onClick={onClose}/>
+					 </div>
+				 </div>
+				 <div
+						className={styles.modal__btn}
+						onClick={onClose}>
+					 <BsArrowLeft size={24}/>back
+				 </div>
+			 </div>
+		 </div>
+	)
 }

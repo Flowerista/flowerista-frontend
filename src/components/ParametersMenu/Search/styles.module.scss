@@ -62,7 +62,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		span{
-			font-family: Work Sans, serif;
+			font-family: var(--font-family-main);
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 24px;
@@ -77,7 +77,7 @@
 }
 
 .priceDiscount{
-	font-family: Work Sans, serif;
+	font-family: var(--font-family-main);
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 19px;
@@ -87,7 +87,7 @@
 }
 
 .defaultPrice{
-	font-family: Work Sans, serif;
+	font-family: var(--font-family-main);
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 24px;

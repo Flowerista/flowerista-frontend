@@ -10,6 +10,7 @@ import {setShopDate, setShopTime} from '../../../store/checkout/checkout.slice';
 import dayjs from 'dayjs';
 import {useAppDispatch} from '../../../store/store';
 import * as yup from 'yup';
+import {useTranslation} from 'react-i18next';
 
 interface IFirstTab {
 	setIsActive: (isActive: boolean) => void;
@@ -21,6 +22,7 @@ interface Inputs {
 }
 
 const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
+	const {t} = useTranslation()
 	const dispatch = useAppDispatch()
 
 	const {
@@ -54,7 +56,7 @@ const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
 	return (
 		 <div className={styles.firstTab}>
 			 <Form onSubmit={handleSubmit(onSubmit)}>
-				 <span>45 Peremohy St., Kyiv, Ukraine</span>
+				 <span>{`${t('checkout.authorized.delivery.street')}`}</span>
 				 <div className={styles.wrappPicker}>
 					 <Controller
 							name="date"
@@ -122,7 +124,8 @@ const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
 							)}
 					 />
 				 </div>
-				 <Button text="Continue" type={'submit'} colorMode="black" style={{marginTop: '40px'}}/>
+				 <Button text={`${t('checkout.authorized.delivery.btn3')}`} type={'submit'} colorMode="black"
+				         style={{marginTop: '40px'}}/>
 			 </Form>
 		 </div>
 	);

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react';
 
 import { PersonalInformationForm } from './ProfileForms/PersonalInformationForm';
 import { AddressForm } from './ProfileForms/AddressForm';
@@ -26,13 +26,13 @@ export const PersonalInformation: FC = () => {
     setShowPasswordChange(true)
   }
 
-  if (loadingStatus.getProfile) {
-    return <h1>Loading...</h1>
-  }
+	if (loadingStatus.getProfile) {
+		return <h1>Loading...</h1>
+	}
 
-  if (errorStatus.getProfile) {
-    return <h1>Error...</h1>
-  }
+	if (errorStatus.getProfile) {
+		return <h1>Error...</h1>
+	}
 
   return (
     <>

@@ -5,10 +5,10 @@ import {DataRoute} from '../../../data/routes';
 import headerLogo from '../../../assets/image/logo/white_logo.png'
 import footerLogo from '../../../assets/image/logo/black_logo.png'
 
-export const Logo: FC<{type:string}> = ({type}) => {
+export const Logo: FC<{ type: string }> = ({type}) => {
 	return (
-		 <Link to={DataRoute.Home} className={styles.logo}>
-			 {type === "footer"? <img src={footerLogo} alt="logo"/>:<img src={headerLogo} alt="logo"/>}
+		 <Link target="_top" to={DataRoute.Home} className={styles.logo}>
+			 {type === 'footer' ? <img src={footerLogo} alt="logo"/> : <img src={headerLogo} alt="logo"/>}
 		 </Link>
 	);
 };

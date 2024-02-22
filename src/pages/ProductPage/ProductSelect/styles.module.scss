@@ -7,7 +7,7 @@
 	width: 100%;
 	cursor: pointer;
 	&__size{
-		font-family: Work Sans, serif;
+		font-family: var(--font-family-main);
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 21px;
@@ -25,7 +25,7 @@
 	}
 
 	&__price{
-		font-family: Work Sans, sans-serif;
+		font-family: var(--font-family-main);
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 21px;
