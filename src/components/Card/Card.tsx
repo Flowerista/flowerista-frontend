@@ -4,10 +4,13 @@ import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
 import { generateCartID } from '../../utils/helpers/generateCartID';
+import { addCard, deleteCard } from '../../store/wishlist/wishlist.slice';
+import WishlistModal from '../Modals/WishlistModal/Wishlist';
 import { setCartModalOpen } from '../../store/modals/modals.slice';
+
 
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -31,10 +34,10 @@ export interface IFlowerCard {
 }
 
 export const Card: FC<IFlowerCard> = (props) => {
+    const {wishlist} = useAppSelector(state => state.wishlist);
+    const dispatch = useAppDispatch();
     const {id, name, imageUrls, defaultPrice, discount, discountPrice} = props;
-    const [liked, setLiked] = useState(false)
-
-    const dispatch = useAppDispatch()
+    const [liked, setLiked] = useState(wishlist.some(card => card.id === id))
 
     const toCart = () => {
         const cartID = generateCartID(id, 'MEDIUM')
@@ -48,6 +51,20 @@ export const Card: FC<IFlowerCard> = (props) => {
         dispatch(setCartModalOpen(true))
     }
 
+    const toLike = async (id: number) => {
+        if (!localStorage.getItem('token')) {
+            alert('Register?')
+        } else {
+            if(liked) {
+                await dispatch(deleteCard(id))
+                setLiked(false)
+            } else {
+                await dispatch(addCard(props))
+                setLiked(true)
+            }
+        }
+    }
+
     const img = imageUrls?.['1']
 
     return (
@@ -58,7 +75,7 @@ export const Card: FC<IFlowerCard> = (props) => {
                     <img 
                         src={img} alt="flower" />
                 </Link>
-                <div className={styles.like} onClick={() => setLiked(state => !state)}>
+                <div className={styles.like} onClick={() => toLike(id)}>
                     { liked ? <BsHeartFill/> : <BsHeart/> }
                 </div>
             </div>
