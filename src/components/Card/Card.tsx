@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
 import { generateCartID } from '../../utils/helpers/generateCartID';
 import { addCard, deleteCard } from '../../store/wishlist/wishlist.slice';
+import WishlistModal from '../Modals/WishlistModal/Wishlist';
 
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -47,15 +48,16 @@ export const Card: FC<IFlowerCard> = (props) => {
         dispatch(addCartItem(flower))
     }
 
-    const toLike = (id: number) => {
+    const toLike = async (id: number) => {
         if (!localStorage.getItem('token')) {
-            // TO DO Modal window
             alert('Register?')
         } else {
             if(liked) {
-                dispatch(deleteCard(id))
+                await dispatch(deleteCard(id))
+                setLiked(false)
             } else {
-                dispatch(addCard(props))
+                await dispatch(addCard(props))
+                setLiked(true)
             }
         }
     }

@@ -25,12 +25,14 @@ export default class UserService {
     }
 
     static async addCardToWishlist(cardId: number): Promise<AxiosResponse> {
-        return $api.post('api/user/wishlist', cardId)
+        return $api.post('api/user/wishlist', {id: cardId})
     }
 
     static async deleteCardFromWishlist(cardId: number): Promise<AxiosResponse> {
         const config = {
-            data: Number(cardId)
+            data: {
+                id: cardId
+            }
         }
         return $api.delete('api/user/wishlist', config)
     }

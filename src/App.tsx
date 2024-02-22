@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {HomePage} from './pages/HomePage';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {MainLayout} from './layouts/MainLayout';
@@ -18,9 +18,19 @@ import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
 import { ProfileLayout } from './layouts/ProfileLayout';
 import { Wishlist } from './pages/Profile/Wishlist/Wishlist';
+import { useAppDispatch } from './store/store';
+import { getWishlist } from './store/wishlist/wishlist.slice';
 
 
 function App() {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(getWishlist())
+    }
+  }, [])
+  
 
   const location = useLocation();
   return (
