@@ -9,7 +9,7 @@ import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
 import { generateCartID } from '../../utils/helpers/generateCartID';
 import { addCard, deleteCard } from '../../store/wishlist/wishlist.slice';
 import WishlistModal from '../Modals/WishlistModal/Wishlist';
-import { setCartModalOpen } from '../../store/modals/modals.slice';
+import { setCartModalOpen, setWishlistModalOpen } from '../../store/modals/modals.slice';
 
 
 
@@ -53,7 +53,7 @@ export const Card: FC<IFlowerCard> = (props) => {
 
     const toLike = async (id: number) => {
         if (!localStorage.getItem('token')) {
-            alert('Register?')
+            dispatch(setWishlistModalOpen(true))
         } else {
             if(liked) {
                 await dispatch(deleteCard(id))
