@@ -2,13 +2,15 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit'
 
 interface IInitialState {
     modals: {
-        cartModalOpen: boolean
+        cartModalOpen: boolean;
+        wishlistModalOpen: boolean;
     }
 }
 
 const initialState: IInitialState = {
     modals: {
-        cartModalOpen: false
+        cartModalOpen: false,
+        wishlistModalOpen: false, 
     }
 }
 
@@ -18,10 +20,14 @@ export const modalsSlice = createSlice({
 	reducers: {
         setCartModalOpen: (state, {payload}: PayloadAction<boolean>) => {
             state.modals.cartModalOpen = payload
-        } 
+        },
+        setWishlistModalOpen: (state, {payload}: PayloadAction<boolean>) => {
+            state.modals.wishlistModalOpen = payload
+        }
     }
 })
 
 export const {
-    setCartModalOpen
+    setCartModalOpen,
+    setWishlistModalOpen
 } = modalsSlice.actions
