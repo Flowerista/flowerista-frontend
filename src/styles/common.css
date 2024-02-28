@@ -35,4 +35,9 @@
 
     --heading-1-600: var(--line-weight-6) 90px / 80px var(--font-family-second);
 
+    /* COLORS */
+
+    --brown: #231104;
+    --white: #FFF;
+    --gray-dark: #B4B4B4;
 }

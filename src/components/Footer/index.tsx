@@ -4,6 +4,7 @@ import {Name} from './Name';
 import {Links} from './Links';
 import {Contacts} from './Contacts';
 import {Subscribe} from './Subscribe';
+import { Copyright } from './Copyright';
 
 export const Footer: FC = () => {
 	return (
@@ -13,6 +14,7 @@ export const Footer: FC = () => {
 				<Links/>
 				<Contacts/>
 				<Subscribe/>
+				<Copyright className={styles.footer__copirate_2}/>
 			</div>
 		 </footer>
 	);
