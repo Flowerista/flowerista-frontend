@@ -22,6 +22,7 @@ import { useAppDispatch } from './store/store';
 import { getWishlist } from './store/wishlist/wishlist.slice';
 import {SecondLayout} from './layouts/SecondLayout';
 import './i18n/i18n';
+import { Footer } from './components/Footer';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -52,6 +53,7 @@ function App() {
           <Route path={DataRoute.Orders} element={<ProfileLayout pageName='Orders history'>'Orders'</ProfileLayout>} />
 				 <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
 				 <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
+				 <Route path='/test' element={<Footer/>}/>
 				 <Route path="*" element={<NotFoundPage/>}/>
 			 </Routes>
 		 </PageTransition>

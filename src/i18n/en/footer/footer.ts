@@ -2,7 +2,7 @@ export const footerEn = {
 	'links': {
 		'first-link': 'Catalog',
 		'second-link': 'About us',
-		'third-link': 'Delivery & Payment',
+		'third-link': 'Delivery and payment',
 	},
 	'rights': '© All rights reserved',
 	'contacts': 'Contacts',
