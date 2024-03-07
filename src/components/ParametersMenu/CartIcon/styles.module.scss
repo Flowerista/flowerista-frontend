@@ -1,0 +1,18 @@
+.cart {
+	position: relative;
+}
+.quantity {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	background-color: red;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+	font-size: 14px;
+	top: 13px;
+	right: -3px;
+	user-select: none;
+}

@@ -1,9 +1,14 @@
 .container {
+	display: flex;
+	gap: 10px;
+	letter-spacing: 0.32px;
 	button {
 		background-color: transparent;
 	}
+	font: var(--body-1-400);
+	color: var(--brown);
 }
 
 .active {
-	color: #E7A9A7;
+	color: var(--rose);
 }

@@ -4,27 +4,30 @@ import {NavLink} from 'react-router-dom';
 import {DataRoute} from '../../../data/routes';
 import {ParametersMenu} from '../../ParametersMenu';
 import {useTranslation} from 'react-i18next';
+import classNames from 'classnames';
 
 export interface INavBar {
+	className?: string
+	type: 'modal' | 'header'
 }
 
-export const NavBar: FC<INavBar> = () => {
+export const NavBar: FC<INavBar> = ({className, type}) => {
 	const { t } = useTranslation();
 	return (
-		 <nav className={styles.navbar}>
-			 <ul className={styles.navbar__menu}>
-				 <li><NavLink to={DataRoute.Catalog} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					 {t("header.first-link")}
-				 </NavLink></li>
-				 <li><NavLink to={DataRoute.AboutUs} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					 {t("header.second-link")}
-				 </NavLink></li>
-				 <li><NavLink to={DataRoute.DeliveryAndPayment} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					 {t("header.third-link")}
-				 </NavLink></li>
-			 </ul>
-			 <ParametersMenu/>
-		 </nav>
+		<nav className={classNames(styles.navbar, styles[type], className)}>
+			<ul className={styles.navbar__menu}>
+				<li><NavLink to={DataRoute.Catalog} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
+					{t("header.first-link")}
+				</NavLink></li>
+				<li><NavLink to={DataRoute.AboutUs} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
+					{t("header.second-link")}
+				</NavLink></li>
+				<li><NavLink to={DataRoute.DeliveryAndPayment} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
+					{t("header.third-link")}
+				</NavLink></li>
+			</ul>
+			<ParametersMenu/>
+		</nav>
 	);
 };
 

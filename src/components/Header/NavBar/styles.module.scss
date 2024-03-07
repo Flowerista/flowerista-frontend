@@ -2,31 +2,35 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
-
+	flex: 1;
+	letter-spacing: 0.32px;
 	&__menu {
 		display: flex;
-
+		gap: 50px;
 		li {
-			margin-right: 55px;
-
-			&:last-of-type {
-				margin-right: 0;
-			}
-
 			a {
 				cursor: pointer;
-				color: #2C1607;
-				border-bottom: 2px solid transparent;
+				color: var(--brown);
+				border-bottom: 1px solid transparent;
 				transition: border-bottom 0.3s ease;
-
+				font: var(--body-1-400);
 				&:hover {
-					border-bottom: 2px solid #e7a9a7;
+					border-bottom: 1px solid var(--rose);
 				}
 				&.active {
-          border-bottom: 2px solid #e7a9a7;
-        }
+          			border-bottom: 1px solid var(--rose);
+        		}
 			}
 		}
+	}
+}
+
+.navbar.header {
+	display: none;
+}
+
+@media screen and (min-width: 1200px) { 
+	.navbar.header {
+		display: flex;
 	}
 }
