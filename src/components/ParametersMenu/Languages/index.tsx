@@ -26,12 +26,12 @@ export const Languages: FC<ILanguages> = () => {
 
 	return (
 		 <div className={styles.container}>
-			 <button className={`${currentLanguage === Language.UA && `${styles.active}`}`}
-			         onClick={() => changeLanguage(Language.UA)}>ua
-			 </button>
-			 <span>|</span>
 			 <button className={`${currentLanguage === Language.EN && `${styles.active}`}`}
 			         onClick={() => changeLanguage(Language.EN)}>en
+			 </button>
+			 <span>|</span>
+			 <button className={`${currentLanguage === Language.UA && `${styles.active}`}`}
+			         onClick={() => changeLanguage(Language.UA)}>ua
 			 </button>
 		 </div>
 	);

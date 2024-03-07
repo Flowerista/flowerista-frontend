@@ -9,14 +9,14 @@ export interface IMainLayout {
 
 export const MainLayout: FC<IMainLayout> = ({children}) => {
 	return (
-		 <div>
-				<div className={"container"}>
-					<Header/>
-					{children}
-				</div>
-			 <Footer/>
-			 <WishlistModal/>
-		 </div>
+		<div>
+			<div className={"container"}>
+				<Header/>
+				{children}
+			</div>
+			<Footer/>
+			<WishlistModal/>
+		</div>
 	);
 };
 

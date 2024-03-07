@@ -1,0 +1,95 @@
+button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.headerButton {
+    width: 30px;
+
+    &::before {
+        background-color: var(--brown);
+        content: '';
+        display: block;
+        height: 2px;
+        width: 24px;
+        transition: all .2s ease-in-out;
+    }
+
+    .line {
+        background-color: var(--dark-rose);
+        display: block;
+        height: 2px;
+        margin: 9px 0;
+        width: 30px;
+        transition: all .2s ease-in-out;
+    }
+
+    &::after {
+        background-color: var(--brown);
+        content: '';
+        display: block;
+        height: 2px;
+        width: 16px;
+        transition: all .2s ease-in-out;
+    }
+}
+
+.headerButton.open {
+    &::before {
+        width: 33px;
+        transform: translate(-4px, 11px) rotate(-45deg);
+    }
+
+    .line {
+        transform: scale(0);
+    }
+
+    &::after {
+        width: 33px;
+        transform: translate(-4px, -11px) rotate(45deg);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .headerButton {
+        width: 44px;
+    
+        &::before {
+            width: 34px;
+        }
+    
+        .line {
+            width: 40px;
+        }
+    
+        &::after {
+            width: 24px;
+        }
+    }
+
+    // .headerButton.open {
+    //     width: 24px;
+    //     height: 24px;
+    //     &::before {
+    //         width: 33px;
+    //         transform: translate(-4px, 11px) rotate(-45deg);
+    //     }
+    
+    //     .line {
+    //         transform: scale(0);
+    //     }
+    
+    //     &::after {
+    //         width: 33px;
+    //         transform: translate(-4px, -11px) rotate(45deg);
+    //     }
+    // }
+}
+
+@media screen and (min-width: 1200px) {
+    .headerButton {
+        display: none;
+    }
+}
