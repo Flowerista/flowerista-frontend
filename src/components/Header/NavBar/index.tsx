@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 export interface INavBar {
 	className?: string
-	type: 'modal' | 'header'
+	type: 'menu' | 'header'
 }
 
 export const NavBar: FC<INavBar> = ({className, type}) => {
@@ -26,7 +26,7 @@ export const NavBar: FC<INavBar> = ({className, type}) => {
 					{t("header.third-link")}
 				</NavLink></li>
 			</ul>
-			<ParametersMenu/>
+			{type === 'header'? <ParametersMenu/> : null}
 		</nav>
 	);
 };

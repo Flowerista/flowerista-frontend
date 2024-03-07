@@ -13,7 +13,7 @@ export const ParametersMenu: FC = () => {
 	return (
 		<>
 			<ul className={styles.parametersMenu}>
-				<li><Search/></li>
+				<li><Search type='header'/></li>
 				<li><Languages/></li>
 				<li><Link to={DataRoute.PersonalInformation}><BsFillPersonFill style={{fontSize: '32px', }}/></Link></li>
 				<li><CartIcon/></li>

@@ -8,6 +8,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
 }
 
 .parametersMenu{
@@ -17,6 +18,40 @@
 	}
 	&__profile {
 		display: none;
+	}
+}
+
+.menu {
+	position: absolute;
+	top: 64px;
+	left: 0;
+	width: 0;
+	padding: 54px 20px 100px 20px;
+	background-color: var(--creamy);
+	display: none;
+	z-index: 999;
+}
+
+.open {
+	display: block;
+	width: 100%;
+}
+
+.profile {
+	border-top: 1px solid var(--white);
+	border-bottom: 1px solid var(--white);
+	padding: 20px 0 20px 0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 40px;
+	margin-bottom: 80px;
+	color: var(--brown);
+	font: var(--body-1-400);
+	a {
+		display: flex;
+		align-items: center;
+		gap: 10px;
 	}
 }
 
@@ -31,6 +66,11 @@
 
 	.parametersMenu__profile {
 		display: inline;
+	}
+
+	.menu {
+		max-width: 375px;
+		top: 104px;
 	}
 }
 

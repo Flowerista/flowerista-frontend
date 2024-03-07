@@ -25,6 +25,29 @@
 	}
 }
 
+.navbar.menu {
+	.navbar__menu {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		li {
+			a {
+				cursor: pointer;
+				color: var(--brown);
+				border-bottom: 1px solid transparent;
+				transition: border-bottom 0.3s ease;
+				font: var(--body-1-400);
+				&:hover {
+					border-bottom: 1px solid var(--rose);
+				}
+				&.active {
+          			border-bottom: 1px solid var(--rose);
+        		}
+			}
+		}
+	}
+}
+
 .navbar.header {
 	display: none;
 }
