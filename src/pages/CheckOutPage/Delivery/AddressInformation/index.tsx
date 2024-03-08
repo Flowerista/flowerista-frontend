@@ -6,19 +6,14 @@ import {useAppSelector} from '../../../../store/store';
 import {useTranslation} from 'react-i18next';
 
 export interface IAddressInformation {
-	address: {
-		city: string | null
-		street: string | null
-		house: string | null
-		entrance: string | null
-		flat: string | null
-	} | undefined
 	type: string
 }
 
-export const AddressInformation: FC<IAddressInformation> = ({address, type}) => {
+export const AddressInformation: FC<IAddressInformation> = ({type}) => {
 	const {t} = useTranslation()
-	const {city, date, street, flat, entrance, house, time, shopDate, shopTime} = useAppSelector(state => state.checkout)
+	const {city, date, street, flat, entrance, house, time} = useAppSelector(state => state.checkout)
+
+
 	return (
 		 <div className={styles.address}>
 			 <img src={addressImg} alt="address-img"/>
@@ -31,7 +26,7 @@ export const AddressInformation: FC<IAddressInformation> = ({address, type}) => 
 					 </>}
 					 {type === 'mail' && <>
 						 <span>{t('checkout.authorized.delivery.street')}</span>
-						 <span>{shopDate} {' '} {shopTime}</span>
+						 <span>{date} {' '} {time}</span>
 					 </>}
 				 </div>
 			 </div>

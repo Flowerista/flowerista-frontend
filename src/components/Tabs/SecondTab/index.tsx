@@ -23,18 +23,6 @@ import {useTranslation} from 'react-i18next';
 
 interface InterfaceSecondTab {
 	setIsActive: (isActive: boolean) => void
-
-}
-
-
-interface Inputs {
-	city: string;
-	street: string;
-	house: string;
-	entrance: string;
-	flat: string;
-	date?: string | undefined;
-	time?: string | undefined;
 }
 
 
@@ -42,6 +30,7 @@ const SecondTab: FC<InterfaceSecondTab> = ({setIsActive}) => {
 	const {t} = useTranslation()
 	const dispatch = useAppDispatch()
 	const {city, street, entrance, flat, house} = useAppSelector(state => state.checkout)
+	const {address} = useAppSelector(state => state.user.user)
 	const {
 		control,
 		register,
@@ -52,11 +41,11 @@ const SecondTab: FC<InterfaceSecondTab> = ({setIsActive}) => {
 	} = useForm({
 		mode: 'onBlur',
 		defaultValues: {
-			city: ' ',
-			street: ' ',
-			house: ' ',
-			flat: ' ',
-			entrance: ' ',
+			city: `${address && address.city ? address.city : ''}`,
+			street: `${address && address.street ? address.street : ''}`,
+			house: `${address && address.house ? address.house : ''}`,
+			flat: `${address && address.flat ? address.flat : ''}`,
+			entrance: `${address && address.entrance ? address.entrance : ''}`,
 			date: undefined,
 			time: undefined,
 		},

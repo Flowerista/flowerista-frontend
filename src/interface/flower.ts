@@ -14,7 +14,7 @@ export interface IFlowerCard {
     defaultPrice: number;
     discount: number | null;
     discountPrice: number | null;
-    sizes: ISize[];
+    sizes: [];
 }
 
 export interface IFlowersItem {
@@ -24,7 +24,7 @@ export interface IFlowersItem {
     discount: number | null;
     discountPrice: number| null;
     imageUrls: Record<string, string>
-    sizes: ISize[];
+    sizes: [];
 }
 
 export interface IAllFlower {

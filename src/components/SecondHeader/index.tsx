@@ -7,10 +7,10 @@ export interface ISecondHeader {
 
 export const SecondHeader: FC<ISecondHeader> = () => {
 	return (
-		 <div className={styles.container}>
+		 <header className={styles.container}>
 			 <Logo type={'header'}/>
 			 <div></div>
-		 </div>
+		 </header>
 	);
 };
 
