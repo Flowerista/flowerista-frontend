@@ -4,10 +4,10 @@ import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import { useAppDispatch } from '../../store/store';
-import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
-import { generateCartID } from '../../utils/helpers/generateCartID';
-import { setCartModalOpen } from '../../store/modals/modals.slice';
+import {useAppDispatch} from '../../store/store';
+import {addCartItem, ICartItem} from '../../store/cart/cart.slice';
+import {generateCartID} from '../../utils/helpers/generateCartID';
+import {setCartModalOpen} from '../../store/modals/modals.slice';
 
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -31,15 +31,18 @@ export interface IFlowerCard {
 }
 
 export const Card: FC<IFlowerCard> = (props) => {
-    const {id, name, imageUrls, defaultPrice, discount, discountPrice} = props;
+    const {id, name, imageUrls, defaultPrice, discount, discountPrice,sizes} = props;
     const [liked, setLiked] = useState(false)
 
     const dispatch = useAppDispatch()
 
+
     const toCart = () => {
+        const currentSizeID = ""
         const cartID = generateCartID(id, 'MEDIUM')
         const flower: ICartItem = {
             ...props,
+            // size:
             currentSize: 'MEDIUM',
             quantity: 1,
             cartID: cartID,

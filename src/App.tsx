@@ -18,8 +18,12 @@ import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
 import {SecondLayout} from './layouts/SecondLayout';
 import './i18n/i18n'
+import {CheckOutPendingPage} from './pages/CheckOutPendingPage';
+import {CheckOutThanksPage} from './pages/CheckOutThanksPage';
+import {PaymentErrorPage} from './pages/PaymentErrorPage';
 
 function App() {
+
 
 	const location = useLocation();
 	return (
@@ -39,6 +43,9 @@ function App() {
 				 <Route path={DataRoute.PersonalInformation} element={<MainLayout><PersonalInformation/></MainLayout>}/>
 				 <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
 				 <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
+				 <Route path={DataRoute.CheckOutPending} element={<CheckOutPendingPage/>}/>
+				 <Route path={DataRoute.ThanksYou} element={<CheckOutThanksPage/>}/>
+				 <Route path={DataRoute.ErrorAfterPayment} element={<PaymentErrorPage/>}/>
 				 <Route path="*" element={<NotFoundPage/>}/>
 			 </Routes>
 		 </PageTransition>

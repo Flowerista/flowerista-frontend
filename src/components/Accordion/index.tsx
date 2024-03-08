@@ -4,7 +4,7 @@ import close from '../../assets/image/checkOut/close.png'
 import open from '../../assets/image/checkOut/open.png'
 import Tabs from '../Tabs';
 import {AddressInformation} from '../../pages/CheckOutPage/Delivery/AddressInformation';
-import {useAppDispatch} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {setCity, setEntrance, setFlat, setHouse, setStreet} from '../../store/checkout/checkout.slice';
 import {useTranslation} from 'react-i18next';
 
@@ -20,6 +20,7 @@ interface IAccordion {
 
 export const Accordion: FC<IAccordion> = ({address}) => {
 	const {t} = useTranslation()
+	const user = useAppSelector(state => state.user)
 	const [isActiveAccordion, setIsActiveAccordion] = useState(false);
 	const [type, setType] = useState<'mail' | 'courier'>('courier');
 	const [isActive, setIsActive] = useState<boolean>(false)
@@ -48,7 +49,7 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 	return (
 		 <div
 				onClick={handleClick}
-				className={`${styles.accordion} ${isActiveAccordion ? `${styles.open}` : ''}`}
+				className={`${user.user.email === '' ? styles.blocked : ''}  ${styles.accordion} ${isActiveAccordion ? `${styles.open}` : ''}`}
 		 >
 			 <div className={styles.title}>
 				 <span>{t('checkout.authorized.delivery.title')}</span>
@@ -59,7 +60,7 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 						<img src={isActiveAccordion ? open : close} alt="image-accordion"/>}
 			 </div>
 			 <div className={styles.content} onClick={handleTabsClick}>
-				 {isActive && <AddressInformation type={type} address={address}/>}
+				 {isActive && <AddressInformation type={type}/>}
 				 {!isActive && <Tabs setType={setType} setIsActive={setIsActive}/>}
 			 </div>
 		 </div>
