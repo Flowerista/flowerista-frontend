@@ -1,0 +1,43 @@
+.container {
+
+}
+
+.info {
+	h1 {
+		font-family: var(--font-family-main);
+		font-size: 32px;
+		font-weight: 400;
+		line-height: 48px;
+		letter-spacing: 0.02em;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	p {
+		font-family: var(--font-family-main);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		letter-spacing: 0.02em;
+		text-align: center;
+
+	}
+
+	form {
+		display: flex;
+		justify-content: center;
+		margin-top: 30px;
+		margin-bottom: 100px;
+	}
+}
+
+.image {
+	display: flex;
+	justify-content: center;
+
+	img {
+		height: 100%;
+		width: 100%;
+
+	}
+}

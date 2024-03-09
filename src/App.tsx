@@ -16,24 +16,25 @@ import {PersonalInformation} from './pages/Profile/PersonalInformation/PersonalI
 import {ProductPage} from './pages/ProductPage';
 import {CheckOutPage} from './pages/CheckOutPage';
 import {PasswordRecovery} from './pages/PasswordRecovery';
-import { ProfileLayout } from './layouts/ProfileLayout';
-import { Wishlist } from './pages/Profile/Wishlist/Wishlist';
-import { useAppDispatch } from './store/store';
-import { getWishlist } from './store/wishlist/wishlist.slice';
+import {ProfileLayout} from './layouts/ProfileLayout';
+import {Wishlist} from './pages/Profile/Wishlist/Wishlist';
+import {useAppDispatch} from './store/store';
+import {getWishlist} from './store/wishlist/wishlist.slice';
 import {SecondLayout} from './layouts/SecondLayout';
 import './i18n/i18n'
 import {CheckOutPendingPage} from './pages/CheckOutPendingPage';
 import {CheckOutThanksPage} from './pages/CheckOutThanksPage';
 import {PaymentErrorPage} from './pages/PaymentErrorPage';
+import {ProfileOrders} from './pages/Profile/Orders';
 
 function App() {
-  const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      dispatch(getWishlist())
-    }
-  }, [])
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			dispatch(getWishlist())
+		}
+	}, [])
 
 
 	const location = useLocation();
@@ -51,14 +52,17 @@ function App() {
 				 <Route path={DataRoute.RestoringAccessSuccess}
 				        element={<SecondLayout><RestoringAccessSuccess/></SecondLayout>}/>
 				 <Route path={DataRoute.ProductId} element={<MainLayout><ProductPage/></MainLayout>}/>
-				 <Route path={DataRoute.PersonalInformation} element={<ProfileLayout pageName='Profile'><PersonalInformation/></ProfileLayout>}/>
+				 <Route path={DataRoute.PersonalInformation}
+				        element={<ProfileLayout pageName="Profile"><PersonalInformation/></ProfileLayout>}/>
 				 <Route path={DataRoute.CheckOut} element={<CheckOutPage/>}/>
 				 <Route path={DataRoute.ChangePassword} element={<MainLayout><PasswordRecovery/></MainLayout>}/>
 				 <Route path={DataRoute.CheckOutPending} element={<CheckOutPendingPage/>}/>
 				 <Route path={DataRoute.ThanksYou} element={<CheckOutThanksPage/>}/>
 				 <Route path={DataRoute.ErrorAfterPayment} element={<PaymentErrorPage/>}/>
-				 <Route path={DataRoute.Wishlist} element={<ProfileLayout pageName='Wishlist'><Wishlist></Wishlist></ProfileLayout>} />
-				 <Route path={DataRoute.Orders} element={<ProfileLayout pageName='Orders history'>'Orders'</ProfileLayout>} />
+				 <Route path={DataRoute.Wishlist}
+				        element={<ProfileLayout pageName="Wishlist"><Wishlist></Wishlist></ProfileLayout>}/>
+				 <Route path={DataRoute.Orders}
+				        element={<ProfileLayout pageName="Orders history"><ProfileOrders></ProfileOrders></ProfileLayout>}/>
 				 <Route path="*" element={<NotFoundPage/>}/>
 			 </Routes>
 		 </PageTransition>
