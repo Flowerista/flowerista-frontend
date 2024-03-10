@@ -67,18 +67,18 @@ export const CartModal: FC<CartModalProps> = ({style, className}) => {
 						 <p>{t('cart.price')}</p>
 						 <div className={styles.price__item}>
 							 {totalPrice}
-							 <span> UAH</span>
+							 <span> USD</span>
 						 </div>
 					 </div>
 					 <div className={styles.btns}>
-						 <Button sizeMode="small" text="Check out" onClick={toCheckOut} disabled={cart.length === 0}/>
-						 <Button sizeMode="small" colorMode="white" text="Сontinue shopping" onClick={onClose}/>
+						 <Button sizeMode="small" text={`${t('cart.btn1')}`} onClick={toCheckOut} disabled={cart.length === 0}/>
+						 <Button sizeMode="small" colorMode="white" text={`${t('cart.btn2')}`} onClick={onClose}/>
 					 </div>
 				 </div>
 				 <div
 						className={styles.modal__btn}
 						onClick={onClose}>
-					 <BsArrowLeft size={24}/>back
+					 <BsArrowLeft size={24}/>{t('cart.back')}
 				 </div>
 			 </div>
 		 </div>

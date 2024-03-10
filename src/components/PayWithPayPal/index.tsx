@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import {PayPalButtons, PayPalButtonsComponentProps} from '@paypal/react-paypal-js';
 import {useAppSelector} from '../../store/store';
 import PaymentService from '../../services/PaymentService/payment-service';
+import {useTranslation} from 'react-i18next';
 
 export interface IPayWithPayPal {
 
@@ -10,6 +11,7 @@ export interface IPayWithPayPal {
 
 
 export const PayWithPayPal: FC<IPayWithPayPal> = () => {
+	const {t} = useTranslation()
 	const cart = useAppSelector(state => state.cart.cart)
 	const orderId = useAppSelector(state => state.checkout.orderId)
 	const [loading, setLoading] = useState(false);
@@ -60,8 +62,7 @@ export const PayWithPayPal: FC<IPayWithPayPal> = () => {
 	return (
 		 <div className={styles.payment}>
 			 <span>
-				 Use the button below to finalize your payment via Paypal.
-After completing the payment, you will be automatically redirected back to our site to finish your order.  Your payment security is ensured by Paypal.
+				 {t('checkout.authorized.payment.online.text')}
 			 </span>
 			 <div>
 				 <label>
@@ -70,7 +71,7 @@ After completing the payment, you will be automatically redirected back to our s
 							checked={isChecked}
 							onChange={handleCheckboxChange}
 					 />
-					 I have read the Privacy policy and agree to receive news, emails and offers from Flowerista
+					 {t('checkout.authorized.payment.online.btn')}
 				 </label>
 			 </div>
 			 <PayPalButtons

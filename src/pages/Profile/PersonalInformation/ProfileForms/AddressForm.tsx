@@ -76,14 +76,14 @@ export const AddressForm: FC = () => {
 				 <Form onSubmit={handleSubmit(onSubmit)}>
 					 <InputsWrapper>
 						 <TextInput
-								label="City"
+								label={`${t('profile.address.city')}`}
 								placeholder="City"
 								register={register}
 								registerName="city"
 								error={errors.city?.message}
 						 />
 						 <TextInput
-								label="Street"
+								label={`${t('profile.address.street')}`}
 								placeholder="Street"
 								register={register}
 								registerName="street"
@@ -91,21 +91,21 @@ export const AddressForm: FC = () => {
 						 />
 						 <InputsWrapper style={{flexDirection: 'row', gap: '20px'}}>
 							 <TextInput
-									label="House"
+									label={`${t('profile.address.house')}`}
 									placeholder="House"
 									register={register}
 									registerName="house"
 									error={errors.house?.message}
 							 />
 							 <TextInput
-									label="Entrance"
+									label={`${t('profile.address.entrance')}`}
 									placeholder="Entrance"
 									register={register}
 									registerName="entrance"
 									error={errors.entrance?.message}
 							 />
 							 <TextInput
-									label="Flat"
+									label={`${t('profile.address.flat')}`}
 									placeholder="Flat"
 									register={register}
 									registerName="flat"

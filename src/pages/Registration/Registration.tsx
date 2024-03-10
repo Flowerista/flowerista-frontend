@@ -39,12 +39,12 @@ type Inputs = {
 // add try catch
 const checkEmail = async (email: string) => {
     let checked
-    await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
-            .then(response => {
-                checked = response.data
-            })
-            .catch(err => console.log(err))
-    return checked
+	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
+		 .then(response => {
+			 checked = response.data
+		 })
+		 .catch(err => console.log(err))
+	return checked
 }
 
 const checkPhone = async (phone: number) => {

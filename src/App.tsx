@@ -26,6 +26,7 @@ import {CheckOutPendingPage} from './pages/CheckOutPendingPage';
 import {CheckOutThanksPage} from './pages/CheckOutThanksPage';
 import {PaymentErrorPage} from './pages/PaymentErrorPage';
 import {ProfileOrders} from './pages/Profile/Orders';
+import i18next from 'i18next';
 
 function App() {
 	const dispatch = useAppDispatch()
@@ -35,6 +36,13 @@ function App() {
 			dispatch(getWishlist())
 		}
 	}, [])
+
+	useEffect(() => {
+		const selectedLanguage = localStorage.getItem('selectedLanguage');
+		if (selectedLanguage) {
+			i18next.changeLanguage(selectedLanguage);
+		}
+	}, [i18next.language]);
 
 
 	const location = useLocation();
