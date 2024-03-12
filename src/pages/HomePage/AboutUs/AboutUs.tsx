@@ -43,7 +43,7 @@ export const AboutUs: FC<IAboutUs> = () => {
 						 </p>
 					 </div>
 					 <div className={styles.content__link__wrapper}>
-						 <Link to={DataRoute.AboutUs} className={styles.content__link}>
+						 <Link target={'_top'} to={DataRoute.AboutUs} className={styles.content__link}>
 							 {t('mainPage.about-us.btn')} <BsArrowRight style={{fontSize: '24px'}}/>
 						 </Link>
 					 </div>

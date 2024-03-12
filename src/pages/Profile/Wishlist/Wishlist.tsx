@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../../data/routes';
 import Flower from '../../../assets/image/wishlist/img.png'
 import {useTranslation} from 'react-i18next';
+import {Loader} from '../../../components/shared/Loading';
 
 export const Wishlist: FC = () => {
 	const {t} = useTranslation()
@@ -20,7 +21,7 @@ export const Wishlist: FC = () => {
 	}, []);
 
 	if (loadingStatus.getWishlist) {
-		return <h1>Loading...</h1>
+		return <Loader/>
 	}
 
 	if (errorStatus.getWishlist) {

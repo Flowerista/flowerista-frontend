@@ -4,8 +4,8 @@ import PaymentService from '../../services/PaymentService/payment-service';
 import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {SecondHeader} from '../../components/SecondHeader';
-import loader from '../../assets/image/checkOut/loader.png'
 import {CheckOutFooter} from '../CheckOutPage/CheckOutFooter';
+import loader from '../../assets/image/checkOut/loader.gif'
 
 export interface ICheckOutPendingPage {
 }
