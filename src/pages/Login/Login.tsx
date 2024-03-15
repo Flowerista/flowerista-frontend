@@ -73,9 +73,8 @@ export const Login: FC = () => {
 
 	return (
 		 <div className={styles.login}>
-			 <div>
+			 <div className={styles.login__container}>
 				 <Title text={`${t('login.title')}`}/>
-
 				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
 					 <InputsWrapper>
 						 <EmailInput register={register} error={errors.email?.message}/>

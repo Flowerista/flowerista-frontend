@@ -1,5 +1,13 @@
+@import "../../../styles/mixin";
+
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+@include media768 {
+	.wrapper {
+		gap: 30px;
+	}
 }

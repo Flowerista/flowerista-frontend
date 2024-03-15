@@ -1,33 +1,107 @@
-.login {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 198px;
-    font-family: var(--font-family-main);
-    color: #231104;
-    font-weight: 400;
+@import "../../styles/mixin";
 
-    &__link {
-        font-size: 12px;
-        font-weight: 400;
-        line-height: normal;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        text-align: end;
-        text-decoration-line: underline;
-    }
+.login {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 198px;
+	font-family: var(--font-family-main);
+	color: #231104;
+	font-weight: 400;
+
+	&__link {
+		font-size: 12px;
+		font-weight: 400;
+		line-height: normal;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		text-align: end;
+		text-decoration-line: underline;
+	}
 }
 
 .img {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    height: 646px;
-    width: 412px;
-    z-index: -1;
-    img {
-        width: 100%;
-        height: 100%;
-    }
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 646px;
+	width: 412px;
+	z-index: -1;
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+
+@include media768 {
+
+	.login {
+		position: static;
+		padding-bottom: 80px;
+		padding-top: 80px;
+
+		&__container {
+			width: 354px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		&__link {
+			font-size: 12px;
+			font-weight: 400;
+			line-height: normal;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: end;
+			text-decoration-line: underline;
+		}
+
+		button{
+			width: 100%;
+		}
+	}
+
+	.img {
+		display: none;
+	}
+}
+
+@include media375 {
+
+	.login {
+		position: static;
+		padding-bottom: 60px;
+		padding-top: 40px;
+
+		&__container {
+			width: 335px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		&__link {
+			font-size: 12px;
+			font-weight: 400;
+			line-height: normal;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			text-align: end;
+			text-decoration-line: underline;
+		}
+
+		button{
+			width: 100%;
+		}
+	}
+
+	.img {
+		display: none;
+	}
 }

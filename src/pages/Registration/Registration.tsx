@@ -126,7 +126,7 @@ export const Registration: FC = () => {
 
 	return (
 		 <div className={styles.registration}>
-			 <div>
+			 <div className={styles.registration__container}>
 				 <Title text={`${t('register.title')}`}/>
 
 				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>

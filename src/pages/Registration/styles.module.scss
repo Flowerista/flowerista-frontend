@@ -1,3 +1,5 @@
+@import "../../styles/mixin";
+
 .registration {
 	display: flex;
 	position: relative;
@@ -28,4 +30,74 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@include media768 {
+	.registration {
+		position: static;
+		padding-bottom: 80px;
+		padding-top: 80px;
+
+		&__container {
+			max-width: 354px;
+			width: 100%;
+
+			input {
+				width: 100%;
+			}
+
+			button {
+				width: 100%;
+			}
+		}
+
+		h2 {
+			text-align: center;
+		}
+	}
+
+	.img {
+		display: none;
+	}
+
+	.flex {
+		width: 310px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+
+@include media375 {
+	.registration {
+		position: static;
+		padding: 20px;
+		padding-bottom: 60px;
+		padding-top: 40px;
+
+		&__container {
+			max-width: 335px;
+			width: 100%;
+
+			input {
+				width: 100%;
+			}
+		}
+
+		h2 {
+			text-align: center;
+		}
+	}
+
+	.img {
+		display: none;
+	}
+
+	.flex {
+		width: 310px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
