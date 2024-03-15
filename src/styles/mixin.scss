@@ -1,0 +1,13 @@
+@import "variables";
+
+@mixin media768 {
+	@media screen and (max-width: $md1) {
+		@content;
+	}
+}
+
+@mixin media375 {
+	@media screen and (max-width: $md2) {
+		@content;
+	}
+}
