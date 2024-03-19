@@ -1,29 +1,88 @@
-.head {
+.section {
+    
+}
+
+.sectionSlider {
+    background-color: var(--creamy);
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-family-main);
-    color: #2C1607;
-    font-weight: 400;
-    &__title {
-        font-size: 32px;
+    gap: 9px;
+    padding-bottom: 43px;
+}
+.horizontalClass {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.bulletClass {
+    width: 3px;
+    height: 3px;
+    border-radius: 13px;
+    opacity: 0.4;
+    background-color: #231104;
+}
+.bulletActiveClass {
+    width: 16px;
+    opacity: 1;
+    border-radius: 14px;
+}
+
+@media screen and (min-width: 1276px) {
+    .sectionSlider {
+        padding-bottom: 0;
     }
-    &__link {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px;
-        line-height: 150%; /* 24px */
-        &:hover{
-            text-decoration: underline;
-        }
-        &__wrapper {
-            display: flex;
-        }
+    .horizontalClass {
+        display: none
     }
 }
 
-.content{
-    margin-top: 50px;
-    display: flex;
-}
+
+// .head {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     font-family: var(--font-family-main);
+//     color: #2C1607;
+//     font-weight: 400;
+//     &__title {
+//         font-size: 32px;
+//     }
+//     &__link {
+//         display: flex;
+//         align-items: center;
+//         gap: 10px;
+//         font-size: 16px;
+//         line-height: 150%; /* 24px */
+//         &:hover{
+//             text-decoration: underline;
+//         }
+//         &__wrapper {
+//             display: flex;
+//         }
+//     }
+// }
+
+// .content{
+//     margin-top: 50px;
+//     display: flex;
+// }
+// .sectionSlider {
+//     background-color: var(--creamy)
+// }
+// .horizontalClass {
+//     display: flex;
+//     justify-content: center;
+//     gap: 10px;
+// }
+// .bulletClass {
+//     width: 3px;
+//     height: 3px;
+//     border-radius: 13px;
+//     opacity: 0.4;
+//     background-color: #231104;
+// }
+// .bulletActiveClass {
+//     width: 16px;
+//     opacity: 1;
+//     border-radius: 14px;
+// }

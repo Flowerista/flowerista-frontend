@@ -3,7 +3,9 @@ import {SectionFlower} from '../SectionFlower';
 import {SkeletonCard} from '../../Skeletons/SkeletonCard/SkeletonCard';
 import {useGetTopSellersQuery} from '../../../services/bouquete-api/bouquete-api-service';
 import {useTranslation} from 'react-i18next';
+import { SectionTitle } from '../SectionTitle/SectionTitle';
 
+import styles from './styles.module.scss';
 
 export const Sale: FC = () => {
 	const {t} = useTranslation()
@@ -27,8 +29,9 @@ export const Sale: FC = () => {
 	}
 
 	return (
-		 <>
-			 <SectionFlower title={`${t('mainPage.sale')}`} data={data} style={{marginTop: '120px', marginBottom: '120px'}}/>
-		 </>
+		<div className={styles.sale}>
+			<SectionTitle title={`${t('mainPage.sale')}`}/>
+			<SectionFlower data={data}/>
+		</div>
 	)
 }

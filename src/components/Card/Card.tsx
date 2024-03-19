@@ -66,48 +66,51 @@ export const Card: FC<IFlowerCard> = (props) => {
 
 	const img = imageUrls?.['1']
 
-	return (
-		 <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
-			 <div className={styles.card__wrapper}>
-				 <div className={styles.card__img}>
-					 <Link to={`${DataRoute.Product}/${id}`}>
-						 <img
-								src={img} alt="flower"/>
-					 </Link>
-					 <div className={styles.like} onClick={() => toLike(id)}>
-						 {liked ? <BsHeartFill/> : <BsHeart/>}
-					 </div>
-				 </div>
-				 <div className={styles.card__footer}>
-					 <div className={styles.card__name}>
-						 <Link to={`${DataRoute.Product}:${id}`}>
-							 {name}
-						 </Link>
-					 </div>
-					 <div className={styles.card__desc}>
-						 <div className={styles.price__wrapper}>
-							 {discountPrice &&
-									<div className={styles.price_old}>
-										<p>{defaultPrice}</p>
-										<span> UAH</span>
-									</div>
-							 }
-							 <div className={styles.price}>
-								 {discountPrice || defaultPrice}
-								 <span> UAH</span>
-							 </div>
-						 </div>
-						 <button className={styles.cart} onClick={toCart}>
-							 <BsBagFill/>
-						 </button>
-					 </div>
-				 </div>
-			 </div>
-			 {discount &&
-					<div className={styles.sale}>
-						<p>-{discount}%</p>
-					</div>
-			 }
-		 </div>
-	)
+    return (
+    <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
+        <div className={styles.card__wrapper}>
+            <div className={styles.card__img}>
+                <Link to={`${DataRoute.Product}/${id}`}>
+                    <img 
+                        className={`${discount ? styles.img_sale : ''}`}
+                        src={img} 
+                        alt="flower" 
+                    />
+                </Link>
+                <div className={styles.like} onClick={() => toLike(id)}>
+                    { liked ? <BsHeartFill/> : <BsHeart/> }
+                </div>
+            </div>
+            <div className={styles.card__footer}>
+                <div className={styles.card__name}>
+                    <Link to={`${DataRoute.Product}:${id}`}>
+                        {name}
+                    </Link>
+                </div>
+                <div className={styles.card__desc}>
+                    <div className={styles.price__wrapper}>
+                        {discountPrice &&
+                            <div className={styles.price_old}>
+                                <p className={styles.price_old__count}>{defaultPrice}</p>
+                                <span className={styles.price_old__currency}>UAH</span>
+                            </div>
+                        }
+                        <div className={styles.price}>
+                            {discountPrice || defaultPrice}
+                            <span>UAH</span>
+                        </div>
+                    </div>
+                    <button className={styles.cart} onClick={toCart} >
+                        <BsBagFill/>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {discount && 
+            <div className={styles.sale}>
+                <p>-{discount}%</p>
+            </div>
+        }
+    </div>
+  )
 }

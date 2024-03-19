@@ -21,7 +21,8 @@ import {Wishlist} from './pages/Profile/Wishlist/Wishlist';
 import {useAppDispatch} from './store/store';
 import {getWishlist} from './store/wishlist/wishlist.slice';
 import {SecondLayout} from './layouts/SecondLayout';
-import './i18n/i18n'
+import './i18n/i18n';
+import { TestPage } from './pages/TestPage';
 import {CheckOutPendingPage} from './pages/CheckOutPendingPage';
 import {CheckOutThanksPage} from './pages/CheckOutThanksPage';
 import {PaymentErrorPage} from './pages/PaymentErrorPage';
@@ -47,7 +48,6 @@ function App() {
 
 	const location = useLocation();
 	return (
-
 		 <PageTransition location={location.pathname}>
 			 <Routes>
 				 <Route path={DataRoute.Home} element={<MainLayout><HomePage/></MainLayout>}/>
@@ -71,10 +71,10 @@ function App() {
 				        element={<ProfileLayout pageName="Wishlist"><Wishlist></Wishlist></ProfileLayout>}/>
 				 <Route path={DataRoute.Orders}
 				        element={<ProfileLayout pageName="Orders history"><ProfileOrders></ProfileOrders></ProfileLayout>}/>
+         <Route path='/test' element={<MainLayout><TestPage/></MainLayout>}/>
 				 <Route path="*" element={<NotFoundPage/>}/>
 			 </Routes>
 		 </PageTransition>
-
 	);
 }
 

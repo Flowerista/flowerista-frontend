@@ -1,46 +1,85 @@
-import {FC} from 'react';
-import {Link} from 'react-router-dom';
-import {BsArrowRight} from 'react-icons/bs';
+import {CSSProperties, FC, useEffect, useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Pagination} from 'swiper/modules';
+import classNames from 'classnames';
 
+import {Card} from '../Card/Card';
 import {IFlowerCard} from '../../interface/flower';
 
 import styles from './styles.module.scss';
-import {Card} from '../Card/Card';
-import {DataRoute} from '../../data/routes';
-import {useTranslation} from 'react-i18next';
+import { useResize } from '../../hooks/useResize';
 
 export interface ISectionsFlower {
-    data: IFlowerCard[] | undefined;
-    title: string;
-    style?: object;
+  data: IFlowerCard[] | undefined;
+  style?: CSSProperties;
+  className?: string
 }
 
-export const SectionFlower: FC<ISectionsFlower> = ({data, title, style}) => {
-  const {t} = useTranslation()
+export const SectionFlower: FC<ISectionsFlower> = ({data, style, className}) => {
+  const {width} = useResize()
+  
+  const [showSlide, setShowSlide] = useState(2);
+  const [gapSlide, setGapSlide] = useState(9);
+
+  useEffect(() => {
+    if (width < 500) {
+      setShowSlide(2)
+      setGapSlide(9)
+    }
+    if (width > 500) {
+      setShowSlide(3)
+      setGapSlide(9)
+    }
+    if (width >= 768) {
+      setShowSlide(3)
+      setGapSlide(20)
+    }
+    if (width >= 1024) {
+      setShowSlide(4)
+      setGapSlide(20)
+    }
+    if (width >= 1276) {
+      setShowSlide(5)
+      setGapSlide(3)
+    }
+    
+    console.log(width)
+    return () => {
+
+    }
+  }, [width])
+  
+
+  console.log(width)
   return (
-    <section style={style}>
-      <div className={styles.head}>
-        <div className={styles.head__title}>{title}</div>
-        <div className={styles.head__link__wrapper}>
-            <Link target={'_top'} to={DataRoute.Catalog} className={styles.head__link}>
-              {t("mainPage.btn-see-all")} <BsArrowRight style={{fontSize: "24px"}}/>
-            </Link>
-        </div>
-      </div>
-      <div className={styles.content}>
-        {data && data.map((item) => (
-          <Card
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            discount={item.discount}
-            defaultPrice={item.defaultPrice}
-            discountPrice={item.discountPrice}
-            imageUrls={item.imageUrls}
-            sizes={item.sizes}
-          />
-        ))}
-      </div>
+    <section className={classNames(styles.section, className)} style={style}>
+      <div className={styles.swiper}>
+			  <Swiper
+					pagination={{
+            clickable: true,
+            bulletActiveClass: `${styles.bulletActiveClass}`,
+            bulletClass:  `${styles.bulletClass}`,
+            horizontalClass: `${styles.horizontalClass}`
+          }}
+          spaceBetween={gapSlide}
+					modules={[Pagination]}
+          slidesPerView={showSlide}
+			  >
+          {data && data.map((item) => (
+            <SwiperSlide className={styles.sectionSlider} key={item.id}>
+              <Card
+                id={item.id}
+                name={item.name}
+                discount={item.discount}
+                defaultPrice={item.defaultPrice}
+                discountPrice={item.discountPrice}
+                imageUrls={item.imageUrls}
+                sizes={item.sizes}
+              />
+            </SwiperSlide>
+          ))}
+			 </Swiper>
+		 </div>
     </section>
   )
 }

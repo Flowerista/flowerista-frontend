@@ -3,19 +3,21 @@ import {SectionFlower} from '../SectionFlower';
 import {SkeletonCard} from '../../Skeletons/SkeletonCard/SkeletonCard';
 import {useGetBestsellersQuery} from '../../../services/bouquete-api/bouquete-api-service';
 import {useTranslation} from 'react-i18next';
+import { SectionTitle } from '../SectionTitle/SectionTitle';
+import styles from './styles.module.scss';
 
 export const Bestsellers: FC = () => {
 	const {t} = useTranslation()
 	const {data, error, isLoading} = useGetBestsellersQuery('')
 	if (isLoading) {
 		return (
-			 <div style={{display: 'flex', marginTop: '120px'}}>
-				 <SkeletonCard/>
-				 <SkeletonCard/>
-				 <SkeletonCard/>
-				 <SkeletonCard/>
-				 <SkeletonCard/>
-			 </div>
+			<div style={{display: 'flex', marginTop: '120px'}}>
+				<SkeletonCard/>
+				<SkeletonCard/>
+				<SkeletonCard/>
+				<SkeletonCard/>
+				<SkeletonCard/>
+			</div>
 		)
 	}
 	if (error) {
@@ -23,8 +25,9 @@ export const Bestsellers: FC = () => {
 	}
 
 	return (
-		 <>
-			 <SectionFlower title={`${t('mainPage.bestsellers')}`} data={data} style={{marginTop: '120px'}}/>
-		 </>
+		<div className={styles.bestsellers}>
+			<SectionTitle title={`${t('mainPage.bestsellers')}`}/>
+			<SectionFlower data={data} />
+		</div>
 	)
 }

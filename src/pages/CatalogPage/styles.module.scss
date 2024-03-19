@@ -46,7 +46,8 @@
 
 
 .flower__wrapper {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
 	flex-wrap: wrap;
 	margin-top: 50px;
 	row-gap: 100px;
