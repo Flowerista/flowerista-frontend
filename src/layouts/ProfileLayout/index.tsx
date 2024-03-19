@@ -1,11 +1,11 @@
-import { FC, ReactNode, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import {FC, ReactNode, useEffect} from 'react'
+import {Link, useNavigate} from 'react-router-dom';
 
 
 import styles from './styles.module.scss';
-import { DataRoute } from '../../data/routes';
-import { Sidebar } from '../../components/Sidebar/Sidebar';
-import { MainLayout } from '../MainLayout';
+import {DataRoute} from '../../data/routes';
+import {Sidebar} from '../../components/Sidebar/Sidebar';
+import {MainLayout} from '../MainLayout';
 
 export interface IProfileLayout {
     children: ReactNode

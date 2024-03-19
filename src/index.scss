@@ -3,7 +3,11 @@
 @import "styles/variables";
 @import "styles/common.css";
 
-.container{
+body {
+	overflow-x: hidden;
+}
+
+.container {
 	max-width: 1276px;
 	margin: 0 auto;
 }
@@ -29,28 +33,28 @@
 	object-fit: cover;
 }
 
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
 	width: 40px !important;
 	height: 4px !important;
 	border-radius: 0 !important;
 }
 
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
 	background: #FFFFFF !important;
 }
 
-.swiper-button-prev,.swiper-button-next{
+.swiper-button-prev, .swiper-button-next {
 	background-repeat: no-repeat;
 	background-size: contain;
 	height: 200px !important;
 }
 
-.swiper-button-prev{
+.swiper-button-prev {
 	background-image: url("../src/assets/image/swiper/arrow_2.svg");
 	margin-left: 40px !important;
 }
 
-.swiper-button-next{
+.swiper-button-next {
 	background-image: url("../src/assets/image/swiper/arrow_1.svg");
 	margin-right: 40px !important;
 

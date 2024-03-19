@@ -9,8 +9,8 @@ interface IInitialState {
 	entrance: string
 	date: string
 	time: string
-	shopDate: string
-	shopTime: string
+	type: string
+	orderId: number
 }
 
 
@@ -22,8 +22,8 @@ const initialState: IInitialState = {
 	entrance: '',
 	date: '',
 	time: '',
-	shopDate: '',
-	shopTime: '',
+	type: '',
+	orderId: 0,
 }
 
 export const checkOutSlice = createSlice({
@@ -35,12 +35,6 @@ export const checkOutSlice = createSlice({
 		},
 		setTime: (state, {payload}) => {
 			state.time = payload
-		},
-		setShopTime: (state, {payload}) => {
-			state.shopTime = payload
-		},
-		setShopDate: (state, {payload}) => {
-			state.shopDate = payload
 		},
 		setCity: (state, {payload}) => {
 			state.city = payload
@@ -57,6 +51,12 @@ export const checkOutSlice = createSlice({
 		setEntrance: (state, {payload}) => {
 			state.entrance = payload
 		},
+		setTypeToCheckout: (state, {payload}) => {
+			state.type = payload
+		},
+		setOrderId: (state, {payload}) => {
+			state.orderId = payload
+		},
 	},
 
 })
@@ -69,6 +69,6 @@ export const {
 	setTime,
 	setHouse,
 	setDate,
-	setShopTime,
-	setShopDate,
+	setTypeToCheckout,
+	setOrderId,
 } = checkOutSlice.actions

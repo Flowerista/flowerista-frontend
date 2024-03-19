@@ -30,6 +30,8 @@ import {profileUa} from './ua/profile/profile';
 import {profileEn} from './en/profile/profile';
 import {checkoutPageEn} from './en/checkout/checkout';
 import {checkoutPageUa} from './ua/checkout/checkout';
+import {inputsEn} from './en/inputs/inputs';
+import {inputsUa} from './ua/inputs';
 
 
 const resources = {
@@ -49,6 +51,7 @@ const resources = {
 			restoring: restoringEn,
 			profile: profileEn,
 			checkout: checkoutPageEn,
+			inputs: inputsEn,
 		},
 	},
 	[Language.UA]: {
@@ -67,6 +70,8 @@ const resources = {
 			restoring: restoringUa,
 			profile: profileUa,
 			checkout: checkoutPageUa,
+			inputs: inputsUa,
+
 		},
 	},
 };

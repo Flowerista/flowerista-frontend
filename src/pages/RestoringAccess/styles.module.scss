@@ -1,31 +1,90 @@
+@import "../../styles/mixin";
+
 .restoring {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 242px;
-    font-family: var(--font-family-main);
-    color: #231104;
-    font-weight: 400;
-    &__wrapper {
-        width: 304px;
-    }
-    &__descr {
-        margin-top: 20px;
-        font-size: 16px;
-        line-height: 150%; /* 24px */
-    }
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	align-items: center;
+	padding-bottom: 242px;
+	font-family: var(--font-family-main);
+	color: #231104;
+	font-weight: 400;
+
+	&__wrapper {
+		width: 304px;
+	}
+
+	&__descr {
+		margin-top: 20px;
+		font-size: 16px;
+		line-height: 150%; /* 24px */
+	}
 }
 
 .img {
-    position: absolute;
-    right: -192px;
-    bottom: 0;
-    height: 596px;
-    width: 604px;
-    z-index: -1;
-    img {
-        width: 100%;
-        height: 100%;
-    }
+	position: absolute;
+	right: -192px;
+	bottom: 0;
+	height: 596px;
+	width: 604px;
+	z-index: -1;
+
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@include media768 {
+	.restoring {
+		position: static;
+		padding-bottom: 80px;
+		padding-top: 80px;
+
+		&__wrapper {
+			width: 354px;
+
+			h2 {
+				text-align: center;
+			}
+
+			button {
+				width: 100%;
+			}
+		}
+
+		&__descr {
+			margin-top: 20px;
+			font-size: 16px;
+			line-height: 150%;
+			text-align: center;
+		}
+	}
+
+	.img {
+		display: none;
+	}
+}
+
+
+@include media375 {
+	.restoring {
+		padding-top: 60px;
+
+		&__wrapper {
+			width: 335px;
+
+			h2 {
+				text-align: center;
+			}
+
+			button {
+				width: 100%;
+			}
+		}
+
+		&__descr {
+			margin-top: 10px;
+		}
+	}
 }

@@ -47,7 +47,7 @@ const Modal: FC<ModalProps> = ({children, style, className, isOpen = true, onClo
 				 <div
 						className={styles.modal__btn}
 						onClick={onClose}>
-					 <BsArrowLeft size={24}/>{t('register.btn1')}
+					 <BsArrowLeft size={24}/>{t('register.successes.btn1')}
 				 </div>
 			 </div>
 		 </div>

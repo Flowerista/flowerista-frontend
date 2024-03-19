@@ -13,7 +13,8 @@
 		line-height: 38px;
 		color: #231104;
 	}
-	img{
+
+	img {
 		width: 20px;
 		height: 10px;
 	}
@@ -24,7 +25,8 @@
 		line-height: 21px;
 		text-decoration: underline;
 		transition: all 0.5s ease-in-out;
-		&:hover{
+
+		&:hover {
 			color: #9C5A58;
 			text-decoration: underline #9C5A58;
 		}
@@ -40,4 +42,9 @@
 
 .accordion.open .content{
 	display: block;
+}
+
+.blocked {
+	user-select: none;
+	opacity: 0.3;
 }

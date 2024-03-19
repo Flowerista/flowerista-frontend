@@ -24,15 +24,18 @@ export const checkoutPageEn = {
 			'street': 'Store address: 45 Peremohy St., Kyiv, Ukraine',
 		},
 		'payment': {
-			'title': 'Payment method',
-			'btn1': 'PayPal',
+			'title': 'Payment Method',
+			'btn1': 'Online Payment',
 			'btn2': 'Payment in cash',
-			'text1': 'Use the button below to finalize your payment via PayPal.',
-			'text2': 'After completing the payment, you will be automatically redirected back to our site to finish your order. Your payment security is ensured by PayPal.',
-			'text3': 'You can pay for the order in cash to the courier or upon receipt at the pickup department.',
-			'btn3': 'I have read the Privacy policy and agree to receive news, emails and offers from Flowerista',
-			'btn4': 'Pay by PayPal',
-			'street': 'Store address: 45 Peremohy St., Kyiv, Ukraine',
+			'online': {
+				'text': 'Use the button below to finalize your payment via Paypal. After completing the payment, you will be automatically redirected back to our site to finish your order. Your payment security is ensured by Paypal.',
+				'btn': 'I have read the Privacy policy and agree to receive news, emails and offers from Flowerista',
+			},
+			'cash': {
+				'text': 'You can pay for the order in cash to the courier or upon receipt at the pickup department.',
+				'btn': 'I have read the Privacy policy and agree to receive news, emails and offers from Flowerista',
+				'btn2': 'Pay By Cash',
+			},
 		},
 	},
 	'unauthorized': {

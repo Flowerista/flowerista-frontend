@@ -21,15 +21,18 @@ type Inputs = {
 	email: string;
 }
 
-// add try catch
 const checkEmail = async (email: string) => {
 	let checked
-	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
-		 .then(response => {
-			 checked = response.data
-		 })
-		 .catch(err => console.log(err))
-	return checked
+	try {
+		await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
+			 .then(response => {
+				 checked = response.data
+			 })
+			 .catch(err => console.log(err))
+		return checked
+	} catch (e) {
+		console.log(e);
+	}
 }
 
 export const Login: FC = () => {
@@ -59,7 +62,7 @@ export const Login: FC = () => {
 			await dispatch(login(data))
 			setLoading(false)
 			if (errorStatus) {
-				alert("Login failed. Wrong password or email not confirmed")
+				alert('Login failed. Wrong password or email not confirmed')
 			} else {
 				alert(JSON.stringify(data))
 				reset()
@@ -70,9 +73,8 @@ export const Login: FC = () => {
 
 	return (
 		 <div className={styles.login}>
-			 <div>
+			 <div className={styles.login__container}>
 				 <Title text={`${t('login.title')}`}/>
-
 				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
 					 <InputsWrapper>
 						 <EmailInput register={register} error={errors.email?.message}/>

@@ -26,6 +26,7 @@ import {DropDown} from '../../../components/DropDown';
 import {DropDownPrice} from '../../../components/DropDownPrice';
 import {DropDownSorting} from '../../../components/DropDownSorting';
 import {useTranslation} from 'react-i18next';
+import {Loader} from '../../../components/shared/Loading';
 
 
 export const Filters: FC = () => {
@@ -130,7 +131,7 @@ export const Filters: FC = () => {
 	return (
 		 <div className={styles.container}>
 			 {flowersLoading || colorsLoading ?
-					<div>Loading...</div>
+					<Loader/>
 					:
 					<div className={styles.catalog__dropDown}>
 						<div className={styles.catalog__dropDown_items}>

@@ -1,5 +1,15 @@
+@import "../../../styles/mixin";
+
+
 .form {
-    display: flex;
-    flex-direction: column;
-    max-width: 304px;
+	display: flex;
+	flex-direction: column;
+	max-width: 304px;
+}
+
+
+@include media768 {
+	.form {
+		max-width: 354px;
+	}
 }

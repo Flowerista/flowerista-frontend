@@ -9,11 +9,12 @@ import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
 import {ProductSelect} from './ProductSelect';
-import { generateCartID } from '../../utils/helpers';
-import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
-import { setCartModalOpen } from '../../store/modals/modals.slice';
+import {generateCartID} from '../../utils/helpers';
+import {addCartItem, ICartItem} from '../../store/cart/cart.slice';
+import {setCartModalOpen} from '../../store/modals/modals.slice';
 import {useTranslation} from 'react-i18next';
 import { SectionFlower } from '../../components/SectionsFlower/SectionFlower';
+import {Loader} from '../../components/shared/Loading';
 
 export interface IProductPage {
 }
@@ -32,10 +33,10 @@ export const ProductPage: FC<IProductPage> = () => {
 	console.log(data)
 
 	const submitItems = {
-		size:activeSize,
-		price:price,
-		priceDiscount:discountPrice,
-		quantity:quantity,
+		size: activeSize,
+		price: price,
+		priceDiscount: discountPrice,
+		quantity: quantity,
 	}
 
 	const toCart = () => {
@@ -43,7 +44,7 @@ export const ProductPage: FC<IProductPage> = () => {
 			const {id, name, imageUrls, sizes} = data
 			const dataCurSize = sizes.find(el => el.size === activeSize)
 			if (dataCurSize) {
-				const defaultPrice = dataCurSize?.defaultPrice 
+				const defaultPrice = dataCurSize?.defaultPrice
 				const discount = dataCurSize?.discount
 				const discountPrice = dataCurSize.discountPrice
 				const cartID = generateCartID(id, activeSize)
@@ -57,7 +58,7 @@ export const ProductPage: FC<IProductPage> = () => {
 					discountPrice,
 					sizes,
 					currentSize: activeSize,
-					quantity
+					quantity,
 				}
 				dispatch(addCartItem(flower))
 				dispatch(setCartModalOpen(true))
@@ -65,8 +66,8 @@ export const ProductPage: FC<IProductPage> = () => {
 		}
 	}
 
-	useEffect(()=>{
-		if(data){
+	useEffect(() => {
+		if (data) {
 			setActiveSize(data?.sizes[0]?.size)
 			setPrice(data?.sizes[0]?.defaultPrice.toString())
 			setDiscountPrice(data?.sizes[0]?.discountPrice ? data?.sizes[0]?.discountPrice.toString() : '')
@@ -83,8 +84,7 @@ export const ProductPage: FC<IProductPage> = () => {
 	}, [data])
 
 
-
-	const updateContent = (size: ISize)=>{
+	const updateContent = (size: ISize) => {
 		setActiveSize(size.size)
 		setPrice(`${size.defaultPrice}`)
 		setDiscountPrice(`${size.discountPrice ? size.discountPrice.toString() : ''}`)
@@ -104,7 +104,7 @@ export const ProductPage: FC<IProductPage> = () => {
 
 
 	if (isLoading) {
-		return <h1>Loading...</h1>
+		return <Loader/>
 	}
 
 	if (error) {
@@ -149,7 +149,7 @@ export const ProductPage: FC<IProductPage> = () => {
 						 <span className={styles.defaultPrice}>{discountPrice ? discountPrice : price} UAH</span>
 					 </div>
 					 <div className={styles.productPage__content__btns}>
-						 <Button text={`${t("product.buy")}`} onClick={toCart}/>
+						 <Button text={`${t('product.buy')}`} onClick={toCart}/>
 						 <div>
 							 <button onClick={decreaseQuantity}>-</button>
 							 {quantity}
@@ -157,15 +157,15 @@ export const ProductPage: FC<IProductPage> = () => {
 						 </div>
 					 </div>
 					 <div className={styles.productPage__content__link}>
-						 <span>{t("product.link1")}</span>
-						 <Link to={DataRoute.DeliveryAndPayment} target={'_top'}>{t("product.link2")}<img src={arrow}
-						                                                                                 alt="arrow"/></Link>
+						 <span>{t('product.link1')}</span>
+						 <Link to={DataRoute.DeliveryAndPayment} target={'_top'}>{t('product.link2')}<img src={arrow}
+						                                                                                  alt="arrow"/></Link>
 					 </div>
 				 </div>
 			 </div>
 
 			 <div className={styles.productPage__recentlyViewed}>
-				 <h1>{t("product.recently")}</h1>
+				 <h1>{t('product.recently')}</h1>
 				 <SectionFlower data={recentlyViewed}/>
 				 {/* <div style={{display: 'flex'}}>{
 					 recentlyViewed.map(item =>

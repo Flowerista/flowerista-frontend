@@ -1,6 +1,8 @@
 import {FC} from 'react';
 import styles from './styles.module.scss';
 import sectionImg1 from '../../assets/image/about_us_page/section_1.png';
+import sectionImg1_375 from '../../assets/image/about_us_page/section_1_375.png';
+import sectionImg3_375 from '../../assets/image/about_us_page/section_3_375.png';
 import sectionImg3 from '../../assets/image/about_us_page/section_3.png';
 import Pavlo from '../../assets/image/about_us_page/team/pavlo.png';
 import Anna from '../../assets/image/about_us_page/team/anna.png';
@@ -64,12 +66,14 @@ export const AboutUs: FC = () => {
 			],
 		},
 	]
+	const screenWidth = window.innerWidth;
+
 
 	return (
 		 <div className={styles.about_us}>
 			 <section className={styles.section_1}>
 				 <div className={styles.img__wrapper}>
-					 <img src={sectionImg1} alt=""/>
+					 {screenWidth > 375 ? <img src={sectionImg1} alt="team"/> : <img src={sectionImg1_375} alt="team"/>}
 				 </div>
 				 <div className={styles.descr}>
 					 <p className={styles.title}>{t('aboutUs.company.title')}</p>
@@ -120,10 +124,9 @@ export const AboutUs: FC = () => {
 				 <div className={styles.signature}>
 					 <p>{t('aboutUs.text1')}</p>
 					 <p>{t('aboutUs.text2')}</p>
-
 				 </div>
 				 <div className={styles.img__wrapper}>
-					 <img src={sectionImg3} alt=""/>
+					 {screenWidth > 375 ? <img src={sectionImg3} alt="team"/> : <img src={sectionImg3_375} alt="team"/>}
 				 </div>
 			 </section>
 			 <section className={styles.section_4}>

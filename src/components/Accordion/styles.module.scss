@@ -42,3 +42,8 @@
 .accordion.open .content{
 	display: block;
 }
+
+.blocked {
+	user-select: none;
+	opacity: 0.3;
+}

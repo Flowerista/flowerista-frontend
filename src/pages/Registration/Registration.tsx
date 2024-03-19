@@ -38,23 +38,23 @@ type Inputs = {
 
 // add try catch
 const checkEmail = async (email: string) => {
-    let checked
-    await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
-            .then(response => {
-                checked = response.data
-            })
-            .catch(err => console.log(err))
-    return checked
+	let checked
+	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
+		 .then(response => {
+			 checked = response.data
+		 })
+		 .catch(err => console.log(err))
+	return checked
 }
 
 const checkPhone = async (phone: number) => {
-    let checked
-    await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkPhone/${phone}`)
-            .then(response => {
-                checked = response.data
-            })
-            .catch(err => console.log(err))
-    return checked
+	let checked
+	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkPhone/${phone}`)
+		 .then(response => {
+			 checked = response.data
+		 })
+		 .catch(err => console.log(err))
+	return checked
 }
 
 export const Registration: FC = () => {
@@ -126,7 +126,7 @@ export const Registration: FC = () => {
 
 	return (
 		 <div className={styles.registration}>
-			 <div>
+			 <div className={styles.registration__container}>
 				 <Title text={`${t('register.title')}`}/>
 
 				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
@@ -140,7 +140,9 @@ export const Registration: FC = () => {
 					 <Button text={`${t('register.btn1')}`} style={{marginTop: '40px'}}/>
 				 </Form>
 
-				 <FormLink to={DataRoute.Login} text={`${t('register.btn2')}`}/>
+				 <div className={styles.flex}>
+					 <FormLink to={DataRoute.Login} text={`${t('register.btn2')}`}/>
+				 </div>
 			 </div>
 			 <RegistrationCompleted isOpen={showRegisterCompleted} setOpen={setShowRegisterCompleted}/>
 			 <RegistrationError isOpen={showRegisterError} setOpen={setShowRegisterError}/>

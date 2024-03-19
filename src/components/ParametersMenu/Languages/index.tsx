@@ -9,7 +9,7 @@ export interface ILanguages {
 
 export const Languages: FC<ILanguages> = () => {
 
-	const [currentLanguage, setCurrentLanguage] = useState<string>(i18next.language);
+	const [currentLanguage, setCurrentLanguage] = useState<string>(localStorage.getItem('selectedLanguage') ?? i18next.language);
 
 	const changeLanguage = (language: string) => {
 		i18next.changeLanguage(language);
@@ -17,10 +17,11 @@ export const Languages: FC<ILanguages> = () => {
 		localStorage.setItem('selectedLanguage', language);
 	};
 
+
 	useEffect(() => {
 		const selectedLanguage = localStorage.getItem('selectedLanguage');
 		if (selectedLanguage) {
-			changeLanguage(selectedLanguage);
+			i18next.changeLanguage(selectedLanguage);
 		}
 	}, [i18next.language]);
 
