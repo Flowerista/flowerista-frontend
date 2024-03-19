@@ -1,7 +1,10 @@
 .wishlist {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 100px;
+    width: 764px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    // flex-wrap: wrap;
+    // row-gap: 100px;
 }
 
 .empty {

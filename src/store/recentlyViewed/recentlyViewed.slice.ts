@@ -1,14 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { IFlowerCard } from '../../interface/flower';
 
 interface IInitialState{
-	recentlyViewed:any[],
+	recentlyViewed:IFlowerCard[],
 	maxRecentlyViewedLength:number
 }
 
 
 const initialState: IInitialState ={
 	recentlyViewed: [],
-	maxRecentlyViewedLength: 3,
+	maxRecentlyViewedLength: 5,
 }
 
 export const recentlyViewedSlice = createSlice({

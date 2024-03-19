@@ -8,12 +8,12 @@ import {Button} from '../../components/Buttons/Button'
 import arrow from '../../assets/image/productItem/arrow.png'
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {addToRecentlyViewed} from '../../store/recentlyViewed/recentlyViewed.slice';
-import {Card} from '../../components/Card/Card';
 import {ProductSelect} from './ProductSelect';
 import { generateCartID } from '../../utils/helpers';
 import { ICartItem, addCartItem } from '../../store/cart/cart.slice';
 import { setCartModalOpen } from '../../store/modals/modals.slice';
 import {useTranslation} from 'react-i18next';
+import { SectionFlower } from '../../components/SectionsFlower/SectionFlower';
 
 export interface IProductPage {
 }
@@ -76,7 +76,7 @@ export const ProductPage: FC<IProductPage> = () => {
 				discount: data.sizes[1]?.discountPrice ? 20 : '',
 				defaultPrice: data?.sizes[0]?.defaultPrice.toString(),
 				discountPrice: data?.sizes[0]?.discountPrice ? data?.sizes[0]?.discountPrice.toString() : '',
-				img: data.imageUrls,
+				imageUrls: data.imageUrls,
 				sizes: data.sizes,
 			}))
 		}
@@ -166,7 +166,8 @@ export const ProductPage: FC<IProductPage> = () => {
 
 			 <div className={styles.productPage__recentlyViewed}>
 				 <h1>{t("product.recently")}</h1>
-				 <div style={{display: 'flex'}}>{
+				 <SectionFlower data={recentlyViewed}/>
+				 {/* <div style={{display: 'flex'}}>{
 					 recentlyViewed.map(item =>
 							<Card
 								 id={item.id}
@@ -179,7 +180,7 @@ export const ProductPage: FC<IProductPage> = () => {
 								 key={item.id}
 							/>,
 					 )
-				 }</div>
+				 }</div> */}
 			 </div>
 		 </div>
 	);

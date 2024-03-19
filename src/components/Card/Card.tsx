@@ -73,7 +73,10 @@ export const Card: FC<IFlowerCard> = (props) => {
             <div className={styles.card__img}>
                 <Link to={`${DataRoute.Product}/${id}`}>
                     <img 
-                        src={img} alt="flower" />
+                        className={`${discount ? styles.img_sale : ''}`}
+                        src={img} 
+                        alt="flower" 
+                    />
                 </Link>
                 <div className={styles.like} onClick={() => toLike(id)}>
                     { liked ? <BsHeartFill/> : <BsHeart/> }
@@ -89,13 +92,13 @@ export const Card: FC<IFlowerCard> = (props) => {
                     <div className={styles.price__wrapper}>
                         {discountPrice &&
                             <div className={styles.price_old}>
-                                <p>{defaultPrice}</p>
-                                <span> UAH</span>
+                                <p className={styles.price_old__count}>{defaultPrice}</p>
+                                <span className={styles.price_old__currency}>UAH</span>
                             </div>
                         }
                         <div className={styles.price}>
                             {discountPrice || defaultPrice}
-                            <span> UAH</span>
+                            <span>UAH</span>
                         </div>
                     </div>
                     <button className={styles.cart} onClick={toCart} >
