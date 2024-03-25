@@ -22,35 +22,26 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, style, className}) => 
   const [gapSlide, setGapSlide] = useState(9);
 
   useEffect(() => {
-    if (width < 500) {
-      setShowSlide(2)
-      setGapSlide(9)
-    }
-    if (width > 500) {
-      setShowSlide(3)
-      setGapSlide(9)
-    }
-    if (width >= 768) {
-      setShowSlide(3)
-      setGapSlide(20)
-    }
-    if (width >= 1024) {
-      setShowSlide(4)
-      setGapSlide(20)
-    }
     if (width >= 1276) {
       setShowSlide(5)
       setGapSlide(3)
+    } else if (width >= 1024) {
+      setShowSlide(4)
+      setGapSlide(20)
+    } else if (width >= 768) {
+      setShowSlide(3)
+      setGapSlide(20)
+    } else  if (width >= 500) {
+      setShowSlide(3)
+      setGapSlide(9)
+    } else {
+      setShowSlide(2)
+      setGapSlide(9)
     }
+    console.log(width);
     
-    console.log(width)
-    return () => {
-
-    }
   }, [width])
   
-
-  console.log(width)
   return (
     <section className={classNames(styles.section, className)} style={style}>
       <div className={styles.swiper}>

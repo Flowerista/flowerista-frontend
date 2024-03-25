@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
@@ -36,8 +36,14 @@ export const Card: FC<IFlowerCard> = (props) => {
 	const {wishlist} = useAppSelector(state => state.wishlist);
 	const dispatch = useAppDispatch();
 	const {id, name, imageUrls, defaultPrice, discount, discountPrice} = props;
-	const [liked, setLiked] = useState(wishlist.some(card => card.id === id))
+	const [liked, setLiked] = useState(false)
 
+    useEffect(() => {
+      if (!wishlist.length) {
+        setLiked(wishlist.some(card => card.id === id))
+      }
+    }, [])
+    
 	const toCart = () => {
 		const cartID = generateCartID(id, 'MEDIUM')
 		const flower: ICartItem = {
