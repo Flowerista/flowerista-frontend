@@ -1,9 +1,55 @@
 .catalog{
 	cursor: pointer;
 	h2{
-		// font-family: var(--font-family-main);
-
+		color: var(--brown);
+		font: var(--body-1-500);
+		letter-spacing: 0.32px;
 		margin-bottom: 10px;
-		font: 500 24px / 150% var(--font-family-main);
+	}
+}
+
+.img_wrp{
+	width: 100%;
+	height: 150px;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.catalog{
+		h2{
+			font: var(--subtitle-2-500);
+			letter-spacing: 0.48px;
+			margin-bottom: 2px;
+		}
+	}
+	.img_wrp{
+		height: 231px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.catalog{
+		h2{
+			font: var(--subtitle-3-500);
+			letter-spacing: 0.36px;
+		}
+	}
+	
+	.img_wrp{
+		height: 231px;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.catalog{
+		h2{
+			font: var(--subtitle-1-500);
+			letter-spacing: 0.48px;
+			margin-bottom: 2px;
+		}
 	}
 }

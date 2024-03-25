@@ -8,10 +8,12 @@ import {DataRoute} from '../../data/routes';
 
 export const CatalogBox: FC<{ text: string }> = ({text}) => {
 	return (
-		 <NavLink target={'_top'} to={DataRoute.Catalog} className={styles.catalog}>
-			 <h2>{text}</h2>
-			 {text === 'New arrivals' ? <img src={firstImg} alt="catalog img"/> : <img src={secondImg} alt="catalog img"/>}
-		 </NavLink>
+		<NavLink target={'_top'} to={DataRoute.Catalog} className={styles.catalog}>
+			<h2>{text}</h2>
+			<div className={styles.img_wrp}>
+				{text === 'New arrivals' ? <img src={firstImg} alt="catalog img"/> : <img src={secondImg} alt="catalog img"/>}
+			</div>
+		</NavLink>
 	);
 };
 
