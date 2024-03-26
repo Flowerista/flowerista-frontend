@@ -1,0 +1,66 @@
+.accordion {
+
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+}
+
+.content {
+	margin-top: 20px;
+	height: 250px;
+	overflow-y: auto;
+}
+
+.content::-webkit-scrollbar {
+	width: 2px;
+}
+
+.content::-webkit-scrollbar-thumb {
+	background: #e7a9a7;
+	border-radius: 10px;
+}
+
+.accordion .content {
+	display: none;
+}
+
+
+.accordion.open .content {
+	display: block;
+}
+
+
+.item {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0.02em;
+	color: #231104;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.square {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #231104;
+	margin-right: 10px;
+}
+
+.selected {
+	background-image: url("../../../../../assets/image/catalog/mobile/checkbox.png");
+	width: 20px;
+	height: 20px;
+	background-color: #E7A9A7;
+	border: none !important;
+}

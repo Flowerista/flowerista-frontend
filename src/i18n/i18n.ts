@@ -32,6 +32,8 @@ import {checkoutPageEn} from './en/checkout/checkout';
 import {checkoutPageUa} from './ua/checkout/checkout';
 import {inputsEn} from './en/inputs/inputs';
 import {inputsUa} from './ua/inputs';
+import {MobileFiltersEn} from './en/mobileFilters/mobileFilters';
+import {MobileFiltersUa} from './ua/mobileFilters/mobileFilters';
 
 
 const resources = {
@@ -52,6 +54,7 @@ const resources = {
 			profile: profileEn,
 			checkout: checkoutPageEn,
 			inputs: inputsEn,
+			mobileFilters: MobileFiltersEn,
 		},
 	},
 	[Language.UA]: {
@@ -71,6 +74,7 @@ const resources = {
 			profile: profileUa,
 			checkout: checkoutPageUa,
 			inputs: inputsUa,
+			mobileFilters: MobileFiltersUa,
 
 		},
 	},

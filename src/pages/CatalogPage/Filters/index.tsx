@@ -27,6 +27,7 @@ import {DropDownPrice} from '../../../components/DropDownPrice';
 import {DropDownSorting} from '../../../components/DropDownSorting';
 import {useTranslation} from 'react-i18next';
 import {Loader} from '../../../components/shared/Loading';
+import {MobileFilters} from '../MobileFilters';
 
 
 export const Filters: FC = () => {
@@ -162,6 +163,21 @@ export const Filters: FC = () => {
 							 setName={setSortingName}
 							 name={sortingName}/>
 					</div>}
+
+			 {flowersLoading || colorsLoading ?
+					null
+					:
+					<MobileFilters
+						 setSelectedItems={setSelectedItems}
+						 selectedItems={selectedItems}
+						 removeHandler={removeHandler}
+						 addFlowerFilter={addFlower}
+						 addColorFilter={addColor}
+						 min={min}
+						 max={max}
+						 minInputRef={minInputRef}
+						 maxInputRef={maxInputRef}
+					/>}
 
 			 <div className={styles.catalog__selectedItemsContainer}>
 				 {[...flowerIds, ...colorIds, ...maxMinValues].map((item) => (
