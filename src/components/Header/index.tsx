@@ -10,6 +10,7 @@ import { Search } from '../ParametersMenu/Search';
 import { Languages } from '../ParametersMenu/Languages';
 import { FC, useState } from 'react';
 import classNames from 'classnames';
+import { CartModal } from '../Modals/CartModal/CartModal';
 
 
 export const Header = () => {
@@ -27,6 +28,7 @@ export const Header = () => {
 			<div className={s.parametersMenu__wrp}>
 				<Link to={DataRoute.PersonalInformation} className={s.parametersMenu__profile}><BsFillPersonFill style={{fontSize: '28px'}}/></Link>
 				<CartIcon/>
+				<CartModal/>
 			</div>
 			<div className={classNames(s.menu, {[s.open]: openMenu})}>
 				<Search type='menu'/>

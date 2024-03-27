@@ -5,31 +5,30 @@ import classNames from 'classnames';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	text: string;
-	style?: CSSProperties
 	colorMode?: 'black' | 'white';
-	sizeMode?: 'big' | 'small';
+	sizeMode?: 'big' | 'small' | 'full';
 	loading?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({
-	                                        text,
-	                                        style,
-	                                        colorMode = 'black',
-	                                        sizeMode = 'big',
-	                                        onClick,
-	                                        disabled,
-	                                        loading,
-                                        }) => {
-	const clazz = classNames(styles.btn, styles[colorMode], styles[sizeMode], {[styles.loading]: loading})
+export const Button: FC<ButtonProps> = (props) => {
+	const {
+		text,
+		colorMode = 'black',
+		sizeMode = 'big',
+		disabled,
+		loading,
+		className,
+		...otherProps
+	} = props									
+	const clazz = classNames(styles.btn, styles[colorMode], styles[sizeMode], {[styles.loading]: loading}, className)
 
 	return (
-		 <button
-				className={clazz}
-				onClick={onClick}
-				style={style}
-				disabled={disabled || loading}
-		 >
-			 {loading ? <BsClockFill className={styles.clock}/> : text}
-		 </button>
+		<button
+			className={clazz}
+			disabled={disabled || loading}
+			{...otherProps}
+		>
+			{loading ? <BsClockFill className={styles.clock}/> : text}
+		</button>
 	)
 }

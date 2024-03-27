@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {getTotalPrice} from '../../../utils/helpers';
 import {Button, Cart} from '../../index';
 
-import {BsArrowLeft} from 'react-icons/bs'
+import {BsArrowLeft, BsXLg} from 'react-icons/bs'
 import styles from './styles.module.scss'
 import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../../data/routes';
@@ -52,35 +52,44 @@ export const CartModal: FC<CartModalProps> = ({style, className}) => {
 		navigate(DataRoute.CheckOut)
 	}
 	return (
-		 <div
-				className={classNames(styles.modal)}
-				onClick={onClose}
-		 >
-			 <div
-					className={classNames(styles.modal__wrapper, className)}
-					style={style}
-					onClick={(e) => e.stopPropagation()}
-			 >
-				 <Cart mode="modal"/>
-				 <div className={styles.modal__footer}>
-					 <div className={styles.price}>
-						 <p>{t('cart.price')}</p>
-						 <div className={styles.price__item}>
-							 {totalPrice}
-							 <span> USD</span>
-						 </div>
-					 </div>
-					 <div className={styles.btns}>
-						 <Button sizeMode="small" text={`${t('cart.btn1')}`} onClick={toCheckOut} disabled={cart.length === 0}/>
-						 <Button sizeMode="small" colorMode="white" text={`${t('cart.btn2')}`} onClick={onClose}/>
-					 </div>
-				 </div>
-				 <div
-						className={styles.modal__btn}
-						onClick={onClose}>
-					 <BsArrowLeft size={24}/>{t('cart.back')}
-				 </div>
-			 </div>
-		 </div>
+		<div
+			className={classNames(styles.modal)}
+			onClick={onClose}
+		>
+			<div
+				className={classNames(styles.modal__wrapper, className)}
+				style={style}
+				onClick={(e) => e.stopPropagation()}
+			>
+				<Cart mode="modal"/>
+				<div className={styles.modal__footer}>
+					<div className={styles.price}>
+						<p>{t('cart.price')}</p>
+						<div className={styles.price__item}>
+							{totalPrice}
+							<span>USD</span>
+						</div>
+					</div>
+					<div className={styles.btns}>
+						<Button sizeMode="full" text={`${t('cart.btn1')}`} onClick={toCheckOut} disabled={cart.length === 0}/>
+						<Button sizeMode="full" colorMode="white" text={`${t('cart.btn2')}`} onClick={onClose}/>
+					</div>
+				</div>
+				<div
+					className={styles.modal__btn}
+					onClick={onClose}
+				>
+					<BsArrowLeft size={24}/>{t('cart.back')}
+				</div>
+				<div
+					className={styles.title}
+				>
+					<p className={styles.title__text}>
+						{t('cart.modal')}
+					</p>
+					<BsXLg size={24} onClick={onClose}/>
+				</div>
+			</div>
+		</div>
 	)
 }
