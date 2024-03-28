@@ -3,9 +3,10 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    font-size: 16px;
-    line-height: 150%; /* 24px */
+    font: var(--body-1-400);
+    letter-spacing: 0.32px;
     cursor: pointer;
+    transition: all .3s;
 }
 
 .clock {
@@ -13,47 +14,47 @@
 }
 
 .black {
-    background-color: #231104;
-    color: #FCF7F0;
+    background-color: var(--brown);
+    color: var(--creamy);
     &:hover{
-        background-color: #9C5A58;
+        background-color: var(--dark-rose);
     }
     &:active{
-        background-color: #231104;
+        background-color: var(--brown);
     }
     &:disabled{
-        background-color: #C5B4B9;
+        background-color: var(--lavander);
     }
     .clock {
-        color: #FCF7F0;
+        color: var(--creamy);
     }
 }
 
 .black.loading:disabled{
-    background-color: #231104;
+    background-color: var(--brown);
 }
 
 .white {
     background-color: inherit;
-    color: #231104;
-    border: #231104 solid 2px;
+    color: var(--brown);
+    border: var(--brown) solid 2px;
     &:hover {
-        border-color: #9C5A58;
+        border-color: var(--dark-rose);
     }
     &:active {
-        border-color: #231104;
+        border-color: var(--brown);
     }
     &:disabled{
-        color: #C5B4B9;
-        border-color: #C5B4B9;
+        color: var(--lavander);
+        border-color: var(--lavander);
     }
     .clock {
-        color: #231104;
+        color: var(--brown);
     }
 }
 
 .white.loading:disabled {
-    border-color: #231104;
+    border-color: var(--brown);
 }
 
 .small {
