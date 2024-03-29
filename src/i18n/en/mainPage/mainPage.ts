@@ -16,6 +16,7 @@ export const MainPageEn = {
 	'reviews': 'Reviews',
 	'btn-see-all': 'see all',
 	'about-us': {
+		'slogan': 'our team',
 		'btn': 'more about',
 		'title': 'About Us',
 		'text': 'We are a team of passionate florists dedicated to crafting exquisite floral arrangements.',

@@ -1,7 +1,7 @@
 export const inputsUa = {
-	'email': 'E-майл',
+	'email': 'Електронна пошта',
 	'password': 'Пароль',
-	'name': 'Імя',
-	'surname': 'Фамілія',
+	'name': 'Ім\'я',
+	'surname': 'Прізвище',
 	'telephone': 'Телефон',
 }
