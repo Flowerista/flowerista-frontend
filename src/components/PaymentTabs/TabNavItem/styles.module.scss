@@ -1,4 +1,4 @@
-.tabItem{
+.tabItem {
 	font-family: var(--font-family-main);
 	font-size: 20px;
 	font-weight: 500;
@@ -7,6 +7,20 @@
 	cursor: pointer;
 }
 
-.active{
+.active {
 	color: #B4B4B4;
+}
+
+
+@media screen and (max-width: 769px) {
+	.tabItem {
+		font-size: 20px;
+	}
+}
+
+
+@media screen and (max-width: 500px) {
+	.tabItem {
+		font-size: 16px;
+	}
 }

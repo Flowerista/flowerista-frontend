@@ -1,9 +1,35 @@
-.wrapper{
+.wrapper {
 	background-color: #ffffff;
 }
 
-.checkOut{
+.checkOut {
 	min-height: 100vh;
 	margin-left: 323px;
 	display: flex;
+}
+
+@media screen and (max-width: 1500px) {
+	.checkOut {
+		margin-left: 150px;
+	}
+}
+
+@media screen and (max-width: 1366px) {
+	.checkOut {
+		margin-left: 50px;
+	}
+}
+
+@media screen and (max-width: 1220px) {
+	.checkOut {
+		margin-left: 0px;
+		padding-left: 20px;
+	}
+}
+
+@media screen and (max-width: 1025px) {
+	.checkOut {
+		padding-left: 0px;
+		flex-direction: column;
+	}
 }

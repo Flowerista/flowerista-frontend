@@ -2,11 +2,12 @@
 .accordion {
 }
 
-.title{
+.title {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	span{
+
+	span {
 		font-family: var(--font-family-main);
 		font-size: 32px;
 		font-weight: 400;
@@ -18,7 +19,8 @@
 		width: 20px;
 		height: 10px;
 	}
-	a{
+
+	a {
 		font-family: var(--font-family-main);
 		font-size: 16px;
 		font-weight: 400;
@@ -39,12 +41,25 @@
 }
 
 
-
-.accordion.open .content{
+.accordion.open .content {
 	display: block;
 }
 
 .blocked {
 	user-select: none;
 	opacity: 0.3;
+}
+
+
+@media screen and (max-width: 768px) {
+	.title {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		span {
+			font-size: 20px;
+			line-height: 30px;
+		}
+	}
 }

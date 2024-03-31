@@ -1,14 +1,122 @@
-.secondTab{
+.secondTab {
 	margin-top: 20px;
 }
-.wrappPicker{
+
+.wrappPicker {
 	display: flex;
 	justify-content: space-between;
 }
-.datePicker{
+
+.datePicker {
 	width: 150px;
 }
-.timePicker{
+
+.timePicker {
 	width: 135px;
 	border-radius: 0;
+}
+
+
+@media screen and (max-width: 769px) {
+	.secondTab {
+		margin-top: 30px;
+
+		button {
+			width: 100%;
+		}
+
+		form {
+			max-width: 100%;
+			position: relative;
+
+			div {
+
+				&:first-child {
+					//position: relative;
+					width: 354px;
+				}
+			}
+
+		}
+
+	}
+	.wrappPicker {
+		display: flex;
+		justify-content: space-between;
+	}
+	.datePicker {
+		width: 100%;
+	}
+	.timePicker {
+		position: absolute;
+		width: 105px;
+		bottom: 27%;
+		left: 375px;
+
+		div {
+			width: 105px !important;
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.timePicker {
+		bottom: 25%;
+	}
+}
+
+
+@media screen and (max-width: 508px) {
+	.secondTab {
+		margin-top: 30px;
+
+		button {
+			width: 100%;
+		}
+
+		form {
+			max-width: 100%;
+			position: static;
+
+			div {
+				gap: 30px;
+
+				&:first-child {
+					width: 100%;
+				}
+			}
+
+		}
+
+	}
+	.wrappPicker {
+		display: flex;
+		flex-direction: column;
+		justify-content: normal;
+	}
+	.datePicker {
+		width: 100%;
+		position: relative;
+
+		input {
+			padding-left: 0;
+		}
+
+		label {
+			position: absolute;
+			left: -15px;
+		}
+	}
+	.timePicker {
+		position: static;
+		width: 100%;
+
+		input {
+			padding-left: 0;
+		}
+
+		div {
+			width: 100% !important;
+		}
+	}
 }

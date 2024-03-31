@@ -27,3 +27,32 @@
 		}
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.payment {
+		margin-top: 25px;
+
+		p {
+			margin-top: 25px;
+
+		}
+
+		span, p {
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+			color: #000000;
+		}
+
+		div {
+			margin-top: 20px;
+
+			input {
+				width: 19px;
+				height: 19px;
+				margin: 0;
+				margin-right: 20px;
+			}
+		}
+	}
+}

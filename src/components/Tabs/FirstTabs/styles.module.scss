@@ -1,7 +1,8 @@
-.firstTab{
+.firstTab {
 	margin-top: 30px;
-	form{
-		span{
+
+	form {
+		span {
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 24px;
@@ -9,16 +10,86 @@
 		}
 	}
 }
-.wrappPicker{
+
+.wrappPicker {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 30px;
 	width: 300px;
 }
-.datePicker{
+
+.datePicker {
 	width: 150px;
 }
-.timePicker{
+
+.timePicker {
 	width: 135px;
 	border-radius: 0;
+}
+
+
+@media screen and (max-width: 769px) {
+	.firstTab {
+		margin-top: 30px;
+
+		form {
+			max-width: 100%;
+
+			span {
+				font-size: 16px;
+			}
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+	.wrappPicker {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 25px;
+		width: 430px;
+	}
+	.datePicker {
+		width: 305px;
+	}
+	.timePicker {
+		width: 105px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.firstTab {
+		margin-top: 20px;
+
+		form {
+			max-width: 100%;
+
+			span {
+				font-size: 16px;
+			}
+		}
+
+		button {
+			width: 100%;
+		}
+	}
+	.wrappPicker {
+		display: flex;
+		flex-direction: column;
+		margin-top: 25px;
+		width: 100%;
+
+		.datePicker {
+			margin-bottom: 30px;
+		}
+	}
+	.datePicker {
+		width: 100%;
+		font-size: 15px;
+
+	}
+	.timePicker {
+		width: 100%;
+	}
 }

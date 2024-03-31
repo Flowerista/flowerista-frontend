@@ -2,22 +2,25 @@
 .accordion {
 }
 
-.title{
+.title {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	span{
+
+	span {
 		font-family: var(--font-family-main);
 		font-size: 32px;
 		font-weight: 400;
 		line-height: 38px;
 		color: #231104;
 	}
-	img{
+
+	img {
 		width: 20px;
 		height: 10px;
 	}
-	button{
+
+	button {
 		font-family: var(--font-family-main);
 		font-size: 16px;
 		font-weight: 400;
@@ -25,7 +28,8 @@
 		text-decoration: underline;
 		transition: all 0.5s ease-in-out;
 		background: transparent;
-		&:hover{
+
+		&:hover {
 			color: #9C5A58;
 			text-decoration: underline #9C5A58;
 		}
@@ -38,12 +42,35 @@
 }
 
 
-
-.accordion.open .content{
+.accordion.open .content {
 	display: block;
 }
 
 .blocked {
 	user-select: none;
 	opacity: 0.3;
+}
+
+@media screen and (max-width: 769px) {
+	.title {
+
+		span {
+			font-size: 20px;
+			line-height: 30px;
+		}
+
+		button {
+			font-size: 16px;
+			line-height: 21px;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.title {
+		span {
+			font-size: 20px;
+			line-height: 27px;
+		}
+	}
 }

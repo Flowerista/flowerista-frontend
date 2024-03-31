@@ -1,16 +1,19 @@
-.UserInformation{
-	&__title{
+
+.UserInformation {
+	&__title {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 50px;
-		h1{
+
+		h1 {
 			font-family: var(--font-family-main);
 			font-size: 24px;
 			font-weight: 500;
 			line-height: 28px;
 			color: #231104;
 		}
-		button{
+
+		button {
 			font-family: var(--font-family-main);
 			font-size: 16px;
 			font-weight: 400;
@@ -18,28 +21,33 @@
 			text-decoration: underline;
 			transition: all 0.5s ease-in-out;
 			background: transparent;
-			&:hover{
+
+			&:hover {
 				color: #9C5A58;
 				text-decoration: underline #9C5A58;
 			}
 		}
 	}
 
-	&__content{
+	&__content {
 		display: flex;
+
 		&__user {
 			margin-left: 20px;
-			span{
+
+			span {
 				display: block;
 				font-family: var(--font-family-main);
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 24px;
 				margin-bottom: 10px;
-				&:last-of-type{
+
+				&:last-of-type {
 					margin-bottom: 0;
 				}
 			}
+
 			span:nth-of-type(1) {
 				font-size: 20px;
 				font-weight: 500;
@@ -56,4 +64,70 @@
 			}
 		}
 	}
+}
+
+@media screen and (max-width: 769px) {
+	.UserInformation {
+		&__title {
+			margin-bottom: 30px;
+
+			h1 {
+				font-size: 20px;
+			}
+
+			button {
+				font-size: 16px;
+				line-height: 21px;
+			}
+		}
+
+		&__content {
+			display: flex;
+
+			&__user {
+				span:nth-of-type(1) {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+
+}
+
+@media screen and (max-width: 500px) {
+	.UserInformation {
+		&__title {
+			margin-bottom: 10px;
+
+			h1 {
+				font-size: 20px;
+			}
+
+			button {
+				font-size: 15px;
+				line-height: 21px;
+			}
+		}
+
+		&__content {
+			display: flex;
+
+			img {
+				width: 76px;
+				height: 76px;
+			}
+
+			&__user {
+
+				span {
+					margin-bottom: 2px;
+				}
+
+				span:nth-of-type(1) {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
 }

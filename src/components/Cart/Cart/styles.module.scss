@@ -4,6 +4,7 @@
 	gap: 40px;
 	overflow-y: auto;
 	background-color: inherit;
+
 	&::-webkit-scrollbar-button {
 		display: none;
 	}
@@ -18,27 +19,6 @@
 	}
 }
 
-// .checkout {
-// 	margin-top: 30px;
-// 	padding-bottom: 20px;
-// 	height: 380px;
-
-// 	&::-webkit-scrollbar {
-// 		width: 2px;
-// 		height: 380px;
-// 		background-color: #fff;
-// 	}
-
-// 	&::-webkit-scrollbar-button {
-// 		display: none;
-// 	}
-
-// 	&::-webkit-scrollbar-thumb {
-// 		background: #E7A9A7;
-// 		min-height: 190px;
-// 	}
-// }
-
 
 .cartEmpty {
 	display: flex;
@@ -46,6 +26,7 @@
 	justify-content: center;
 	align-items: center;
 	color: var(--brown);
+
 	h2 {
 		font: var(--subtitle-1-400);
 		letter-spacing: 0.48px;
@@ -56,11 +37,13 @@
 		font: var(--body-1-400);
 		letter-spacing: 0.32px;
 	}
+
 	.img_wrp {
 		margin-top: 68px;
 		max-width: 335px;
 		max-height: 284px;
 	}
+
 	.img {
 		width: 100%;
 		height: 100%;
@@ -74,50 +57,105 @@
 		gap: 40px;
 		overflow-y: auto;
 		background-color: inherit;
+
 		&::-webkit-scrollbar-button {
 			width: 0px
 		}
 	}
-	
+
 	.modal {
 		height: calc(100% - 198px);
 		padding: 0 50px 20px 50px;
-	
+
 		&::-webkit-scrollbar {
 			width: 0px;
 		}
 	}
-	
+
 	.checkout {
 		margin-top: 30px;
 		padding-bottom: 20px;
 		height: 380px;
-	
+
 		&::-webkit-scrollbar {
 			width: 2px;
 			height: 380px;
 			background-color: var(--white);
 		}
-	
+
 		&::-webkit-scrollbar-button {
 			display: none;
 		}
-	
+
 		&::-webkit-scrollbar-thumb {
 			background: var(--rose);
 			min-height: 190px;
 		}
 	}
-	
+
 	.cartEmpty {
 		h2 {
 			font: var(--title-1);
 			letter-spacing: 0.64px;
 		}
-	
+
 		p {
 			margin-top: 10px;
 		}
+
+		.img_wrp {
+			margin-top: 70px;
+			max-width: 464px;
+			max-height: 392px;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.cart {
+		gap: 40px;
+	}
+
+	.modal {
+		height: calc(100% - 198px);
+		padding: 0 50px 20px 50px;
+
+		&::-webkit-scrollbar {
+			width: 0px;
+		}
+	}
+
+	.checkout {
+		margin-top: 30px;
+		padding-bottom: 20px;
+		height: 380px;
+
+		&::-webkit-scrollbar {
+			width: 2px;
+			height: 380px;
+			background-color: var(--white);
+		}
+
+		&::-webkit-scrollbar-button {
+			display: none;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: var(--rose);
+			min-height: 190px;
+		}
+	}
+
+	.cartEmpty {
+		h2 {
+			font: var(--title-1);
+			letter-spacing: 0.64px;
+		}
+
+		p {
+			margin-top: 10px;
+		}
+
 		.img_wrp {
 			margin-top: 70px;
 			max-width: 464px;

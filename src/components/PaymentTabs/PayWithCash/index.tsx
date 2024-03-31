@@ -36,7 +36,7 @@ export const PayWithCash: FC<IPayWithCash> = () => {
 					disabled={!isChecked}
 					text={t('checkout.authorized.payment.cash.btn2')}
 					colorMode="black"
-					style={{marginTop: '25px', marginBottom: '120px'}}
+					style={{marginTop: '25px'}}
 			 />
 		 </div>
 	);

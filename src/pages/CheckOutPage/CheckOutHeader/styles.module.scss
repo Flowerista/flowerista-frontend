@@ -1,15 +1,65 @@
-.header{
+.header {
 	width: 1260px;
 	margin: 0 auto;
 	display: flex;
 	padding: 50px 0;
 }
 
-.title{
+.title {
 	font-family: var(--font-family-main);
 	font-size: 32px;
 	font-weight: 400;
 	line-height: 38px;
 	color: #231104;
 	margin-left: 250px;
+}
+
+@media screen and (max-width: 1220px) {
+	.header {
+		width: 100%;
+		padding-left: 20px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.header {
+		width: 100%;
+		padding: 30px 0;
+		padding-left: 20px;
+		display: flex;
+		flex-direction: column;
+
+		a {
+			width: 176px;
+			height: 80px;
+		}
+
+		div {
+			font-size: 28px;
+			font-weight: 400;
+			line-height: 42px;
+			letter-spacing: 0.02em;
+			margin-left: 40%;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.header {
+		width: 100%;
+		padding: 20px 0;
+		margin: 0;
+
+		a {
+			width: 176px;
+			height: 80px;
+		}
+
+		div {
+			font-size: 24px;
+			line-height: 36px;
+			margin-left: 37%;
+
+		}
+	}
 }

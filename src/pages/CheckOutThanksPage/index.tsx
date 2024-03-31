@@ -25,8 +25,10 @@ export const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
 				 <SecondHeader/>
 				 <main className={styles.main}>
 					 <div className={styles.info}>
-						 <h1>Thank you </h1>
-						 <h1>For choosing Us!</h1>
+						 <div className={styles.header}>
+							 <h1>Thank you </h1>
+							 <h1>For choosing Us!</h1>
+						 </div>
 						 <p>We have received your order № {orderId}.</p>
 						 <p>A confirmation email has been sent to your email address.</p>
 						 <span className={styles.span}>Our manager will contact you soon.</span>

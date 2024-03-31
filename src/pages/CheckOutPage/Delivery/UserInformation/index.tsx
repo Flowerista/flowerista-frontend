@@ -18,11 +18,12 @@ export const UserInformation: FC<IUserInformation> = ({user, setVisible}) => {
 				 <h1>{t('checkout.authorized.data.title')}</h1>
 				 <button onClick={() => {
 					 setVisible(true);
-				 }}>{t('checkout.authorized.data.btn1')}
+				 }}>
+					 {t('checkout.authorized.data.btn1')}
 				 </button>
 			 </div>
 			 <div className={styles.UserInformation__content}>
-				 <img src={userImage} alt=""/>
+				 <img src={userImage} alt="user-avatar"/>
 				 <div className={styles.UserInformation__content__user}>
 					 <span>{user.firstName} {user.lastName}</span>
 					 <span>{user.email}</span>

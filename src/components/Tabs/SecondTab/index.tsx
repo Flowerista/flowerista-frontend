@@ -121,10 +121,10 @@ const SecondTab: FC<InterfaceSecondTab> = ({setIsActive}) => {
 								name="date"
 								control={control}
 								render={({field}) => (
-									 <div>
+									 <div className={styles.datePicker}>
 										 <DatePicker
 												{...field}
-												className={styles.datePicker}
+												// className={styles.datePicker}
 												label="Date"
 												sx={{
 													'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
@@ -154,10 +154,10 @@ const SecondTab: FC<InterfaceSecondTab> = ({setIsActive}) => {
 								name="time"
 								control={control}
 								render={({field}) => (
-									 <div>
+									 <div className={styles.timePicker}>
 										 <TimePicker
 												{...field}
-												className={styles.timePicker}
+												// className={styles.timePicker}
 												sx={{
 													'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
 														border: 'none',

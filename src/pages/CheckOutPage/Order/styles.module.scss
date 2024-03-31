@@ -1,9 +1,10 @@
-.order{
+.order {
 	height: 713px;
 	width: 100%;
 	background-color: #fcf7f0;
 	padding-top: 53px;
 	padding-left: 108px;
+
 	&__content {
 		max-width: 486px;
 		background-color: inherit;
@@ -22,16 +23,67 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-    &__item {
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        span {
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-        }
-    }
+
+	&__item {
+		font-size: 24px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+
+		span {
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: normal;
+		}
+	}
+}
+
+@media screen and (max-width: 1220px) {
+	.order {
+		height: 713px;
+		padding-top: 53px;
+		padding-left: 20px;
+
+		&__content {
+			max-width: 98%;
+		}
+	}
+}
+
+@media screen and (max-width: 1025px) {
+	.order {
+		height: 713px;
+		padding-top: 53px;
+		padding-left: 20px;
+
+		&__content {
+			max-width: 98%;
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.order {
+		padding-top: 30px;
+		padding-bottom: 80px;
+		height: auto;
+
+		&__content {
+
+			h2 {
+				font-size: 24px;
+			}
+		}
+	}
+
+	.price {
+		padding-top: 30px;
+		font-size: 18px;
+
+		&__item {
+			font-size: 20px;
+		}
+	}
+
 }

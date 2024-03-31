@@ -1,3 +1,15 @@
-.userDelivery{
+.userDelivery {
 	margin-top: 99px;
+}
+
+@media screen and (max-width: 769px) {
+	.userDelivery {
+		margin-top: 60px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.userDelivery {
+		margin-top: 40px;
+	}
 }
