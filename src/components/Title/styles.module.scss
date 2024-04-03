@@ -8,7 +8,8 @@
 	text-transform: capitalize;
 }
 
-@include media768 {
+
+@media screen and (max-width: 1024px) {
 	.title {
 		text-transform: capitalize;
 		font-size: 28px;
@@ -18,8 +19,7 @@
 	}
 }
 
-
-@include media375 {
+@media screen and (max-width: 500px) {
 	.title {
 		font-size: 20px;
 		font-weight: 400;
@@ -27,3 +27,4 @@
 		letter-spacing: 0.02em;
 	}
 }
+

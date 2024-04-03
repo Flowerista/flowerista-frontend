@@ -32,8 +32,7 @@
 }
 
 
-@include media375 {
-
+@media screen and (max-width: 500px) {
 	.modal {
 		&__list {
 			width: 330px;
@@ -41,3 +40,4 @@
 		}
 	}
 }
+

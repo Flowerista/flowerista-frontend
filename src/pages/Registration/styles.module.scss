@@ -9,6 +9,13 @@
 	font-family: var(--font-family-main);
 	color: #231104;
 	font-weight: 400;
+
+
+	&__container {
+		h2 {
+			margin-bottom: 50px;
+		}
+	}
 }
 
 .img {
@@ -32,6 +39,13 @@
 	align-items: center;
 }
 
+@media screen and (max-width: 1150px) {
+	.img {
+		display: none;
+	}
+}
+
+
 @include media768 {
 	.registration {
 		position: static;
@@ -41,6 +55,10 @@
 		&__container {
 			max-width: 354px;
 			width: 100%;
+
+			h2 {
+				margin-bottom: 30px;
+			}
 
 			input {
 				width: 100%;
@@ -69,7 +87,7 @@
 }
 
 
-@include media375 {
+@media screen and (max-width: 500px) {
 	.registration {
 		position: static;
 		padding: 20px;
@@ -77,8 +95,13 @@
 		padding-top: 40px;
 
 		&__container {
-			max-width: 335px;
+			max-width: 100%;
 			width: 100%;
+
+
+			form {
+				max-width: 100%;
+			}
 
 			input {
 				width: 100%;
@@ -95,9 +118,11 @@
 	}
 
 	.flex {
-		width: 310px;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 }
+
+

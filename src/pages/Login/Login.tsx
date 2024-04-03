@@ -64,7 +64,6 @@ export const Login: FC = () => {
 			if (errorStatus) {
 				alert('Login failed. Wrong password or email not confirmed')
 			} else {
-				alert(JSON.stringify(data))
 				reset()
 				navigate(DataRoute.PersonalInformation)
 			}
@@ -75,7 +74,7 @@ export const Login: FC = () => {
 		 <div className={styles.login}>
 			 <div className={styles.login__container}>
 				 <Title text={`${t('login.title')}`}/>
-				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
+				 <Form onSubmit={handleSubmit(onSubmit)}>
 					 <InputsWrapper>
 						 <EmailInput register={register} error={errors.email?.message}/>
 						 <PasswordInput register={register} error={errors.password?.message}/>

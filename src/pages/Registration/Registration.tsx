@@ -129,7 +129,7 @@ export const Registration: FC = () => {
 			 <div className={styles.registration__container}>
 				 <Title text={`${t('register.title')}`}/>
 
-				 <Form onSubmit={handleSubmit(onSubmit)} style={{marginTop: '50px'}}>
+				 <Form onSubmit={handleSubmit(onSubmit)}>
 					 <InputsWrapper>
 						 <NameInput register={register} error={errors.name?.message}/>
 						 <SurnameInput register={register} error={errors.surname?.message}/>
