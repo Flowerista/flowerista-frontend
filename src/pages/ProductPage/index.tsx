@@ -151,69 +151,83 @@ export const ProductPage: FC<IProductPage> = () => {
 
 					<div className={styles.imgs_wrp}>
 						{data && data.imageUrls && Object.values(data.imageUrls).map((imageUrl, index) => (
-							<img key={index} src={imageUrl} alt="image"/>
+							<>
+							<div className={styles.img}>
+								<img key={index} src={imageUrl} alt="image"/>
+							</div>
+							<div className={styles.img}>
+								<img key={index} src={imageUrl} alt="image"/>
+							</div>
+							<div className={styles.img}>
+								<img key={index} src={imageUrl} alt="image"/>
+							</div>
+							</>
+							
 						))}
 					</div>
 	
 					<div className={styles.content}>
-						<div className={styles.info}>
-							<div className={styles.info__wrp}>
-								<h1 className={styles.info__title}>{data?.name}</h1>
-								<span className={styles.info__code}>{t('product.code')}: {data.itemCode}</span>
-							</div>
-							<div className={styles.info__descr}>
-								<p>{t('product.flowers')}: {data.flowers.map((flower) => flower.name).join(', ')}.</p>
-								<p>{t('product.desc')}</p>
-								<p>{t('product.sub_desc')}</p>
-							</div>
-						</div>
-						<div className={styles.select_wrp}>
-							{data?.sizes.map(size =>
-								<ProductSelect
-									size={size.size}
-									active={size.size === activeSize}
-									setActive={() => updateContent(size)}
-									key={size.id}
-									price={`${size.defaultPrice}`}
-								/>)}
-						</div>
-
-						<div className={styles.quantity_wpr}>
-							<div className={styles.price}>
-								{discountPrice &&
-									<div className={styles.price__old}>
-										<p>{+price * quantity}</p>
-										<span>UAH</span>
-									</div>
-								}
-								<div className={styles.price__new}>
-									{quantity * +(discountPrice || price)}
-									<span>UAH</span>
+						<div className={styles.content_wrp}>
+							<div className={styles.info}>
+								<div className={styles.info__wrp}>
+									<h1 className={styles.info__title}>{data?.name}</h1>
+									<span className={styles.info__code}>{t('product.code')}: {data.itemCode}</span>
+								</div>
+								<div className={styles.info__descr}>
+									<p>{t('product.flowers')}: {data.flowers.map((flower) => flower.name).join(', ')}.</p>
+									<p>{t('product.desc')}</p>
+									<p>{t('product.sub_desc')}</p>
 								</div>
 							</div>
-							<div className={styles.count}>
-								<button onClick={decreaseQuantity}>-</button>
-								<div className={styles.count__item}>{quantity}</div>
-								<button onClick={increaseQuantity}>+</button>
+							<div className={styles.select_wrp}>
+								{data?.sizes.map(size =>
+									<ProductSelect
+										size={size.size}
+										active={size.size === activeSize}
+										setActive={() => updateContent(size)}
+										key={size.id}
+										price={`${size.defaultPrice}`}
+									/>)}
 							</div>
-							<Button 
-								text={`${t('product.buy')}`} 
-								onClick={toCart}
-								sizeMode='full'
-								className={styles.buy}
-							/>
-						</div>
 
-						<div className={styles.link}>
-							<span>{t('product.link1')}</span>
-							<Link 
-								to={DataRoute.DeliveryAndPayment} 
-								target={'_top'}
-							>
-								{t('product.link2')}
-								<BsArrowRight style={{fontSize: "24px"}}/>
-							</Link>
+							<div className={styles.quantity_wpr}>
+								<div className={styles.price}>
+									{discountPrice &&
+										<div className={styles.price__old}>
+											<p>{+price * quantity}</p>
+											<span>UAH</span>
+										</div>
+									}
+									<div className={styles.price__new}>
+										{quantity * +(discountPrice || price)}
+										<span>UAH</span>
+									</div>
+								</div>
+								<div className={styles.count}>
+									<button onClick={decreaseQuantity}>-</button>
+									<div className={styles.count__item}>{quantity}</div>
+									<button onClick={increaseQuantity}>+</button>
+								</div>
+								<Button 
+									text={`${t('product.buy')}`} 
+									onClick={toCart}
+									sizeMode='full'
+									className={styles.buy}
+								/>
+							</div>
+
+							<div className={styles.link}>
+								<span>{t('product.link1')}</span>
+								<Link 
+									to={DataRoute.DeliveryAndPayment} 
+									target={'_top'}
+								>
+									{t('product.link2')}
+									<BsArrowRight style={{fontSize: "24px"}}/>
+								</Link>
+							</div>
 						</div>
+						<div></div>
 					</div>
 				</div>
 	
