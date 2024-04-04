@@ -1,6 +1,4 @@
-.section {
-    
-}
+.section {}
 
 .sectionSlider {
     background-color: var(--creamy);
@@ -9,11 +7,13 @@
     gap: 9px;
     padding-bottom: 43px;
 }
+
 .horizontalClass {
     display: flex;
     justify-content: center;
     gap: 10px;
 }
+
 .bulletClass {
     width: 3px;
     height: 3px;
@@ -21,6 +21,7 @@
     opacity: 0.4;
     background-color: var(--brown);
 }
+
 .bulletActiveClass {
     width: 16px;
     opacity: 1;
@@ -31,6 +32,7 @@
     .sectionSlider {
         padding-bottom: 0;
     }
+
     .horizontalClass {
         display: none
     }

@@ -15,13 +15,17 @@ export const ProductSelect: FC<IProductSelect> = ({ size, price, active, setActi
 		setActive(!active);
 	};
 
+	const [firstChar, ...otherChar] = size.split('')
+	const sizeShow = [firstChar.toUpperCase(), ...otherChar.map(item => (item.toLowerCase()))].join("")
+
+
 	return (
-		 <div className={`${styles.productSelect} ${active ? styles.active : ''}`} onClick={toggleActive}>
-			 <div className={styles.productSelect__size}>
-				 {active ? <img src={second} alt="" /> : <img src={first} alt="" />}
-				 <span>{size}</span>
-			 </div>
-			 <div className={styles.productSelect__price}>{price}</div>
-		 </div>
+		<div className={`${styles.productSelect} ${active ? styles.active : ''}`} onClick={toggleActive}>
+			<div className={styles.productSelect__size}>
+				{active ? <img src={second} alt="" /> : <img src={first} alt="" />}
+				<span>{sizeShow}</span>
+			</div>
+			<div className={styles.productSelect__price}>{price}</div>
+		</div>
 	);
 };
