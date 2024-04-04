@@ -13,9 +13,10 @@ export interface ISectionsFlower {
   data: IFlowerCard[] | undefined;
   style?: CSSProperties;
   className?: string
+  pagination?: boolean
 }
 
-export const SectionFlower: FC<ISectionsFlower> = ({data, style, className}) => {
+export const SectionFlower: FC<ISectionsFlower> = ({data, style, className, pagination = true}) => {
   const {width} = useResize()
   
   const [showSlide, setShowSlide] = useState(2);
@@ -53,7 +54,7 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, style, className}) => 
             horizontalClass: `${styles.horizontalClass}`
           }}
           spaceBetween={gapSlide}
-					modules={[Pagination]}
+					modules={pagination ? [Pagination] : []}
           slidesPerView={showSlide}
 			  >
           {data && data.map((item) => (
