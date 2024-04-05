@@ -18,13 +18,13 @@
 	&__descr {
 		margin-top: 20px;
 		font-size: 16px;
-		line-height: 150%; /* 24px */
+		line-height: 150%;
 	}
 }
 
 .img {
 	position: absolute;
-	right: -300px;
+	right: -350px;
 	bottom: 0;
 	height: 653px;
 	width: 734px;
@@ -35,6 +35,13 @@
 		height: 100%;
 	}
 }
+
+@media screen and (max-width: 1200px) {
+	.img {
+		display: none;
+	}
+}
+
 
 @include media768 {
 	.restoring {
@@ -62,16 +69,17 @@
 	}
 }
 
-@include media375 {
-	@include media768 {
-		.restoring {
-			padding-bottom: 120px;
-			padding-top: 60px;
+@media screen and (max-width: 500px) {
+	.restoring {
+		padding-bottom: 120px;
+		padding-top: 60px;
+		padding-left: 20px;
+		padding-right: 20px;
 
-			&__wrapper {
-				width: 335px;
-			}
-
+		&__wrapper {
+			width: 100%;
 		}
+
 	}
 }
+

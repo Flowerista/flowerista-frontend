@@ -35,6 +35,13 @@
 	}
 }
 
+@media screen and (max-width: 1200px) {
+	.img {
+		display: none;
+	}
+}
+
+
 @include media768 {
 	.restoring {
 		position: static;
@@ -67,12 +74,19 @@
 }
 
 
-@include media375 {
+@media screen and (max-width: 500px) {
 	.restoring {
 		padding-top: 60px;
+		padding-left: 20px;
+		padding-right: 20px;
+
 
 		&__wrapper {
-			width: 335px;
+			width: 100%;
+
+			form {
+				max-width: 100%;
+			}
 
 			h2 {
 				text-align: center;
