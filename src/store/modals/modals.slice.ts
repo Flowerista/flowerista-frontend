@@ -4,13 +4,15 @@ interface IInitialState {
     modals: {
         cartModalOpen: boolean;
         wishlistModalOpen: boolean;
+        sidebarModalOpen: boolean;
     }
 }
 
 const initialState: IInitialState = {
     modals: {
         cartModalOpen: false,
-        wishlistModalOpen: false, 
+        wishlistModalOpen: false,
+        sidebarModalOpen: false,
     }
 }
 
@@ -23,11 +25,15 @@ export const modalsSlice = createSlice({
         },
         setWishlistModalOpen: (state, {payload}: PayloadAction<boolean>) => {
             state.modals.wishlistModalOpen = payload
-        }
+        },
+        setSidebarModalOpen: (state, {payload}: PayloadAction<boolean>) => {
+            state.modals.sidebarModalOpen = payload
+        },
     }
 })
 
 export const {
     setCartModalOpen,
-    setWishlistModalOpen
+    setWishlistModalOpen,
+    setSidebarModalOpen
 } = modalsSlice.actions

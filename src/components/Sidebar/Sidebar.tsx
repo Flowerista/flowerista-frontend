@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
-import {DataRoute} from '../../data/routes';
-import styles from './styles.module.scss';
-import {BsArrowRight} from 'react-icons/bs';
-import {useAppDispatch} from '../../store/store';
-import {logout} from '../../store/auth/auth.slice';
 import {useTranslation} from 'react-i18next';
+import {DataRoute} from '../../data/routes';
+import {logout} from '../../store/auth/auth.slice';
+import {useAppDispatch} from '../../store/store';
 import { clearDataUser } from '../../store/user/user.slice';
+import {BsArrowRight} from 'react-icons/bs';
 
-interface SidebarPrors {
-	style?: React.CSSProperties,
-	className?: string;
+import styles from './styles.module.scss';
+
+interface SidebarPrors extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+
 }
 
-export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
+export const Sidebar: React.FC<SidebarPrors> = ({className, ...props}) => {
 	const {t} = useTranslation()
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
@@ -23,47 +23,47 @@ export const Sidebar: React.FC<SidebarPrors> = ({className, style}) => {
 		navigate(DataRoute.Login)
 	}
 	return (
-		 <div className={`${styles.sidebar} ${className}`} style={style}>
-			 <ul className={styles.sidebar__menu}>
-				 <li>
-					 <NavLink to={DataRoute.PersonalInformation}>
-						 {({isActive}) => (
-								<div className={styles.sidebar__item}>
-									{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
-									<p>{t('profile.links.link1')}</p>
-								</div>
-						 )}
-					 </NavLink>
-				 </li>
-				 <li>
-					 <NavLink to={DataRoute.Orders}>
-						 {({isActive}) => (
-								<div className={styles.sidebar__item}>
-									{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
-									<p>{t('profile.links.link2')}</p>
-								</div>
-						 )}
-					 </NavLink>
-				 </li>
-				 <li>
-					 <NavLink to={DataRoute.Wishlist}>
-						 {({isActive}) => (
-								<div className={styles.sidebar__item}>
-									{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
-									<p>{t('profile.links.link3')}</p>
-								</div>
-						 )}
-					 </NavLink>
-				 </li>
-			 </ul>
-			 <div className={styles.sidebar__item}>
-				 <div className={styles.arrow}></div>
-				 <button className={styles.log_out}
-				         onClick={onLogout}
-				 >
-					 {t('profile.links.link4')}
-				 </button>
-			 </div>
-		 </div>
+		<div className={`${styles.sidebar} ${className}`} {...props}>
+			<ul className={styles.sidebar__menu}>
+				<li>
+					<NavLink to={DataRoute.PersonalInformation}>
+						{({isActive}) => (
+							<div className={styles.sidebar__item}>
+								{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
+								<p>{t('profile.links.link1')}</p>
+							</div>
+						)}
+					</NavLink>
+				</li>
+				<li>
+					<NavLink to={DataRoute.Orders}>
+						{({isActive}) => (
+							<div className={styles.sidebar__item}>
+								{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
+								<p>{t('profile.links.link2')}</p>
+							</div>
+						)}
+					</NavLink>
+				</li>
+				<li>
+					<NavLink to={DataRoute.Wishlist}>
+						{({isActive}) => (
+							<div className={styles.sidebar__item}>
+								{isActive ? <BsArrowRight className={styles.arrow}/> : <div className={styles.arrow}></div>}
+								<p>{t('profile.links.link3')}</p>
+							</div>
+						)}
+					</NavLink>
+				</li>
+			</ul>
+			<div className={styles.sidebar__item}>
+				<div className={styles.arrow}></div>
+				<button className={styles.log_out}
+						onClick={onLogout}
+				>
+					{t('profile.links.link4')}
+				</button>
+			</div>
+		</div>
 	)
 }
