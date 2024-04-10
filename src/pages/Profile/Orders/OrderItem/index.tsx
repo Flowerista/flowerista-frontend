@@ -3,35 +3,23 @@ import styles from './styles.module.scss';
 import top from '../../../../assets/image/profile/order/top.png';
 import bottom from '../../../../assets/image/profile/order/botton.png';
 import {useTranslation} from 'react-i18next';
-
+import {AddressHistory, OrderItemHistory, UserHistory} from '../index';
 
 export interface IOrderItem {
 	item: {
-		id: string;
+		id: number;
 		status: string;
-		total: string;
-		address: {
-			city: string;
-			street: string;
-			house: string;
-			flat?: string;
-			entrance?: string;
-			date: string;
-			type: string;
-		}
-		user: {
-			telephone: string;
-			name: string;
-		};
-		products: {
-			image: string;
-			name: string;
-			size: string;
-			price: number;
-			quantity: number;
-		}[];
+		payId: string | null;
+		userId: number;
+		sum: number;
+		orderItems: OrderItemHistory[];
+		address: AddressHistory;
+		user: UserHistory;
+		created: number | null;
+		updated: number | null;
 	}
 }
+
 
 export const OrderItem: FC<IOrderItem> = ({item}) => {
 	const {t} = useTranslation()
@@ -55,21 +43,21 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 					 </div>
 					 <div className={styles.item__price}>
 						 <div className={styles.item__price_title}>{t('profile.order.total')}</div>
-						 <div className={styles.item__price_total}>{item.total} <span>USD</span></div>
+						 <div className={styles.item__price_total}>{item.sum} <span>USD</span></div>
 					 </div>
 				 </div>
 				 <div className={styles.item__image}>
 					 {
-						 item.products.length <= 3 ? (
+						 item.orderItems.length <= 3 ? (
 								<>
-									{item.products.map(product => (
-										 <img src={product.image} alt={product.name} key={product.name + product.quantity}/>
+									{item.orderItems.map(product => (
+										 <img src={product.imageUrls[1]} alt={product.name} key={product.name + product.quantity}/>
 									))}
 								</>
 						 ) : (
 								<>
-									<img src={item.products[0].image} alt={item.products[0].name}/>
-									<span className={styles.quantity}>+{item.products.length}</span>
+									<img src={item.orderItems[0].imageUrls[1]} alt={item.orderItems[0].name}/>
+									<span className={styles.quantity}>+{item.orderItems.length}</span>
 								</>
 						 )
 					 }
@@ -91,16 +79,16 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 							</div>
 							<div className={styles.info__user_recipient}>
 								<h4>{t('profile.order.recipient')}</h4>
-								<p>{item.user.name}</p>
-								<p>{t('profile.order.tel')} {item.user.telephone}</p>
+								<p>{item.user.firstName} {item.user.lastName}</p>
+								<p>{t('profile.order.tel')} {item.user.phoneNumber}</p>
 							</div>
 						</div>
 						<div className={styles.info__products}>
 							{
-								item.products.map((product, index) => (
+								item.orderItems.map((product, index) => (
 									 <div key={index} className={styles.info__products_product}>
 										 <div className={styles.image}>
-											 <img src={product.image} alt={product.image}/>
+											 <img src={product.imageUrls[1]} alt={product.name}/>
 										 </div>
 										 <div className={styles.title}>
 											 <span>{product.name}</span>
@@ -113,7 +101,7 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 							}
 							<div className={styles.info__total}>
 								<h3>{t('profile.order.total')}:</h3>
-								<p>{item.total} <span>USD</span></p>
+								<p>{item.sum} <span>USD</span></p>
 							</div>
 						</div>
 					</div>

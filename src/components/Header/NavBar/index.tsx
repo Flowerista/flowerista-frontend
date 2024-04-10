@@ -12,22 +12,24 @@ export interface INavBar {
 }
 
 export const NavBar: FC<INavBar> = ({className, type}) => {
-	const { t } = useTranslation();
+	const {t} = useTranslation();
 	return (
-		<nav className={classNames(styles.navbar, styles[type], className)}>
-			<ul className={styles.navbar__menu}>
-				<li><NavLink to={DataRoute.Catalog} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					{t("header.first-link")}
-				</NavLink></li>
-				<li><NavLink to={DataRoute.AboutUs} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					{t("header.second-link")}
-				</NavLink></li>
-				<li><NavLink to={DataRoute.DeliveryAndPayment} className={({ isActive }) => (isActive ? `${styles.active}` : '')}>
-					{t("header.third-link")}
-				</NavLink></li>
-			</ul>
-			{type === 'header'? <ParametersMenu/> : null}
-		</nav>
+		 <nav className={classNames(styles.navbar, styles[type], className)}>
+			 <ul className={styles.navbar__menu}>
+				 <li><NavLink target={'_top'} to={DataRoute.Catalog}
+				              className={({isActive}) => (isActive ? `${styles.active}` : '')}>
+					 {t('header.first-link')}
+				 </NavLink></li>
+				 <li><NavLink to={DataRoute.AboutUs} className={({isActive}) => (isActive ? `${styles.active}` : '')}>
+					 {t('header.second-link')}
+				 </NavLink></li>
+				 <li><NavLink to={DataRoute.DeliveryAndPayment}
+				              className={({isActive}) => (isActive ? `${styles.active}` : '')}>
+					 {t('header.third-link')}
+				 </NavLink></li>
+			 </ul>
+			 {type === 'header' ? <ParametersMenu/> : null}
+		 </nav>
 	);
 };
 
