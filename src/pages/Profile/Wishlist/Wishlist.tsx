@@ -30,20 +30,20 @@ export const Wishlist: FC = () => {
 
 	if (wishlist && wishlist.length > 0) {
 		return (
-			 <div className={styles.wishlist}>
-				 {wishlist.map((item) => (
-						<Card
-							 key={item.id}
-							 id={item.id}
-							 name={item.name}
-							 discount={item.discount}
-							 defaultPrice={item.defaultPrice}
-							 discountPrice={item.discountPrice}
-							 imageUrls={item.imageUrls}
-							 sizes={item.sizes}
-						/>
-				 ))}
-			 </div>
+			<div className={styles.wishlist}>
+				{wishlist.map((item) => (
+					<Card
+						key={item.id}
+						id={item.id}
+						name={item.name}
+						discount={item.discount}
+						defaultPrice={item.defaultPrice}
+						discountPrice={item.discountPrice}
+						imageUrls={item.imageUrls}
+						sizes={item.sizes}
+					/>
+				))}
+			</div>
 		)
 	} else {
 		return (

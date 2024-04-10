@@ -1,18 +1,21 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 60px;
     font-family: var(--font-family-main);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
+    /* 24px */
     color: #231104;
+
     &__menu {
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
+
     &__item {
         display: flex;
         gap: 10px;
@@ -30,4 +33,10 @@
     font-size: 24px;
     height: 24px;
     width: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .sidebar {
+        gap: 120px;
+    }
 }

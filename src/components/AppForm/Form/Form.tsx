@@ -1,18 +1,16 @@
-import {FC, ReactNode} from 'react'
+import {DetailedHTMLProps, FC, FormHTMLAttributes} from 'react'
+import cn from 'classnames'
 import styles from './styles.module.scss'
 
-interface IFormProps {
-    onSubmit: () => void;
-    children?: ReactNode;
-    style?: {};
+interface IFormProps extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>  {
+
 }
 
-const Form: FC<IFormProps> = ({children, style, onSubmit}) => {
+const Form: FC<IFormProps> = ({children, className, ...props}) => {
   return (
     <form 
-        className={styles.form}
-        onSubmit={onSubmit}
-        style={style} 
+        className={cn(styles.form, className)}
+        {...props}
     >
         {children}
     </form>
