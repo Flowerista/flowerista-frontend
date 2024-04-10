@@ -1,6 +1,18 @@
 .forms__wrapper {
-    padding-top: 52px;
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 60px;
+}
+
+@media screen and (min-width: 768px) {
+    .forms__wrapper {
+        gap: 100px;
+    }
+}
+
+@media screen and (min-width: 1276px) {
+    .forms__wrapper {
+        padding-top: 52px;
+        gap: 120px;
+    }
 }

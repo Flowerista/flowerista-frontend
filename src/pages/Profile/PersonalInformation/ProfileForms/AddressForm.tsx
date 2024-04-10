@@ -67,56 +67,58 @@ export const AddressForm: FC = () => {
 		}
 	}
 	return (
-		 <div className={styles.form__wrapper}>
-			 <div className={styles.form__head}>
-				 <Title text={`${t('profile.address.title')}`}/>
-				 <p className={styles.form__descr}>{t('profile.address.text')}</p>
-			 </div>
-			 <div className={styles.form__body}>
-				 <Form onSubmit={handleSubmit(onSubmit)}>
-					 <InputsWrapper>
-						 <TextInput
-								label={`${t('profile.address.city')}`}
-								placeholder="City"
-								register={register}
-								registerName="city"
-								error={errors.city?.message}
-						 />
-						 <TextInput
-								label={`${t('profile.address.street')}`}
-								placeholder="Street"
-								register={register}
-								registerName="street"
-								error={errors.street?.message}
-						 />
-						 <InputsWrapper style={{flexDirection: 'row', gap: '20px'}}>
-							 <TextInput
-									label={`${t('profile.address.house')}`}
-									placeholder="House"
-									register={register}
-									registerName="house"
-									error={errors.house?.message}
-							 />
-							 <TextInput
-									label={`${t('profile.address.entrance')}`}
-									placeholder="Entrance"
-									register={register}
-									registerName="entrance"
-									error={errors.entrance?.message}
-							 />
-							 <TextInput
-									label={`${t('profile.address.flat')}`}
-									placeholder="Flat"
-									register={register}
-									registerName="flat"
-									error={errors.flat?.message}
-							 />
-						 </InputsWrapper>
-					 </InputsWrapper>
-					 <Button text={`${t('profile.address.btn1')}`} colorMode="white" style={{marginTop: '40px'}}
-					         loading={loadingStatus.changeAddress}/>
-				 </Form>
-			 </div>
-		 </div>
+		<div className={styles.form__wrapper}>
+			<div className={styles.form__head}>
+				<Title text={`${t('profile.address.title')}`}/>
+				<p className={styles.form__descr}>{t('profile.address.text')}</p>
+			</div>
+			<div className={styles.form__body}>
+				<Form onSubmit={handleSubmit(onSubmit)}>
+					<div className={styles.inputs_wpr}>
+						<TextInput
+							label={`${t('profile.address.city')}`}
+							placeholder="City"
+							register={register}
+							registerName="city"
+							error={errors.city?.message}
+						/>
+						<TextInput
+							label={`${t('profile.address.street')}`}
+							placeholder="Street"
+							register={register}
+							registerName="street"
+							error={errors.street?.message}
+						/>
+						<TextInput
+							label={`${t('profile.address.house')}`}
+							placeholder="House"
+							register={register}
+							registerName="house"
+							error={errors.house?.message}
+						/>
+						<TextInput
+							label={`${t('profile.address.entrance')}`}
+							placeholder="Entrance"
+							register={register}
+							registerName="entrance"
+							error={errors.entrance?.message}
+						/>
+						<TextInput
+							label={`${t('profile.address.flat')}`}
+							placeholder="Flat"
+							register={register}
+							registerName="flat"
+							error={errors.flat?.message}
+						/>
+					</div>
+					<Button 
+						text={`${t('profile.address.btn1')}`} 
+						colorMode="white" 
+						sizeMode='full'
+						style={{marginTop: '40px'}}
+						loading={loadingStatus.changeAddress}/>
+				</Form>
+			</div>
+		</div>
 	)
 }

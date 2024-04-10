@@ -35,14 +35,14 @@ export const PersonalInformation: FC = () => {
 	}
 
 	return (
-		 <>
-			 <div className={styles.forms__wrapper}>
-				 <PersonalInformationForm onOpen={openPasswordModal}/>
-				 <AddressForm/>
-				 <ContactsForm/>
-			 </div>
-			 <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
-			 <PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
-		 </>
+		<>
+			<div className={styles.forms__wrapper}>
+				<PersonalInformationForm onOpen={openPasswordModal}/>
+				<AddressForm/>
+				<ContactsForm/>
+			</div>
+			<PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
+			<PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
+		</>
 	)
 }

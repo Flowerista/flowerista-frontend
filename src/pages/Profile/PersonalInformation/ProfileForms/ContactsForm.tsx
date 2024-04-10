@@ -51,7 +51,7 @@ export const ContactsForm: FC = () => {
 				 <Form onSubmit={handleSubmit(onSubmit)}>
 					 <InputsWrapper>
 						 <EmailInput register={register} error={errors.email?.message}/>
-						 <PhoneInput control={control} error={errors.phone?.message}/>
+						 <PhoneInput control={control} error={errors.phone?.message} />
 					 </InputsWrapper>
 				 </Form>
 			 </div>

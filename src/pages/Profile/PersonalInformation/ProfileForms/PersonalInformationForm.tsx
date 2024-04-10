@@ -57,27 +57,32 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
 	}
 
 	return (
-		 <div className={styles.form__wrapper}>
-			 <div className={styles.form__head}>
-				 <Title text={`${t('profile.personal.title')}`}/>
-				 <p className={styles.form__descr}>{t('profile.personal.text')}</p>
-			 </div>
-			 <div className={styles.form__body}>
-				 <Form onSubmit={handleSubmit(onSubmit)}>
-					 <InputsWrapper>
-						 <NameInput register={register} error={errors.name?.message}/>
-						 <SurnameInput register={register} error={errors.surname?.message}/>
-						 <div
-								className={styles.password}
-								onClick={onOpen}
-						 >
-							 {t('profile.personal.btn1')}
-						 </div>
-					 </InputsWrapper>
-					 <Button text={`${t('profile.personal.btn2')}`} colorMode="white" style={{marginTop: '40px'}}
-					         loading={loadingStatus.changePersonalInfo}/>
-				 </Form>
-			 </div>
-		 </div>
+		<div className={styles.form__wrapper}>
+			<div className={styles.form__head}>
+				<Title text={`${t('profile.personal.title')}`}/>
+				<p className={styles.form__descr}>{t('profile.personal.text')}</p>
+			</div>
+			<div className={styles.form__body}>
+				<Form onSubmit={handleSubmit(onSubmit)}>
+					<InputsWrapper>
+						<NameInput register={register} error={errors.name?.message}/>
+						<SurnameInput register={register} error={errors.surname?.message}/>
+						<div
+							className={styles.password}
+							onClick={onOpen}
+						>
+							{t('profile.personal.btn1')}
+						</div>
+					</InputsWrapper>
+					<Button 
+						text={`${t('profile.personal.btn2')}`} 
+						colorMode="white"
+						sizeMode='full'
+						className={styles.personal_btn}
+						loading={loadingStatus.changePersonalInfo}
+					/>
+				</Form>
+			</div>
+		</div>
 	)
 }

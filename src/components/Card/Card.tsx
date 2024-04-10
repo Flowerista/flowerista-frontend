@@ -39,7 +39,7 @@ export const Card: FC<IFlowerCard> = (props) => {
 	const [liked, setLiked] = useState(false)
 
     useEffect(() => {
-      if (!wishlist.length) {
+      if (wishlist.length) {
         setLiked(wishlist.some(card => card.id === id))
       }
     }, [])
