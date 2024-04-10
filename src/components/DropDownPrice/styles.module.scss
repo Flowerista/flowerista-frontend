@@ -27,6 +27,10 @@
 		font-weight: 500;
 	}
 
+	&__content__range {
+		position: relative;
+	}
+
 	&__content {
 		width: 200px;
 		height: 200px;
@@ -39,11 +43,11 @@
 		border: 1px solid #e7a9a7;
 		padding-top: 20px;
 		margin-left: -1px;
+		padding-left: 10px;
+		padding-right: 10px;
 
 		&__inputs {
 			display: flex;
-			padding-left: 10px;
-			padding-right: 10px;
 			justify-content: space-between;
 			align-items: center;
 
@@ -124,13 +128,13 @@
 			height: 237px;
 			font-size: 16px;
 			border-top: 0;
+			padding-right: 10px;
+			padding-left: 10px;
 
 
 			&__inputs {
 				display: flex;
 				flex-direction: column;
-				padding-left: 10px;
-				padding-right: 10px;
 				justify-content: space-between;
 				align-items: center;
 
@@ -157,7 +161,7 @@
 			&__range {
 				width: 100%;
 				margin: 30px auto 0;
-				padding: 0 10px;
+				//padding: 0 10px;
 			}
 		}
 	}

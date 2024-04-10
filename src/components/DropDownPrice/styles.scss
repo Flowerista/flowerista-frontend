@@ -2,9 +2,7 @@
 
 .slider {
 	position: relative;
-	width: 175px;
-	margin-right: 10px;
-	margin-left: 10px;
+	width: 100%;
 }
 
 .slider__track,
@@ -43,10 +41,10 @@
 	pointer-events: none;
 	position: absolute;
 	height: 0;
-	width: 175px;
+	width: 100%;
 	outline: none;
-	margin-right: 10px;
-	margin-left: 10px;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .thumb--zindex-3 {
@@ -73,23 +71,3 @@
 	position: relative;
 }
 
-
-@include media768 {
-
-	.slider {
-		position: relative;
-		width: 165px;
-		margin-right: 0;
-		margin-left: 0;
-	}
-
-	.thumb {
-		pointer-events: none;
-		position: absolute;
-		height: 0;
-		width: 165px;
-		outline: none;
-		margin-right: 0;
-		margin-left: 0;
-	}
-}
