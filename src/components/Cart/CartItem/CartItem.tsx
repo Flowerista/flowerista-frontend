@@ -86,12 +86,12 @@ const CartItem: FC<CartItemProps> = ({
 						 {discountPrice &&
 								<div className={styles.price__old}>
 									<p>{defaultPrice * quantity}</p>
-									<span>UAH</span>
+									<span>USD</span>
 								</div>
 						 }
 						 <div className={styles.price__new}>
 							 {quantity * (discountPrice || defaultPrice)}
-							 <span>UAH</span>
+							 <span>USD</span>
 						 </div>
 					 </div>
 				 </div>
