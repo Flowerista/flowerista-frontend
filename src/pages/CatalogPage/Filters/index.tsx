@@ -50,7 +50,7 @@ export const Filters: FC = () => {
 	const [sorting, setSorting] = useState([
 		{item: 'sortByNewest', id: 1, name: 'New', sort: false},
 		{item: 'sortByPriceHighToLow', id: 2, name: 'High to Low Price', sort: false},
-		{item: 'sortByPriceLowToHigh', id: 3, name: 'Low To High Price', sort: false},
+		{item: 'sortByPriceLowToHigh', id: 3, name: 'Low to High Price', sort: false},
 	])
 
 
