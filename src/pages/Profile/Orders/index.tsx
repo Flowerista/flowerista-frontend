@@ -69,12 +69,12 @@ export const ProfileOrders: FC<IProfileOrders> = () => {
 	return (
 		 <article className={styles.wrapper}>
 			 {data ?
-					<div>
-						{data.map(product => (
+				  <div>
+					  {data.map(product => (
 							 <OrderItem item={product}/>
-						))}
-					</div>
-					:
+					  ))}
+				  </div>
+				  :
 					<EmptyOrder></EmptyOrder>
 			 }
 		 </article>

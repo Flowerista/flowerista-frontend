@@ -31,42 +31,80 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 	return (
 		 <div className={styles.wrapper}>
 			 <div className={styles.item}>
-				 <div className={styles.item__container}>
-					 <div className={styles.item__number}>
-						 <div className={styles.item__number_orderStatus}></div>
-						 <div className={styles.item__number_info}>
+				 <div className={styles.smallWrapper}>
+					 <div className={styles.item__container}>
+						 <div className={styles.item__number}>
+							 <div
+									className={`${styles.item__number_orderStatus} 
+									${item.status === 'COMPLETED' && styles.completed} 
+									${item.status === 'CANCELED' && styles.canceled}`}></div>
+							 <div className={styles.item__number_info}>
 								<span className={styles.order}>
-									{t('profile.order.title')} № {item.id}, {item.address.date}
+									{t('profile.order.title')} № {item.id}, <span>{item.address.date}</span>
 								</span>
-							 <span className={styles.status}>{item.status}</span>
+								 <span className={styles.status}>{item.status}</span>
+							 </div>
+						 </div>
+						 <div className={styles.item__price}>
+							 <div className={styles.item__price_title}>{t('profile.order.total')}</div>
+							 <div className={styles.item__price_total}>{item.sum} <span>USD</span></div>
 						 </div>
 					 </div>
-					 <div className={styles.item__price}>
-						 <div className={styles.item__price_title}>{t('profile.order.total')}</div>
-						 <div className={styles.item__price_total}>{item.sum} <span>USD</span></div>
+
+					 <div className={styles.secondWrapper}>
+						 <div className={styles.item__image}>
+							 {
+								 item.orderItems.length <= 3 ? (
+										<>
+											{item.orderItems.map(product => (
+												 <img src={product.imageUrls[1]} alt={product.name} key={product.name + product.quantity}/>
+											))}
+										</>
+								 ) : (
+										<>
+											<img src={item.orderItems[0].imageUrls[1]} alt={item.orderItems[0].name}/>
+											<span className={styles.quantity}>+{item.orderItems.length}</span>
+										</>
+								 )
+							 }
+						 </div>
+						 <div className={styles.item__openMenu}>
+							 {isExpanded ?
+									<img src={top} onClick={() => handleExpandClick()} alt="menu-top"/> :
+									<img src={bottom} onClick={() => handleExpandClick()} alt="bottom-top"/>}
+							 <div className={styles.item__price}>
+								 <div className={styles.item__price_title}>{t('profile.order.total')}</div>
+								 <div className={styles.item__price_total}>{item.sum} <span>USD</span></div>
+							 </div>
+
+						 </div>
 					 </div>
+
 				 </div>
-				 <div className={styles.item__image}>
-					 {
-						 item.orderItems.length <= 3 ? (
-								<>
-									{item.orderItems.map(product => (
-										 <img src={product.imageUrls[1]} alt={product.name} key={product.name + product.quantity}/>
-									))}
-								</>
-						 ) : (
-								<>
-									<img src={item.orderItems[0].imageUrls[1]} alt={item.orderItems[0].name}/>
-									<span className={styles.quantity}>+{item.orderItems.length}</span>
-								</>
-						 )
-					 }
-				 </div>
-				 <div className={styles.item__openMenu}>
-					 {isExpanded ?
-							<img src={top} onClick={() => handleExpandClick()} alt="menu-top"/> :
-							<img src={bottom} onClick={() => handleExpandClick()} alt="bottom-top"/>}
-				 </div>
+				 {!isExpanded &&
+						<div className={styles.smallContent}>
+							<div className={styles.item__image}>
+								{
+									item.orderItems.length <= 3 ? (
+										 <>
+											 {item.orderItems.map(product => (
+													<img src={product.imageUrls[1]} alt={product.name} key={product.name + product.quantity}/>
+											 ))}
+										 </>
+									) : (
+										 <>
+											 <img src={item.orderItems[0].imageUrls[1]} alt={item.orderItems[0].name}/>
+											 <span className={styles.quantity}>+{item.orderItems.length}</span>
+										 </>
+									)
+								}
+							</div>
+							<div className={styles.item__price}>
+								<div className={styles.item__price_title}>{t('profile.order.total')}</div>
+								<div className={styles.item__price_total}>{item.sum} <span>USD</span></div>
+							</div>
+						</div>
+				 }
 			 </div>
 			 {isExpanded &&
 					<div className={styles.info}>
@@ -87,12 +125,14 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 							{
 								item.orderItems.map((product, index) => (
 									 <div key={index} className={styles.info__products_product}>
-										 <div className={styles.image}>
-											 <img src={product.imageUrls[1]} alt={product.name}/>
-										 </div>
-										 <div className={styles.title}>
-											 <span>{product.name}</span>
-											 <span>{product.size}</span>
+										 <div className={styles.product__wrapper}>
+											 <div className={styles.image}>
+												 <img src={product.imageUrls[1]} alt={product.name}/>
+											 </div>
+											 <div className={styles.title}>
+												 <span>{product.name}</span>
+												 <span>{product.size}</span>
+											 </div>
 										 </div>
 										 <div className={styles.quantity}>{product.quantity} {t('profile.order.pc')}</div>
 										 <div className={styles.price}>{product.price} <span> USD</span></div>
