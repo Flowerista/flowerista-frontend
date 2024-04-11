@@ -51,7 +51,8 @@
 	opacity: 0.3;
 }
 
-@media screen and (max-width: 769px) {
+
+@media screen and (max-width: 1024px) {
 	.title {
 
 		span {
@@ -65,6 +66,7 @@
 		}
 	}
 }
+
 
 @media screen and (max-width: 500px) {
 	.title {
