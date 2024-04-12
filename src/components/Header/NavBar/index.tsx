@@ -16,7 +16,7 @@ export const NavBar: FC<INavBar> = ({className, type}) => {
 	return (
 		 <nav className={classNames(styles.navbar, styles[type], className)}>
 			 <ul className={styles.navbar__menu}>
-				 <li><NavLink target={'_top'} to={DataRoute.Catalog}
+				 <li><NavLink to={DataRoute.Catalog}
 				              className={({isActive}) => (isActive ? `${styles.active}` : '')}>
 					 {t('header.first-link')}
 				 </NavLink></li>

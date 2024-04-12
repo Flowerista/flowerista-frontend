@@ -120,6 +120,9 @@ export const Filters: FC = () => {
 		setSelectedItems([])
 		dispatch(clearFilters([]))
 		dispatch(removeMinMaxValues())
+		dispatch(setSortByPriceLowToHigh(false))
+		dispatch(setSortByPriceHighToLow(false))
+		dispatch(setSortByNewest(false))
 		if (minInputRef && minInputRef.current) {
 			minInputRef.current.value = '';
 		}
@@ -127,6 +130,12 @@ export const Filters: FC = () => {
 			maxInputRef.current.value = '';
 		}
 	}
+
+	useEffect(() => {
+		return () => {
+			resetFilters()
+		};
+	}, []);
 
 
 	return (
