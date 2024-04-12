@@ -18,11 +18,11 @@ export const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
 	const navigation = useNavigate()
 	const dispatch = useAppDispatch()
 
-	useEffect(() => {
-		return () => {
-			dispatch(setOrderId(0))
-		};
-	}, []);
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(setOrderId(0))
+	// 	};
+	// }, []);
 
 
 	return (
