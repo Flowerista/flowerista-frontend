@@ -13,7 +13,7 @@ export interface IPayWithPayPal {
 export const PayWithPayPal: FC<IPayWithPayPal> = () => {
 	const {t} = useTranslation()
 	const cart = useAppSelector(state => state.cart.cart)
-	const orderId = useAppSelector(state => state.checkout.orderId)
+	const orderId = useAppSelector(state => state.checkoutOrderId.orderId)
 	const [loading, setLoading] = useState(false);
 
 	const initialOrder = async (orderId: number) => {

@@ -2,23 +2,29 @@ import {FC, useEffect} from 'react';
 import styles from './styles.module.scss';
 import {CheckOutFooter} from '../CheckOutPage/CheckOutFooter';
 import {SecondHeader} from '../../components/SecondHeader';
-import {useAppSelector} from '../../store/store';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {Button} from '../../components';
 import flower from '../../assets/image/checkOut/thanks_you_flower.png'
 import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
+import {setOrderId} from '../../store/checkout/checkoutOrderId.slice';
 
 export interface ICheckOutThanksPage {
 }
 
 export const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
 
-	const orderId = useAppSelector(state => state.checkout.orderId)
+	const orderId = useAppSelector(state => state.checkoutOrderId.orderId)
 	const navigation = useNavigate()
+	const dispatch = useAppDispatch()
 
 	useEffect(() => {
+		return () => {
+			dispatch(setOrderId(0))
+		};
+	}, []);
 
-	}, [orderId]);
+
 	return (
 		 <div className={styles.wrapper}>
 			 <div className={styles.container}>

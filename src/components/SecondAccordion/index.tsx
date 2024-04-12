@@ -6,7 +6,7 @@ import PaymentTabs from '../PaymentTabs';
 import {useTranslation} from 'react-i18next';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import OrderService from '../../services/OrderService/order-service';
-import {setOrderId} from '../../store/checkout/checkout.slice';
+import {setOrderId} from '../../store/checkout/checkoutOrderId.slice';
 
 interface IAccordion {
 
@@ -17,7 +17,7 @@ export const SecondAccordion: FC<IAccordion> = () => {
 	const [isActiveAccordion, setIsActiveAccordion] = useState<boolean>(false);
 	const cart = useAppSelector(state => state.cart.cart)
 	const user = useAppSelector(state => state.user.user)
-	const {orderId, ...rest} = useAppSelector(state => state.checkout)
+	const {...rest} = useAppSelector(state => state.checkout)
 	const dispatch = useAppDispatch()
 
 	const createOrder = async () => {

@@ -10,7 +10,6 @@ interface IInitialState {
 	date: string
 	time: string
 	type: string
-	orderId: number
 }
 
 
@@ -23,7 +22,6 @@ const initialState: IInitialState = {
 	date: '',
 	time: '',
 	type: '',
-	orderId: 0,
 }
 
 export const checkOutSlice = createSlice({
@@ -54,9 +52,6 @@ export const checkOutSlice = createSlice({
 		setTypeToCheckout: (state, {payload}) => {
 			state.type = payload
 		},
-		setOrderId: (state, {payload}) => {
-			state.orderId = payload
-		},
 	},
 
 })
@@ -70,5 +65,4 @@ export const {
 	setHouse,
 	setDate,
 	setTypeToCheckout,
-	setOrderId,
 } = checkOutSlice.actions
