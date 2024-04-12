@@ -21,7 +21,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({min, max, maxInputRef, minI
 	const {t} = useTranslation()
 	const {isShow, setIsShow, ref} = useOutside(false)
 
-	const {maxPrice, minPrice, max: maxRange, min: minRange} = useAppSelector(state => state.filtration.filters)
+	const {maxPrice, minPrice, max: maxRangeSmall, min: minRangeSmall} = useAppSelector(state => state.filtration.filters)
 
 
 	const minValRef = useRef<HTMLInputElement>(null);
@@ -39,7 +39,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({min, max, maxInputRef, minI
 	useEffect(() => {
 		if (maxValRef.current) {
 			const minPercent = getPercent(Math.max(minPrice, min));
-			const maxPercent = getPercent(Math.min(+maxValRef.current.value, maxRange));
+			const maxPercent = getPercent(Math.min(+maxValRef.current.value, maxRangeSmall));
 
 			if (range.current) {
 				range.current.style.left = `${minPercent}%`;
@@ -64,6 +64,8 @@ export const PriceAccordion: FC<IPriceAccordion> = ({min, max, maxInputRef, minI
 	// Get min and max values when their state changes
 	useEffect(() => {
 	}, [minPrice, maxPrice]);
+
+
 	return (
 		 <div ref={ref} className={styles.dropDown}>
 			 <div
@@ -82,15 +84,15 @@ export const PriceAccordion: FC<IPriceAccordion> = ({min, max, maxInputRef, minI
 							type="number"
 							ref={minInputRef}
 							min={min}
-							max={maxRange}
-							placeholder={minRange.toString()}
+							max={maxRangeSmall}
+							placeholder={minRangeSmall.toString()}
 							onChange={event => {
 								const value = +event.target.value;
-								if (value <= maxRange) {
+								if (value <= maxRangeSmall) {
 									dispatch(setMinValue(value));
 								} else {
-									dispatch(setMinValue(maxRange));
-									minInputRef.current!.value = maxRange.toString();
+									dispatch(setMinValue(maxRangeSmall));
+									minInputRef.current!.value = maxRangeSmall.toString();
 								}
 							}}
 					 />
@@ -98,12 +100,12 @@ export const PriceAccordion: FC<IPriceAccordion> = ({min, max, maxInputRef, minI
 					 <input
 							type="number"
 							ref={maxInputRef}
-							min={minRange}
+							min={minRangeSmall}
 							max={max}
-							placeholder={maxRange.toString()}
+							placeholder={maxRangeSmall.toString()}
 							onChange={event => {
 								const value = +event.target.value;
-								if (value >= minRange && value >= minPrice) {
+								if (value >= minRangeSmall && value >= minPrice) {
 									dispatch(setMaxValue(value));
 								}
 							}}

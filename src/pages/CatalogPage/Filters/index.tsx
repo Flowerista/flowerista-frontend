@@ -40,6 +40,8 @@ export const Filters: FC = () => {
 
 	const minInputRef = useRef<HTMLInputElement>(null);
 	const maxInputRef = useRef<HTMLInputElement>(null);
+	const minInputRefSmall = useRef<HTMLInputElement>(null);
+	const maxInputRefSmall = useRef<HTMLInputElement>(null);
 
 	const {data: colors, isLoading: flowersLoading} = useGetColorsQuery('')
 	const {data: flowers, isLoading: colorsLoading} = useGetFlowersQuery('')
@@ -111,6 +113,13 @@ export const Filters: FC = () => {
 			if (maxInputRef && maxInputRef.current) {
 				maxInputRef.current.value = '';
 			}
+
+			if (minInputRefSmall && minInputRefSmall.current) {
+				minInputRefSmall.current.value = '';
+			}
+			if (maxInputRefSmall && maxInputRefSmall.current) {
+				maxInputRefSmall.current.value = '';
+			}
 		}
 		const updatedSelectedItems = selectedItems.filter(selectedItem => selectedItem !== `${item.menu}_${item.id}`);
 		setSelectedItems(updatedSelectedItems);
@@ -128,6 +137,13 @@ export const Filters: FC = () => {
 		}
 		if (maxInputRef && maxInputRef.current) {
 			maxInputRef.current.value = '';
+		}
+
+		if (minInputRefSmall && minInputRefSmall.current) {
+			minInputRefSmall.current.value = '';
+		}
+		if (maxInputRefSmall && maxInputRefSmall.current) {
+			maxInputRefSmall.current.value = '';
 		}
 	}
 
@@ -184,8 +200,8 @@ export const Filters: FC = () => {
 						 addColorFilter={addColor}
 						 min={min}
 						 max={max}
-						 minInputRef={minInputRef}
-						 maxInputRef={maxInputRef}
+						 minInputRef={minInputRefSmall}
+						 maxInputRef={maxInputRefSmall}
 					/>}
 
 			 <div className={styles.catalog__selectedItemsContainer}>
