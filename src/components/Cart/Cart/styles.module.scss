@@ -112,19 +112,6 @@
 }
 
 @media screen and (max-width: 500px) {
-	.cart {
-		gap: 40px;
-	}
-
-	.modal {
-		height: calc(100% - 198px);
-		padding: 0 50px 20px 50px;
-
-		&::-webkit-scrollbar {
-			width: 0px;
-		}
-	}
-
 	.checkout {
 		margin-top: 30px;
 		padding-bottom: 20px;
@@ -143,23 +130,6 @@
 		&::-webkit-scrollbar-thumb {
 			background: var(--rose);
 			min-height: 190px;
-		}
-	}
-
-	.cartEmpty {
-		h2 {
-			font: var(--title-1);
-			letter-spacing: 0.64px;
-		}
-
-		p {
-			margin-top: 10px;
-		}
-
-		.img_wrp {
-			margin-top: 70px;
-			max-width: 464px;
-			max-height: 392px;
 		}
 	}
 }
