@@ -8,6 +8,7 @@ import flower from '../../assets/image/checkOut/thanks_you_flower.png'
 import {useNavigate} from 'react-router-dom';
 import {DataRoute} from '../../data/routes';
 import {setOrderId} from '../../store/checkout/checkoutOrderId.slice';
+import { cleanCart } from '../../store/cart/cart.slice';
 
 export interface ICheckOutThanksPage {
 }
@@ -18,11 +19,12 @@ export const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
 	const navigation = useNavigate()
 	const dispatch = useAppDispatch()
 
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(setOrderId(0))
-	// 	};
-	// }, []);
+	useEffect(() => {
+		dispatch(cleanCart())
+		// return () => {
+		// 	dispatch(setOrderId(0))
+		// };
+	}, []);
 
 
 	return (

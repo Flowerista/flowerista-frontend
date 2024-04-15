@@ -106,6 +106,9 @@ export const cartSlice = createSlice({
                     }
                 }
             }
+        },
+        cleanCart: (state) => {
+            state.cart = []
         }
     }
 })
@@ -115,5 +118,6 @@ export const {
     removeCartItem,
     incQuantity,
     decQuantity,
-    changeSize
+    changeSize,
+    cleanCart
 } = cartSlice.actions

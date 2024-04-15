@@ -114,198 +114,127 @@ export const ProductPage: FC<IProductPage> = () => {
 	if (error) {
 		return <h1>Something Was Wrong</h1>
 	}
-	
-	if (data) {
-		return (
-			<div className={styles.productPage}>
-				<div className={styles.nav}>
-					<Link to={DataRoute.Home}>{t('product.btn1')}</Link> 
-					<span>|</span>
-					<Link to={DataRoute.Catalog}>{t('product.btn2')}</Link>
-					<span>|</span> 
-					{t('product.bouquet')} {productId}
-				</div>
-				<div className={styles.container}>
-					
-					<div className={styles.swiper}>
-						<Swiper
-							pagination={{
-								clickable: true,
-								bulletActiveClass: `${styles.bulletActiveClass}`,
-								bulletClass:  `${styles.bulletClass}`,
-								horizontalClass: `${styles.horizontalClass}`
-							}}										
-							spaceBetween={0}
-							modules={[Pagination]}
-				 			slidesPerView={1}
-						>
-							{data && data.imageUrls && Object.values(data.imageUrls).map((imageUrl, index) => (
-								<>
-									<SwiperSlide className={styles.sectionSlider} key={index}>
-										<img src={imageUrl} alt="flowers"/>
-									</SwiperSlide>
-								</>
-							))}
-						</Swiper>
-					</div>
 
-					<div className={styles.imgs_wrp}>
+	return (
+		<div className={styles.productPage}>
+			<div className={styles.nav}>
+				<Link to={DataRoute.Home}>{t('product.btn1')}</Link> 
+				<span>|</span>
+				<Link to={DataRoute.Catalog}>{t('product.btn2')}</Link>
+				<span>|</span> 
+				{t('product.bouquet')} {productId}
+			</div>
+			<div className={styles.container}>
+				
+				<div className={styles.swiper}>
+					<Swiper
+						pagination={{
+							clickable: true,
+							bulletActiveClass: `${styles.bulletActiveClass}`,
+							bulletClass:  `${styles.bulletClass}`,
+							horizontalClass: `${styles.horizontalClass}`
+						}}										
+						spaceBetween={0}
+						modules={[Pagination]}
+						slidesPerView={1}
+					>
 						{data && data.imageUrls && Object.values(data.imageUrls).map((imageUrl, index) => (
 							<>
-							<div className={styles.img}>
-								<img key={index} src={imageUrl} alt="image"/>
-							</div>
-							<div className={styles.img}>
-								<img key={index} src={imageUrl} alt="image"/>
-							</div>
-							<div className={styles.img}>
-								<img key={index} src={imageUrl} alt="image"/>
-							</div>
+								<SwiperSlide className={styles.sectionSlider} key={index}>
+									<img src={imageUrl} alt="flowers"/>
+								</SwiperSlide>
 							</>
-							
 						))}
-					</div>
-	
-					<div className={styles.content}>
-						<div className={styles.content_wrp}>
-							<div className={styles.info}>
-								<div className={styles.info__wrp}>
-									<h1 className={styles.info__title}>{data?.name}</h1>
-									<span className={styles.info__code}>{t('product.code')}: {data.itemCode}</span>
-								</div>
-								<div className={styles.info__descr}>
-									<p>{t('product.flowers')}: {data.flowers.map((flower) => flower.name).join(', ')}.</p>
-									<p>{t('product.desc')}</p>
-									<p>{t('product.sub_desc')}</p>
-								</div>
-							</div>
-							<div className={styles.select_wrp}>
-								{data?.sizes.map(size =>
-									<ProductSelect
-										size={size.size}
-										active={size.size === activeSize}
-										setActive={() => updateContent(size)}
-										key={size.id}
-										price={`${size.defaultPrice}`}
-									/>)}
-							</div>
+					</Swiper>
+				</div>
 
-							<div className={styles.quantity_wpr}>
-								<div className={styles.price}>
-									{discountPrice &&
-										<div className={styles.price__old}>
-											<p>{+price * quantity}</p>
-											<span>UAH</span>
-										</div>
-									}
-									<div className={styles.price__new}>
-										{quantity * +(discountPrice || price)}
-										<span>UAH</span>
-									</div>
-								</div>
-								<div className={styles.count}>
-									<button onClick={decreaseQuantity}>-</button>
-									<div className={styles.count__item}>{quantity}</div>
-									<button onClick={increaseQuantity}>+</button>
-								</div>
-								<Button 
-									text={`${t('product.buy')}`} 
-									onClick={toCart}
-									sizeMode='full'
-									className={styles.buy}
-								/>
-							</div>
+				<div className={styles.imgs_wrp}>
+					{data && data.imageUrls && Object.values(data.imageUrls).map((imageUrl, index) => (
+						<>
+						<div className={styles.img}>
+							<img key={index} src={imageUrl} alt="image"/>
+						</div>
+						<div className={styles.img}>
+							<img key={index} src={imageUrl} alt="image"/>
+						</div>
+						<div className={styles.img}>
+							<img key={index} src={imageUrl} alt="image"/>
+						</div>
+						</>
+						
+					))}
+				</div>
 
-							<div className={styles.link}>
-								<span>{t('product.link1')}</span>
-								<Link 
-									to={DataRoute.DeliveryAndPayment} 
-									target={'_top'}
-								>
-									{t('product.link2')}
-									<BsArrowRight style={{fontSize: "24px"}}/>
-								</Link>
+				<div className={styles.content}>
+					<div className={styles.content_wrp}>
+						<div className={styles.info}>
+							<div className={styles.info__wrp}>
+								<h1 className={styles.info__title}>{data?.name}</h1>
+								<span className={styles.info__code}>{t('product.code')}: {data?.itemCode}</span>
+							</div>
+							<div className={styles.info__descr}>
+								<p>{t('product.flowers')}: {data?.flowers.map((flower) => flower.name).join(', ')}.</p>
+								<p>{t('product.desc')}</p>
+								<p>{t('product.sub_desc')}</p>
 							</div>
 						</div>
-						<div></div>
+						<div className={styles.select_wrp}>
+							{data?.sizes.map(size =>
+								<ProductSelect
+									size={size.size}
+									active={size.size === activeSize}
+									setActive={() => updateContent(size)}
+									key={size.id}
+									price={`${size.defaultPrice}`}
+								/>)}
+						</div>
+
+						<div className={styles.quantity_wpr}>
+							<div className={styles.price}>
+								{discountPrice &&
+									<div className={styles.price__old}>
+										<p>{+price * quantity}</p>
+										<span>UAH</span>
+									</div>
+								}
+								<div className={styles.price__new}>
+									{quantity * +(discountPrice || price)}
+									<span>UAH</span>
+								</div>
+							</div>
+							<div className={styles.count}>
+								<button onClick={decreaseQuantity}>-</button>
+								<div className={styles.count__item}>{quantity}</div>
+								<button onClick={increaseQuantity}>+</button>
+							</div>
+							<Button 
+								text={`${t('product.buy')}`} 
+								onClick={toCart}
+								sizeMode='full'
+								className={styles.buy}
+							/>
+						</div>
+
+						<div className={styles.link}>
+							<span>{t('product.link1')}</span>
+							<Link 
+								to={DataRoute.DeliveryAndPayment} 
+								target={'_top'}
+							>
+								{t('product.link2')}
+								<BsArrowRight style={{fontSize: "24px"}}/>
+							</Link>
+						</div>
 					</div>
-				</div>
-	
-				<div className={styles.recentlyViewed}>
-					<h2>{t('product.recently')}</h2>
-					<SectionFlower data={recentlyViewed} pagination={false}/>
+					<div></div>
 				</div>
 			</div>
-		);
-	}
-	return null
 
-	// return (
-	// 	<div className={styles.productPage}>
-	// 		<div className={styles.links}>
-	// 			<Link to={DataRoute.Home}>{t('product.btn1')}</Link> 
-	// 			<span>|</span>
-	// 			<Link to={DataRoute.Catalog}>{t('product.btn2')}</Link>
-	// 			<span>|</span> 
-	// 			{t('product.bouquet')} {productId}
-	// 		</div>
-	// 		<div className={styles.container}>
-	// 			<div className={styles.images}>
-	// 				{data && data.imageUrls && Object.values(data.imageUrls).map((imageUrl, index) => (
-	// 					<img key={index} src={imageUrl} alt="image"/>
-	// 				))}
-	// 			</div>
-	// 			<div className={styles.content}>
-	// 				<div className={styles.content__infos}>
-	// 					<h1>{data?.name}</h1>
-	// 					<span className={styles.content__span}>{t('product.code')}: {data?.itemCode}</span>
-	// 					<div
-	// 						className={styles.content__infos__flowers}>{t('product.flowers')}: {data?.flowers.map(flower => <>{flower.name}, {' '}</>)}</div>
-	// 					<p>{t('product.desc')}</p>
-	// 					<p>{t('product.sub_desc')}</p>
-	// 				</div>
-	// 				<div className={styles.content__select}>
-	// 					{data?.sizes.map(size =>
-	// 						<ProductSelect
-	// 							size={size.size}
-	// 							active={size.size === activeSize}
-	// 							setActive={() => updateContent(size)}
-	// 							key={size.id}
-	// 							price={`${size.defaultPrice}`}
-	// 						/>)}
-	// 				</div>
-	// 				<div className={styles.content__price}>
-	// 					<div className={styles.priceDiscount}>
-	// 						{discountPrice ? <span>{price.toString()} UAH</span> : ''}
-	// 					</div>
-	// 					<span className={styles.defaultPrice}>{discountPrice ? discountPrice : price} UAH</span>
-	// 				</div>
-	// 				<div className={styles.content__btns}>
-	// 					<Button text={`${t('product.buy')}`} onClick={toCart}/>
-	// 					<div>
-	// 						<button onClick={decreaseQuantity}>-</button>
-	// 						{quantity}
-	// 						<button onClick={increaseQuantity}>+</button>
-	// 					</div>
-	// 				</div>
-	// 				<div className={styles.content__link}>
-	// 					<span>{t('product.link1')}</span>
-	// 					<Link 
-	// 						to={DataRoute.DeliveryAndPayment} 
-	// 						target={'_top'}
-	// 					>
-	// 						{t('product.link2')}
-	// 						<img src={arrow} alt="arrow"/>
-	// 					</Link>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-
-	// 		<div className={styles.recentlyViewed}>
-	// 			<h2>{t('product.recently')}</h2>
-	// 			<SectionFlower data={recentlyViewed}/>
-	// 		</div>
-	// 	</div>
-	// );
+			<div className={styles.recentlyViewed}>
+				<h2>{t('product.recently')}</h2>
+				<SectionFlower data={recentlyViewed} pagination={false}/>
+			</div>
+		</div>
+	);
 };
 
