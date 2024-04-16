@@ -12,7 +12,7 @@ import styles from './styles.module.scss';
 import {Loader} from '../../../components/shared/Loading';
 
 
-export const PersonalInformation: FC = () => {
+const PersonalInformation: FC = () => {
 	const {loadingStatus, errorStatus} = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch();
 	useEffect(() => {
@@ -35,14 +35,15 @@ export const PersonalInformation: FC = () => {
 	}
 
 	return (
-		<>
-			<div className={styles.forms__wrapper}>
-				<PersonalInformationForm onOpen={openPasswordModal}/>
-				<AddressForm/>
-				<ContactsForm/>
-			</div>
-			<PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
-			<PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
-		</>
+		 <>
+			 <div className={styles.forms__wrapper}>
+				 <PersonalInformationForm onOpen={openPasswordModal}/>
+				 <AddressForm/>
+				 <ContactsForm/>
+			 </div>
+			 <PasswordChange isOpen={showPasswordChange} setOpen={setShowPasswordChange} showNext={setShowPasswordSuccess}/>
+			 <PasswordSuccess isOpen={showPasswordSuccess} setOpen={setShowPasswordSuccess}/>
+		 </>
 	)
 }
+export default PersonalInformation

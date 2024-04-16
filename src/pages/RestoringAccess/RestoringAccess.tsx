@@ -18,7 +18,7 @@ interface Inputs {
 	email: string;
 }
 
-export const RestoringAccess: FC = () => {
+const RestoringAccess: FC = () => {
 	const {t} = useTranslation()
 	const {
 		register,
@@ -60,3 +60,4 @@ export const RestoringAccess: FC = () => {
 		 </div>
 	)
 }
+export default RestoringAccess

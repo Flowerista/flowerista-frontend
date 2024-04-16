@@ -57,7 +57,7 @@ const checkPhone = async (phone: number) => {
 	return checked
 }
 
-export const Registration: FC = () => {
+const Registration: FC = () => {
 	const {t} = useTranslation()
 	const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
 	const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
@@ -152,3 +152,4 @@ export const Registration: FC = () => {
 		 </div>
 	)
 }
+export default Registration

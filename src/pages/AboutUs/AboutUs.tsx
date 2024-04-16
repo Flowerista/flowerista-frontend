@@ -10,7 +10,7 @@ import Alex from '../../assets/image/about_us_page/team/alex.png';
 import Flower from '../../assets/image/about_us_page/flower.png';
 import {useTranslation} from 'react-i18next';
 
-export const AboutUs: FC = () => {
+const AboutUs: FC = () => {
 	const {t} = useTranslation()
 	const teamData = [
 		{
@@ -158,3 +158,4 @@ export const AboutUs: FC = () => {
 		 </div>
 	)
 }
+export default AboutUs

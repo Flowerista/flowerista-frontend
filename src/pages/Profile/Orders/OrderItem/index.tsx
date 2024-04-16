@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import top from '../../../../assets/image/profile/order/top.png';
 import bottom from '../../../../assets/image/profile/order/botton.png';
 import {useTranslation} from 'react-i18next';
-import {AddressHistory, OrderItemHistory, UserHistory} from '../index';
+import {AddressHistory, OrderItemHistory, UserHistory} from '../Orders';
 
 export interface IOrderItem {
 	item: {

@@ -35,7 +35,7 @@ const checkEmail = async (email: string) => {
 	}
 }
 
-export const Login: FC = () => {
+const Login: FC = () => {
 	const {t} = useTranslation()
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch()
@@ -93,3 +93,4 @@ export const Login: FC = () => {
 		 </div>
 	)
 }
+export default Login
