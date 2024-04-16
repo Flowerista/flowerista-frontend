@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import openImage from '../../../../assets/image/catalog/mobile/sorting_open.png';
 import closeImage from '../../../../assets/image/catalog/mobile/close_sorting.png'
@@ -14,15 +14,15 @@ export interface ISorting {
 }
 
 export const Sorting: FC<ISorting> = () => {
-	const {t} = useTranslation()
+	const {t, i18n} = useTranslation()
 
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const dispatch = useAppDispatch()
 
 	const [sorting, setSorting] = useState([
-		{item: 'sortByNewest', id: 1, name: 'New', sort: false},
-		{item: 'sortByPriceHighToLow', id: 2, name: 'High to Low Price', sort: false},
-		{item: 'sortByPriceLowToHigh', id: 3, name: 'Low To High Price', sort: false},
+		{item: 'sortByNewest', id: 1, name: `${t('catalog.sorting.first')}`, sort: false},
+		{item: 'sortByPriceHighToLow', id: 2, name: `${t('catalog.sorting.second')}`, sort: false},
+		{item: 'sortByPriceLowToHigh', id: 3, name: `${t('catalog.sorting.third')}`, sort: false},
 	])
 
 	const addSorting = (value: { item: string, name: string, id: number, sort: boolean }) => {
@@ -59,6 +59,22 @@ export const Sorting: FC<ISorting> = () => {
 		document.body.style.overflow = 'auto';
 		setIsVisible(false);
 	};
+
+	useEffect(() => {
+		const updateSorting = () => {
+			setSorting([
+				{item: 'sortByNewest', id: 1, name: `${t('catalog.sorting.first')}`, sort: false},
+				{item: 'sortByPriceHighToLow', id: 2, name: `${t('catalog.sorting.second')}`, sort: false},
+				{item: 'sortByPriceLowToHigh', id: 3, name: `${t('catalog.sorting.third')}`, sort: false},
+			]);
+		};
+
+		i18n.on('languageChanged', updateSorting);
+
+		return () => {
+			i18n.off('languageChanged', updateSorting);
+		};
+	}, [i18n, t]);
 
 
 	return (

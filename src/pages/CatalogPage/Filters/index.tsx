@@ -31,10 +31,10 @@ import {MobileFilters} from '../MobileFilters';
 
 
 export const Filters: FC = () => {
-	const {t} = useTranslation()
+	const {t, i18n} = useTranslation()
 	const dispatch = useAppDispatch()
 	const {data: priceRange} = useGetRangePriceQuery('')
-	const [sortingName, setSortingName] = useState<string>('new');
+	const [sortingName, setSortingName] = useState<string>(t('catalog.sorting.title'));
 
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -50,9 +50,9 @@ export const Filters: FC = () => {
 	const maxMinValues = [{item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42}]
 
 	const [sorting, setSorting] = useState([
-		{item: 'sortByNewest', id: 1, name: 'New', sort: false},
-		{item: 'sortByPriceHighToLow', id: 2, name: 'High to Low Price', sort: false},
-		{item: 'sortByPriceLowToHigh', id: 3, name: 'Low to High Price', sort: false},
+		{item: 'sortByNewest', id: 1, name: `${t('catalog.sorting.first')}`, sort: false},
+		{item: 'sortByPriceHighToLow', id: 2, name: `${t('catalog.sorting.second')}`, sort: false},
+		{item: 'sortByPriceLowToHigh', id: 3, name: `${t('catalog.sorting.third')}`, sort: false},
 	])
 
 
@@ -146,6 +146,24 @@ export const Filters: FC = () => {
 			maxInputRefSmall.current.value = '';
 		}
 	}
+
+	useEffect(() => {
+		const updateSorting = () => {
+			setSorting([
+				{item: 'sortByNewest', id: 1, name: `${t('catalog.sorting.first')}`, sort: false},
+				{item: 'sortByPriceHighToLow', id: 2, name: `${t('catalog.sorting.second')}`, sort: false},
+				{item: 'sortByPriceLowToHigh', id: 3, name: `${t('catalog.sorting.third')}`, sort: false},
+			]);
+			setSortingName(t('catalog.sorting.title'));
+		};
+
+		i18n.on('languageChanged', updateSorting);
+
+		return () => {
+			i18n.off('languageChanged', updateSorting);
+		};
+	}, [i18n, t]);
+
 
 	useEffect(() => {
 		return () => {

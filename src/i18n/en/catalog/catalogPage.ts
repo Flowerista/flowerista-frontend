@@ -8,4 +8,10 @@ export const CatalogPageEn = {
 		'new': 'new',
 		'clear': 'clear filters',
 	},
+	'sorting': {
+		'title': 'new',
+		'first': 'New',
+		'second': 'High to Low Price',
+		'third': 'Low to High Price',
+	},
 }
