@@ -111,14 +111,14 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 						<div className={styles.info__user}>
 							<div className={styles.info__user_delivery}>
 								<h4>{t('profile.order.info')}</h4>
-								<p>{t('profile.order.delivery')} {item.address.type}</p>
+								<p>{t('profile.order.delivery')} {item.address.type === 'mail' ? 'pickup' : item.address.type}</p>
 								<p>{item.address.house ?? item.address.flat} {item.address.entrance ?? ''} {item.address.street},</p>
 								<p>{item.address.city}</p>
 							</div>
 							<div className={styles.info__user_recipient}>
 								<h4>{t('profile.order.recipient')}</h4>
 								<p>{item.user.firstName} {item.user.lastName}</p>
-								<p>{t('profile.order.tel')} {item.user.phoneNumber}</p>
+								<p>{t('profile.order.tel')} +380{item.user.phoneNumber}</p>
 							</div>
 						</div>
 						<div className={styles.info__products}>
