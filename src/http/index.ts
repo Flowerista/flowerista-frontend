@@ -19,7 +19,7 @@ $api.interceptors.response.use((config) => {
 }, (async (error: AxiosError) => {
     const originalRequest = error.config;
     // @ts-ignore
-    if (error.response?.status == 401 && error.config && originalRequest && !error.config._isRetry) { 
+    if (error.response?.status === 401) { 
         // @ts-ignore
         originalRequest._isRetry = true;
         try {
@@ -30,7 +30,7 @@ $api.interceptors.response.use((config) => {
             })
             localStorage.setItem('token', response.data.access_token)
             localStorage.setItem('refresh', response.data.refresh_token)
-            return $api.request(originalRequest)
+            return $api.request(originalRequest!)
         } catch (e) {
             console.log('Not authorized');
         }

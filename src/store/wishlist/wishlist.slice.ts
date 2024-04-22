@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, SerializedError } from "@reduxjs/toolkit";
 import UserService from "../../services/UserService/UserService";
 import { IFlowerCard } from "../../interface/flower";
+import { logout } from "../auth/auth.slice";
 
 interface IInitialState {
     wishlist:  IFlowerCard[];

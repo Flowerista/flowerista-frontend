@@ -1,8 +1,9 @@
-import {CSSProperties, FC, ReactNode, useEffect} from 'react'
+import { CSSProperties, FC, ReactNode, useEffect } from 'react'
 import styles from './styles.module.scss'
-import {BsArrowLeft} from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
+import { BsXLg } from "react-icons/bs";
 import classNames from 'classnames';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 interface ModalProps {
 	style?: CSSProperties;
@@ -13,8 +14,8 @@ interface ModalProps {
 }
 
 
-const Modal: FC<ModalProps> = ({children, style, className, isOpen = true, onClose}) => {
-	const {t} = useTranslation()
+const Modal: FC<ModalProps> = ({ children, style, className, isOpen = true, onClose }) => {
+	const { t } = useTranslation()
 	useEffect(() => {
 		const closeModal = (e: any) => {
 			if (e.code === 'Escape') {
@@ -34,23 +35,26 @@ const Modal: FC<ModalProps> = ({children, style, className, isOpen = true, onClo
 	}
 
 	return (
-		 <div
-				className={classNames(styles.modal)}
-				onClick={onClose}
-		 >
-			 <div
-					className={classNames(styles.modal__wrapper, className)}
-					style={style}
-					onClick={(e) => e.stopPropagation()}
-			 >
-				 {children}
-				 <div
-						className={styles.modal__btn}
-						onClick={onClose}>
-					 <BsArrowLeft size={24}/>{t('register.successes.btn1')}
-				 </div>
-			 </div>
-		 </div>
+		<div
+			className={classNames(styles.modal)}
+			onClick={onClose}
+		>
+			<div
+				className={classNames(styles.modal__wrapper, className)}
+				style={style}
+				onClick={(e) => e.stopPropagation()}
+			>
+				{children}
+				<button
+					className={styles.modal__close}
+					onClick={onClose}
+					tabIndex={isOpen ? 1 : -1}
+				>
+					<div className={styles.btn_big}><BsArrowLeft size={24} />{t('register.successes.btn1')}</div>
+					<div className={styles.btn_small}><BsXLg size={24} /></div>
+				</button>
+			</div>
+		</div>
 	)
 }
 

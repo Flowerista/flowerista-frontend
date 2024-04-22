@@ -1,10 +1,10 @@
-import {CSSProperties, FC, useEffect, useState} from 'react';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Pagination} from 'swiper/modules';
+import { CSSProperties, FC, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
 import classNames from 'classnames';
 
-import {Card} from '../Card/Card';
-import {IFlowerCard} from '../../interface/flower';
+import { Card } from '../Card/Card';
+import { IFlowerCard } from '../../interface/flower';
 
 import styles from './styles.module.scss';
 import { useResize } from '../../hooks/useResize';
@@ -16,9 +16,9 @@ export interface ISectionsFlower {
   pagination?: boolean
 }
 
-export const SectionFlower: FC<ISectionsFlower> = ({data, style, className, pagination = true}) => {
-  const {width} = useResize()
-  
+export const SectionFlower: FC<ISectionsFlower> = ({ data, style, className, pagination = true }) => {
+  const { width } = useResize()
+
   const [showSlide, setShowSlide] = useState(2);
   const [gapSlide, setGapSlide] = useState(9);
 
@@ -32,31 +32,29 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, style, className, pagi
     } else if (width >= 768) {
       setShowSlide(3)
       setGapSlide(20)
-    } else  if (width >= 500) {
+    } else if (width >= 500) {
       setShowSlide(3)
       setGapSlide(9)
     } else {
       setShowSlide(2)
       setGapSlide(9)
     }
-    console.log(width);
-    
   }, [width])
-  
+
   return (
     <section className={classNames(styles.section, className)} style={style}>
       <div className={styles.swiper}>
-			  <Swiper
-					pagination={{
+        <Swiper
+          pagination={{
             clickable: true,
             bulletActiveClass: `${styles.bulletActiveClass}`,
-            bulletClass:  `${styles.bulletClass}`,
+            bulletClass: `${styles.bulletClass}`,
             horizontalClass: `${styles.horizontalClass}`
           }}
           spaceBetween={gapSlide}
-					modules={pagination ? [Pagination] : []}
+          modules={pagination ? [Pagination] : []}
           slidesPerView={showSlide}
-			  >
+        >
           {data && data.map((item) => (
             <SwiperSlide className={styles.sectionSlider} key={item.id}>
               <Card
@@ -70,8 +68,8 @@ export const SectionFlower: FC<ISectionsFlower> = ({data, style, className, pagi
               />
             </SwiperSlide>
           ))}
-			 </Swiper>
-		 </div>
+        </Swiper>
+      </div>
     </section>
   )
 }

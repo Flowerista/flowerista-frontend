@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import { FC } from 'react'
 import Modal from '../Modal';
 
 import styles from './styles.module.scss'
@@ -12,7 +12,7 @@ interface PasswordSuccessProps {
     setOpen: (state: false) => void;
 }
 
-const PasswordSuccess: FC<PasswordSuccessProps> = ({isOpen, setOpen}) => {
+const PasswordSuccess: FC<PasswordSuccessProps> = ({ isOpen, setOpen }) => {
     const navigate = useNavigate()
     const onClose = () => {
         setOpen(false)
@@ -23,7 +23,7 @@ const PasswordSuccess: FC<PasswordSuccessProps> = ({isOpen, setOpen}) => {
     }
     return (
         <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>
-            <Title text='Password Updated Successfully' className={styles.modal__title}/>
+            <Title text='Password Updated Successfully' className={styles.modal__title} />
             <div className={styles.list__wrapper}>
                 <ol className={styles.modal__list}>
                     <li className={styles.modal__item}>
@@ -37,8 +37,8 @@ const PasswordSuccess: FC<PasswordSuccessProps> = ({isOpen, setOpen}) => {
                     </li>
                 </ol>
             </div>
-            <Button text='Go to main page' onClick={() => toMainPage()} style={{marginTop: '50px'}}/>
-            <Button text='Go to profile page' colorMode='white' onClick={onClose} style={{marginTop: '20px'}}/>
+            <Button text='Go to main page' onClick={() => toMainPage()} style={{ marginTop: '50px' }} sizeMode='full' />
+            <Button text='Go to profile page' colorMode='white' onClick={onClose} style={{ marginTop: '20px' }} sizeMode='full' />
         </Modal>
     )
 }
