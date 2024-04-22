@@ -39,6 +39,12 @@
     .wishlist {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .empty {
+        &__btn {
+            max-width: 354px;
+        }
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -60,6 +66,12 @@
     .wishlist {
         grid-template-columns: repeat(3, 1fr);
         row-gap: 80px;
+    }
+
+    .empty {
+        &__btn {
+            max-width: 304px;
+        }
     }
 }
 
