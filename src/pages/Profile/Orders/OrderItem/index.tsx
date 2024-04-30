@@ -4,6 +4,7 @@ import top from '../../../../assets/image/profile/order/top.png';
 import bottom from '../../../../assets/image/profile/order/botton.png';
 import {useTranslation} from 'react-i18next';
 import {AddressHistory, OrderItemHistory, UserHistory} from '../Orders';
+import {useNavigate} from 'react-router-dom';
 
 export interface IOrderItem {
 	item: {
@@ -27,6 +28,11 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 	const handleExpandClick = () => {
 		setIsExpanded(!isExpanded);
 	};
+	const navigate = useNavigate()
+
+	const onNavigateToProduct = (id: string) => {
+		return navigate(`/product/${id}`);
+	}
 
 	return (
 		 <div className={styles.wrapper}>
@@ -126,7 +132,7 @@ export const OrderItem: FC<IOrderItem> = ({item}) => {
 								item.orderItems.map((product, index) => (
 									 <div key={index} className={styles.info__products_product}>
 										 <div className={styles.product__wrapper}>
-											 <div className={styles.image}>
+											 <div onClick={() => onNavigateToProduct(String(product.productId))} className={styles.image}>
 												 <img src={product.imageUrls[1]} alt={product.name}/>
 											 </div>
 											 <div className={styles.title}>

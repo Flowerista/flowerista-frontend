@@ -46,7 +46,14 @@ const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
 							const selectedDate = dayjs(value).format('YYYY-MM-DD')
 							return selectedDate >= dayjs(new Date()).format('YYYY-MM-DD');
 						}),
-				 time: yup.string().nullable().required('time is required'),
+				 time: yup.string().nullable().required('time is required')
+						.test('not-past', 'The store is open from 9:00 to 20:00.', function (value) {
+							if (!value) return true;
+							const selectedHour = dayjs(value).hour()
+							return selectedHour >= 9 && selectedHour < 20;
+						}),
+
+
 			 }).required()),
 	})
 
@@ -101,11 +108,13 @@ const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
 					 <Controller
 							name="time"
 							control={control}
+
 							render={({field}) => (
 								 <div>
 									 <TimePicker
 											{...field}
 											className={styles.timePicker}
+											ampm={false}
 											sx={{
 												'& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
 													border: 'none',
@@ -125,7 +134,9 @@ const FirstTab: FC<IFirstTab> = ({setIsActive}) => {
 
 											}}
 									 />
-									 {errors.time?.message && <FormError error={errors.time.message}/>}
+									 {errors.time?.message && <div className={styles.FormError}>
+										 <FormError error={errors.time.message}/>
+									 </div>}
 
 								 </div>
 							)}
