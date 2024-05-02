@@ -1,17 +1,17 @@
-import {FC, useEffect} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
+import { FC, useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import {PersonalInformationSchema} from '../../../../utils/yup';
-import {Form, InputsWrapper, NameInput, SurnameInput} from '../../../../components/AppForm';
-import {Button} from '../../../../components/Buttons/Button';
-import {Title} from '../../../../components/Title/Title';
+import { PersonalInformationSchema } from '../../../../utils/yup';
+import { Form, InputsWrapper, NameInput, SurnameInput } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Buttons/Button';
+import { Title } from '../../../../components/Title/Title';
 
 import styles from './styles.module.scss';
-import {useAppDispatch, useAppSelector} from '../../../../store/store';
-import {changePersonalInfo} from '../../../../store/user/user.slice';
-import {upFirstChar} from '../../../../utils/helpers';
-import {useTranslation} from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { changePersonalInfo } from '../../../../store/user/user.slice';
+import { upFirstChar } from '../../../../utils/helpers';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
 	name: string;
@@ -22,16 +22,16 @@ interface PersonalFormProps {
 	onOpen: () => void;
 }
 
-export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
-	const {t} = useTranslation()
-	const {user: {firstName, lastName}, errorStatus, loadingStatus} = useAppSelector(state => state.user)
+export const PersonalInformationForm: FC<PersonalFormProps> = ({ onOpen }) => {
+	const { t } = useTranslation()
+	const { user: { firstName, lastName }, errorStatus, loadingStatus } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
 
 
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		setValue,
 	} = useForm<Inputs>({
 		mode: 'onBlur',
@@ -44,29 +44,29 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
 	}, [firstName])
 
 
-	const onSubmit: SubmitHandler<Inputs> = async ({name, surname}) => {
+	const onSubmit: SubmitHandler<Inputs> = async ({ name, surname }) => {
 		const newFirstName = upFirstChar(name)
 		const newLastName = upFirstChar(surname)
-		const data = {firstName: newFirstName, lastName: newLastName}
+		const data = { firstName: newFirstName, lastName: newLastName }
 		await dispatch(changePersonalInfo(data))
 		if (errorStatus.changePersonalInfo) {
 			alert('error')
 		} else {
-			alert(JSON.stringify(data))
+			alert('Success')
 		}
 	}
 
 	return (
 		<div className={styles.form__wrapper}>
 			<div className={styles.form__head}>
-				<Title text={`${t('profile.personal.title')}`}/>
+				<Title text={`${t('profile.personal.title')}`} />
 				<p className={styles.form__descr}>{t('profile.personal.text')}</p>
 			</div>
 			<div className={styles.form__body}>
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<InputsWrapper>
-						<NameInput register={register} error={errors.name?.message}/>
-						<SurnameInput register={register} error={errors.surname?.message}/>
+						<NameInput register={register} error={errors.name?.message} />
+						<SurnameInput register={register} error={errors.surname?.message} />
 						<div
 							className={styles.password}
 							onClick={onOpen}
@@ -74,8 +74,8 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
 							{t('profile.personal.btn1')}
 						</div>
 					</InputsWrapper>
-					<Button 
-						text={`${t('profile.personal.btn2')}`} 
+					<Button
+						text={`${t('profile.personal.btn2')}`}
 						colorMode="white"
 						sizeMode='full'
 						className={styles.personal_btn}

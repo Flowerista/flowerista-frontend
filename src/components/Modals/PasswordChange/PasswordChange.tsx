@@ -53,7 +53,6 @@ const PasswordChange: FC<PasswordChangeProps> = ({ isOpen, setOpen, showNext }) 
 		if (errorStatus.changePassword) {
 			alert('Error')
 		} else {
-			alert(JSON.stringify(data))
 			reset()
 			onClose()
 			showSuccessModal()

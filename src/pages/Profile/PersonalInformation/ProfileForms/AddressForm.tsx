@@ -1,17 +1,17 @@
-import {FC, useEffect} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
+import { FC, useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import {Form, InputsWrapper, TextInput} from '../../../../components/AppForm';
-import {Button} from '../../../../components/Buttons/Button';
-import {Title} from '../../../../components/Title/Title';
-import {AddressSchema} from '../../../../utils/yup';
+import { Form, InputsWrapper, TextInput } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Buttons/Button';
+import { Title } from '../../../../components/Title/Title';
+import { AddressSchema } from '../../../../utils/yup';
 
 
 import styles from './styles.module.scss';
-import {useAppDispatch, useAppSelector} from '../../../../store/store';
-import {changeAddress} from '../../../../store/user/user.slice';
-import {useTranslation} from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../../../store/store';
+import { changeAddress } from '../../../../store/user/user.slice';
+import { useTranslation } from 'react-i18next';
 
 export interface Inputs {
 	city: string;
@@ -22,10 +22,10 @@ export interface Inputs {
 }
 
 export const AddressForm: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 
 	const {
-		user: {address: {city, street, house, entrance, flat}},
+		user: { address: { city, street, house, entrance, flat } },
 		errorStatus,
 		loadingStatus,
 	} = useAppSelector(state => state.user)
@@ -34,7 +34,7 @@ export const AddressForm: FC = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		setValue,
 	} = useForm<Inputs>({
 		mode: 'onBlur',
@@ -51,7 +51,7 @@ export const AddressForm: FC = () => {
 
 
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-		const {city, street, house, entrance, flat} = data
+		const { city, street, house, entrance, flat } = data
 		const newAddress = {
 			city,
 			street,
@@ -63,13 +63,13 @@ export const AddressForm: FC = () => {
 		if (errorStatus.changeAddress) {
 			alert('Error')
 		} else {
-			alert(JSON.stringify(newAddress))
+			alert('Success')
 		}
 	}
 	return (
 		<div className={styles.form__wrapper}>
 			<div className={styles.form__head}>
-				<Title text={`${t('profile.address.title')}`}/>
+				<Title text={`${t('profile.address.title')}`} />
 				<p className={styles.form__descr}>{t('profile.address.text')}</p>
 			</div>
 			<div className={styles.form__body}>
@@ -111,12 +111,12 @@ export const AddressForm: FC = () => {
 							error={errors.flat?.message}
 						/>
 					</div>
-					<Button 
-						text={`${t('profile.address.btn1')}`} 
-						colorMode="white" 
+					<Button
+						text={`${t('profile.address.btn1')}`}
+						colorMode="white"
 						sizeMode='full'
-						style={{marginTop: '40px'}}
-						loading={loadingStatus.changeAddress}/>
+						style={{ marginTop: '40px' }}
+						loading={loadingStatus.changeAddress} />
 				</Form>
 			</div>
 		</div>
