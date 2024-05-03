@@ -17,8 +17,6 @@ import {
 } from '../../components/AppForm'
 import {Button} from '../../components/Buttons/Button';
 import {Title} from '../../components/Title/Title';
-
-import {usePostRegistrationMutation} from '../../services/bouquete-api/bouquete-api-service';
 import {IRegister} from '../../interface/register';
 import RegistrationCompleted from '../../components/Modals/RegistrationCompleted/RegistrationCompleted';
 import RegistrationError from '../../components/Modals/RegistrationError/RegistrationError';
@@ -27,6 +25,7 @@ import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
 import {upFirstChar} from '../../utils/helpers';
 import {useTranslation} from 'react-i18next';
+import {usePostRegistration} from '../../services/UserService/postRegistration/postRegistration';
 
 type Inputs = {
 	name: string;
@@ -62,7 +61,7 @@ const Registration: FC = () => {
 	const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
 	const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
 	const [loading, setLoading] = useState<boolean>(false)
-	const [sendRequest] = usePostRegistrationMutation()
+	const [sendRequest] = usePostRegistration()
 	const {
 		register,
 		handleSubmit,

@@ -1,6 +1,5 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {bouqueteApi} from '../services/bouquete-api/bouquete-api-service';
 import {authServiceApi} from '../services/AuthService/rtk-auth-service';
 import {filtrationSlice} from './filtration/filtration.slice'
 import {recentlyViewedSlice} from './recentlyViewed/recentlyViewed.slice'
@@ -15,6 +14,7 @@ import {wishlistSlice} from './wishlist/wishlist.slice'
 import {checkOutSlice} from './checkout/checkout.slice';
 import {modalsSlice} from './modals/modals.slice';
 import {checkOutOrderIdSlice} from './checkout/checkoutOrderId.slice';
+import {rtkApi} from '../http/rtkApi';
 
 const persistConfig = {
 	key: 'root',
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
 	checkout: checkOutSlice.reducer,
 	checkoutOrderId: checkOutOrderIdSlice.reducer,
 	modals: modalsSlice.reducer,
-	[bouqueteApi.reducerPath]: bouqueteApi.reducer,
+	[rtkApi.reducerPath]: rtkApi.reducer,
 	[authServiceApi.reducerPath]: authServiceApi.reducer,
 })
 
@@ -64,7 +64,8 @@ export const setupStore = () => {
 						 'wishlist/deleteCard/fulfilled',
 					 ],
 				 },
-			 }).concat(bouqueteApi.middleware)
+			 })
+					.concat(rtkApi.middleware)
 					.concat(authServiceApi.middleware),
 	})
 }

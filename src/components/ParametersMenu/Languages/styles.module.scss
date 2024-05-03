@@ -2,13 +2,16 @@
 	display: flex;
 	gap: 10px;
 	letter-spacing: 0.32px;
+
 	button {
 		background-color: transparent;
+		color: black;
 	}
+
 	font: var(--body-1-400);
 	color: var(--brown);
 }
 
 .active {
-	color: var(--rose);
+	color: var(--rose) !important;
 }

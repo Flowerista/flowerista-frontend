@@ -37,7 +37,9 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 
 
 	const handleClick = () => {
-		setIsActiveAccordion((prevState) => !prevState);
+		if (user.user.email !== '') {
+			setIsActiveAccordion((prevState) => !prevState);
+		}
 	};
 
 
@@ -45,11 +47,14 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 		e.stopPropagation();
 	};
 
-
 	return (
 		 <div
 				onClick={handleClick}
-				className={`${user.user.email === '' ? styles.blocked : ''}  ${styles.accordion} ${isActiveAccordion ? `${styles.open}` : ''}`}
+				className={`
+					${user.user.email === '' ? styles.blocked : ''}
+				 ${styles.accordion} 
+				 ${isActiveAccordion ? `${styles.open}` : ''}
+				 `}
 		 >
 			 <div className={styles.title}>
 				 <span>{t('checkout.authorized.delivery.title')}</span>

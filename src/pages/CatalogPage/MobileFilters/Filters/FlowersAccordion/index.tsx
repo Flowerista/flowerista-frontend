@@ -2,8 +2,8 @@ import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import styles from './styles.module.scss';
 import open from '../../../../../assets/image/checkOut/open.png';
 import close from '../../../../../assets/image/checkOut/close.png';
-import {useGetFlowersQuery} from '../../../../../services/bouquete-api/bouquete-api-service';
 import {useTranslation} from 'react-i18next';
+import {useGetFlowers} from '../../../../../services/bouquete-api/getFlowers/getFlowers';
 
 
 export interface IFlowersAccordion {
@@ -23,7 +23,7 @@ export const FlowersAccordion: FC<IFlowersAccordion> = ({
 	const name = t('mobileFilters.filter.modal.nameFlower')
 
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const {data} = useGetFlowersQuery('')
+	const {data} = useGetFlowers('')
 
 
 	const handleClick = () => {

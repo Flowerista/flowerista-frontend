@@ -1,12 +1,12 @@
 import {FC, FormHTMLAttributes, SetStateAction, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
 import {BsSearch} from 'react-icons/bs';
-import {useSearchBouquetesQuery} from '../../../services/bouquete-api/bouquete-api-service';
 import {useDebounce} from '../../../hooks/useDebounce';
 import {Link} from 'react-router-dom';
 import {DataRoute} from '../../../data/routes';
 import classNames from 'classnames';
 import {useTranslation} from 'react-i18next';
+import {useSearchBouquetes} from '../../../services/bouquete-api/searchBouquetes/searchBouquetes';
 
 interface SearchProps extends FormHTMLAttributes<HTMLFormElement> {
 	type: 'header' | 'menu'
@@ -19,7 +19,7 @@ export const Search: FC<SearchProps> = ({className, type}) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const debouncedSearch = useDebounce(searchTerm, 500)
 	const ref = useRef<HTMLDivElement | null>(null)
-	const {data} = useSearchBouquetesQuery(debouncedSearch)
+	const {data} = useSearchBouquetes(debouncedSearch)
 
 	useEffect(() => {
 		if (type === 'menu') {
