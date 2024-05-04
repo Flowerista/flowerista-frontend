@@ -8,8 +8,10 @@ import {PayWithPayPal} from '../PayWithPayPal';
 
 
 const PaymentTabs: FC = () => {
+
 	const {t} = useTranslation()
 	const [activeTab, setActiveTab] = useState('tab1');
+
 	return (
 		 <div className={styles.tabs}>
 			 <ul className={styles.nav}>

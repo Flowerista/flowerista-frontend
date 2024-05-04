@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios';
@@ -26,6 +26,8 @@ import styles from './styles.module.scss'
 import {upFirstChar} from '../../utils/helpers';
 import {useTranslation} from 'react-i18next';
 import {usePostRegistration} from '../../services/UserService/postRegistration/postRegistration';
+import {useLazyGetCheckEmailQuery} from '../../services/AuthService/checkEmail/checkEmail';
+import {useLazyGetCheckPhoneQuery} from '../../services/AuthService/checkPhone/checkPhone';
 
 type Inputs = {
 	name: string;
@@ -35,33 +37,15 @@ type Inputs = {
 	password: string;
 }
 
-// add try catch
-const checkEmail = async (email: string) => {
-	let checked
-	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
-		 .then(response => {
-			 checked = response.data
-		 })
-		 .catch(err => console.log(err))
-	return checked
-}
-
-const checkPhone = async (phone: number) => {
-	let checked
-	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkPhone/${phone}`)
-		 .then(response => {
-			 checked = response.data
-		 })
-		 .catch(err => console.log(err))
-	return checked
-}
 
 const Registration: FC = () => {
 	const {t} = useTranslation()
 	const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
 	const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
-	const [loading, setLoading] = useState<boolean>(false)
-	const [sendRequest] = usePostRegistration()
+	const [sendRequest, {data, isLoading, isError}] = usePostRegistration()
+	const [checkEmail] = useLazyGetCheckEmailQuery()
+	const [checkPhone] = useLazyGetCheckPhoneQuery()
+
 	const {
 		register,
 		handleSubmit,
@@ -77,7 +61,6 @@ const Registration: FC = () => {
 		resolver: yupResolver(RegisterSchema),
 	})
 
-	const toggleLoading = () => setLoading(loading => !loading)
 
 	const onSubmit: SubmitHandler<Inputs> = async ({password, email, name, surname, phone}) => {
 		const newName = upFirstChar(name)
@@ -90,38 +73,30 @@ const Registration: FC = () => {
 			lastName: newSurname,
 			phoneNumber: newPhone,
 		}
-		toggleLoading()
-		const checkedEmail = await checkEmail(email)
+		const {data: checkedEmail} = await checkEmail(email)
 
 		if (checkedEmail) {
-			setError('email', {type: 'chackEmail', message: 'Mail already exists'})
-			toggleLoading()
+			setError('email', {type: 'checkEmail', message: 'Mail already exists'})
 		} else {
-			const checkedPhone = await checkPhone(newPhone)
+			const {data: checkedPhone} = await checkPhone(String(newPhone))
 			if (checkedPhone) {
-				setError('phone', {type: 'chackPhone', message: 'Phone already exists'})
-				toggleLoading()
+				setError('phone', {type: 'checkPhone', message: 'Phone already exists'})
 			} else {
-				try {
-					sendRequest(newData)
-						 .then((response) => {
-							 if ('data' in response) {
-								 alert(JSON.stringify(newData))
-								 setShowRegisterCompleted(true)
-								 reset()
-							 } else if ('error' in response) {
-								 setShowRegisterError(true)
-							 }
-						 })
-						 .catch(() => {
-							 setShowRegisterError(true)
-						 })
-				} catch (error) {
-					setShowRegisterError(true)
-				}
+				await sendRequest(newData)
 			}
 		}
 	}
+
+	useEffect(() => {
+		if (data === null) {
+			setShowRegisterCompleted(true)
+			reset()
+
+		} else if (isError) {
+			setShowRegisterError(true)
+
+		}
+	}, [data, isError]);
 
 	return (
 		 <div className={styles.registration}>
@@ -136,7 +111,7 @@ const Registration: FC = () => {
 						 <PhoneInput control={control} error={errors.phone?.message}/>
 						 <PasswordInput register={register} error={errors.password?.message}/>
 					 </InputsWrapper>
-					 <Button text={`${t('register.btn1')}`} style={{marginTop: '40px'}}/>
+					 <Button loading={isLoading} text={`${t('register.btn1')}`} style={{marginTop: '40px'}}/>
 				 </Form>
 
 				 <div className={styles.flex}>

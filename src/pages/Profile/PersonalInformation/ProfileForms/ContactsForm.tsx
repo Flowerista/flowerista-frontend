@@ -1,5 +1,5 @@
 import {FC, useEffect} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 
 import {ContactsSchema} from '../../../../utils/yup';
@@ -21,9 +21,7 @@ export const ContactsForm: FC = () => {
 	const {email, phoneNumber} = useAppSelector(state => state.user.user)
 	const {
 		register,
-		handleSubmit,
 		formState: {errors},
-		reset,
 		control,
 		setValue,
 	} = useForm<Inputs>({
@@ -34,13 +32,9 @@ export const ContactsForm: FC = () => {
 	useEffect(() => {
 		setValue('email', email)
 		setValue('phone', `${phoneNumber}`)
-	}, [])
+	}, [email, phoneNumber, setValue])
 
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => {
-		alert(JSON.stringify(data))
-		reset()
-	}
 	return (
 		 <div className={styles.form__wrapper}>
 			 <div className={styles.form__head}>
@@ -48,10 +42,11 @@ export const ContactsForm: FC = () => {
 				 <p className={styles.form__descr}>{t('profile.contacts.text')}</p>
 			 </div>
 			 <div className={styles.form__body}>
-				 <Form onSubmit={handleSubmit(onSubmit)}>
+				 <Form onSubmit={() => {
+				 }}>
 					 <InputsWrapper>
 						 <EmailInput register={register} error={errors.email?.message}/>
-						 <PhoneInput control={control} error={errors.phone?.message} />
+						 <PhoneInput control={control} error={errors.phone?.message}/>
 					 </InputsWrapper>
 				 </Form>
 			 </div>

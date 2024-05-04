@@ -1,9 +1,10 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './styles.module.scss';
 import {PayPalButtons, PayPalButtonsComponentProps} from '@paypal/react-paypal-js';
 import {useAppSelector} from '../../store/store';
-import PaymentService from '../../services/PaymentService/payment-service';
 import {useTranslation} from 'react-i18next';
+import {useCreateOrderMutation} from '../../services/OrderService/createOrder';
+import {usePaymentInitMutation} from '../../services/OrderService/paymentInit/paymentInit';
 
 export interface IPayWithPayPal {
 
@@ -13,34 +14,95 @@ export interface IPayWithPayPal {
 export const PayWithPayPal: FC<IPayWithPayPal> = () => {
 	const {t} = useTranslation()
 	const cart = useAppSelector(state => state.cart.cart)
-	const orderId = useAppSelector(state => state.checkoutOrderId.orderId)
+	const checkOut = useAppSelector(state => state.checkout)
 	const [loading, setLoading] = useState(false);
-
-	const initialOrder = async (orderId: number) => {
-		const res = await PaymentService.paymentInit(orderId)
-		window.open(res?.data.redirectUrl)
-	}
-	if (loading) {
-		initialOrder(orderId)
-	}
-
-
 	const [isChecked, setChecked] = useState<boolean>(false);
+	const [createOrder, {data, error}] = useCreateOrderMutation()
+	const [paymentInit,
+		{data: paymentData, error: paymentError},
+	] = usePaymentInitMutation()
+
+
+	const createOrderHandler = async () => {
+		const order = {
+			address: checkOut,
+			sum: cart.reduce((total, item) => {
+				const price = item.discountPrice !== null ? item.discountPrice : item.defaultPrice;
+				const quantity = item.quantity;
+				return total + (price * quantity);
+			}, 0),
+			orderItems:
+				 cart.map(item => ({
+					 productId: item.id,
+					 name: item.name,
+					 quantity: item.quantity,
+					 sizeId: item.sizes.find(size => size.size === item.currentSize)?.id,
+					 discountPrice: item.discountPrice,
+					 price: item.defaultPrice,
+					 colorId: item.id,
+				 })),
+		}
+		createOrder(order)
+	}
 
 	const handleCheckboxChange = () => {
 		setChecked(!isChecked);
 	};
 
+	useEffect(() => {
+		const handleCreateOrder = async () => {
+			if (loading) {
+				const order = {
+					address: checkOut,
+					sum: cart.reduce((total, item) => {
+						const price = item.discountPrice !== null ? item.discountPrice : item.defaultPrice;
+						const quantity = item.quantity;
+						return total + (price * quantity);
+					}, 0),
+					orderItems: cart.map(item => ({
+						productId: item.id,
+						name: item.name,
+						quantity: item.quantity,
+						sizeId: item.sizes.find(size => size.size === item.currentSize)?.id,
+						discountPrice: item.discountPrice,
+						price: item.defaultPrice,
+						colorId: item.id,
+					})),
+				};
+				createOrder(order);
+			}
+		};
+
+		handleCreateOrder();
+	}, [loading, cart, checkOut, createOrder]);
+
+	useEffect(() => {
+		if (data) {
+			paymentInit(data.id);
+		}
+	}, [data, paymentInit]);
+
+	useEffect(() => {
+		if (paymentData) {
+			window.location.href = paymentData.redirectUrl;
+		}
+	}, [paymentData]);
+
+
+	if (error || paymentError) {
+		return <div>erorr</div>
+	}
 
 	const onCreateOrder: PayPalButtonsComponentProps['createOrder'] = async (data, actions) => {
 		return actions.order.create({
+			intent: 'CAPTURE',
 			purchase_units: [
 				{
 					amount: {
+						currency_code: 'USD',
 						value: `${
 							 cart.reduce((total, item) => {
 								 const price = item.discountPrice !== null ? item.discountPrice : item.defaultPrice;
-
 								 const quantity = item.quantity;
 								 return total + (price * quantity);
 							 }, 0)

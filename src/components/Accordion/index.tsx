@@ -26,7 +26,6 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 	const [isActive, setIsActive] = useState<boolean>(false)
 	const dispatch = useAppDispatch()
 
-
 	useEffect(() => {
 		dispatch(setCity(address?.city))
 		dispatch(setStreet(address?.street))
@@ -46,7 +45,6 @@ export const Accordion: FC<IAccordion> = ({address}) => {
 	const handleTabsClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		e.stopPropagation();
 	};
-
 	return (
 		 <div
 				onClick={handleClick}

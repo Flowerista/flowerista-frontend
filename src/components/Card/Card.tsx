@@ -4,12 +4,14 @@ import {DataRoute} from '../../data/routes';
 import {BsBagFill, BsHeart, BsHeartFill} from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import {useAppDispatch, useAppSelector} from '../../store/store';
+import {useAppDispatch} from '../../store/store';
 import {addCartItem, ICartItem} from '../../store/cart/cart.slice';
 import {generateCartID} from '../../utils/helpers/generateCartID';
-import {addCard, deleteCard} from '../../store/wishlist/wishlist.slice';
 import {setCartModalOpen, setWishlistModalOpen} from '../../store/modals/modals.slice';
 import {IFlowerCard} from '../../interface/flower';
+import {useAddWishlistMutation} from '../../services/wishlistService/addCardToWishlist/addCardToWishlist';
+import {useRemoveCardFromWishlist} from '../../services/wishlistService/deleteFromWishlist/deleteFromWishlist';
+import {useGetWishlistQuery} from '../../services/wishlistService/getWishlist/getWishlist';
 
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -22,27 +24,19 @@ export interface ISize {
 	discountPrice: number | null;
 }
 
-// export interface IFlowerCard {
-//     id: number;
-//     name: string;
-//     imageUrls: Record<string, string>
-//     defaultPrice: number;
-//     discount: number | null;
-//     discountPrice: number | null;
-//     sizes: ISize[];
-// }
-
 export const Card: FC<IFlowerCard> = (props) => {
-	const {wishlist} = useAppSelector(state => state.wishlist);
+	const {data: wishlist} = useGetWishlistQuery()
 	const dispatch = useAppDispatch();
 	const {id, name, imageUrls, defaultPrice, discount, discountPrice} = props;
 	const [liked, setLiked] = useState(false)
+	const [addToWishlist] = useAddWishlistMutation()
+	const [removeCard] = useRemoveCardFromWishlist()
 
 	useEffect(() => {
-		if (wishlist.length) {
-			setLiked(wishlist.some(card => card.id === id))
+		if (wishlist?.length) {
+			setLiked(wishlist?.some(card => card.id === id))
 		}
-	}, [])
+	}, [wishlist])
 
 	const toCart = () => {
 		const cartID = generateCartID(id, 'MEDIUM')
@@ -61,10 +55,10 @@ export const Card: FC<IFlowerCard> = (props) => {
 			dispatch(setWishlistModalOpen(true))
 		} else {
 			if (liked) {
-				await dispatch(deleteCard(id))
+				await removeCard(id)
 				setLiked(false)
 			} else {
-				await dispatch(addCard(props))
+				await addToWishlist(props.id)
 				setLiked(true)
 			}
 		}

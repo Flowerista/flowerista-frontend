@@ -1,6 +1,5 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import {authServiceApi} from '../services/AuthService/rtk-auth-service';
 import {filtrationSlice} from './filtration/filtration.slice'
 import {recentlyViewedSlice} from './recentlyViewed/recentlyViewed.slice'
 import {cartSlice} from './cart/cart.slice';
@@ -8,13 +7,12 @@ import {cartSlice} from './cart/cart.slice';
 import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE} from 'redux-persist'
 
 import storage from 'redux-persist/lib/storage'
-import {authSlice} from './auth/auth.slice';
-import {userSlice} from './user/user.slice';
-import {wishlistSlice} from './wishlist/wishlist.slice'
 import {checkOutSlice} from './checkout/checkout.slice';
 import {modalsSlice} from './modals/modals.slice';
 import {checkOutOrderIdSlice} from './checkout/checkoutOrderId.slice';
 import {rtkApi} from '../http/rtkApi';
+import {rtkApiAuth} from '../http/rtkApAuthi';
+import {profileSlice} from './profile/profile.slice';
 
 const persistConfig = {
 	key: 'root',
@@ -25,15 +23,13 @@ const persistConfig = {
 const rootReducer = combineReducers({
 	filtration: filtrationSlice.reducer,
 	recentlyViewed: recentlyViewedSlice.reducer,
-	auth: authSlice.reducer,
 	cart: cartSlice.reducer,
-	user: userSlice.reducer,
-	wishlist: wishlistSlice.reducer,
+	user: profileSlice.reducer,
 	checkout: checkOutSlice.reducer,
 	checkoutOrderId: checkOutOrderIdSlice.reducer,
 	modals: modalsSlice.reducer,
 	[rtkApi.reducerPath]: rtkApi.reducer,
-	[authServiceApi.reducerPath]: authServiceApi.reducer,
+	[rtkApiAuth.reducerPath]: rtkApiAuth.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -52,21 +48,11 @@ export const setupStore = () => {
 						 PERSIST,
 						 PURGE,
 						 REGISTER,
-						 'auth/login/fulfilled',
-						 'auth/checkAuth/fulfilled',
-						 'auth/logout/fulfilled',
-						 'user/profile/fulfilled',
-						 'user/changeAddress/fulfilled',
-						 'user/changePassword/fulfilled',
-						 'user/changePersonalInfo/fulfilled',
-						 'wishlist/getWishlist/fulfilled',
-						 'wishlist/addCard/fulfilled',
-						 'wishlist/deleteCard/fulfilled',
 					 ],
 				 },
 			 })
 					.concat(rtkApi.middleware)
-					.concat(authServiceApi.middleware),
+					.concat(rtkApiAuth.middleware),
 	})
 }
 export const store = setupStore();

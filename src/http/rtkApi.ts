@@ -9,17 +9,3 @@ export const rtkApi = createApi({
 });
 
 
-// export const rtkApiAuth = createApi({
-// 	reducerPath: 'api',
-// 	baseQuery: fetchBaseQuery({
-// 		baseUrl: process.env.REACT_APP_API_URL,
-// 		prepareHeaders: (headers) => {
-// 			const token = localStorage.getItem() || '';
-// 			if (token) {
-// 				headers.set('Authorization', token);
-// 			}
-// 			return headers;
-// 		},
-// 	}),
-// 	endpoints: () => ({}),
-// });
