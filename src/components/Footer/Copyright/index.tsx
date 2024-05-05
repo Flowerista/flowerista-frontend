@@ -1,14 +1,15 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styles from '../styles.module.scss';
 import classNames from 'classnames';
 
 interface CopyrightProps {
-	className?: string
+  className?: string;
 }
 
-export const Copyright: FC<CopyrightProps> = ({className}) => {
-	return (
-		<p className={classNames(styles.footer__copirate, className)}>© Flowerista, 2023</p>
-	);
+export const Copyright: FC<CopyrightProps> = ({ className }) => {
+  return (
+    <p className={classNames(styles.footer__copirate, className)}>
+      © Flowerista, 2023
+    </p>
+  );
 };
-

@@ -1,15 +1,13 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import styles from './styles.module.scss';
-import {SecondAccordion} from '../../../../components/SecondAccordion';
+import { SecondAccordion } from '../../../../components/SecondAccordion';
 
-export interface IUserPayment {
-}
+export interface IUserPayment {}
 
 export const UserPayment: FC<IUserPayment> = () => {
-	return (
-		 <div className={styles.userPayment}>
-			 <SecondAccordion/>
-		 </div>
-	);
+  return (
+    <div className={styles.userPayment}>
+      <SecondAccordion />
+    </div>
+  );
 };
-

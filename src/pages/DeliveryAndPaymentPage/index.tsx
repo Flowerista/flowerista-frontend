@@ -1,5 +1,3 @@
-import {DeliveryAndPaymentPageAsync} from './DeliveryAndPaymentPage.async';
+import { DeliveryAndPaymentPageAsync } from './DeliveryAndPaymentPage.async';
 
-export {
-	DeliveryAndPaymentPageAsync as DeliveryAndPaymentPage,
-};
+export { DeliveryAndPaymentPageAsync as DeliveryAndPaymentPage };

@@ -1,5 +1,3 @@
-import {CheckOutThanksPageAsync} from './CheckOutThanksPage.async';
+import { CheckOutThanksPageAsync } from './CheckOutThanksPage.async';
 
-export {
-	CheckOutThanksPageAsync as CheckOutThanksPage,
-};
+export { CheckOutThanksPageAsync as CheckOutThanksPage };

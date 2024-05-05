@@ -1,5 +1,3 @@
-import {AboutUsAsync} from './AboutUs.async';
+import { AboutUsAsync } from './AboutUs.async';
 
-export {
-	AboutUsAsync as AboutUs,
-};
+export { AboutUsAsync as AboutUs };

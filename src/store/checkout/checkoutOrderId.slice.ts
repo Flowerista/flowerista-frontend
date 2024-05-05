@@ -1,25 +1,21 @@
-import {createSlice} from '@reduxjs/toolkit'
-
+import { createSlice } from '@reduxjs/toolkit';
 
 interface IInitialState {
-	orderId: number
+  orderId: number;
 }
-
 
 const initialState: IInitialState = {
-	orderId: 0,
-}
+  orderId: 0
+};
 
 export const checkOutOrderIdSlice = createSlice({
-	name: 'checkoutOrderId',
-	initialState,
-	reducers: {
+  name: 'checkoutOrderId',
+  initialState,
+  reducers: {
+    setOrderId: (state, { payload }) => {
+      state.orderId = payload;
+    }
+  }
+});
 
-		setOrderId: (state, {payload}) => {
-			state.orderId = payload
-		},
-	},
-
-})
-
-export const {setOrderId} = checkOutOrderIdSlice.actions
+export const { setOrderId } = checkOutOrderIdSlice.actions;

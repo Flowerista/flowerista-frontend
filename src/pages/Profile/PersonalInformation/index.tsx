@@ -1,5 +1,3 @@
-import {PersonalInformationAsync} from './PersonalInformation.async';
+import { PersonalInformationAsync } from './PersonalInformation.async';
 
-export {
-	PersonalInformationAsync as PersonalInformation,
-};
+export { PersonalInformationAsync as PersonalInformation };

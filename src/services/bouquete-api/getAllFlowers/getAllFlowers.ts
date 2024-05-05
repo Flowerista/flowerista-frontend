@@ -1,11 +1,11 @@
-import {rtkApi} from '../../../http/rtkApi';
-import {IAllFlower, IFetchAllFlowers} from '../../../interface/flower';
+import { rtkApi } from '../../../http/rtkApi';
+import { IAllFlower, IFetchAllFlowers } from '../../../interface/flower';
 
 const getAllFlowersApi = rtkApi.injectEndpoints({
-	endpoints: (build) => ({
-		getAllFlowers: build.query<IAllFlower, IFetchAllFlowers>({
-			query: (data) => ({
-				url: `/bouquete?page=${data.page}
+  endpoints: (build) => ({
+    getAllFlowers: build.query<IAllFlower, IFetchAllFlowers>({
+      query: (data) => ({
+        url: `/bouquete?page=${data.page}
 							${data.flowerIds?.length === 0 ? '' : `&flowerIds=${data.flowerIds}`}
 							${data.colorIds?.length === 0 ? '' : `&colorIds=${data.colorIds}`}
 							${data.minPrice && data.minPrice > data.min ? `&minPrice=${data.minPrice}` : ''}
@@ -14,11 +14,9 @@ const getAllFlowersApi = rtkApi.injectEndpoints({
 							${data.sortByPriceHighToLow ? `&sortByPriceHighToLow=${data.sortByPriceHighToLow}` : ''}
 							${data.sortByPriceLowToHigh ? `&sortByPriceLowToHigh=${data.sortByPriceLowToHigh}` : ''}
 							`
-				,
-			}),
-		}),
-	}),
+      })
+    })
+  })
 });
-
 
 export const useGetAllFlowers = getAllFlowersApi.useGetAllFlowersQuery;

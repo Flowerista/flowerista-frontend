@@ -1,5 +1,3 @@
-import {ProductPageAsync} from './ProductPage.async';
+import { ProductPageAsync } from './ProductPage.async';
 
-export {
-	ProductPageAsync as ProductPage,
-};
+export { ProductPageAsync as ProductPage };

@@ -1,5 +1,3 @@
-import {PasswordRecoveryAsync} from './PasswordRecovery.async';
+import { PasswordRecoveryAsync } from './PasswordRecovery.async';
 
-export {
-	PasswordRecoveryAsync as PasswordRecovery,
-};
+export { PasswordRecoveryAsync as PasswordRecovery };

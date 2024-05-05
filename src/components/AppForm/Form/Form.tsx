@@ -1,20 +1,19 @@
-import {DetailedHTMLProps, FC, FormHTMLAttributes} from 'react'
-import cn from 'classnames'
-import styles from './styles.module.scss'
+import { DetailedHTMLProps, FC, FormHTMLAttributes } from 'react';
+import cn from 'classnames';
+import styles from './styles.module.scss';
 
-interface IFormProps extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>  {
+interface IFormProps
+  extends DetailedHTMLProps<
+    FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+  > {}
 
-}
-
-const Form: FC<IFormProps> = ({children, className, ...props}) => {
+const Form: FC<IFormProps> = ({ children, className, ...props }) => {
   return (
-    <form 
-        className={cn(styles.form, className)}
-        {...props}
-    >
-        {children}
+    <form className={cn(styles.form, className)} {...props}>
+      {children}
     </form>
-  )
-}
+  );
+};
 
 export default Form;

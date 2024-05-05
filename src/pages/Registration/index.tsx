@@ -1,5 +1,3 @@
-import {RegistrationAsync} from './Registration.async';
+import { RegistrationAsync } from './Registration.async';
 
-export {
-	RegistrationAsync as Registration,
-};
+export { RegistrationAsync as Registration };
