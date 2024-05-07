@@ -1,6 +1,6 @@
 import s from './styles.module.scss';
-import {NavBar} from './NavBar';
-import {Logo} from './Logo';
+import { NavBar } from './NavBar';
+import { Logo } from './Logo';
 import { HeaderButton } from './HeaderButton';
 import { CartIcon } from '../ParametersMenu/CartIcon';
 import { Link } from 'react-router-dom';
@@ -20,21 +20,22 @@ export const Header = () => {
 	}
 	return (
 		<header className={s.container}>
-			<HeaderButton onClick={() => toggleMenu()} open={openMenu}/>
+			<HeaderButton onClick={() => toggleMenu()} open={openMenu} />
 			<div className={s.logo__wrp}>
-				<Logo type={"header"}/>
+				<Logo type={"header"} />
 			</div>
-			<NavBar type='header'/>
+			<NavBar type='header' />
 			<div className={s.parametersMenu__wrp}>
-				<Link to={DataRoute.PersonalInformation} className={s.parametersMenu__profile}><BsFillPersonFill style={{fontSize: '28px'}}/></Link>
-				<CartIcon/>
-				<CartModal/>
+				<Link to={DataRoute.PersonalInformation} className={s.parametersMenu__profile}><BsFillPersonFill style={{ fontSize: '28px' }} /></Link>
+				<CartIcon />
+				<CartModal />
 			</div>
-			<div className={classNames(s.menu, {[s.open]: openMenu})}>
-				<Search type='menu'/>
-				<NavBar type='menu'/>
-				<ProfileRender/>
-				<Languages/>
+
+			<div className={classNames(s.menu, { [s.open]: openMenu })}>
+				<Search type='menu' />
+				<NavBar type='menu' />
+				<ProfileRender />
+				<Languages />
 			</div>
 		</header>
 	);
@@ -45,7 +46,7 @@ const ProfileRender: FC = () => {
 		return (
 			<div className={s.profile}>
 				<Link to={DataRoute.PersonalInformation}>
-					<BsFillPersonFill style={{fontSize: '21px', }}/>
+					<BsFillPersonFill style={{ fontSize: '21px', }} />
 					<span>Profile</span>
 				</Link>
 			</div>
@@ -53,9 +54,9 @@ const ProfileRender: FC = () => {
 	} else {
 		return (
 			<div className={s.profile}>
-				<BsFillPersonFill style={{fontSize: '21px'}}/>
+				<BsFillPersonFill style={{ fontSize: '21px' }} />
 				<Link to={DataRoute.Login}>Log in</Link>
-					<span>|</span>
+				<span>|</span>
 				<Link to={DataRoute.Registration}>Registration</Link>
 			</div>
 		)

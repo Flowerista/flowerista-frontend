@@ -94,6 +94,7 @@
 			letter-spacing: 0.02em;
 		}
 	}
+
 	.flower__wrapper {
 		grid-template-columns: repeat(3, 1fr);
 		row-gap: 60px;
@@ -127,6 +128,7 @@
 	.catalog__dropDown {
 		display: none;
 	}
+
 	.flower__wrapper {
 		grid-template-columns: repeat(2, 1fr);
 		row-gap: 40px;
