@@ -1,8 +1,9 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {EmptyOrder} from './EmptyOrder';
 import styles from './styles.module.scss'
 import {OrderItem} from './OrderItem';
-import OrderHistoryService from '../../../services/OrderHistoryService/order-history-service';
+import {useGetOrderHistory} from '../../../services/UserService/getOrderHistory/getOrderHistory';
+import {Loader} from '../../../components/shared/Loading';
 
 export interface IProfileOrders {
 }
@@ -53,18 +54,14 @@ export interface OrderHistory {
 
 const ProfileOrders: FC<IProfileOrders> = () => {
 
-	const [data, setData] = useState<OrderHistory[]>()
+	const {data, isLoading, error} = useGetOrderHistory()
 
-	const getOrderHistory = async () => {
-		const res = await OrderHistoryService.getHistory()
-		setData(res.data)
-
+	if (isLoading) {
+		return <div><Loader/></div>
 	}
-
-	useEffect(() => {
-		getOrderHistory()
-	}, []);
-
+	if (error) {
+		return <div>erorr</div>
+	}
 
 	return (
 		 <article className={styles.wrapper}>

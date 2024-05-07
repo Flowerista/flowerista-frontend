@@ -4,22 +4,27 @@ import {CheckOutHeader} from './CheckOutHeader';
 import {CheckOutFooter} from './CheckOutFooter';
 import {Delivery} from './Delivery';
 import {Order} from './Order';
-import {useAppDispatch, useAppSelector} from '../../store/store';
-import {getProfile} from '../../store/user/user.slice';
+import {useGetProfile} from '../../services/UserService/getProfile/getProfile';
 import {Loader} from '../../components/shared/Loading';
+import {useAppDispatch} from '../../store/store';
+import {setProfile} from '../../store/profile/profile.slice';
 
 export interface ICheckOutPage {
 }
 
 
 const CheckOutPage: FC<ICheckOutPage> = () => {
-	const {loadingStatus, errorStatus, user} = useAppSelector(store => store.user)
+	const {error, isLoading, data} = useGetProfile()
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		dispatch(getProfile())
-	}, [])
-	if (loadingStatus.getProfile) {
+		if (data) {
+			dispatch(setProfile(data))
+		}
+	}, [data]);
+
+
+	if (isLoading) {
 		return (
 			 <main className={styles.wrapper}>
 				 <CheckOutHeader/>
@@ -35,7 +40,7 @@ const CheckOutPage: FC<ICheckOutPage> = () => {
 		 <main className={styles.wrapper}>
 			 <CheckOutHeader/>
 			 <div className={styles.checkOut}>
-				 <Delivery user={user}/>
+				 <Delivery user={data}/>
 				 <Order/>
 			 </div>
 			 <CheckOutFooter/>

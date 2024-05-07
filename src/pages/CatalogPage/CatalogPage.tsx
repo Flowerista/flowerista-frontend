@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { Pagination } from '../../components/Pagination/Pagination';
-import { Filters } from './Filters';
-import { useGetAllFlowersQuery } from '../../services/bouquete-api/bouquete-api-service';
-import { IFetchAllFlowers } from '../../interface/flower';
-import { Card } from '../../components/Card/Card';
-import { SkeletonCard } from '../../components/Skeletons/SkeletonCard/SkeletonCard';
-import { useAppSelector } from '../../store/store';
-import { useDebounce } from '../../hooks/useDebounce';
-import { Link } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
-import { useTranslation } from 'react-i18next';
+import {Pagination} from '../../components/Pagination/Pagination';
+import {Filters} from './Filters';
+import {IFetchAllFlowers} from '../../interface/flower';
+import {Card} from '../../components/Card/Card';
+import {SkeletonCard} from '../../components/Skeletons/SkeletonCard/SkeletonCard';
+import {useAppSelector} from '../../store/store';
+import {useDebounce} from '../../hooks/useDebounce';
+import {Link} from 'react-router-dom';
+import {DataRoute} from '../../data/routes';
+import {useTranslation} from 'react-i18next';
+import {useGetAllFlowers} from '../../services/bouquete-api/getAllFlowers/getAllFlowers';
 
 export interface ICatalogPage {
 }
@@ -40,8 +40,7 @@ const CatalogPage: FC<ICatalogPage> = () => {
 
 
 	const [dataState, setDataState] = useState(dataFetch)
-
-	const { data, error } = useGetAllFlowersQuery(dataState)
+	const {data, error} = useGetAllFlowers(dataState)
 
 	const handlePageClick = (event: any) => {
 		const newPage = event.selected + 1

@@ -6,7 +6,7 @@ import styles from '../styles.module.scss';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {EmailSchema} from '../../../utils/yup';
 import FormError from '../../AppForm/FormError/FormError';
-import {useSubscriptionMutation} from '../../../services/AuthService/rtk-auth-service';
+import {useSubscriptionMutation} from '../../../services/AuthService/getSubscription/getSubscription';
 
 interface FormData {
 	email: string;

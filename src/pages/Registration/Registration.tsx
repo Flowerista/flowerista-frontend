@@ -1,6 +1,6 @@
-import { FC, useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup'
+import {FC, useEffect, useState} from 'react'
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios';
 
 import { RegisterSchema } from '../../utils/yup';
@@ -15,18 +15,19 @@ import {
 	PhoneInput,
 	SurnameInput,
 } from '../../components/AppForm'
-import { Button } from '../../components/Buttons/Button';
-import { Title } from '../../components/Title/Title';
-
-import { usePostRegistrationMutation } from '../../services/bouquete-api/bouquete-api-service';
-import { IRegister } from '../../interface/register';
+import {Button} from '../../components/Buttons/Button';
+import {Title} from '../../components/Title/Title';
+import {IRegister} from '../../interface/register';
 import RegistrationCompleted from '../../components/Modals/RegistrationCompleted/RegistrationCompleted';
 import RegistrationError from '../../components/Modals/RegistrationError/RegistrationError';
 
 import Flower from '../../assets/image/registration/flower.png'
 import styles from './styles.module.scss'
-import { upFirstChar } from '../../utils/helpers';
-import { useTranslation } from 'react-i18next';
+import {upFirstChar} from '../../utils/helpers';
+import {useTranslation} from 'react-i18next';
+import {usePostRegistration} from '../../services/UserService/postRegistration/postRegistration';
+import {useLazyGetCheckEmailQuery} from '../../services/AuthService/checkEmail/checkEmail';
+import {useLazyGetCheckPhoneQuery} from '../../services/AuthService/checkPhone/checkPhone';
 
 type Inputs = {
 	name: string;
@@ -36,33 +37,14 @@ type Inputs = {
 	password: string;
 }
 
-// add try catch
-const checkEmail = async (email: string) => {
-	let checked
-	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkEmail/${email}`)
-		.then(response => {
-			checked = response.data
-		})
-		.catch(err => console.log(err))
-	return checked
-}
-
-const checkPhone = async (phone: number) => {
-	let checked
-	await axios.get(`https://floverista-011daa2eb6c3.herokuapp.com/api/auth/checkPhone/${phone}`)
-		.then(response => {
-			checked = response.data
-		})
-		.catch(err => console.log(err))
-	return checked
-}
-
 const Registration: FC = () => {
 	const { t } = useTranslation()
 	const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
 	const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
-	const [loading, setLoading] = useState<boolean>(false)
-	const [sendRequest] = usePostRegistrationMutation()
+	const [sendRequest, {data, isLoading, isError}] = usePostRegistration()
+	const [checkEmail] = useLazyGetCheckEmailQuery()
+	const [checkPhone] = useLazyGetCheckPhoneQuery()
+
 	const {
 		register,
 		handleSubmit,
@@ -78,7 +60,6 @@ const Registration: FC = () => {
 		resolver: yupResolver(RegisterSchema),
 	})
 
-	const toggleLoading = () => setLoading(loading => !loading)
 
 	const onSubmit: SubmitHandler<Inputs> = async ({ password, email, name, surname, phone }) => {
 		const newName = upFirstChar(name)
@@ -91,17 +72,14 @@ const Registration: FC = () => {
 			lastName: newSurname,
 			phoneNumber: newPhone,
 		}
-		toggleLoading()
-		const checkedEmail = await checkEmail(email)
+		const {data: checkedEmail} = await checkEmail(email)
 
 		if (checkedEmail) {
-			setError('email', { type: 'chackEmail', message: 'Mail already exists' })
-			toggleLoading()
+			setError('email', {type: 'checkEmail', message: 'Mail already exists'})
 		} else {
-			const checkedPhone = await checkPhone(newPhone)
+			const {data: checkedPhone} = await checkPhone(String(newPhone))
 			if (checkedPhone) {
 				setError('phone', { type: 'chackPhone', message: 'Phone already exists' })
-				toggleLoading()
 			} else {
 				try {
 					sendRequest(newData)
@@ -124,21 +102,32 @@ const Registration: FC = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (data === null) {
+			setShowRegisterCompleted(true)
+			reset()
+
+		} else if (isError) {
+			setShowRegisterError(true)
+
+		}
+	}, [data, isError]);
+
 	return (
 		<div className={styles.registration}>
 			<div className={styles.registration__container}>
 				<Title text={`${t('register.title')}`} />
 
-				<Form onSubmit={handleSubmit(onSubmit)}>
-					<InputsWrapper>
-						<NameInput register={register} error={errors.name?.message} />
-						<SurnameInput register={register} error={errors.surname?.message} />
-						<EmailInput register={register} error={errors.email?.message} />
-						<PhoneInput control={control} error={errors.phone?.message} />
-						<PasswordInput register={register} error={errors.password?.message} />
-					</InputsWrapper>
-					<Button text={`${t('register.btn1')}`} style={{ marginTop: '40px' }} />
-				</Form>
+				 <Form onSubmit={handleSubmit(onSubmit)}>
+					 <InputsWrapper>
+						 <NameInput register={register} error={errors.name?.message}/>
+						 <SurnameInput register={register} error={errors.surname?.message}/>
+						 <EmailInput register={register} error={errors.email?.message}/>
+						 <PhoneInput control={control} error={errors.phone?.message}/>
+						 <PasswordInput register={register} error={errors.password?.message}/>
+					 </InputsWrapper>
+					 <Button loading={isLoading} text={`${t('register.btn1')}`} style={{marginTop: '40px'}}/>
+				 </Form>
 
 				<div className={styles.flex}>
 					<FormLink to={DataRoute.Login} text={`${t('register.btn2')}`} />

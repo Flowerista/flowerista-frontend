@@ -5,20 +5,17 @@ import {AddressForm} from './ProfileForms/AddressForm';
 import {ContactsForm} from './ProfileForms/ContactsForm';
 import PasswordChange from '../../../components/Modals/PasswordChange/PasswordChange';
 import PasswordSuccess from '../../../components/Modals/PasswordSuccess/PasswordSuccess';
-import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {getProfile} from '../../../store/user/user.slice';
 
 import styles from './styles.module.scss';
 import {Loader} from '../../../components/shared/Loading';
+import {useGetProfile} from '../../../services/UserService/getProfile/getProfile';
+import {setProfile} from '../../../store/profile/profile.slice';
+import {useAppDispatch} from '../../../store/store';
 
 
 const PersonalInformation: FC = () => {
-	const {loadingStatus, errorStatus} = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch();
-	useEffect(() => {
-		dispatch(getProfile())
-	}, []);
-
+	const {data, isLoading, error} = useGetProfile()
 	const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false)
 	const [showPasswordSuccess, setShowPasswordSuccess] = useState<boolean>(false)
 
@@ -26,11 +23,17 @@ const PersonalInformation: FC = () => {
 		setShowPasswordChange(true)
 	}
 
-	if (loadingStatus.getProfile) {
+	useEffect(() => {
+		if (data) {
+			dispatch(setProfile(data))
+		}
+	}, [data]);
+
+	if (isLoading) {
 		return <Loader/>
 	}
 
-	if (errorStatus.getProfile) {
+	if (error) {
 		return <h1>Error...</h1>
 	}
 

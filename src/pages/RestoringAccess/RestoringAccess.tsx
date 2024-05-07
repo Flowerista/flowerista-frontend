@@ -11,8 +11,8 @@ import {RestoringAccessSchema} from '../../utils/yup';
 
 import Flower from '../../assets/image/restoring_access/restoring_access.png'
 import styles from './styles.module.scss'
-import {useResetPasswordMutation} from '../../services/AuthService/rtk-auth-service';
 import {useTranslation} from 'react-i18next';
+import {useResetPasswordMutation} from '../../services/AuthService/resetPassword/resetPassword';
 
 interface Inputs {
 	email: string;

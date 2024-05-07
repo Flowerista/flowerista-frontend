@@ -16,11 +16,6 @@ import {
 	setSortByPriceLowToHigh,
 } from '../../../store/filtration/filtration.slice';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {
-	useGetColorsQuery,
-	useGetFlowersQuery,
-	useGetRangePriceQuery,
-} from '../../../services/bouquete-api/bouquete-api-service';
 import styles from '../styles.module.scss'
 import {DropDown} from '../../../components/DropDown';
 import {DropDownPrice} from '../../../components/DropDownPrice';
@@ -28,12 +23,15 @@ import {DropDownSorting} from '../../../components/DropDownSorting';
 import {useTranslation} from 'react-i18next';
 import {Loader} from '../../../components/shared/Loading';
 import {MobileFilters} from '../MobileFilters';
+import {useGetColors} from '../../../services/bouquete-api/getColors/getColors';
+import {useGetFlowers} from '../../../services/bouquete-api/getFlowers/getFlowers';
+import {useGetRangePrice} from '../../../services/bouquete-api/getRangePrice/getRangePrice';
 
 
 export const Filters: FC = () => {
 	const {t, i18n} = useTranslation()
 	const dispatch = useAppDispatch()
-	const {data: priceRange} = useGetRangePriceQuery('')
+	const {data: priceRange} = useGetRangePrice('')
 	const [sortingName, setSortingName] = useState<string>(t('catalog.sorting.title'));
 
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -43,8 +41,8 @@ export const Filters: FC = () => {
 	const minInputRefSmall = useRef<HTMLInputElement>(null);
 	const maxInputRefSmall = useRef<HTMLInputElement>(null);
 
-	const {data: colors, isLoading: flowersLoading} = useGetColorsQuery('')
-	const {data: flowers, isLoading: colorsLoading} = useGetFlowersQuery('')
+	const {data: colors, isLoading: colorsLoading} = useGetColors('')
+	const {data: flowers, isLoading: flowersLoading} = useGetFlowers('')
 	const {flowerIds, colorIds, maxPrice, minPrice, min, max} = useAppSelector(state => state.filtration.filters)
 
 	const maxMinValues = [{item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42}]
