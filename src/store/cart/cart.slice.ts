@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { generateCartID } from '../../utils/helpers/generateCartID';
+import { buildSlice } from '../buildSlice.ts';
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
 
@@ -35,12 +35,13 @@ const initialState: IInitialState = {
 interface PayloadId {
   cartID: string;
 }
+
 interface ChangeSizePayload {
   cartID: string;
   size: Size;
 }
 
-export const cartSlice = createSlice({
+export const cartSlice = buildSlice({
   name: 'cart',
   initialState,
   reducers: {
@@ -122,11 +123,4 @@ export const cartSlice = createSlice({
   }
 });
 
-export const {
-  addCartItem,
-  removeCartItem,
-  incQuantity,
-  decQuantity,
-  changeSize,
-  cleanCart
-} = cartSlice.actions;
+export const { useActions: useCartActions } = cartSlice;

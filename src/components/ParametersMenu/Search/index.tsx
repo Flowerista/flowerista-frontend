@@ -10,10 +10,10 @@ import styles from './styles.module.scss';
 import { BsSearch } from 'react-icons/bs';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { Link } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useSearchBouquetes } from '../../../services/bouquete-api/searchBouquetes/searchBouquetes';
+import { getRouteProductId } from '../../../app/routerConfig.tsx';
 
 interface SearchProps extends FormHTMLAttributes<HTMLFormElement> {
   type: 'header' | 'menu';
@@ -92,7 +92,7 @@ export const Search: FC<SearchProps> = ({ className, type }) => {
           {data.map((result) => (
             <>
               <li key={result.id}>
-                <Link to={`${DataRoute.Product}/${result.id}`}>
+                <Link to={getRouteProductId(String(result.id))}>
                   <img src={result.imageUrls?.['1']} alt="" />
                   <div className={styles.searchResult__content}>
                     <span>{result.name}</span>

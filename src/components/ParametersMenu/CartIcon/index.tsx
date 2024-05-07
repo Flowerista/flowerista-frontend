@@ -1,14 +1,15 @@
 import { BsFillBagFill } from 'react-icons/bs';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { setCartModalOpen } from '../../../store/modals/modals.slice';
+import { useAppSelector } from '../../../store/store';
+import { useModalActions } from '../../../store/modals/modals.slice';
 
 import s from './styles.module.scss';
 
 export const CartIcon = () => {
   const { cart } = useAppSelector((state) => state.cart);
-  const dispatch = useAppDispatch();
+  const { setCartModalOpen } = useModalActions();
+
   const setShowCart: () => void = () => {
-    dispatch(setCartModalOpen(true));
+    setCartModalOpen(true);
   };
   return (
     <div className={s.cart} onClick={setShowCart}>

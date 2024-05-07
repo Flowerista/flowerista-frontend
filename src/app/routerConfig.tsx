@@ -1,7 +1,6 @@
 import { RouteProps } from 'react-router-dom';
 import { CatalogPage } from '../pages/CatalogPage';
 import { MainLayout } from '../layouts/MainLayout';
-import React from 'react';
 import { DeliveryAndPaymentPage } from '../pages/DeliveryAndPaymentPage';
 import { HomePage } from '../pages/HomePage';
 import { AboutUs } from '../pages/AboutUs';
@@ -43,6 +42,25 @@ export enum AppRoutes {
   ErrorAfterPayment = 'error-after-payment'
 }
 
+export const getRouteHome = () => '/';
+export const getRouteAboutUs = () => '/about-us';
+export const getRouteDeliveryAndPayment = () => '/delivery-payment';
+export const getRouteCatalog = () => '/catalog';
+export const getRouteLogin = () => '/login';
+export const getRouteRegistration = () => '/registration';
+export const getRouteRestoringAccess = () => '/restoring-access';
+export const getRouteRestoringAccessSuccess = () => '/restoring-access/success';
+export const getRoutePersonalInformation = () =>
+  '/profile/personal-information';
+export const getRouteOrders = () => '/profile/orders';
+export const getRouteWishlist = () => '/profile/wishlist';
+export const getRouteProductId = (id: string) => `/product/${id}`;
+export const getRouteCheckOut = () => '/checkout';
+export const getRouteChangePassword = () => '/changePassword';
+export const getRouteCheckOutPending = () => '/capture';
+export const getRouteThanksYou = () => '/thanks-you';
+export const getRouteErrorAfterPayment = () => '/error-after-payment';
+
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Home]: '/',
   [AppRoutes.Catalog]: '/catalog',
@@ -66,7 +84,7 @@ export const RoutePath: Record<AppRoutes, string> = {
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.Catalog]: {
-    path: RoutePath.catalog,
+    path: getRouteCatalog(),
     element: (
       <MainLayout>
         <CatalogPage />
@@ -74,7 +92,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.Home]: {
-    path: RoutePath.home,
+    path: getRouteHome(),
     element: (
       <MainLayout>
         <HomePage />
@@ -82,7 +100,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.AboutUs]: {
-    path: RoutePath['about-us'],
+    path: getRouteAboutUs(),
     element: (
       <MainLayout>
         <AboutUs />
@@ -90,8 +108,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.DeliveryAndPayment]: {
-    path: RoutePath['delivery-payment'],
-    // eslint-disable-next-line react/jsx-no-undef
+    path: getRouteDeliveryAndPayment(),
     element: (
       <MainLayout>
         <DeliveryAndPaymentPage />
@@ -99,7 +116,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.Login]: {
-    path: RoutePath.login,
+    path: getRouteLogin(),
     element: (
       <SecondLayout>
         <Login />
@@ -107,7 +124,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.Registration]: {
-    path: RoutePath.registration,
+    path: getRouteRegistration(),
     element: (
       <SecondLayout>
         <Registration />
@@ -115,7 +132,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.RestoringAccess]: {
-    path: RoutePath['restoring-access'],
+    path: getRouteRestoringAccess(),
     element: (
       <SecondLayout>
         <RestoringAccess />
@@ -123,7 +140,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.RestoringAccessSuccess]: {
-    path: RoutePath['restoring-access/success'],
+    path: getRouteRestoringAccessSuccess(),
     element: (
       <SecondLayout>
         <RestoringAccessSuccess />
@@ -131,7 +148,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.PersonalInformation]: {
-    path: RoutePath['profile/personal-information'],
+    path: getRoutePersonalInformation(),
     element: (
       <ProfileLayout pageName="Profile">
         <PersonalInformation />
@@ -139,7 +156,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.Orders]: {
-    path: RoutePath['profile/orders'],
+    path: getRouteOrders(),
     element: (
       <ProfileLayout pageName="Orders history">
         <ProfileOrders></ProfileOrders>
@@ -147,7 +164,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.Wishlist]: {
-    path: RoutePath['profile/wishlist'],
+    path: getRouteWishlist(),
     element: (
       <ProfileLayout pageName="Wishlist">
         <Wishlist></Wishlist>
@@ -155,7 +172,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.ProductId]: {
-    path: RoutePath['product/:productId'],
+    path: getRouteProductId(':productId'),
     element: (
       <MainLayout>
         <ProductPage />
@@ -163,11 +180,11 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.CheckOut]: {
-    path: RoutePath.checkout,
+    path: getRouteCheckOut(),
     element: <CheckOutPage />
   },
   [AppRoutes.ChangePassword]: {
-    path: RoutePath.changePassword,
+    path: getRouteChangePassword(),
     element: (
       <MainLayout>
         <PasswordRecovery />
@@ -175,19 +192,19 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     )
   },
   [AppRoutes.CheckOutPending]: {
-    path: RoutePath.capture,
+    path: getRouteCheckOutPending(),
     element: <CheckOutPendingPage />
   },
   [AppRoutes.ThanksYou]: {
-    path: RoutePath['thanks-you'],
+    path: getRouteThanksYou(),
     element: <CheckOutThanksPage />
   },
   [AppRoutes.ErrorAfterPayment]: {
-    path: RoutePath['error-after-payment'],
+    path: getRouteErrorAfterPayment(),
     element: <PaymentErrorPage />
   },
   [AppRoutes.NOT_FOUND]: {
-    path: RoutePath.not_found,
+    path: '*',
     element: <NotFoundPage />
   }
 };

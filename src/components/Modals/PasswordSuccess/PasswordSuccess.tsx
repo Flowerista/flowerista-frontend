@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import { Title } from '../../Title/Title';
 import { Button } from '../../Buttons/Button';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
+import { getRouteHome } from '../../../app/routerConfig.tsx';
 
 interface PasswordSuccessProps {
   isOpen: boolean;
@@ -19,7 +19,7 @@ const PasswordSuccess: FC<PasswordSuccessProps> = ({ isOpen, setOpen }) => {
   };
   const toMainPage = () => {
     onClose();
-    navigate(DataRoute.Home);
+    navigate(getRouteHome());
   };
   return (
     <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>

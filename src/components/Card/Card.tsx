@@ -1,20 +1,17 @@
 import { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
 import { BsBagFill, BsHeart, BsHeartFill } from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import { useAppDispatch } from '../../store/store';
-import { addCartItem, ICartItem } from '../../store/cart/cart.slice';
+import { ICartItem, useCartActions } from '../../store/cart/cart.slice';
 import { generateCartID } from '../../utils/helpers/generateCartID';
-import {
-  setCartModalOpen,
-  setWishlistModalOpen
-} from '../../store/modals/modals.slice';
+
 import { IFlowerCard } from '../../interface/flower';
 import { useAddWishlistMutation } from '../../services/wishlistService/addCardToWishlist/addCardToWishlist';
 import { useRemoveCardFromWishlist } from '../../services/wishlistService/deleteFromWishlist/deleteFromWishlist';
 import { useGetWishlistQuery } from '../../services/wishlistService/getWishlist/getWishlist';
+import { useModalActions } from '../../store/modals/modals.slice.ts';
+import { getRouteProductId } from '../../app/routerConfig.tsx';
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';
 
@@ -28,7 +25,8 @@ export interface ISize {
 
 export const Card: FC<IFlowerCard> = (props) => {
   const { data: wishlist } = useGetWishlistQuery();
-  const dispatch = useAppDispatch();
+  const { setCartModalOpen, setWishlistModalOpen } = useModalActions();
+  const { addCartItem } = useCartActions();
   const { id, name, imageUrls, defaultPrice, discount, discountPrice } = props;
   const [liked, setLiked] = useState(false);
   const [addToWishlist] = useAddWishlistMutation();
@@ -48,13 +46,13 @@ export const Card: FC<IFlowerCard> = (props) => {
       quantity: 1,
       cartID: cartID
     };
-    dispatch(addCartItem(flower));
-    dispatch(setCartModalOpen(true));
+    addCartItem(flower);
+    setCartModalOpen(true);
   };
 
   const toLike = async (id: number) => {
     if (!localStorage.getItem('token')) {
-      dispatch(setWishlistModalOpen(true));
+      setWishlistModalOpen(true);
     } else {
       if (liked) {
         await removeCard(id);
@@ -67,12 +65,11 @@ export const Card: FC<IFlowerCard> = (props) => {
   };
 
   const img = imageUrls?.['1'];
-
   return (
     <div className={`${styles.card} ${discount ? styles.card__sale : ''}`}>
       <div className={styles.card__wrapper}>
         <div className={styles.card__img}>
-          <Link to={`${DataRoute.Product}/${id}`}>
+          <Link to={getRouteProductId(String(id))}>
             <img
               className={`${discount ? styles.img_sale : ''}`}
               src={img}
@@ -85,7 +82,7 @@ export const Card: FC<IFlowerCard> = (props) => {
         </div>
         <div className={styles.card__footer}>
           <div className={styles.card__name}>
-            <Link to={`${DataRoute.Product}/${id}`}>{name}</Link>
+            <Link to={getRouteProductId(String(id))}>{name}</Link>
           </div>
           <div className={styles.card__desc}>
             <div className={styles.price__wrapper}>

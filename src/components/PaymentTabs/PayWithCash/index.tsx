@@ -4,9 +4,9 @@ import { Button } from '../../Buttons/Button';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCreateOrderMutation } from '../../../services/OrderService/createOrder';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { setOrderId } from '../../../store/checkout/checkoutOrderId.slice';
-import { DataRoute } from '../../../data/routes';
+import { useAppSelector } from '../../../store/store';
+import { useOrderIdAction } from '../../../store/checkout/checkoutOrderId.slice';
+import { getRouteThanksYou } from '../../../app/routerConfig.tsx';
 
 export interface IPayWithCash {}
 
@@ -18,7 +18,7 @@ export const PayWithCash: FC<IPayWithCash> = () => {
   const [isChecked, setChecked] = useState(false);
   const cart = useAppSelector((state) => state.cart.cart);
   const checkOut = useAppSelector((state) => state.checkout);
-  const dispatch = useAppDispatch();
+  const { setOrderId } = useOrderIdAction();
 
   const handleCheckboxChange = () => {
     setChecked(!isChecked);
@@ -48,10 +48,10 @@ export const PayWithCash: FC<IPayWithCash> = () => {
 
   useEffect(() => {
     if (data) {
-      dispatch(setOrderId(data.id));
-      navgigation(DataRoute.ThanksYou);
+      setOrderId(data.id);
+      navgigation(getRouteThanksYou());
     }
-  }, [data, dispatch, navgigation]);
+  }, [data, navgigation, setOrderId]);
 
   return (
     <div className={styles.container}>

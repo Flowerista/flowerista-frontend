@@ -5,23 +5,22 @@ import SecondTab from './SecondTab';
 import FirstTab from './FirstTabs';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
-import { setTypeToCheckout } from '../../store/checkout/checkout.slice';
-import { useAppDispatch } from '../../store/store';
+import { useCheckoutActions } from '../../store/checkout/checkout.slice';
 
 interface ITab {
-  setType: (type: string) => void;
+  setType: (type: 'mail' | 'courier') => void;
   setIsActive: (isActive: boolean) => void;
 }
 
 const Tabs: FC<ITab> = ({ setType, setIsActive }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('tab1');
-  const dispatch = useAppDispatch();
+  const { setTypeToCheckout } = useCheckoutActions();
 
   useEffect(() => {
     setType(activeTab === 'tab1' ? 'mail' : 'courier');
-    dispatch(setTypeToCheckout(activeTab === 'tab1' ? 'mail' : 'courier'));
-  }, [activeTab]);
+    setTypeToCheckout(activeTab === 'tab1' ? 'mail' : 'courier');
+  }, [activeTab, setType, setTypeToCheckout]);
 
   return (
     <div className={styles.tabs}>

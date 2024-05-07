@@ -6,20 +6,19 @@ import { Delivery } from './Delivery';
 import { Order } from './Order';
 import { useGetProfile } from '../../services/UserService/getProfile/getProfile';
 import { Loader } from '../../components/shared/Loading';
-import { useAppDispatch } from '../../store/store';
-import { setProfile } from '../../store/profile/profile.slice';
+import { useProfileActions } from '../../store/profile/profile.slice';
 
 export interface ICheckOutPage {}
 
 const CheckOutPage: FC<ICheckOutPage> = () => {
   const { isLoading, data } = useGetProfile();
-  const dispatch = useAppDispatch();
+  const { setProfile } = useProfileActions();
 
   useEffect(() => {
     if (data) {
-      dispatch(setProfile(data));
+      setProfile(data);
     }
-  }, [data]);
+  }, [data, setProfile]);
 
   if (isLoading) {
     return (

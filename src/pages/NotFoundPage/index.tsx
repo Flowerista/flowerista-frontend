@@ -2,9 +2,10 @@ import { FC } from 'react';
 import styles from './styles.module.scss';
 import { Logo } from '../../components/Header/Logo';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
+
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components';
+import { getRouteCatalog, getRouteHome } from '../../app/routerConfig.tsx';
 
 export const NotFoundPage: FC = () => {
   const { t } = useTranslation();
@@ -24,12 +25,12 @@ export const NotFoundPage: FC = () => {
           <div className={styles.btn_wrp}>
             <Button
               text={t('notFoundPage.btn1')}
-              onClick={() => navigate(DataRoute.Catalog)}
+              onClick={() => navigate(getRouteCatalog())}
               sizeMode="full"
             />
             <Button
               text={t('notFoundPage.btn2')}
-              onClick={() => navigate(DataRoute.Home)}
+              onClick={() => navigate(getRouteHome())}
               colorMode="white"
               className={styles.btn}
               sizeMode="full"

@@ -1,10 +1,14 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
 import { NavLink } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
 import { ParametersMenu } from '../../ParametersMenu';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import {
+  getRouteAboutUs,
+  getRouteCatalog,
+  getRouteDeliveryAndPayment
+} from '../../../app/routerConfig.tsx';
 
 export interface INavBar {
   className?: string;
@@ -18,7 +22,7 @@ export const NavBar: FC<INavBar> = ({ className, type }) => {
       <ul className={styles.navbar__menu}>
         <li>
           <NavLink
-            to={DataRoute.Catalog}
+            to={getRouteCatalog()}
             className={({ isActive }) => (isActive ? `${styles.active}` : '')}
           >
             {t('header.first-link')}
@@ -26,7 +30,7 @@ export const NavBar: FC<INavBar> = ({ className, type }) => {
         </li>
         <li>
           <NavLink
-            to={DataRoute.AboutUs}
+            to={getRouteAboutUs()}
             className={({ isActive }) => (isActive ? `${styles.active}` : '')}
           >
             {t('header.second-link')}
@@ -34,7 +38,7 @@ export const NavBar: FC<INavBar> = ({ className, type }) => {
         </li>
         <li>
           <NavLink
-            to={DataRoute.DeliveryAndPayment}
+            to={getRouteDeliveryAndPayment()}
             className={({ isActive }) => (isActive ? `${styles.active}` : '')}
           >
             {t('header.third-link')}

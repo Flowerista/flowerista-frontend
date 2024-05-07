@@ -1,8 +1,8 @@
 import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react';
 import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../store/store';
 import { BsXLg } from 'react-icons/bs';
-import { setSidebarModalOpen } from '../../../store/modals/modals.slice';
+import { useModalActions } from '../../../store/modals/modals.slice';
 
 import styles from './styles.module.scss';
 import { Sidebar } from '../../Sidebar/Sidebar';
@@ -15,10 +15,9 @@ export const SidebarModal: FC<SidebarModalProps> = ({
   ...props
 }) => {
   const { modals } = useAppSelector((state) => state.modals);
-  const dispatch = useAppDispatch();
-
+  const { setSidebarModalOpen } = useModalActions();
   const onClose = () => {
-    dispatch(setSidebarModalOpen(false));
+    setSidebarModalOpen(false);
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ export const SidebarModal: FC<SidebarModalProps> = ({
 
     return () => {
       document.body.removeEventListener('keyup', closeModal);
-      dispatch(setSidebarModalOpen(false));
+      setSidebarModalOpen(false);
     };
   }, []);
 

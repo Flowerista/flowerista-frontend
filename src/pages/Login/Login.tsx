@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { DataRoute } from '../../data/routes';
 import { LoginSchema } from '../../utils/yup';
 import {
   EmailInput,
@@ -20,6 +19,11 @@ import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useLazyGetCheckEmailQuery } from '../../services/AuthService/checkEmail/checkEmail';
 import { useLoginMutation } from '../../services/AuthService/login/login';
+import {
+  getRoutePersonalInformation,
+  getRouteRegistration,
+  getRouteRestoringAccess
+} from '../../app/routerConfig.tsx';
 
 type Inputs = {
   password: string;
@@ -64,7 +68,7 @@ const Login: FC = () => {
     } else if (data) {
       localStorage.setItem('token', data.access_token);
       reset();
-      navigate(DataRoute.PersonalInformation);
+      navigate(getRoutePersonalInformation());
     }
   }, [data, error, setError]);
 
@@ -80,13 +84,13 @@ const Login: FC = () => {
               error={errors.password?.message}
             />
           </InputsWrapper>
-          <Link to={DataRoute.RestoringAccess} className={styles.login__link}>
+          <Link to={getRouteRestoringAccess()} className={styles.login__link}>
             {t('login.btn1')}
           </Link>
           <Button text={`${t('login.btn2')}`} loading={isLoading} />
         </Form>
 
-        <FormLink to={DataRoute.Registration} text={`${t(`login.btn3`)}`} />
+        <FormLink to={getRouteRegistration()} text={`${t(`login.btn3`)}`} />
       </div>
       <div className={styles.img}>
         <img src={Flower} alt="flower" />

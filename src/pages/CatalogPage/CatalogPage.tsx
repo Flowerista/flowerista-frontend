@@ -8,9 +8,9 @@ import { SkeletonCard } from '../../components/Skeletons/SkeletonCard/SkeletonCa
 import { useAppSelector } from '../../store/store';
 import { useDebounce } from '../../hooks/useDebounce';
 import { Link } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
 import { useTranslation } from 'react-i18next';
 import { useGetAllFlowers } from '../../services/bouquete-api/getAllFlowers/getAllFlowers';
+import { getRouteHome } from '../../app/routerConfig.tsx';
 
 export interface ICatalogPage {}
 
@@ -21,8 +21,8 @@ const CatalogPage: FC<ICatalogPage> = () => {
   const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500);
 
   const dataFetch: IFetchAllFlowers = {
-    flowerIds: filters.flowerIds.map((item) => item.id).join(','),
-    colorIds: filters.colorIds.map((item) => item.id).join(','),
+    flowerIds: filters.flowerIds.map((item) => item.id).join(',') ?? '',
+    colorIds: filters.colorIds.map((item) => item.id).join(',') ?? '',
     minPrice: debouncedMinPrice,
     maxPrice: debouncedMaxPrice,
     sortByNewest: filters.sortByNewest,
@@ -35,7 +35,7 @@ const CatalogPage: FC<ICatalogPage> = () => {
 
   useEffect(() => {
     setDataState(dataFetch);
-  }, [filters, debouncedMaxPrice, debouncedMinPrice]);
+  }, [filters, debouncedMaxPrice, debouncedMinPrice, dataFetch]);
 
   const [dataState, setDataState] = useState(dataFetch);
 
@@ -53,7 +53,7 @@ const CatalogPage: FC<ICatalogPage> = () => {
   return (
     <div className={styles.catalog}>
       <div className={styles.catalog__name}>
-        <Link to={DataRoute.Home}>{t('catalog.link')}</Link>
+        <Link to={getRouteHome()}>{t('catalog.link')}</Link>
         {t('catalog.link2')}
       </div>
       <Filters />

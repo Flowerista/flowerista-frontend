@@ -1,22 +1,19 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import openImage from '../../../../assets/image/catalog/mobile/sorting_open.png';
 import closeImage from '../../../../assets/image/catalog/mobile/close_sorting.png';
-import {
-  setSortByNewest,
-  setSortByPriceHighToLow,
-  setSortByPriceLowToHigh
-} from '../../../../store/filtration/filtration.slice';
-import { useAppDispatch } from '../../../../store/store';
+
 import { useTranslation } from 'react-i18next';
+import { useFiltrationActions } from '../../../../store/filtration/filtration.slice.ts';
 
 export interface ISorting {}
 
 export const Sorting: FC<ISorting> = () => {
   const { t, i18n } = useTranslation();
+  const { setSortByPriceHighToLow, setSortByPriceLowToHigh, setSortByNewest } =
+    useFiltrationActions();
 
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const [sorting, setSorting] = useState([
     {
@@ -53,17 +50,17 @@ export const Sorting: FC<ISorting> = () => {
     setSorting(updatedSorting);
 
     if (value.item === 'sortByNewest') {
-      dispatch(setSortByNewest(true));
-      dispatch(setSortByPriceHighToLow(false));
-      dispatch(setSortByPriceLowToHigh(false));
+      setSortByNewest(true);
+      setSortByPriceHighToLow(false);
+      setSortByPriceLowToHigh(false);
     } else if (value.item === 'sortByPriceHighToLow') {
-      dispatch(setSortByPriceHighToLow(true));
-      dispatch(setSortByPriceLowToHigh(false));
-      dispatch(setSortByNewest(false));
+      setSortByPriceHighToLow(true);
+      setSortByPriceLowToHigh(false);
+      setSortByNewest(false);
     } else if (value.item === 'sortByPriceLowToHigh') {
-      dispatch(setSortByPriceLowToHigh(true));
-      dispatch(setSortByPriceHighToLow(false));
-      dispatch(setSortByNewest(false));
+      setSortByPriceLowToHigh(true);
+      setSortByPriceHighToLow(false);
+      setSortByNewest(false);
     }
   };
 

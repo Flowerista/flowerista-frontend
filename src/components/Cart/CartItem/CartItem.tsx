@@ -2,15 +2,7 @@ import { CSSProperties, FC } from 'react';
 
 import styles from './styles.module.scss';
 import { BsTrash3 } from 'react-icons/bs';
-import { useAppDispatch } from '../../../store/store';
-import {
-  changeSize,
-  decQuantity,
-  incQuantity,
-  ISize,
-  removeCartItem,
-  Size
-} from '../../../store/cart/cart.slice';
+import { ISize, Size, useCartActions } from '../../../store/cart/cart.slice';
 import { DropDownSize } from '../DropDownSize/DropDownSize';
 import { generateCartID } from '../../../utils/helpers/generateCartID';
 
@@ -39,23 +31,25 @@ const CartItem: FC<CartItemProps> = ({
   sizes
 }) => {
   const cartID = generateCartID(id, currentSize);
-  const dispatch = useAppDispatch();
+  const { removeCartItem, incQuantity, decQuantity, changeSize } =
+    useCartActions();
+
   const onDelete = () => {
-    dispatch(removeCartItem({ cartID }));
+    removeCartItem({ cartID });
   };
 
   const onInc = () => {
-    dispatch(incQuantity({ cartID }));
+    incQuantity({ cartID });
   };
 
   const onDec = () => {
     if (quantity > 1) {
-      dispatch(decQuantity({ cartID }));
+      decQuantity({ cartID });
     }
   };
 
   const onChangeSize = (size: Size) => {
-    dispatch(changeSize({ cartID, size }));
+    changeSize({ cartID, size });
   };
 
   return (

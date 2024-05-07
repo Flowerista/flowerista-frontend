@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import styles from './styles.module.scss';
 import open from '../../../../../assets/image/checkOut/open.png';
 import close from '../../../../../assets/image/checkOut/close.png';
@@ -23,7 +23,7 @@ export const ColorsAccordion: FC<IColorsAccordion> = ({
   const name = t('mobileFilters.filter.modal.nameColor');
 
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { data } = useGetColors('');
+  const { data } = useGetColors();
 
   const handleClick = () => {
     setIsActive((prevState) => !prevState);

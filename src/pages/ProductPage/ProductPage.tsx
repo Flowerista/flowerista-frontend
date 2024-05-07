@@ -2,17 +2,13 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { setCartModalOpen } from '../../store/modals/modals.slice';
-import { addToRecentlyViewed } from '../../store/recentlyViewed/recentlyViewed.slice';
-import { addCartItem, ICartItem } from '../../store/cart/cart.slice';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useAppSelector } from '../../store/store';
 
 import { Button } from '../../components/Buttons/Button';
 import { Loader } from '../../components/shared/Loading';
 import { SectionFlower } from '../../components/SectionsFlower/SectionFlower';
 import { ProductSelect } from './ProductSelect';
 
-import { DataRoute } from '../../data/routes';
 import { ISize, Size } from '../../interface/flower';
 import { generateCartID } from '../../utils/helpers';
 
@@ -21,6 +17,14 @@ import { BsArrowRight } from 'react-icons/bs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { useGetBouqueteById } from '../../services/bouquete-api/getBouqueteById/getBouqueteById';
+import { ICartItem, useCartActions } from '../../store/cart/cart.slice.ts';
+import { useModalActions } from '../../store/modals/modals.slice.ts';
+import { useRecentlyViewedActions } from '../../store/recentlyViewed/recentlyViewed.slice.ts';
+import {
+  getRouteCatalog,
+  getRouteDeliveryAndPayment,
+  getRouteHome
+} from '../../app/routerConfig.tsx';
 
 export interface IProductPage {}
 
@@ -32,7 +36,10 @@ const ProductPage: FC<IProductPage> = () => {
   const [price, setPrice] = useState<string>('');
   const [discountPrice, setDiscountPrice] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
-  const dispatch = useAppDispatch();
+  const { addCartItem } = useCartActions();
+  const { setCartModalOpen } = useModalActions();
+  const { addToRecentlyViewed } = useRecentlyViewedActions();
+
   const { recentlyViewed } = useAppSelector((state) => state.recentlyViewed);
 
   const toCart = () => {
@@ -56,8 +63,8 @@ const ProductPage: FC<IProductPage> = () => {
           currentSize: activeSize,
           quantity
         };
-        dispatch(addCartItem(flower));
-        dispatch(setCartModalOpen(true));
+        addCartItem(flower);
+        setCartModalOpen(true);
       }
     }
   };
@@ -71,19 +78,17 @@ const ProductPage: FC<IProductPage> = () => {
           ? data?.sizes[0]?.discountPrice.toString()
           : ''
       );
-      dispatch(
-        addToRecentlyViewed({
-          id: data.id,
-          name: data.name,
-          discount: data.sizes[1]?.discountPrice ? 20 : '',
-          defaultPrice: data?.sizes[0]?.defaultPrice.toString(),
-          discountPrice: data?.sizes[0]?.discountPrice
-            ? data?.sizes[0]?.discountPrice.toString()
-            : '',
-          imageUrls: data.imageUrls,
-          sizes: data.sizes
-        })
-      );
+      addToRecentlyViewed({
+        id: data.id,
+        name: data.name,
+        discount: data.sizes[1]?.discountPrice ? 20 : '',
+        defaultPrice: data?.sizes[0]?.defaultPrice.toString(),
+        discountPrice: data?.sizes[0]?.discountPrice
+          ? data?.sizes[0]?.discountPrice.toString()
+          : '',
+        imageUrls: data.imageUrls,
+        sizes: data.sizes
+      });
     }
   }, [data]);
 
@@ -118,9 +123,9 @@ const ProductPage: FC<IProductPage> = () => {
   return (
     <div className={styles.productPage}>
       <div className={styles.nav}>
-        <Link to={DataRoute.Home}>{t('product.btn1')}</Link>
+        <Link to={getRouteHome()}>{t('product.btn1')}</Link>
         <span>|</span>
-        <Link to={DataRoute.Catalog}>{t('product.btn2')}</Link>
+        <Link to={getRouteCatalog()}>{t('product.btn2')}</Link>
         <span>|</span>
         {t('product.bouquet')} {productId}
       </div>
@@ -220,7 +225,7 @@ const ProductPage: FC<IProductPage> = () => {
 
             <div className={styles.link}>
               <span>{t('product.link1')}</span>
-              <Link to={DataRoute.DeliveryAndPayment} target={'_top'}>
+              <Link to={getRouteDeliveryAndPayment()} target={'_top'}>
                 {t('product.link2')}
                 <BsArrowRight style={{ fontSize: '24px' }} />
               </Link>

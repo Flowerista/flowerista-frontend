@@ -75,6 +75,8 @@ export const PayWithPayPal: FC<IPayWithPayPal> = () => {
   const onCreateOrder: PayPalButtonsComponentProps['createOrder'] = async (
     actions
   ) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return actions.order.create({
       intent: 'CAPTURE',
       purchase_units: [

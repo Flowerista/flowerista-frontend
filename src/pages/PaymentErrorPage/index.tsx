@@ -5,7 +5,7 @@ import { CheckOutFooter } from '../CheckOutPage/CheckOutFooter';
 import { Button } from '../../components';
 import errorImage from '../../assets/image/checkOut/error.png';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
+import { getRouteCheckOut } from '../../app/routerConfig.tsx';
 
 export interface IPaymentErrorPage {}
 
@@ -24,7 +24,7 @@ export const PaymentErrorPage: FC<IPaymentErrorPage> = () => {
             </p>
             <form target={'_top'} className={styles.button}>
               <Button
-                onClick={() => navigation(DataRoute.CheckOut)}
+                onClick={() => navigation(getRouteCheckOut())}
                 text={'Go to Check out'}
               />
             </form>

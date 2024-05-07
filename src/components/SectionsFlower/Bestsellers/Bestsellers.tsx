@@ -8,7 +8,7 @@ import { useGetBestsellers } from '../../../services/bouquete-api/getBestsellers
 
 export const Bestsellers: FC = () => {
   const { t } = useTranslation();
-  const { data, error, isLoading } = useGetBestsellers('');
+  const { data, error, isLoading } = useGetBestsellers();
   if (isLoading) {
     return (
       <div style={{ display: 'flex', marginTop: '120px' }}>

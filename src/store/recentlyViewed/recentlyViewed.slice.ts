@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { IFlowerCard } from '../../interface/flower';
+import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {
   recentlyViewed: IFlowerCard[];
@@ -11,7 +11,7 @@ const initialState: IInitialState = {
   maxRecentlyViewedLength: 5
 };
 
-export const recentlyViewedSlice = createSlice({
+export const recentlyViewedSlice = buildSlice({
   name: 'recentlyViewed',
   initialState,
   reducers: {
@@ -38,4 +38,4 @@ export const recentlyViewedSlice = createSlice({
   }
 });
 
-export const { addToRecentlyViewed } = recentlyViewedSlice.actions;
+export const { useActions: useRecentlyViewedActions } = recentlyViewedSlice;

@@ -4,9 +4,10 @@ import { Search } from './Search';
 import { Languages } from './Languages';
 import { Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { DataRoute } from '../../data/routes';
+
 import { CartIcon } from './CartIcon';
 import { CartModal } from '../Modals/CartModal/CartModal';
+import { getRoutePersonalInformation } from '../../app/routerConfig.tsx';
 
 export const ParametersMenu: FC = () => {
   return (
@@ -19,7 +20,7 @@ export const ParametersMenu: FC = () => {
           <Languages />
         </li>
         <li>
-          <Link to={DataRoute.PersonalInformation}>
+          <Link to={getRoutePersonalInformation()}>
             <BsFillPersonFill style={{ fontSize: '32px' }} />
           </Link>
         </li>

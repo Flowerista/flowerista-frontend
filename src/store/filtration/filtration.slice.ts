@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { buildSlice } from '../buildSlice.ts';
 
 interface IItem {
   item: string;
@@ -36,7 +37,7 @@ const initialState: IInitialState = {
   }
 };
 
-export const filtrationSlice = createSlice({
+export const filtrationSlice = buildSlice({
   name: 'filtration',
   initialState,
   reducers: {
@@ -103,18 +104,4 @@ export const filtrationSlice = createSlice({
   }
 });
 
-export const {
-  addFlowersId,
-  addColorsId,
-  removeFlowerId,
-  removeColorId,
-  clearFilters,
-  setMinValue,
-  setMaxValue,
-  removeMinMaxValues,
-  setSortByPriceLowToHigh,
-  setSortByPriceHighToLow,
-  setSortByNewest,
-  setMaxNumber,
-  setMiNumber
-} = filtrationSlice.actions;
+export const { useActions: useFiltrationActions } = filtrationSlice;

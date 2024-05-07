@@ -1,30 +1,36 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DataRoute } from '../../data/routes';
-import { useAppDispatch } from '../../store/store';
+
 import { BsArrowRight } from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import { clearDataUser, logout } from '../../store/profile/profile.slice';
+import { useProfileActions } from '../../store/profile/profile.slice';
+import {
+  getRouteLogin,
+  getRouteOrders,
+  getRoutePersonalInformation,
+  getRouteWishlist
+} from '../../app/routerConfig.tsx';
 
 interface SidebarPrors
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export const Sidebar: React.FC<SidebarPrors> = ({ className, ...props }) => {
+export const Sidebar: FC<SidebarPrors> = ({ className, ...props }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { clearDataUser, logout } = useProfileActions();
+
   const onLogout = () => {
-    dispatch(clearDataUser());
-    dispatch(logout());
-    navigate(DataRoute.Login);
+    clearDataUser();
+    logout();
+    navigate(getRouteLogin());
   };
   return (
     <div className={`${styles.sidebar} ${className}`} {...props}>
       <ul className={styles.sidebar__menu}>
         <li>
-          <NavLink to={DataRoute.PersonalInformation}>
+          <NavLink to={getRoutePersonalInformation()}>
             {({ isActive }) => (
               <div className={styles.sidebar__item}>
                 {isActive ? (
@@ -38,7 +44,7 @@ export const Sidebar: React.FC<SidebarPrors> = ({ className, ...props }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={DataRoute.Orders}>
+          <NavLink to={getRouteOrders()}>
             {({ isActive }) => (
               <div className={styles.sidebar__item}>
                 {isActive ? (
@@ -52,7 +58,7 @@ export const Sidebar: React.FC<SidebarPrors> = ({ className, ...props }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to={DataRoute.Wishlist}>
+          <NavLink to={getRouteWishlist()}>
             {({ isActive }) => (
               <div className={styles.sidebar__item}>
                 {isActive ? (

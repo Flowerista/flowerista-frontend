@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './styles.module.scss';
 import topArrow from '../../assets/image/dropDown/top_arrow.png';
 import bottomArrow from '../../assets/image/dropDown/botton_arrow.png';

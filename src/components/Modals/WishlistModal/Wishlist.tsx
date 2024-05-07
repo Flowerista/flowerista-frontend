@@ -5,27 +5,34 @@ import styles from './styles.module.scss';
 import { Title } from '../../Title/Title';
 import { Button } from '../../Buttons/Button';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { setWishlistModalOpen } from '../../../store/modals/modals.slice';
+import { useAppSelector } from '../../../store/store';
+import { useModalActions } from '../../../store/modals/modals.slice';
+import {
+  getRouteLogin,
+  getRouteRegistration
+} from '../../../app/routerConfig.tsx';
 
 interface WishlistModalInfoProps {}
 
 const WishlistModal: FC<WishlistModalInfoProps> = () => {
-  const dispatch = useAppDispatch();
   const { wishlistModalOpen } = useAppSelector((state) => state.modals.modals);
   const navigate = useNavigate();
+  const { setWishlistModalOpen } = useModalActions();
+
   const onClose = () => {
-    dispatch(setWishlistModalOpen(false));
+    setWishlistModalOpen(false);
   };
+
   const toLogin = () => {
     onClose();
-    navigate(DataRoute.Login);
+    navigate(getRouteLogin());
   };
+
   const toRegister = () => {
     onClose();
-    navigate(DataRoute.Registration);
+    navigate(getRouteRegistration());
   };
+
   return (
     <Modal
       className={styles.modal}

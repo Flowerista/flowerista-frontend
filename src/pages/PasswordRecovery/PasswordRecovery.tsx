@@ -9,9 +9,10 @@ import { Button } from '../../components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ResetPassword } from '../../utils/yup';
-import { DataRoute } from '../../data/routes';
+
 import { useTranslation } from 'react-i18next';
 import { useAuthChangePassword } from '../../services/AuthService/changePassword/authChangePassword';
+import { getRouteHome } from '../../app/routerConfig.tsx';
 
 const PasswordRecovery: FC = () => {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ const PasswordRecovery: FC = () => {
     } catch (e) {
       console.log(e);
     }
-    navigate(DataRoute.Home);
+    navigate(getRouteHome());
   };
 
   return (

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {
   city: string;
@@ -22,7 +22,7 @@ const initialState: IInitialState = {
   type: ''
 };
 
-export const checkOutSlice = createSlice({
+export const checkOutSlice = buildSlice({
   name: 'checkout',
   initialState,
   reducers: {
@@ -53,13 +53,4 @@ export const checkOutSlice = createSlice({
   }
 });
 
-export const {
-  setEntrance,
-  setStreet,
-  setCity,
-  setFlat,
-  setTime,
-  setHouse,
-  setDate,
-  setTypeToCheckout
-} = checkOutSlice.actions;
+export const { useActions: useCheckoutActions } = checkOutSlice;

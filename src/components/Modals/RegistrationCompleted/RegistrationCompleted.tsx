@@ -5,8 +5,8 @@ import styles from './styles.module.scss';
 import { Title } from '../../Title/Title';
 import { Button } from '../../Buttons/Button';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
 import { useTranslation } from 'react-i18next';
+import { getRouteHome } from '../../../app/routerConfig.tsx';
 
 interface RegistrationCompletedProps {
   isOpen: boolean;
@@ -24,7 +24,7 @@ const RegistrationCompleted: FC<RegistrationCompletedProps> = ({
   };
   const toMainPage = () => {
     onClose();
-    navigate(DataRoute.Home);
+    navigate(getRouteHome());
   };
   return (
     <Modal className={styles.modal} isOpen={isOpen} onClose={onClose}>

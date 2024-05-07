@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import styles from './styles.module.scss';
 import open from '../../../../../assets/image/checkOut/open.png';
 import close from '../../../../../assets/image/checkOut/close.png';

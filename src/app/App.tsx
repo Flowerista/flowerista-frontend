@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
 import '../i18n/i18n';

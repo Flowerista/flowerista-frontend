@@ -1,11 +1,15 @@
 import { FC, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
+
 import { SecondHeader } from '../../components/SecondHeader';
 import { CheckOutFooter } from '../CheckOutPage/CheckOutFooter';
 import loader from '../../assets/image/checkOut/loader.gif';
 import { usePaymentCaptureMutation } from '../../services/OrderService/paymentCapture/paymentCapture';
+import {
+  getRouteErrorAfterPayment,
+  getRouteThanksYou
+} from '../../app/routerConfig.tsx';
 
 export interface ICheckOutPendingPage {}
 
@@ -22,13 +26,13 @@ const CheckOutPendingPage: FC<ICheckOutPendingPage> = () => {
 
   useEffect(() => {
     if (data?.status === 'success') {
-      navigate(DataRoute.ThanksYou);
+      navigate(getRouteThanksYou());
     }
   }, [data?.status, navigate]);
 
   useEffect(() => {
     if (data?.status === 'error') {
-      navigate(DataRoute.ErrorAfterPayment);
+      navigate(getRouteErrorAfterPayment());
     }
   }, [data?.status, navigate]);
 

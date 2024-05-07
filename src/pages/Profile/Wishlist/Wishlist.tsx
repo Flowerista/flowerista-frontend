@@ -3,11 +3,11 @@ import { Button, Card } from '../../../components';
 
 import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
 import Flower from '../../../assets/image/wishlist/img.png';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../../../components/shared/Loading';
 import { useGetWishlistQuery } from '../../../services/wishlistService/getWishlist/getWishlist';
+import { getRouteCatalog } from '../../../app/routerConfig.tsx';
 
 const Wishlist: FC = () => {
   const { t } = useTranslation();
@@ -46,7 +46,7 @@ const Wishlist: FC = () => {
         <p className={styles.empty__subtitle}>{t('profile.wishlist.text')}</p>
         <Button
           text={t('profile.wishlist.btn')}
-          onClick={() => navigate(DataRoute.Catalog)}
+          onClick={() => navigate(getRouteCatalog())}
           sizeMode="full"
           className={styles.empty__btn}
         />

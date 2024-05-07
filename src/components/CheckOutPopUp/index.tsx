@@ -3,8 +3,11 @@ import styles from './styles.module.scss';
 import { Button } from '../Buttons/Button';
 import arrow from '../../assets/image/arrow.png';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
 import { useTranslation } from 'react-i18next';
+import {
+  getRouteLogin,
+  getRouteRegistration
+} from '../../app/routerConfig.tsx';
 
 export interface ICheckOutPopUp {
   setVisible: (visible: boolean) => void;
@@ -33,13 +36,13 @@ export const CheckOutPopUp: FC<ICheckOutPopUp> = ({ setVisible, ref }) => {
           <li>{t('checkout.modal.text')}</li>
           <Button
             onClick={() => {
-              navigation(DataRoute.Login);
+              navigation(getRouteLogin());
             }}
             text={`${t('checkout.modal.btn1')}`}
           />
           <Button
             onClick={() => {
-              navigation(DataRoute.Registration);
+              navigation(getRouteRegistration());
             }}
             colorMode={'white'}
             text={`${t('checkout.modal.btn2')}`}

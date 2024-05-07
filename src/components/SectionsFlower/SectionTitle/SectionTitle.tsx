@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
-import { DataRoute } from '../../../data/routes';
 
 import styles from './styles.module.scss';
+import { getRouteCatalog } from '../../../app/routerConfig.tsx';
 
 export interface ISectionTitle {
   title: string;
@@ -25,7 +25,7 @@ export const SectionTitle: FC<ISectionTitle> = ({
       <div className={styles.head__link__wrapper}>
         <Link
           target={'_top'}
-          to={DataRoute.Catalog}
+          to={getRouteCatalog()}
           className={styles.head__link}
         >
           {t('mainPage.btn-see-all')}{' '}

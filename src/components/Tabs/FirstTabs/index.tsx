@@ -6,15 +6,8 @@ import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { Form, FormError } from '../../AppForm';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  setCity,
-  setDate,
-  setHouse,
-  setStreet,
-  setTime
-} from '../../../store/checkout/checkout.slice';
+import { useCheckoutActions } from '../../../store/checkout/checkout.slice';
 import dayjs from 'dayjs';
-import { useAppDispatch } from '../../../store/store';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
@@ -29,7 +22,8 @@ interface Inputs {
 
 const FirstTab: FC<IFirstTab> = ({ setIsActive }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  const { setCity, setDate, setHouse, setStreet, setTime } =
+    useCheckoutActions();
 
   const {
     control,
@@ -77,11 +71,11 @@ const FirstTab: FC<IFirstTab> = ({ setIsActive }) => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(setDate(dayjs(data.date).format('YYYY-MM-DD')));
-    dispatch(setTime(dayjs(data.time).format('HH:mm')));
-    dispatch(setCity('Київ'));
-    dispatch(setStreet('Перемоги'));
-    dispatch(setHouse('45'));
+    setDate(dayjs(data.date).format('YYYY-MM-DD'));
+    setTime(dayjs(data.time).format('HH:mm'));
+    setCity('Київ');
+    setStreet('Перемоги');
+    setHouse('45');
     setIsActive(true);
     reset();
   };

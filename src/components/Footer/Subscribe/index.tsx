@@ -26,7 +26,7 @@ export const Subscribe: FC = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    await subscription(data);
+    await subscription(data.email);
     reset();
   };
 

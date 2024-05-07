@@ -1,21 +1,7 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import x from '../../../assets/image/hresik.png';
-import {
-  addColorsId,
-  addFlowersId,
-  clearFilters,
-  removeColorId,
-  removeFlowerId,
-  removeMinMaxValues,
-  setMaxNumber,
-  setMaxValue,
-  setMiNumber,
-  setMinValue,
-  setSortByNewest,
-  setSortByPriceHighToLow,
-  setSortByPriceLowToHigh
-} from '../../../store/filtration/filtration.slice';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+
+import { useAppSelector } from '../../../store/store';
 import styles from '../styles.module.scss';
 import { DropDown } from '../../../components/DropDown';
 import { DropDownPrice } from '../../../components/DropDownPrice';
@@ -26,11 +12,27 @@ import { MobileFilters } from '../MobileFilters';
 import { useGetColors } from '../../../services/bouquete-api/getColors/getColors';
 import { useGetFlowers } from '../../../services/bouquete-api/getFlowers/getFlowers';
 import { useGetRangePrice } from '../../../services/bouquete-api/getRangePrice/getRangePrice';
+import { useFiltrationActions } from '../../../store/filtration/filtration.slice.ts';
 
 export const Filters: FC = () => {
   const { t, i18n } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { data: priceRange } = useGetRangePrice('');
+  const {
+    setMaxNumber,
+    setMaxValue,
+    setMinValue,
+    setMiNumber,
+    removeMinMaxValues,
+    removeFlowerId,
+    removeColorId,
+    addFlowersId,
+    clearFilters,
+    addColorsId,
+    setSortByPriceHighToLow,
+    setSortByPriceLowToHigh,
+    setSortByNewest
+  } = useFiltrationActions();
+
+  const { data: priceRange } = useGetRangePrice();
   const [sortingName, setSortingName] = useState<string>(
     t('catalog.sorting.title')
   );
@@ -42,8 +44,8 @@ export const Filters: FC = () => {
   const minInputRefSmall = useRef<HTMLInputElement>(null);
   const maxInputRefSmall = useRef<HTMLInputElement>(null);
 
-  const { data: colors, isLoading: colorsLoading } = useGetColors('');
-  const { data: flowers, isLoading: flowersLoading } = useGetFlowers('');
+  const { data: colors, isLoading: colorsLoading } = useGetColors();
+  const { data: flowers, isLoading: flowersLoading } = useGetFlowers();
   const { flowerIds, colorIds, maxPrice, minPrice, min, max } = useAppSelector(
     (state) => state.filtration.filters
   );
@@ -77,18 +79,19 @@ export const Filters: FC = () => {
 
   useEffect(() => {
     if (priceRange) {
-      dispatch(setMiNumber(priceRange.minPrice));
-      dispatch(setMaxNumber(priceRange.maxPrice));
-      dispatch(setMinValue(priceRange.minPrice));
-      dispatch(setMaxValue(priceRange.maxPrice));
+      setMiNumber(priceRange.minPrice);
+      setMaxNumber(priceRange.maxPrice);
+      setMinValue(priceRange.minPrice);
+      setMaxValue(priceRange.maxPrice);
     }
-  }, [priceRange]);
+    // }, [priceRange]);
+  }, [priceRange, setMaxNumber, setMaxValue, setMiNumber, setMinValue]);
 
   const addFlower = (item: { item: string; menu: string; id: number }) => {
-    dispatch(addFlowersId(item));
+    addFlowersId(item);
   };
   const addColor = (item: { item: string; menu: string; id: number }) => {
-    dispatch(addColorsId(item));
+    addColorsId(item);
   };
 
   const addSorting = (value: {
@@ -105,27 +108,27 @@ export const Filters: FC = () => {
     setSorting(updatedSorting);
 
     if (value.item === 'sortByNewest') {
-      dispatch(setSortByNewest(true));
-      dispatch(setSortByPriceHighToLow(false));
-      dispatch(setSortByPriceLowToHigh(false));
+      setSortByNewest(true);
+      setSortByPriceHighToLow(false);
+      setSortByPriceLowToHigh(false);
     } else if (value.item === 'sortByPriceHighToLow') {
-      dispatch(setSortByPriceHighToLow(true));
-      dispatch(setSortByPriceLowToHigh(false));
-      dispatch(setSortByNewest(false));
+      setSortByPriceHighToLow(true);
+      setSortByPriceLowToHigh(false);
+      setSortByNewest(false);
     } else if (value.item === 'sortByPriceLowToHigh') {
-      dispatch(setSortByPriceLowToHigh(true));
-      dispatch(setSortByPriceHighToLow(false));
-      dispatch(setSortByNewest(false));
+      setSortByPriceLowToHigh(true);
+      setSortByPriceHighToLow(false);
+      setSortByNewest(false);
     }
   };
 
   const removeHandler = (item: { item: string; menu: string; id: number }) => {
     if (item.menu === 'flowers' || item.menu === 'квіти') {
-      dispatch(removeFlowerId(item));
+      removeFlowerId(item);
     } else if (item.menu === 'colors' || item.menu === 'кольори') {
-      dispatch(removeColorId(item));
+      removeColorId(item);
     } else if (item.menu === 'minMax') {
-      dispatch(removeMinMaxValues());
+      removeMinMaxValues();
       if (minInputRef && minInputRef.current) {
         minInputRef.current.value = '';
       }
@@ -148,11 +151,11 @@ export const Filters: FC = () => {
 
   const resetFilters = () => {
     setSelectedItems([]);
-    dispatch(clearFilters([]));
-    dispatch(removeMinMaxValues());
-    dispatch(setSortByPriceLowToHigh(false));
-    dispatch(setSortByPriceHighToLow(false));
-    dispatch(setSortByNewest(false));
+    clearFilters([]);
+    removeMinMaxValues();
+    setSortByPriceLowToHigh(false);
+    setSortByPriceHighToLow(false);
+    setSortByNewest(false);
     if (minInputRef && minInputRef.current) {
       minInputRef.current.value = '';
     }

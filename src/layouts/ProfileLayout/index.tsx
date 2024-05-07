@@ -2,13 +2,13 @@ import { FC, ReactNode, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.scss';
-import { DataRoute } from '../../data/routes';
+
 import { Sidebar } from '../../components/Sidebar/Sidebar';
 import { MainLayout } from '../MainLayout';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { SidebarModal } from '../../components/Modals/SidebarModal/SidebarModal';
-import { useAppDispatch } from '../../store/store';
-import { setSidebarModalOpen } from '../../store/modals/modals.slice';
+import { useModalActions } from '../../store/modals/modals.slice';
+import { getRouteHome, getRouteLogin } from '../../app/routerConfig.tsx';
 
 export interface IProfileLayout {
   children: ReactNode;
@@ -17,13 +17,14 @@ export interface IProfileLayout {
 
 export const ProfileLayout: FC<IProfileLayout> = ({ children, pageName }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { setSidebarModalOpen } = useModalActions();
+
   const onOpen = () => {
-    dispatch(setSidebarModalOpen(true));
+    setSidebarModalOpen(true);
   };
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      navigate(DataRoute.Login);
+      navigate(getRouteLogin());
     }
   }, []);
 
@@ -31,7 +32,7 @@ export const ProfileLayout: FC<IProfileLayout> = ({ children, pageName }) => {
     <MainLayout>
       <div className={styles.page_wrp}>
         <div className={styles.nav}>
-          <Link to={DataRoute.Home}>Home</Link>|<p>{pageName}</p>
+          <Link to={getRouteHome()}>Home</Link>|<p>{pageName}</p>
         </div>
         <button className={styles.btn} onClick={onOpen}>
           {pageName}

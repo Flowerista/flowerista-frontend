@@ -5,6 +5,7 @@ import bottom from '../../../../assets/image/profile/order/botton.png';
 import { useTranslation } from 'react-i18next';
 import { AddressHistory, OrderItemHistory, UserHistory } from '../Orders';
 import { useNavigate } from 'react-router-dom';
+import { getRouteProductId } from '../../../../app/routerConfig.tsx';
 
 export interface IOrderItem {
   item: {
@@ -30,7 +31,7 @@ export const OrderItem: FC<IOrderItem> = ({ item }) => {
   const navigate = useNavigate();
 
   const onNavigateToProduct = (id: string) => {
-    return navigate(`/product/${id}`);
+    return navigate(getRouteProductId(id));
   };
 
   return (

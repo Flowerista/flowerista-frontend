@@ -10,7 +10,7 @@ import { useGetTopSellers } from '../../../services/bouquete-api/getTopSellers/g
 export const Sale: FC = () => {
   const { t } = useTranslation();
 
-  const { data, error, isLoading } = useGetTopSellers('');
+  const { data, error, isLoading } = useGetTopSellers();
 
   if (isLoading) {
     return (

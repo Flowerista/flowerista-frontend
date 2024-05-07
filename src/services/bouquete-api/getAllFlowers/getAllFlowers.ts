@@ -6,8 +6,8 @@ const getAllFlowersApi = rtkApi.injectEndpoints({
     getAllFlowers: build.query<IAllFlower, IFetchAllFlowers>({
       query: (data) => ({
         url: `/bouquete?page=${data.page}
-							${data.flowerIds?.length === 0 ? '' : `&flowerIds=${data.flowerIds}`}
-							${data.colorIds?.length === 0 ? '' : `&colorIds=${data.colorIds}`}
+							${data.flowerIds && `&flowerIds=${data.flowerIds}`}
+							${data.colorIds && `&colorIds=${data.colorIds}`}
 							${data.minPrice && data.minPrice > data.min ? `&minPrice=${data.minPrice}` : ''}
 							${data.maxPrice && data.maxPrice < data.max ? `&maxPrice=${data.maxPrice}` : ''}
 							${data.sortByNewest ? `&sortByNewest=${data.sortByNewest}` : ''}

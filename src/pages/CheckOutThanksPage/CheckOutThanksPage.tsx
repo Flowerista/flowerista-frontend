@@ -2,26 +2,27 @@ import { FC, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { CheckOutFooter } from '../CheckOutPage/CheckOutFooter';
 import { SecondHeader } from '../../components/SecondHeader';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useAppSelector } from '../../store/store';
 import { Button } from '../../components';
 import flower from '../../assets/image/checkOut/thanks_you_flower.png';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
-import { cleanCart } from '../../store/cart/cart.slice';
+
+import { useCartActions } from '../../store/cart/cart.slice.ts';
+import { getRouteCatalog, getRouteHome } from '../../app/routerConfig.tsx';
 
 export interface ICheckOutThanksPage {}
 
 const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
   const orderId = useAppSelector((state) => state.checkoutOrderId.orderId);
   const navigation = useNavigate();
-  const dispatch = useAppDispatch();
+  const { cleanCart } = useCartActions();
 
   useEffect(() => {
-    dispatch(cleanCart());
+    cleanCart();
     // return () => {
-    // 	dispatch(setOrderId(0))
+    // 	setOrderId(0)
     // };
-  }, []);
+  }, [cleanCart]);
 
   return (
     <div className={styles.wrapper}>
@@ -42,7 +43,7 @@ const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
               <form target={'_top'}>
                 <Button
                   onClick={() => {
-                    navigation(DataRoute.Catalog);
+                    navigation(getRouteCatalog());
                   }}
                   text={'Go to Catalog '}
                 />
@@ -50,7 +51,7 @@ const CheckOutThanksPage: FC<ICheckOutThanksPage> = () => {
               <form target={'_top'}>
                 <Button
                   onClick={() => {
-                    navigation(DataRoute.Home);
+                    navigation(getRouteHome());
                   }}
                   colorMode={'white'}
                   text={'Go to main page'}

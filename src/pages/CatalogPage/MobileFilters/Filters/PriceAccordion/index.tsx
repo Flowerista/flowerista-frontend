@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEvent,
   FC,
   RefObject,
@@ -9,15 +9,12 @@ import React, {
 import styles from './styles.module.scss';
 import topArrow from '../../../../../assets/image/dropDown/top_arrow.png';
 import bottomArrow from '../../../../../assets/image/dropDown/botton_arrow.png';
-import {
-  setMaxValue,
-  setMinValue
-} from '../../../../../store/filtration/filtration.slice';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import useOutside from '../../../../../hooks/useOutside';
-import { useAppDispatch, useAppSelector } from '../../../../../store/store';
+import { useAppSelector } from '../../../../../store/store';
 import './styles.scss';
+import { useFiltrationActions } from '../../../../../store/filtration/filtration.slice.ts';
 
 export interface IPriceAccordion {
   min: number;
@@ -34,6 +31,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
 }) => {
   const { t } = useTranslation();
   const { isShow, setIsShow, ref } = useOutside(false);
+  const { setMinValue, setMaxValue } = useFiltrationActions();
 
   const {
     maxPrice,
@@ -45,7 +43,6 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
-  const dispatch = useAppDispatch();
 
   // Convert to percentage
   const getPercent = useCallback(
@@ -112,9 +109,9 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             onChange={(event) => {
               const value = +event.target.value;
               if (value <= maxRangeSmall) {
-                dispatch(setMinValue(value));
+                setMinValue(value);
               } else {
-                dispatch(setMinValue(maxRangeSmall));
+                setMinValue(maxRangeSmall);
                 minInputRef.current!.value = maxRangeSmall.toString();
               }
             }}
@@ -129,7 +126,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             onChange={(event) => {
               const value = +event.target.value;
               if (value >= minRangeSmall && value >= minPrice) {
-                dispatch(setMaxValue(value));
+                setMaxValue(value);
               }
             }}
           />
@@ -143,7 +140,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             ref={minValRef}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = Math.min(+event.target.value, maxPrice - 1);
-              dispatch(setMinValue(value));
+              setMinValue(value);
               minInputRef!.current!.value = value.toString();
               event.target.value = value.toString();
             }}
@@ -159,7 +156,7 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             ref={maxValRef}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
               const value = Math.max(+event.target.value, minPrice + 1);
-              dispatch(setMaxValue(value));
+              setMaxValue(value);
               maxInputRef!.current!.value = value.toString();
               event.target.value = value.toString();
             }}

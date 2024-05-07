@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../../interface/global';
+import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {
   user: IUser;
@@ -21,7 +22,7 @@ const initialState: IInitialState = {
   }
 };
 
-export const profileSlice = createSlice({
+export const profileSlice = buildSlice({
   name: 'profile',
   initialState,
   reducers: {
@@ -39,4 +40,4 @@ export const profileSlice = createSlice({
   }
 });
 
-export const { clearDataUser, setProfile, logout } = profileSlice.actions;
+export const { useActions: useProfileActions } = profileSlice;

@@ -9,13 +9,13 @@ import PasswordSuccess from '../../../components/Modals/PasswordSuccess/Password
 import styles from './styles.module.scss';
 import { Loader } from '../../../components/shared/Loading';
 import { useGetProfile } from '../../../services/UserService/getProfile/getProfile';
-import { setProfile } from '../../../store/profile/profile.slice';
-import { useAppDispatch } from '../../../store/store';
+import { useProfileActions } from '../../../store/profile/profile.slice';
 
 const PersonalInformation: FC = () => {
-  const dispatch = useAppDispatch();
   const { data, isLoading, error } = useGetProfile();
+  const { setProfile } = useProfileActions();
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false);
+
   const [showPasswordSuccess, setShowPasswordSuccess] =
     useState<boolean>(false);
 
@@ -25,9 +25,9 @@ const PersonalInformation: FC = () => {
 
   useEffect(() => {
     if (data) {
-      dispatch(setProfile(data));
+      setProfile(data);
     }
-  }, [data]);
+  }, [data, setProfile]);
 
   if (isLoading) {
     return <Loader />;

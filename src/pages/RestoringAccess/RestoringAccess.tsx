@@ -11,13 +11,17 @@ import {
 } from '../../components/AppForm';
 import { Button } from '../../components/Buttons/Button';
 import { Title } from '../../components/Title/Title';
-import { DataRoute } from '../../data/routes';
+
 import { RestoringAccessSchema } from '../../utils/yup';
 
 import Flower from '../../assets/image/restoring_access/restoring_access.png';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useResetPasswordMutation } from '../../services/AuthService/resetPassword/resetPassword';
+import {
+  getRouteLogin,
+  getRouteRestoringAccessSuccess
+} from '../../app/routerConfig.tsx';
 
 interface Inputs {
   email: string;
@@ -40,7 +44,7 @@ const RestoringAccess: FC = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await resetPassword(String(data.email));
-    navigate(DataRoute.RestoringAccessSuccess);
+    navigate(getRouteRestoringAccessSuccess());
     reset();
   };
 
@@ -61,7 +65,7 @@ const RestoringAccess: FC = () => {
           />
           <FormLink
             text={`${t('restoring.success.btn2')}`}
-            to={DataRoute.Login}
+            to={getRouteLogin()}
           />
         </Form>
       </div>

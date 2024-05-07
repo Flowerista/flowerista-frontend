@@ -4,15 +4,10 @@ import close from '../../assets/image/checkOut/close.png';
 import open from '../../assets/image/checkOut/open.png';
 import Tabs from '../Tabs';
 import { AddressInformation } from '../../pages/CheckOutPage/Delivery/AddressInformation';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import {
-  setCity,
-  setEntrance,
-  setFlat,
-  setHouse,
-  setStreet
-} from '../../store/checkout/checkout.slice';
+import { useAppSelector } from '../../store/store';
+
 import { useTranslation } from 'react-i18next';
+import { useCheckoutActions } from '../../store/checkout/checkout.slice.ts';
 
 interface IAccordion {
   address:
@@ -32,15 +27,17 @@ export const Accordion: FC<IAccordion> = ({ address }) => {
   const [isActiveAccordion, setIsActiveAccordion] = useState(false);
   const [type, setType] = useState<'mail' | 'courier'>('courier');
   const [isActive, setIsActive] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
+  const { setCity, setStreet, setHouse, setFlat, setEntrance } =
+    useCheckoutActions();
 
   useEffect(() => {
-    dispatch(setCity(address?.city));
-    dispatch(setStreet(address?.street));
-    dispatch(setHouse(address?.house));
-    dispatch(setFlat(address?.flat));
-    dispatch(setEntrance(address?.entrance));
-  }, [address]);
+    setCity(address?.city);
+    setStreet(address?.street);
+    setHouse(address?.house);
+    setFlat(address?.flat);
+    setEntrance(address?.entrance);
+    // }, [address]);
+  }, [address, setCity, setEntrance, setFlat, setHouse, setStreet]);
 
   const handleClick = () => {
     if (user.user.email !== '') {

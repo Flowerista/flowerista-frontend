@@ -4,17 +4,9 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../store/store';
 import dayjs from 'dayjs';
-import {
-  setCity,
-  setDate,
-  setEntrance,
-  setFlat,
-  setHouse,
-  setStreet,
-  setTime
-} from '../../../store/checkout/checkout.slice';
+import { useCheckoutActions } from '../../../store/checkout/checkout.slice';
 import { CheckOutAddressSchema } from '../../../utils/yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
@@ -26,7 +18,16 @@ interface InterfaceSecondTab {
 
 const SecondTab: FC<InterfaceSecondTab> = ({ setIsActive }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  const {
+    setTime,
+    setCity,
+    setDate,
+    setEntrance,
+    setFlat,
+    setHouse,
+    setStreet
+  } = useCheckoutActions();
+
   const { city, street, entrance, flat, house } = useAppSelector(
     (state) => state.checkout
   );
@@ -52,13 +53,13 @@ const SecondTab: FC<InterfaceSecondTab> = ({ setIsActive }) => {
   });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit: SubmitHandler<any> = (data) => {
-    dispatch(setDate(dayjs(data.date).format('YYYY-MM-DD')));
-    dispatch(setTime(dayjs(data.time).format('HH:mm')));
-    dispatch(setCity(data.city));
-    dispatch(setStreet(data.street));
-    dispatch(setHouse(data.house));
-    dispatch(setFlat(data.flat));
-    dispatch(setEntrance(data.entrance));
+    setDate(dayjs(data.date).format('YYYY-MM-DD'));
+    setTime(dayjs(data.time).format('HH:mm'));
+    setCity(data.city);
+    setStreet(data.street);
+    setHouse(data.house);
+    setFlat(data.flat);
+    setEntrance(data.entrance);
     setIsActive(true);
     reset();
   };

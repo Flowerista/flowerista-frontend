@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/Buttons/Button';
 import { Title } from '../../../components/Title/Title';
-import { DataRoute } from '../../../data/routes';
 
 import Flower from '../../../assets/image/restoring_access/restoring_success.png';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
+import { getRouteHome } from '../../../app/routerConfig.tsx';
 
 export const RestoringAccessSuccess: FC = () => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ export const RestoringAccessSuccess: FC = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(DataRoute.Home);
+    navigate(getRouteHome());
   };
   return (
     <div className={styles.restoring}>

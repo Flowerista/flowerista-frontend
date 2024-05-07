@@ -4,13 +4,18 @@ import { Logo } from './Logo';
 import { HeaderButton } from './HeaderButton';
 import { CartIcon } from '../ParametersMenu/CartIcon';
 import { Link } from 'react-router-dom';
-import { DataRoute } from '../../data/routes';
+
 import { BsFillPersonFill } from 'react-icons/bs';
 import { Search } from '../ParametersMenu/Search';
 import { Languages } from '../ParametersMenu/Languages';
 import { FC, useState } from 'react';
 import classNames from 'classnames';
 import { CartModal } from '../Modals/CartModal/CartModal';
+import {
+  getRouteLogin,
+  getRoutePersonalInformation,
+  getRouteRegistration
+} from '../../app/routerConfig.tsx';
 
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -26,7 +31,7 @@ export const Header = () => {
       <NavBar type="header" />
       <div className={s.parametersMenu__wrp}>
         <Link
-          to={DataRoute.PersonalInformation}
+          to={getRoutePersonalInformation()}
           className={s.parametersMenu__profile}
         >
           <BsFillPersonFill style={{ fontSize: '28px' }} />
@@ -48,7 +53,7 @@ const ProfileRender: FC = () => {
   if (localStorage.getItem('token')) {
     return (
       <div className={s.profile}>
-        <Link to={DataRoute.PersonalInformation}>
+        <Link to={getRoutePersonalInformation()}>
           <BsFillPersonFill style={{ fontSize: '21px' }} />
           <span>Profile</span>
         </Link>
@@ -58,9 +63,9 @@ const ProfileRender: FC = () => {
     return (
       <div className={s.profile}>
         <BsFillPersonFill style={{ fontSize: '21px' }} />
-        <Link to={DataRoute.Login}>Log in</Link>
+        <Link to={getRouteLogin()}>Log in</Link>
         <span>|</span>
-        <Link to={DataRoute.Registration}>Registration</Link>
+        <Link to={getRouteRegistration()}>Registration</Link>
       </div>
     );
   }

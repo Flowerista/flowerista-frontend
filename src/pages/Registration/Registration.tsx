@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { RegisterSchema } from '../../utils/yup';
-import { DataRoute } from '../../data/routes';
+
 import {
   EmailInput,
   Form,
@@ -27,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { usePostRegistration } from '../../services/UserService/postRegistration/postRegistration';
 import { useLazyGetCheckEmailQuery } from '../../services/AuthService/checkEmail/checkEmail';
 import { useLazyGetCheckPhoneQuery } from '../../services/AuthService/checkPhone/checkPhone';
+import { getRouteLogin } from '../../app/routerConfig.tsx';
 
 type Inputs = {
   name: string;
@@ -127,7 +128,7 @@ const Registration: FC = () => {
         </Form>
 
         <div className={styles.flex}>
-          <FormLink to={DataRoute.Login} text={`${t('register.btn2')}`} />
+          <FormLink to={getRouteLogin()} text={`${t('register.btn2')}`} />
         </div>
       </div>
       <RegistrationCompleted

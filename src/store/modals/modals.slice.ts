@@ -1,4 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {
   modals: {
@@ -16,7 +17,7 @@ const initialState: IInitialState = {
   }
 };
 
-export const modalsSlice = createSlice({
+export const modalsSlice = buildSlice({
   name: 'filtration',
   initialState,
   reducers: {
@@ -32,5 +33,4 @@ export const modalsSlice = createSlice({
   }
 });
 
-export const { setCartModalOpen, setWishlistModalOpen, setSidebarModalOpen } =
-  modalsSlice.actions;
+export const { useActions: useModalActions } = modalsSlice;

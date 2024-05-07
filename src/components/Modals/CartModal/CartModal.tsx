@@ -1,15 +1,15 @@
 import { CSSProperties, FC, useEffect } from 'react';
 import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../store/store';
 import { getTotalPrice } from '../../../utils/helpers';
 import { Button, Cart } from '../../index';
 
 import { BsArrowLeft, BsXLg } from 'react-icons/bs';
 import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { DataRoute } from '../../../data/routes';
-import { setCartModalOpen } from '../../../store/modals/modals.slice';
+import { useModalActions } from '../../../store/modals/modals.slice';
 import { useTranslation } from 'react-i18next';
+import { getRouteCheckOut } from '../../../app/routerConfig.tsx';
 
 interface CartModalProps {
   className?: string;
@@ -21,10 +21,10 @@ export const CartModal: FC<CartModalProps> = ({ style, className }) => {
   const navigate = useNavigate();
   const { cart } = useAppSelector((state) => state.cart);
   const { modals } = useAppSelector((state) => state.modals);
-  const dispatch = useAppDispatch();
+  const { setCartModalOpen } = useModalActions();
 
   const onClose = () => {
-    dispatch(setCartModalOpen(false));
+    setCartModalOpen(false);
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export const CartModal: FC<CartModalProps> = ({ style, className }) => {
 
     return () => {
       document.body.removeEventListener('keyup', closeModal);
-      dispatch(setCartModalOpen(false));
+      setCartModalOpen(false);
     };
   }, []);
 
@@ -50,7 +50,7 @@ export const CartModal: FC<CartModalProps> = ({ style, className }) => {
   const totalPrice = getTotalPrice(cart);
 
   const toCheckOut = () => {
-    navigate(DataRoute.CheckOut);
+    navigate(getRouteCheckOut());
   };
   return (
     <div className={classNames(styles.modal)} onClick={onClose}>
