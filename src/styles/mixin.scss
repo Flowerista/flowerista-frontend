@@ -12,6 +12,12 @@
 	}
 }
 
+@mixin media1024 {
+	@media screen and (max-width: $md3) {
+		@content;
+	}
+}
+
 @mixin media1366 {
 	@media screen and (max-width: $md3) {
 		@content;
