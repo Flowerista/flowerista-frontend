@@ -47,12 +47,15 @@ const PasswordChange: FC<PasswordChangeProps> = ({isOpen, setOpen, showNext}) =>
 			currentPassword: data.passwordOld,
 			newPassword: data.passwordNew,
 		}
-		await changePassword(passwords)
-		reset()
-		onClose()
-		showSuccessModal()
-	}
-
+    await changePassword(passwords)
+		if (error) {
+			alert('Error')
+		} else {
+			reset()
+			onClose()
+			showSuccessModal()
+		}
+  }   
 	if (error) {
 		return <div>error</div>
 	}

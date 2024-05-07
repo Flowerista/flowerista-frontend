@@ -1,11 +1,11 @@
-import {FC, ReactNode, useEffect} from 'react'
-import {Link, useNavigate} from 'react-router-dom';
+import { FC, ReactNode, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import styles from './styles.module.scss';
-import {DataRoute} from '../../data/routes';
-import {Sidebar} from '../../components/Sidebar/Sidebar';
-import {MainLayout} from '../MainLayout';
+import { DataRoute } from '../../data/routes';
+import { Sidebar } from '../../components/Sidebar/Sidebar';
+import { MainLayout } from '../MainLayout';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { SidebarModal } from '../../components/Modals/SidebarModal/SidebarModal';
 import { useAppDispatch } from '../../store/store';
@@ -16,17 +16,17 @@ export interface IProfileLayout {
     pageName: 'Profile' | 'Wishlist' | 'Orders history'
 }
 
-export const ProfileLayout: FC<IProfileLayout> = ({children, pageName}) => {
+export const ProfileLayout: FC<IProfileLayout> = ({ children, pageName }) => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const onOpen = () => {
         dispatch(setSidebarModalOpen(true))
     }
-    useEffect(() => { 
+    useEffect(() => {
         if (!localStorage.getItem('token')) {
             navigate(DataRoute.Login)
         }
-    }, []);
+    }, [localStorage.getItem('token')]);
 
     return (
         <MainLayout>
@@ -34,12 +34,12 @@ export const ProfileLayout: FC<IProfileLayout> = ({children, pageName}) => {
                 <div className={styles.nav}>
                     <Link to={DataRoute.Home} >Home</Link>|<p>{pageName}</p>
                 </div>
-                <button 
+                <button
                     className={styles.btn}
-                    onClick={onOpen}    
+                    onClick={onOpen}
                 >
                     {pageName}
-                    <BsChevronCompactDown size={24}/>
+                    <BsChevronCompactDown size={24} />
                 </button>
                 <div className={styles.content}>
                     {children}
@@ -49,7 +49,7 @@ export const ProfileLayout: FC<IProfileLayout> = ({children, pageName}) => {
                     <div></div>
                 </div>
             </div>
-            <SidebarModal/>
+            <SidebarModal />
         </MainLayout>
     )
 }

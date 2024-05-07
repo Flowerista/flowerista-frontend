@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import {Pagination} from '../../components/Pagination/Pagination';
 import {Filters} from './Filters';
@@ -16,8 +16,8 @@ export interface ICatalogPage {
 }
 
 const CatalogPage: FC<ICatalogPage> = () => {
-	const {t} = useTranslation()
-	const {filters} = useAppSelector(state => state.filtration)
+	const { t } = useTranslation()
+	const { filters } = useAppSelector(state => state.filtration)
 	const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500)
 	const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500)
 
@@ -40,12 +40,12 @@ const CatalogPage: FC<ICatalogPage> = () => {
 
 
 	const [dataState, setDataState] = useState(dataFetch)
-
 	const {data, error} = useGetAllFlowers(dataState)
 
 	const handlePageClick = (event: any) => {
 		const newPage = event.selected + 1
-		setDataState((state) => ({...state, page: newPage}))
+		setDataState((state) => ({ ...state, page: newPage }))
+		window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
 	if (error) {
@@ -53,41 +53,41 @@ const CatalogPage: FC<ICatalogPage> = () => {
 	}
 
 	return (
-		 <div className={styles.catalog}>
-			 <div className={styles.catalog__name}><Link to={DataRoute.Home}>{t('catalog.link')}</Link>{t('catalog.link2')}
-			 </div>
-			 <Filters/>
-			 {data ?
-					<div className={styles.flower__wrapper}>
-						{data && data.content.map(item => (
-							 <Card
-									id={item.id}
-									name={item.name}
-									discount={item.discount}
-									defaultPrice={item.defaultPrice}
-									discountPrice={item.discountPrice}
-									imageUrls={item.imageUrls}
-									key={item.id}
-									sizes={item.sizes}
-							 />
-						))}
-					</div> :
-					<div
-						 style={{display: 'flex', marginTop: '50px', flexWrap: 'wrap', rowGap: '100px', marginBottom: '120px'}}>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-						<SkeletonCard/>
-					</div>
-			 }
-			 {data && <Pagination data={data} handlePageClick={handlePageClick}/>}
-		 </div>
+		<div className={styles.catalog}>
+			<div className={styles.catalog__name}><Link to={DataRoute.Home}>{t('catalog.link')}</Link>{t('catalog.link2')}
+			</div>
+			<Filters />
+			{data ?
+				<div className={styles.flower__wrapper}>
+					{data && data.content.map(item => (
+						<Card
+							id={item.id}
+							name={item.name}
+							discount={item.discount}
+							defaultPrice={item.defaultPrice}
+							discountPrice={item.discountPrice}
+							imageUrls={item.imageUrls}
+							key={item.id}
+							sizes={item.sizes}
+						/>
+					))}
+				</div> :
+				<div
+					style={{ display: 'flex', marginTop: '50px', flexWrap: 'wrap', rowGap: '100px', marginBottom: '120px' }}>
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+					<SkeletonCard />
+				</div>
+			}
+			{data && <Pagination data={data} handlePageClick={handlePageClick} />}
+		</div>
 	);
 };
 

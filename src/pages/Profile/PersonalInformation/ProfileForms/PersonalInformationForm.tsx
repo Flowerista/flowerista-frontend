@@ -1,11 +1,11 @@
-import {FC, useEffect} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
+import { FC, useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import {PersonalInformationSchema} from '../../../../utils/yup';
-import {Form, InputsWrapper, NameInput, SurnameInput} from '../../../../components/AppForm';
-import {Button} from '../../../../components/Buttons/Button';
-import {Title} from '../../../../components/Title/Title';
+import { PersonalInformationSchema } from '../../../../utils/yup';
+import { Form, InputsWrapper, NameInput, SurnameInput } from '../../../../components/AppForm';
+import { Button } from '../../../../components/Buttons/Button';
+import { Title } from '../../../../components/Title/Title';
 
 import styles from './styles.module.scss';
 import {useAppSelector} from '../../../../store/store';
@@ -27,11 +27,10 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
 	const {user} = useAppSelector(state => state.user)
 	const [change, {isLoading, error}] = useChangePersonalInformation()
 
-
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		setValue,
 	} = useForm<Inputs>({
 		mode: 'onBlur',
@@ -44,13 +43,17 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({onOpen}) => {
 	}, [user])
 
 
-	const onSubmit: SubmitHandler<Inputs> = async ({name, surname}) => {
+	const onSubmit: SubmitHandler<Inputs> = async ({ name, surname }) => {
 		const newFirstName = upFirstChar(name)
 		const newLastName = upFirstChar(surname)
-
 		const data = {firstName: newFirstName, lastName: newLastName}
 		await change(data)
-	}
+		if (error) {
+			alert('error')
+		} else {
+			alert('Success')
+		}
+  }
 	if (error) {
 		return <div>error</div>
 	}

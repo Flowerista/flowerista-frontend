@@ -3,8 +3,8 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios';
 
-import {RegisterSchema} from '../../utils/yup';
-import {DataRoute} from '../../data/routes';
+import { RegisterSchema } from '../../utils/yup';
+import { DataRoute } from '../../data/routes';
 import {
 	EmailInput,
 	Form,
@@ -37,9 +37,8 @@ type Inputs = {
 	password: string;
 }
 
-
 const Registration: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 	const [showRegisterCompleted, setShowRegisterCompleted] = useState<boolean>(false)
 	const [showRegisterError, setShowRegisterError] = useState<boolean>(false)
 	const [sendRequest, {data, isLoading, isError}] = usePostRegistration()
@@ -49,7 +48,7 @@ const Registration: FC = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		reset,
 		control,
 		setError,
@@ -62,7 +61,7 @@ const Registration: FC = () => {
 	})
 
 
-	const onSubmit: SubmitHandler<Inputs> = async ({password, email, name, surname, phone}) => {
+	const onSubmit: SubmitHandler<Inputs> = async ({ password, email, name, surname, phone }) => {
 		const newName = upFirstChar(name)
 		const newSurname = upFirstChar(surname)
 		const newPhone = +phone.slice(4).replace(/\D/g, '')
@@ -80,9 +79,25 @@ const Registration: FC = () => {
 		} else {
 			const {data: checkedPhone} = await checkPhone(String(newPhone))
 			if (checkedPhone) {
-				setError('phone', {type: 'checkPhone', message: 'Phone already exists'})
+				setError('phone', { type: 'chackPhone', message: 'Phone already exists' })
 			} else {
-				await sendRequest(newData)
+				try {
+					sendRequest(newData)
+						.then((response) => {
+							if ('data' in response) {
+								alert('Success')
+								setShowRegisterCompleted(true)
+								reset()
+							} else if ('error' in response) {
+								setShowRegisterError(true)
+							}
+						})
+						.catch(() => {
+							setShowRegisterError(true)
+						})
+				} catch (error) {
+					setShowRegisterError(true)
+				}
 			}
 		}
 	}
@@ -99,9 +114,9 @@ const Registration: FC = () => {
 	}, [data, isError]);
 
 	return (
-		 <div className={styles.registration}>
-			 <div className={styles.registration__container}>
-				 <Title text={`${t('register.title')}`}/>
+		<div className={styles.registration}>
+			<div className={styles.registration__container}>
+				<Title text={`${t('register.title')}`} />
 
 				 <Form onSubmit={handleSubmit(onSubmit)}>
 					 <InputsWrapper>
@@ -114,16 +129,16 @@ const Registration: FC = () => {
 					 <Button loading={isLoading} text={`${t('register.btn1')}`} style={{marginTop: '40px'}}/>
 				 </Form>
 
-				 <div className={styles.flex}>
-					 <FormLink to={DataRoute.Login} text={`${t('register.btn2')}`}/>
-				 </div>
-			 </div>
-			 <RegistrationCompleted isOpen={showRegisterCompleted} setOpen={setShowRegisterCompleted}/>
-			 <RegistrationError isOpen={showRegisterError} setOpen={setShowRegisterError}/>
-			 <div className={styles.img}>
-				 <img src={Flower} alt="flower"/>
-			 </div>
-		 </div>
+				<div className={styles.flex}>
+					<FormLink to={DataRoute.Login} text={`${t('register.btn2')}`} />
+				</div>
+			</div>
+			<RegistrationCompleted isOpen={showRegisterCompleted} setOpen={setShowRegisterCompleted} />
+			<RegistrationError isOpen={showRegisterError} setOpen={setShowRegisterError} />
+			<div className={styles.img}>
+				<img src={Flower} alt="flower" />
+			</div>
+		</div>
 	)
 }
 export default Registration

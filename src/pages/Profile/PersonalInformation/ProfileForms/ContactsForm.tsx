@@ -2,13 +2,13 @@ import {FC, useEffect} from 'react'
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup'
 
-import {ContactsSchema} from '../../../../utils/yup';
-import {EmailInput, Form, InputsWrapper, PhoneInput} from '../../../../components/AppForm';
-import {Title} from '../../../../components/Title/Title';
+import { ContactsSchema } from '../../../../utils/yup';
+import { EmailInput, Form, InputsWrapper, PhoneInput } from '../../../../components/AppForm';
+import { Title } from '../../../../components/Title/Title';
 
 import styles from './styles.module.scss';
-import {useAppSelector} from '../../../../store/store';
-import {useTranslation} from 'react-i18next';
+import { useAppSelector } from '../../../../store/store';
+import { useTranslation } from 'react-i18next';
 
 interface Inputs {
 	email: string;
@@ -16,9 +16,9 @@ interface Inputs {
 }
 
 export const ContactsForm: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 
-	const {email, phoneNumber} = useAppSelector(state => state.user.user)
+	const { email, phoneNumber } = useAppSelector(state => state.user.user)
 	const {
 		register,
 		formState: {errors},
@@ -33,7 +33,6 @@ export const ContactsForm: FC = () => {
 		setValue('email', email)
 		setValue('phone', `${phoneNumber}`)
 	}, [email, phoneNumber, setValue])
-
 
 	return (
 		 <div className={styles.form__wrapper}>

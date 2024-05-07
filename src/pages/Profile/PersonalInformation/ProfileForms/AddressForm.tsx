@@ -1,6 +1,6 @@
-import {FC, useEffect} from 'react'
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
+import { FC, useEffect } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup'
 
 import {Form, TextInput} from '../../../../components/AppForm';
 import {Button} from '../../../../components/Buttons/Button';
@@ -22,7 +22,7 @@ export interface Inputs {
 }
 
 export const AddressForm: FC = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 
 	const {
 		user: {address: {city, street, house, entrance, flat}},
@@ -33,7 +33,7 @@ export const AddressForm: FC = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		setValue,
 	} = useForm<Inputs>({
 		mode: 'onBlur',
@@ -61,6 +61,11 @@ export const AddressForm: FC = () => {
 			flat: flat ? flat : null,
 		}
 		await changeAddress(newAddress)
+		if (error) {
+			alert('Error')
+		} else {
+			alert('Success')
+		}
 	}
 
 	if (error) {
