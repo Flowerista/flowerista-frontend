@@ -22,7 +22,8 @@ export interface IFilters {
 export const Filters: FC<IFilters> = (props) => {
   const { min, minInputRef, maxInputRef, max, isOpen, setIsOpen } = props;
   const { t } = useTranslation();
-  const { removeHandler, addFlowersId, addColorsId } = useFiltrationActions();
+  const { addFlowersId, addColorsId, removeFlowerId, removeColorId } =
+    useFiltrationActions();
   const { data: flowers } = useGetFlowers();
   const { data: colors } = useGetColors();
 
@@ -51,7 +52,7 @@ export const Filters: FC<IFilters> = (props) => {
           <SmallAccordion
             data={flowers || []}
             name={t('mobileFilters.filter.modal.nameFlower')}
-            removeItem={removeHandler}
+            removeItem={removeFlowerId}
             addItem={addFlowersId}
           />
           <PriceAccordion
@@ -63,7 +64,7 @@ export const Filters: FC<IFilters> = (props) => {
           <SmallAccordion
             data={colors || []}
             name={t('mobileFilters.filter.modal.nameColor')}
-            removeItem={removeHandler}
+            removeItem={removeColorId}
             addItem={addColorsId}
           />
         </div>
