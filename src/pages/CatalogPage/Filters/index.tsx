@@ -1,10 +1,7 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import x from '../../../assets/image/hresik.png';
-
 import { useAppSelector } from '../../../store/store';
 import styles from '../styles.module.scss';
-import { DropDown } from '../../../components/DropDown';
-import { DropDownPrice } from '../../../components/DropDownPrice';
 import { DropDownSorting } from '../../../components/DropDownSorting';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../../../components/shared/Loading';
@@ -13,9 +10,17 @@ import { useGetColors } from '../../../services/bouquete-api/getColors/getColors
 import { useGetFlowers } from '../../../services/bouquete-api/getFlowers/getFlowers';
 import { useGetRangePrice } from '../../../services/bouquete-api/getRangePrice/getRangePrice';
 import { useFiltrationActions } from '../../../store/filtration/filtration.slice.ts';
+import { DropDownFilter } from '../../../components/DropDownFilter';
+import DropDownPrice from '../../../components/DropDownPrice';
+
+export interface ItemInterface {
+  item: string;
+  menu: string;
+  id: number;
+}
 
 export const Filters: FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const {
     setMaxNumber,
     setMaxValue,
@@ -27,17 +32,11 @@ export const Filters: FC = () => {
     addFlowersId,
     clearFilters,
     addColorsId,
-    setSortByPriceHighToLow,
-    setSortByPriceLowToHigh,
-    setSortByNewest
+    removeHandler,
+    resetSorting
   } = useFiltrationActions();
 
   const { data: priceRange } = useGetRangePrice();
-  const [sortingName, setSortingName] = useState<string>(
-    t('catalog.sorting.title')
-  );
-
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const minInputRef = useRef<HTMLInputElement>(null);
   const maxInputRef = useRef<HTMLInputElement>(null);
@@ -50,33 +49,6 @@ export const Filters: FC = () => {
     (state) => state.filtration.filters
   );
 
-  const maxMinValues = [
-    { item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42 }
-  ];
-
-  const [sorting, setSorting] = useState([
-    {
-      item: 'sortByNewest',
-      id: 1,
-      name: `${t('catalog.sorting.first')}`,
-      sort: false
-    },
-    {
-      item: 'sortByPriceHighToLow',
-      id: 2,
-      name: `${t('catalog.sorting.second')}`,
-      sort: false
-    },
-    {
-      item: 'sortByPriceLowToHigh',
-      id: 3,
-      name: `${t('catalog.sorting.third')}`,
-      sort: false
-    }
-  ]);
-
-  useEffect(() => {}, [maxMinValues]);
-
   useEffect(() => {
     if (priceRange) {
       setMiNumber(priceRange.minPrice);
@@ -84,78 +56,9 @@ export const Filters: FC = () => {
       setMinValue(priceRange.minPrice);
       setMaxValue(priceRange.maxPrice);
     }
-    // }, [priceRange]);
   }, [priceRange, setMaxNumber, setMaxValue, setMiNumber, setMinValue]);
 
-  const addFlower = (item: { item: string; menu: string; id: number }) => {
-    addFlowersId(item);
-  };
-  const addColor = (item: { item: string; menu: string; id: number }) => {
-    addColorsId(item);
-  };
-
-  const addSorting = (value: {
-    item: string;
-    name: string;
-    id: number;
-    sort: boolean;
-  }) => {
-    const updatedSorting = sorting.map((option) => ({
-      ...option,
-      sort: option.item === value.item
-    }));
-
-    setSorting(updatedSorting);
-
-    if (value.item === 'sortByNewest') {
-      setSortByNewest(true);
-      setSortByPriceHighToLow(false);
-      setSortByPriceLowToHigh(false);
-    } else if (value.item === 'sortByPriceHighToLow') {
-      setSortByPriceHighToLow(true);
-      setSortByPriceLowToHigh(false);
-      setSortByNewest(false);
-    } else if (value.item === 'sortByPriceLowToHigh') {
-      setSortByPriceLowToHigh(true);
-      setSortByPriceHighToLow(false);
-      setSortByNewest(false);
-    }
-  };
-
-  const removeHandler = (item: { item: string; menu: string; id: number }) => {
-    if (item.menu === 'flowers' || item.menu === 'квіти') {
-      removeFlowerId(item);
-    } else if (item.menu === 'colors' || item.menu === 'кольори') {
-      removeColorId(item);
-    } else if (item.menu === 'minMax') {
-      removeMinMaxValues();
-      if (minInputRef && minInputRef.current) {
-        minInputRef.current.value = '';
-      }
-      if (maxInputRef && maxInputRef.current) {
-        maxInputRef.current.value = '';
-      }
-
-      if (minInputRefSmall && minInputRefSmall.current) {
-        minInputRefSmall.current.value = '';
-      }
-      if (maxInputRefSmall && maxInputRefSmall.current) {
-        maxInputRefSmall.current.value = '';
-      }
-    }
-    const updatedSelectedItems = selectedItems.filter(
-      (selectedItem) => selectedItem !== `${item.menu}_${item.id}`
-    );
-    setSelectedItems(updatedSelectedItems);
-  };
-
-  const resetFilters = () => {
-    setSelectedItems([]);
-    clearFilters([]);
-    removeMinMaxValues();
-    setSortByPriceLowToHigh(false);
-    setSortByPriceHighToLow(false);
-    setSortByNewest(false);
+  const resetPrice = () => {
     if (minInputRef && minInputRef.current) {
       minInputRef.current.value = '';
     }
@@ -171,66 +74,36 @@ export const Filters: FC = () => {
     }
   };
 
-  useEffect(() => {
-    const updateSorting = () => {
-      setSorting([
-        {
-          item: 'sortByNewest',
-          id: 1,
-          name: `${t('catalog.sorting.first')}`,
-          sort: false
-        },
-        {
-          item: 'sortByPriceHighToLow',
-          id: 2,
-          name: `${t('catalog.sorting.second')}`,
-          sort: false
-        },
-        {
-          item: 'sortByPriceLowToHigh',
-          id: 3,
-          name: `${t('catalog.sorting.third')}`,
-          sort: false
-        }
-      ]);
-      setSortingName(t('catalog.sorting.title'));
-    };
-
-    i18n.on('languageChanged', updateSorting);
-
-    return () => {
-      i18n.off('languageChanged', updateSorting);
-    };
-  }, [i18n, t]);
+  const resetFilters = () => {
+    clearFilters([]);
+    removeMinMaxValues();
+    resetSorting();
+    resetPrice();
+  };
 
   useEffect(() => {
     return () => {
       resetFilters();
     };
   }, []);
-
   return (
     <div className={styles.container}>
       {flowersLoading || colorsLoading ? (
         <Loader />
       ) : (
         <div className={styles.catalog__dropDown}>
-          <div className={styles.catalog__dropDown_items}>
-            <DropDown
-              setSelectedItems={setSelectedItems}
-              selectedItems={selectedItems}
-              removeHandler={removeHandler}
-              items={flowers}
-              toggleFilter={addFlower}
+          <div className={styles.catalog__dropDown__items}>
+            <DropDownFilter
               name={`${t('catalog.filters.flowers')}`}
+              items={flowers || []}
+              addItem={addFlowersId}
+              removeItem={removeFlowerId}
             />
-            <DropDown
-              setSelectedItems={setSelectedItems}
-              selectedItems={selectedItems}
-              removeHandler={removeHandler}
-              items={colors}
-              toggleFilter={addColor}
+            <DropDownFilter
               name={`${t('catalog.filters.colors')}`}
+              items={colors || []}
+              addItem={addColorsId}
+              removeItem={removeColorId}
             />
             <DropDownPrice
               min={min}
@@ -239,22 +112,12 @@ export const Filters: FC = () => {
               maxInputRef={maxInputRef}
             />
           </div>
-          <DropDownSorting
-            items={sorting}
-            toggleFilter={addSorting}
-            setName={setSortingName}
-            name={sortingName}
-          />
+          <DropDownSorting />
         </div>
       )}
 
       {flowersLoading || colorsLoading ? null : (
         <MobileFilters
-          setSelectedItems={setSelectedItems}
-          selectedItems={selectedItems}
-          removeHandler={removeHandler}
-          addFlowerFilter={addFlower}
-          addColorFilter={addColor}
           min={min}
           max={max}
           minInputRef={minInputRefSmall}
@@ -263,13 +126,20 @@ export const Filters: FC = () => {
       )}
 
       <div className={styles.catalog__selectedItemsContainer}>
-        {[...flowerIds, ...colorIds, ...maxMinValues].map((item) =>
+        {[
+          ...flowerIds,
+          ...colorIds,
+          { item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42 }
+        ].map((item) =>
           item.menu === 'minMax' ? (
             minPrice > min || maxPrice < max ? (
               <div
                 className={styles.catalog__selectedItem}
                 key={item.item}
-                onClick={() => removeHandler(item)}
+                onClick={() => {
+                  removeHandler(item);
+                  resetPrice();
+                }}
               >
                 {item.item}{' '}
                 <span>
@@ -283,7 +153,10 @@ export const Filters: FC = () => {
             <div
               className={styles.catalog__selectedItem}
               key={item.item}
-              onClick={() => removeHandler(item)}
+              onClick={() => {
+                removeHandler(item);
+                resetPrice();
+              }}
             >
               {item.item}{' '}
               <span>

@@ -23,12 +23,8 @@ export interface IPriceAccordion {
   maxInputRef: RefObject<HTMLInputElement>;
 }
 
-export const PriceAccordion: FC<IPriceAccordion> = ({
-  min,
-  max,
-  maxInputRef,
-  minInputRef
-}) => {
+export const PriceAccordion: FC<IPriceAccordion> = (props) => {
+  const { min, max, maxInputRef, minInputRef } = props;
   const { t } = useTranslation();
   const { isShow, setIsShow, ref } = useOutside(false);
   const { setMinValue, setMaxValue } = useFiltrationActions();
@@ -44,14 +40,18 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
 
-  // Convert to percentage
   const getPercent = useCallback(
     (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
 
-  // Set width of the range to decrease from the left side
-  useEffect(() => {
+  const initializeValues = useCallback(() => {
+    if (minInputRef.current) {
+      minInputRef.current!.value = minPrice.toString();
+    }
+    if (maxInputRef.current) {
+      maxInputRef.current!.value = maxPrice.toString();
+    }
     if (maxValRef.current) {
       const minPercent = getPercent(Math.max(minPrice, min));
       const maxPercent = getPercent(
@@ -63,10 +63,6 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
     }
-  }, [minPrice, getPercent, maxValRef]);
-
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
     if (minValRef.current) {
       const minPercent = getPercent(Math.max(+minValRef.current.value, min));
       const maxPercent = getPercent(Math.min(maxPrice, max));
@@ -75,11 +71,20 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
     }
-  }, [maxPrice, getPercent, minValRef]);
+  }, [
+    minInputRef,
+    maxInputRef,
+    minPrice,
+    maxRangeSmall,
+    maxPrice,
+    getPercent,
+    min,
+    max
+  ]);
 
-  // Get min and max values when their state changes
-  useEffect(() => {}, [minPrice, maxPrice]);
-
+  useEffect(() => {
+    initializeValues();
+  }, [initializeValues]);
   return (
     <div ref={ref} className={styles.dropDown}>
       <div
@@ -108,11 +113,13 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             placeholder={minRangeSmall.toString()}
             onChange={(event) => {
               const value = +event.target.value;
-              if (value <= maxRangeSmall) {
+              if (value > Number(maxInputRef.current?.value)) {
+                setMinValue(min);
+              } else if (
+                value <= maxPrice &&
+                value <= Number(maxInputRef.current?.value)
+              ) {
                 setMinValue(value);
-              } else {
-                setMinValue(maxRangeSmall);
-                minInputRef.current!.value = maxRangeSmall.toString();
               }
             }}
           />
@@ -125,7 +132,11 @@ export const PriceAccordion: FC<IPriceAccordion> = ({
             placeholder={maxRangeSmall.toString()}
             onChange={(event) => {
               const value = +event.target.value;
-              if (value >= minRangeSmall && value >= minPrice) {
+              if (
+                value >= minRangeSmall &&
+                value >= minPrice &&
+                value > Number(minInputRef.current?.value)
+              ) {
                 setMaxValue(value);
               }
             }}

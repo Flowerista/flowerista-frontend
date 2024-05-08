@@ -1,21 +1,13 @@
 @import "../../styles/mixin";
 
+
 .dropDown {
-	z-index: 99;
 	width: 200px;
-	position: relative;
 	border: 1px none #e7a9a7;
 	border-left-style: solid;
 
-	&:nth-child(1) {
-		border-left: none;
-	}
-
-	&:nth-child(3) {
-		border-right: 1px solid #e7a9a7;
-	}
-
 	&__btn {
+		width: 100%;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -28,14 +20,8 @@
 	}
 
 	&__content {
-		width: 101%;
-		margin-left: -1px;
+		width: 201px;
 		height: 130px;
-		position: absolute;
-		z-index: 100;
-		left: 0;
-		display: none;
-		opacity: 0;
 		background: #fcf7f0;
 		border: 1px solid #e7a9a7;
 		overflow-y: auto;
@@ -53,33 +39,6 @@
 		}
 	}
 }
-
-.active {
-	opacity: 1;
-	display: block;
-	transition: all 1s ease;
-	animation-name: open;
-	animation-duration: 2s;
-	animation-iteration-count: 1;
-	animation-direction: normal;
-	animation-timing-function: ease-out;
-	animation-fill-mode: forwards;
-	animation-delay: 0s;
-}
-
-@keyframes open {
-	0% {
-		display: block;
-		opacity: 0;
-		visibility: hidden;
-	}
-	100% {
-		display: block;
-		opacity: 1;
-		visibility: visible;
-	}
-}
-
 
 .dropDown__content::-webkit-scrollbar {
 	width: 5px;

@@ -14,6 +14,7 @@ export const Languages: FC<ILanguages> = () => {
     i18next.changeLanguage(language);
     setCurrentLanguage(language);
     localStorage.setItem('selectedLanguage', language);
+    // window.location.reload();
   };
 
   useEffect(() => {

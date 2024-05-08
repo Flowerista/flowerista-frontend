@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import styles from './styles.module.scss';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Filters } from './Filters';
@@ -16,28 +16,38 @@ export interface ICatalogPage {}
 
 const CatalogPage: FC<ICatalogPage> = () => {
   const { t } = useTranslation();
-  const { filters } = useAppSelector((state) => state.filtration);
+  const { filters, sorting } = useAppSelector((state) => state.filtration);
   const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500);
   const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500);
-
-  const dataFetch: IFetchAllFlowers = {
-    flowerIds: filters.flowerIds.map((item) => item.id).join(',') ?? '',
-    colorIds: filters.colorIds.map((item) => item.id).join(',') ?? '',
-    minPrice: debouncedMinPrice,
-    maxPrice: debouncedMaxPrice,
-    sortByNewest: filters.sortByNewest,
-    sortByPriceHighToLow: filters.sortByPriceHighToLow,
-    sortByPriceLowToHigh: filters.sortByPriceLowToHigh,
-    page: filters.page,
-    min: filters.min,
-    max: filters.max
-  };
+  const dataFetch: IFetchAllFlowers = useMemo(() => {
+    return {
+      flowerIds: filters.flowerIds.map((item) => item.id).join(',') ?? '',
+      colorIds: filters.colorIds.map((item) => item.id).join(',') ?? '',
+      minPrice: debouncedMinPrice,
+      maxPrice: debouncedMaxPrice,
+      sortByNewest: Boolean(
+        sorting.find((sort) => sort.sort && sort.item === 'sortByNewest')?.sort
+      ),
+      sortByPriceHighToLow: Boolean(
+        sorting.find(
+          (sort) => sort.sort && sort.item === 'sortByPriceHighToLow'
+        )?.sort
+      ),
+      sortByPriceLowToHigh: Boolean(
+        sorting.find(
+          (sort) => sort.sort && sort.item === 'sortByPriceLowToHigh'
+        )?.sort
+      ),
+      page: filters.page,
+      min: filters.min,
+      max: filters.max
+    };
+  }, [filters, sorting, debouncedMinPrice, debouncedMaxPrice]);
+  const [dataState, setDataState] = useState(dataFetch);
 
   useEffect(() => {
     setDataState(dataFetch);
-  }, [filters, debouncedMaxPrice, debouncedMinPrice, dataFetch]);
-
-  const [dataState, setDataState] = useState(dataFetch);
+  }, [debouncedMaxPrice, debouncedMinPrice, dataFetch]);
 
   const { data, error } = useGetAllFlowers(dataState);
 

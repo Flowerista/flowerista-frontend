@@ -1,7 +1,5 @@
-@import "../../styles/mixin";
-
 .slider {
-	position: relative;
+	//position: relative;
 	width: 100%;
 }
 
@@ -9,7 +7,7 @@
 .slider__range,
 .slider__left-value,
 .slider__right-value {
-	position: absolute;
+	//position: absolute;
 }
 
 .slider__track,
@@ -39,7 +37,7 @@
 
 .thumb {
 	pointer-events: none;
-	position: absolute;
+	//position: absolute;
 	height: 0;
 	width: 100%;
 	outline: none;
@@ -68,6 +66,6 @@
 	height: 16px;
 	width: 16px;
 	pointer-events: all;
-	position: relative;
+	//position: relative;
 }
 

@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { buildSlice } from '../buildSlice.ts';
+import { ItemInterface } from '../../pages/CatalogPage/Filters';
 
 interface IItem {
   item: string;
@@ -20,6 +21,11 @@ interface IInitialState {
     sortByPriceLowToHigh: boolean;
     page: number;
   };
+  sorting: {
+    item: string;
+    id: number;
+    sort: boolean;
+  }[];
 }
 
 const initialState: IInitialState = {
@@ -34,13 +40,36 @@ const initialState: IInitialState = {
     sortByPriceHighToLow: false,
     sortByPriceLowToHigh: false,
     page: 1
-  }
+  },
+  sorting: [
+    {
+      item: 'sort',
+      id: 12,
+      sort: false
+    },
+    {
+      item: 'sortByNewest',
+      id: 1,
+      sort: false
+    },
+    {
+      item: 'sortByPriceHighToLow',
+      id: 2,
+      sort: false
+    },
+    {
+      item: 'sortByPriceLowToHigh',
+      id: 3,
+      sort: false
+    }
+  ]
 };
 
 export const filtrationSlice = buildSlice({
   name: 'filtration',
   initialState,
   reducers: {
+    // colors and flowers
     addFlowersId: (state, { payload }: PayloadAction<IItem>) => {
       const { item, menu, id } = payload;
       const isExisting = state.filters.flowerIds.some(
@@ -59,47 +88,68 @@ export const filtrationSlice = buildSlice({
         state.filters.colorIds.push({ item, menu, id });
       }
     },
-    removeFlowerId: (state, { payload }) => {
+    removeFlowerId: (state, { payload }: PayloadAction<number>) => {
       const flowersIds = state.filters.flowerIds;
       state.filters.flowerIds = flowersIds.filter(({ id }) => {
-        return id !== payload.id;
+        return id !== payload;
       });
     },
-    removeColorId: (state, { payload }) => {
+    removeColorId: (state, { payload }: PayloadAction<number>) => {
       const flowersIds = state.filters.colorIds;
       state.filters.colorIds = flowersIds.filter(({ id }) => {
-        return id !== payload.id;
+        return id !== payload;
       });
     },
-
-    clearFilters: (state, { payload }) => {
-      state.filters.flowerIds = payload;
-      state.filters.colorIds = payload;
+    // price
+    setMiNumber: (state, { payload }: PayloadAction<number>) => {
+      state.filters.min = payload;
     },
-    setMinValue: (state, { payload }) => {
+    setMaxNumber: (state, { payload }: PayloadAction<number>) => {
+      state.filters.max = payload;
+    },
+    setMinValue: (state, { payload }: PayloadAction<number>) => {
       state.filters.minPrice = payload;
     },
-    setMaxValue: (state, { payload }) => {
+    setMaxValue: (state, { payload }: PayloadAction<number>) => {
       state.filters.maxPrice = payload;
     },
     removeMinMaxValues: (state) => {
       state.filters.minPrice = state.filters.min;
       state.filters.maxPrice = state.filters.max;
     },
-    setSortByNewest: (state, { payload }) => {
-      state.filters.sortByNewest = payload;
+    //sorting
+    setSorting: (state, { payload }: PayloadAction<string>) => {
+      state.sorting = state.sorting.map((option) => ({
+        ...option,
+        sort: option.item === payload
+      }));
     },
-    setSortByPriceHighToLow: (state, { payload }) => {
-      state.filters.sortByPriceHighToLow = payload;
+    resetSorting: (state) => {
+      state.sorting = state.sorting.map((option) => ({
+        ...option,
+        sort: false
+      }));
     },
-    setSortByPriceLowToHigh: (state, { payload }) => {
-      state.filters.sortByPriceLowToHigh = payload;
+    removeHandler: (state, { payload }: PayloadAction<ItemInterface>) => {
+      if (payload.menu === 'flowers' || payload.menu === 'квіти') {
+        const flowersIds = state.filters.flowerIds;
+        state.filters.flowerIds = flowersIds.filter(({ id }) => {
+          return id !== payload.id;
+        });
+      } else if (payload.menu === 'colors' || payload.menu === 'кольори') {
+        const colorIds = state.filters.colorIds;
+        state.filters.colorIds = colorIds.filter(({ id }) => {
+          return id !== payload.id;
+        });
+      } else if (payload.menu === 'minMax') {
+        state.filters.minPrice = state.filters.min;
+        state.filters.maxPrice = state.filters.max;
+      }
     },
-    setMiNumber: (state, { payload }) => {
-      state.filters.min = payload;
-    },
-    setMaxNumber: (state, { payload }) => {
-      state.filters.max = payload;
+
+    clearFilters: (state, { payload }: PayloadAction<[]>) => {
+      state.filters.flowerIds = payload;
+      state.filters.colorIds = payload;
     }
   }
 });

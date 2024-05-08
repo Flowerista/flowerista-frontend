@@ -12,14 +12,10 @@
 		display: flex;
 		justify-content: space-between;
 		border: 1px solid #E7A9A7;
+		overflow: hidden;
 
-		&_items {
+		&__items {
 			display: flex;
-
-			&:nth-child(3) {
-				border-right: 1px solid #E7A9A7;
-				background: red;
-			}
 		}
 	}
 
@@ -80,6 +76,13 @@
 
 }
 
+
+@media screen and (max-width: 836px) {
+	.catalog__dropDown {
+		display: none;
+	}
+}
+
 @include media768 {
 	.catalog {
 		.catalog__selectedItemsContainer {
@@ -103,30 +106,7 @@
 }
 
 
-
-@media screen and (max-width: 750px) {
-	.catalog {
-
-		&__dropDown {
-			display: flex;
-			justify-content: space-between;
-			border: none;
-			flex-wrap: wrap;
-
-			&_items {
-				display: flex;
-				flex-wrap: wrap;
-			}
-		}
-
-	}
-
-}
-
 @media screen and (max-width: 500px) {
-	.catalog__dropDown {
-		display: none;
-	}
 	.flower__wrapper {
 		grid-template-columns: repeat(2, 1fr);
 		row-gap: 40px;
