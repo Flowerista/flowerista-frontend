@@ -1,5 +1,3 @@
-import {RestoringAccessAsync} from './RestoringAccess.async';
+import { RestoringAccessAsync } from './RestoringAccess.async';
 
-export {
-	RestoringAccessAsync as RestoringAccess,
-};
+export { RestoringAccessAsync as RestoringAccess };

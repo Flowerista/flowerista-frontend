@@ -1,5 +1,5 @@
-import { Size } from "../../store/cart/cart.slice";
+import { Size } from '../../store/cart/cart.slice';
 
 export function generateCartID(id: number, size: Size): string {
-    return `${id}_${size}`
+  return `${id}_${size}`;
 }

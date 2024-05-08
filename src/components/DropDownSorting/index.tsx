@@ -1,50 +1,73 @@
-import React, {FC} from 'react';
+import { FC, useState } from 'react';
 import styles from './styles.module.scss';
-import topArrow from '../../assets/image/dropDown/top_arrow.png'
-import bottomArrow from '../../assets/image/dropDown/botton_arrow.png'
-import useOutside from '../../hooks/useOutside';
+import { useAppSelector } from '../../store/store.ts';
+import { useFiltrationActions } from '../../store/filtration/filtration.slice.ts';
+import { changeSortingName } from '../../utils/helpers/changeSortingName.ts';
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions
+} from '@headlessui/react';
+import topArrow from '../../assets/image/dropDown/top_arrow.png';
+import bottomArrow from '../../assets/image/dropDown/botton_arrow.png';
 
-interface IDropDownSorting {
-	items: { item: string, name: string, id: number, sort: boolean }[]
-	toggleFilter: (item: { item: string, name: string, id: number, sort: boolean }) => void
-	name: string
-	setName: (name: string) => void
+interface SortingInterface {
+  item: string;
+  id: number;
+  sort: boolean;
 }
 
-export const DropDownSorting: FC<IDropDownSorting> = ({items, toggleFilter, name, setName}) => {
-	const {isShow, setIsShow, ref} = useOutside(false)
+export const DropDownSorting: FC = () => {
+  const sorting = useAppSelector((state) => state.filtration.sorting);
+  const { setSorting } = useFiltrationActions();
+  const [selectedSort, setSelectedSort] = useState<SortingInterface>(
+    sorting[0]
+  );
 
-	const handleItemClick = (value: { item: string, name: string, id: number, sort: boolean }) => {
-		toggleFilter(value);
-		setIsShow(true);
-		setName(value.name);
-	};
-
-	return (
-		 <div className={styles.dropDown}>
-			 <div
-					ref={ref}
-					onClick={() => {
-						setIsShow(!isShow);
-					}}
-					className={styles.dropDown__btn}
-			 >
-				 {name}
-				 <span>
-					 {isShow ? <img src={topArrow} alt=""/> : <img src={bottomArrow} alt=""/>}
-				 </span>
-			 </div>
-			 <div className={`${styles.dropDown__content} ${isShow ? styles.active : ''}`}>
-				 {items?.map((item) => (
-						<div
-							 key={item.id}
-							 onClick={() => handleItemClick(item)} // Обработчик клика на элементе
-							 className={`${styles.item} ${item.sort && styles.selected}`}
-						>
-							{item.name}
-						</div>
-				 ))}
-			 </div>
-		 </div>
-	);
+  return (
+    <Listbox
+      as={'div'}
+      className={styles.dropDown}
+      value={selectedSort}
+      onChange={setSelectedSort}
+    >
+      {({ open }) => (
+        <>
+          <ListboxButton className={styles.dropDown__btn}>
+            {changeSortingName(selectedSort.item)}
+            {open ? (
+              <img src={topArrow} alt="" />
+            ) : (
+              <img src={bottomArrow} alt="" />
+            )}
+          </ListboxButton>
+          {open && (
+            <ListboxOptions
+              className={`${styles.dropDown__content}`}
+              anchor="bottom"
+            >
+              {sorting.map((sort) =>
+                sort.item === 'sort' ? null : (
+                  <ListboxOption
+                    key={sort.id}
+                    value={sort}
+                    onClick={() => setSorting(sort.item)}
+                  >
+                    {({ selected }) => (
+                      <div
+                        className={`${styles.item} ${selected && styles.selected}`}
+                      >
+                        {changeSortingName(sort.item)}
+                      </div>
+                    )}
+                  </ListboxOption>
+                )
+              )}
+            </ListboxOptions>
+          )}
+        </>
+      )}
+    </Listbox>
+  );
 };

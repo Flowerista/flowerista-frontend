@@ -1,3 +1,5 @@
-import {lazy} from 'react';
+import { lazy } from 'react';
 
-export const PersonalInformationAsync = lazy(() => import('./PersonalInformation'));
+export const PersonalInformationAsync = lazy(
+  () => import('./PersonalInformation')
+);

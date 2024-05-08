@@ -1,5 +1,3 @@
-import {CheckOutPendingPageAsync} from './CheckOutPendingPage.async';
+import { CheckOutPendingPageAsync } from './CheckOutPendingPage.async';
 
-export {
-	CheckOutPendingPageAsync as CheckOutPendingPage,
-};
+export { CheckOutPendingPageAsync as CheckOutPendingPage };

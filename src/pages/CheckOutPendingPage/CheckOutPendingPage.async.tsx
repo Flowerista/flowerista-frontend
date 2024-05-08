@@ -1,3 +1,5 @@
-import {lazy} from 'react';
+import { lazy } from 'react';
 
-export const CheckOutPendingPageAsync = lazy(() => import('./CheckOutPendingPage'));
+export const CheckOutPendingPageAsync = lazy(
+  () => import('./CheckOutPendingPage')
+);

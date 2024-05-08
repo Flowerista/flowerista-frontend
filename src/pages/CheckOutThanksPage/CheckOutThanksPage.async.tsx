@@ -1,3 +1,5 @@
-import {lazy} from 'react';
+import { lazy } from 'react';
 
-export const CheckOutThanksPageAsync = lazy(() => import('./CheckOutThanksPage'));
+export const CheckOutThanksPageAsync = lazy(
+  () => import('./CheckOutThanksPage')
+);

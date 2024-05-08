@@ -1,5 +1,3 @@
-import {WishlistAsync} from './Wishlist.async';
+import { WishlistAsync } from './Wishlist.async';
 
-export {
-	WishlistAsync as Wishlist,
-};
+export { WishlistAsync as Wishlist };

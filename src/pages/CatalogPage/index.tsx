@@ -1,5 +1,3 @@
-import {CatalogPageAsync} from './CatalogPage.async';
+import { CatalogPageAsync } from './CatalogPage.async';
 
-export {
-	CatalogPageAsync as CatalogPage,
-};
+export { CatalogPageAsync as CatalogPage };

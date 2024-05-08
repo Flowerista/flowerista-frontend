@@ -5,8 +5,8 @@ export const useResize = () => {
 
   useEffect(() => {
     const handleResize = (event: UIEvent) => {
-        const w = event.target as Window
-        setWidth(w.innerWidth);
+      const w = event.target as Window;
+      setWidth(w.innerWidth);
     };
     window.addEventListener('resize', handleResize);
     return () => {
@@ -15,6 +15,6 @@ export const useResize = () => {
   }, []);
 
   return {
-    width,
+    width
   };
 };

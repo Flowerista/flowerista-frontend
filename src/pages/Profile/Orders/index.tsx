@@ -1,5 +1,3 @@
-import {OrdersAsync} from './Orders.async';
+import { OrdersAsync } from './Orders.async';
 
-export {
-	OrdersAsync as ProfileOrders,
-};
+export { OrdersAsync as ProfileOrders };
