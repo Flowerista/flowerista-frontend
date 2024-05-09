@@ -22,6 +22,7 @@ import { checkOutOrderIdSlice } from './checkout/checkoutOrderId.slice';
 import { rtkApi } from '../http/rtkApi';
 import { rtkApiAuth } from '../http/rtkApAuthi';
 import { profileSlice } from './profile/profile.slice';
+import { sharedSlice } from './shared/shared.slice.ts';
 
 const persistConfig = {
   key: 'root',
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   checkout: checkOutSlice.reducer,
   checkoutOrderId: checkOutOrderIdSlice.reducer,
   modals: modalsSlice.reducer,
+  shared: sharedSlice.reducer,
   [rtkApi.reducerPath]: rtkApi.reducer,
   [rtkApiAuth.reducerPath]: rtkApiAuth.reducer
 });

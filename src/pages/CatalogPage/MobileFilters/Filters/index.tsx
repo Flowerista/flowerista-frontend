@@ -30,6 +30,7 @@ export const Filters: FC<IFilters> = (props) => {
   const handleClose = () => {
     setIsOpen();
   };
+
   return (
     <HeadlessDialog
       active={styles.active}

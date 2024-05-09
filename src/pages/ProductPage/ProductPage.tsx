@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, Fragment, useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -7,9 +7,8 @@ import { useAppSelector } from '../../store/store';
 import { Button } from '../../components/Buttons/Button';
 import { Loader } from '../../components/shared/Loading';
 import { SectionFlower } from '../../components/SectionsFlower/SectionFlower';
-import { ProductSelect } from './ProductSelect';
 
-import { ISize, Size } from '../../interface/flower';
+import { ISize } from '../../interface/flower';
 import { generateCartID } from '../../utils/helpers';
 
 import styles from './styles.module.scss';
@@ -25,6 +24,10 @@ import {
   getRouteDeliveryAndPayment,
   getRouteHome
 } from '../../app/routerConfig.tsx';
+import { Radio, RadioGroup } from '@headlessui/react';
+import second from '../../assets/image/productItem/second_flower.png';
+import first from '../../assets/image/productItem/first_flower.png';
+import { normalizeWord } from '../../utils/helpers/normalizeWord.ts';
 
 export interface IProductPage {}
 
@@ -32,51 +35,40 @@ const ProductPage: FC<IProductPage> = () => {
   const { t } = useTranslation();
   const { productId } = useParams<{ productId: string }>();
   const { data, isLoading, error } = useGetBouqueteById(`${productId}`);
-  const [activeSize, setActiveSize] = useState<Size>('MEDIUM');
-  const [price, setPrice] = useState<string>('');
-  const [discountPrice, setDiscountPrice] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
+
   const { addCartItem } = useCartActions();
   const { setCartModalOpen } = useModalActions();
   const { addToRecentlyViewed } = useRecentlyViewedActions();
-
   const { recentlyViewed } = useAppSelector((state) => state.recentlyViewed);
 
+  const [selectedSize, setSelectedSize] = useState<ISize | null>(null);
+
   const toCart = () => {
-    if (data && productId) {
+    if (data && productId && selectedSize) {
       const { id, name, imageUrls, sizes } = data;
-      const dataCurSize = sizes.find((el) => el.size === activeSize);
-      if (dataCurSize) {
-        const defaultPrice = dataCurSize?.defaultPrice;
-        const discount = dataCurSize?.discount;
-        const discountPrice = dataCurSize.discountPrice;
-        const cartID = generateCartID(id, activeSize);
-        const flower: ICartItem = {
-          cartID,
-          id,
-          name,
-          imageUrls,
-          defaultPrice,
-          discount,
-          discountPrice,
-          sizes,
-          currentSize: activeSize,
-          quantity
-        };
-        addCartItem(flower);
-        setCartModalOpen(true);
-      }
+      const cartID = generateCartID(id, selectedSize.size);
+      const flower: ICartItem = {
+        cartID,
+        id,
+        name,
+        imageUrls,
+        defaultPrice: selectedSize.defaultPrice,
+        discount: selectedSize.discount,
+        discountPrice: selectedSize.discountPrice,
+        sizes,
+        currentSize: selectedSize.size,
+        quantity
+      };
+      addCartItem(flower);
+      setCartModalOpen(true);
     }
   };
 
   useEffect(() => {
     if (data) {
-      setActiveSize(data?.sizes[0]?.size);
-      setPrice(data?.sizes[0]?.defaultPrice.toString());
-      setDiscountPrice(
-        data?.sizes[0]?.discountPrice
-          ? data?.sizes[0]?.discountPrice.toString()
-          : ''
+      setSelectedSize(
+        data?.sizes.slice().sort((a, b) => a.defaultPrice - b.defaultPrice)[2]
       );
       addToRecentlyViewed({
         id: data.id,
@@ -90,16 +82,7 @@ const ProductPage: FC<IProductPage> = () => {
         sizes: data.sizes
       });
     }
-  }, [data]);
-
-  const updateContent = (size: ISize) => {
-    setActiveSize(size.size);
-    setPrice(`${size.defaultPrice}`);
-    setDiscountPrice(
-      `${size.discountPrice ? size.discountPrice.toString() : ''}`
-    );
-  };
-
+  }, [addToRecentlyViewed, data]);
   const increaseQuantity = useCallback(() => {
     if (data && quantity < data.stockQuantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);
@@ -119,7 +102,6 @@ const ProductPage: FC<IProductPage> = () => {
   if (error) {
     return <h1>Something Was Wrong</h1>;
   }
-
   return (
     <div className={styles.productPage}>
       <div className={styles.nav}>
@@ -182,31 +164,61 @@ const ProductPage: FC<IProductPage> = () => {
                 <p>{t('product.sub_desc')}</p>
               </div>
             </div>
-            <div className={styles.select_wrp}>
+            <RadioGroup
+              value={selectedSize}
+              onChange={setSelectedSize}
+              className={styles.select_wrp}
+              defaultValue={
+                data?.sizes
+                  .slice()
+                  .sort((a, b) => a.defaultPrice - b.defaultPrice)[2]
+              }
+            >
               {data?.sizes
                 .slice()
                 .sort((a, b) => a.defaultPrice - b.defaultPrice)
                 .map((size) => (
-                  <ProductSelect
-                    size={size.size}
-                    active={size.size === activeSize}
-                    setActive={() => updateContent(size)}
-                    key={size.id}
-                    price={`${size.defaultPrice}`}
-                  />
+                  <Radio key={size.size} as={Fragment} value={size}>
+                    {({ checked }) => (
+                      <div
+                        key={size.size}
+                        className={`${styles.productSelect} ${checked ? styles.active : ''}`}
+                      >
+                        <div className={styles.productSelect__size}>
+                          {checked ? (
+                            <img src={second} alt="" />
+                          ) : (
+                            <img src={first} alt="" />
+                          )}
+                          <span>{normalizeWord(size.size)}</span>
+                        </div>
+                        <div className={styles.productSelect__price}>
+                          {size.defaultPrice}
+                        </div>
+                      </div>
+                    )}
+                  </Radio>
                 ))}
-            </div>
+            </RadioGroup>
 
             <div className={styles.quantity_wpr}>
               <div className={styles.price}>
-                {discountPrice && (
+                {selectedSize?.discountPrice && (
                   <div className={styles.price__old}>
-                    <p>{+price * quantity}</p>
+                    <p>{+selectedSize?.defaultPrice * quantity}</p>
                     <span>USD</span>
                   </div>
                 )}
                 <div className={styles.price__new}>
-                  {quantity * +(discountPrice || price)}
+                  {selectedSize && (
+                    <>
+                      {quantity *
+                        +(
+                          selectedSize?.discountPrice ||
+                          selectedSize?.defaultPrice
+                        )}
+                    </>
+                  )}
                   <span>USD</span>
                 </div>
               </div>

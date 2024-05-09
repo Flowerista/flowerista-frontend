@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './styles.module.scss';
 import i18next from 'i18next';
 import { Language } from '../../../i18n/enums';
+import { useAppSelector } from '../../../store/store.ts';
+import { useSharedActions } from '../../../store/shared/shared.slice.ts';
 
 export interface ILanguages {}
 
 export const Languages: FC<ILanguages> = () => {
-  const [currentLanguage, setCurrentLanguage] = useState<string>(
-    localStorage.getItem('selectedLanguage') ?? i18next.language
-  );
+  const currentLanguage = useAppSelector((state) => state.shared.lang);
+  const { setLang } = useSharedActions();
 
   const changeLanguage = (language: string) => {
     i18next.changeLanguage(language);
-    setCurrentLanguage(language);
+    setLang(language);
     localStorage.setItem('selectedLanguage', language);
     // window.location.reload();
   };
