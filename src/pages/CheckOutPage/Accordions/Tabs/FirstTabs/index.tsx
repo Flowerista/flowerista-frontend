@@ -1,12 +1,12 @@
 import styles from './styles.module.scss';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers';
-import { Button } from '../../Buttons/Button';
+import { Button } from '../../../../../components/Buttons/Button.tsx';
 import { FC } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Form, FormError } from '../../AppForm';
+import { Form, FormError } from '../../../../../components/AppForm';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCheckoutActions } from '../../../store/checkout/checkout.slice';
+import { useCheckoutActions } from '../../../../../store/checkout/checkout.slice.ts';
 import dayjs from 'dayjs';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';

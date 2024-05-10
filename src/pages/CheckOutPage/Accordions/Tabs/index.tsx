@@ -1,8 +1,8 @@
 import { FC, Fragment } from 'react';
 import styles from '../styles.module.scss';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import FirstTab from '../../../../components/Tabs/FirstTabs';
-import SecondTab from '../../../../components/Tabs/SecondTab';
+import FirstTab from './FirstTabs';
+import SecondTab from './SecondTab';
 import { useCheckoutActions } from '../../../../store/checkout/checkout.slice.ts';
 import { useTranslation } from 'react-i18next';
 

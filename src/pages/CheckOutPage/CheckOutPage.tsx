@@ -2,9 +2,6 @@ import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { CheckOutHeader } from './CheckOutHeader';
 import { CheckOutFooter } from './CheckOutFooter';
-import { useGetProfile } from '../../services/UserService/getProfile/getProfile';
-import { Loader } from '../../components/shared/Loading';
-import { useProfileActions } from '../../store/profile/profile.slice';
 import { Title } from '../../components/Title/Title.tsx';
 import { Cart } from '../../components';
 import { useTranslation } from 'react-i18next';
@@ -20,30 +17,18 @@ import { useCheckoutActions } from '../../store/checkout/checkout.slice.ts';
 export interface ICheckOutPage {}
 
 const CheckOutPage: FC<ICheckOutPage> = () => {
-  const { isLoading, data: user } = useGetProfile();
-  const { setProfile } = useProfileActions();
-
   const { t } = useTranslation();
   const { cart } = useAppSelector((store) => store.cart);
   const totalPrice = getTotalPrice(cart);
   const [isShow, setIsShow] = useState<boolean>(false);
   const { resetAllState } = useCheckoutActions();
-
-  useEffect(() => {
-    if (user) {
-      setProfile(user);
-    }
-  }, [user, setProfile]);
+  const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
     return () => {
       resetAllState();
     };
   }, [resetAllState]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <main className={styles.wrapper}>

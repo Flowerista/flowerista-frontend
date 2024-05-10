@@ -1,13 +1,18 @@
-import { Form, FormError, InputsWrapper, TextInput } from '../../AppForm';
-import { Button } from '../../Buttons/Button';
+import {
+  Form,
+  FormError,
+  InputsWrapper,
+  TextInput
+} from '../../../../../components/AppForm';
+import { Button } from '../../../../../components/Buttons/Button.tsx';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers';
-import { useAppSelector } from '../../../store/store';
+import { useAppSelector } from '../../../../../store/store.ts';
 import dayjs from 'dayjs';
-import { useCheckoutActions } from '../../../store/checkout/checkout.slice';
-import { CheckOutAddressSchema } from '../../../utils/yup';
+import { useCheckoutActions } from '../../../../../store/checkout/checkout.slice.ts';
+import { CheckOutAddressSchema } from '../../../../../utils/yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +36,8 @@ const SecondTab: FC<InterfaceSecondTab> = ({ setIsActive }) => {
   const { city, street, entrance, flat, house } = useAppSelector(
     (state) => state.checkout
   );
-  const { address } = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
+
   const {
     control,
     register,
@@ -41,11 +47,11 @@ const SecondTab: FC<InterfaceSecondTab> = ({ setIsActive }) => {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      city: `${address && address.city ? address.city : ''}`,
-      street: `${address && address.street ? address.street : ''}`,
-      house: `${address && address.house ? address.house : ''}`,
-      flat: `${address && address.flat ? address.flat : ''}`,
-      entrance: `${address && address.entrance ? address.entrance : ''}`,
+      city: `${user?.address && user?.address.city ? user?.address.city : ''}`,
+      street: `${user?.address && user?.address.street ? user?.address.street : ''}`,
+      house: `${user?.address && user?.address.house ? user?.address.house : ''}`,
+      flat: `${user?.address && user?.address.flat ? user?.address.flat : ''}`,
+      entrance: `${user?.address && user?.address.entrance ? user?.address.entrance : ''}`,
       date: undefined,
       time: undefined
     },
