@@ -9,7 +9,7 @@ import {
 
 export interface IUnregistered {}
 
-export const Unregistered: FC<IUnregistered> = () => {
+export const UserInformationUnregistered: FC<IUnregistered> = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.Unregistered}>

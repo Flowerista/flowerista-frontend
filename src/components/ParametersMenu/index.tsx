@@ -7,7 +7,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 
 import { CartIcon } from './CartIcon';
 import { CartModal } from '../Modals/CartModal/CartModal';
-import { getRoutePersonalInformation } from '../../app/routerConfig.tsx';
+import { getRouteProfile } from '../../app/routerConfig.tsx';
 
 export const ParametersMenu: FC = () => {
   return (
@@ -20,7 +20,7 @@ export const ParametersMenu: FC = () => {
           <Languages />
         </li>
         <li>
-          <Link to={getRoutePersonalInformation()}>
+          <Link to={getRouteProfile()}>
             <BsFillPersonFill style={{ fontSize: '32px' }} />
           </Link>
         </li>

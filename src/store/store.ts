@@ -23,11 +23,12 @@ import { rtkApi } from '../http/rtkApi';
 import { rtkApiAuth } from '../http/rtkApAuthi';
 import { profileSlice } from './profile/profile.slice';
 import { sharedSlice } from './shared/shared.slice.ts';
+import { setupListeners } from '@reduxjs/toolkit/query';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart', 'checkoutOrderId']
+  whitelist: ['cart', 'checkoutOrderId', 'user']
 };
 
 const rootReducer = combineReducers({
@@ -60,6 +61,8 @@ export const setupStore = () => {
   });
 };
 export const store = setupStore();
+// setupListeners(store.dispatch); для того щоб працював refetchOnFocus
+setupListeners(store.dispatch);
 export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;

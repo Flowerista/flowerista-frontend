@@ -11,16 +11,23 @@ import closeImage from '../../../../../assets/image/checkOut/close.png';
 import { IFlower } from '../../../../../components/DropDownFilter';
 import { ItemInterface } from '../../../Filters';
 
+interface IItem {
+  item: string;
+  menu: string;
+  id: number;
+}
+
 export interface IFlowersAccordion {
   removeItem: (id: number) => void;
   addItem: (item: ItemInterface) => void;
   name: string;
   data: IFlower[];
+  array: IItem[];
 }
 
 export const SmallAccordion: FC<IFlowersAccordion> = (props) => {
-  const { removeItem, addItem, name, data } = props;
-  const [selectedItems, setSelectedItems] = useState<IFlower[]>([]);
+  const { removeItem, addItem, name, data, array } = props;
+  const [selectedItems, setSelectedItems] = useState(array);
   return (
     <Combobox
       as={'div'}

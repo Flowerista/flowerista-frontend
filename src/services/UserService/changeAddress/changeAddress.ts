@@ -8,7 +8,8 @@ const changeAddressApi = rtkApiAuth.injectEndpoints({
         url: `/user/changeAddress`,
         method: 'PATCH',
         body: address
-      })
+      }),
+      invalidatesTags: ['User']
     })
   })
 });

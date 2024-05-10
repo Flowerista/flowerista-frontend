@@ -5,15 +5,10 @@ import addressImg from '../../../../assets/image/checkOut/address.png';
 import { useAppSelector } from '../../../../store/store';
 import { useTranslation } from 'react-i18next';
 
-export interface IAddressInformation {
-  type: string;
-}
-
-export const AddressInformation: FC<IAddressInformation> = ({ type }) => {
+export const AddressInformation: FC = () => {
   const { t } = useTranslation();
-  const { city, date, street, flat, entrance, house, time } = useAppSelector(
-    (state) => state.checkout
-  );
+  const { city, date, street, flat, entrance, house, time, type } =
+    useAppSelector((state) => state.checkout);
 
   return (
     <div className={styles.address}>
@@ -28,7 +23,7 @@ export const AddressInformation: FC<IAddressInformation> = ({ type }) => {
           {type === 'courier' && (
             <>
               <span>
-                {city} {street} {house} {entrance} {flat}
+                {city && city} {street} {house} {entrance} {flat}
               </span>
               <span>
                 {date} {time}

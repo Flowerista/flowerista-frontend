@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 
 import { PersonalInformationForm } from './ProfileForms/PersonalInformationForm';
 import { AddressForm } from './ProfileForms/AddressForm';
@@ -7,13 +7,8 @@ import PasswordChange from '../../../components/Modals/PasswordChange/PasswordCh
 import PasswordSuccess from '../../../components/Modals/PasswordSuccess/PasswordSuccess';
 
 import styles from './styles.module.scss';
-import { Loader } from '../../../components/shared/Loading';
-import { useGetProfile } from '../../../services/UserService/getProfile/getProfile';
-import { useProfileActions } from '../../../store/profile/profile.slice';
 
 const PersonalInformation: FC = () => {
-  const { data, isLoading, error } = useGetProfile();
-  const { setProfile } = useProfileActions();
   const [showPasswordChange, setShowPasswordChange] = useState<boolean>(false);
 
   const [showPasswordSuccess, setShowPasswordSuccess] =
@@ -22,20 +17,6 @@ const PersonalInformation: FC = () => {
   const openPasswordModal = (): void => {
     setShowPasswordChange(true);
   };
-
-  useEffect(() => {
-    if (data) {
-      setProfile(data);
-    }
-  }, [data, setProfile]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <h1>Error...</h1>;
-  }
 
   return (
     <>

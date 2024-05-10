@@ -5,7 +5,7 @@ import {
   UserHistory
 } from '../../../pages/Profile/Orders/Orders';
 
-interface OrderResponse {
+export interface OrderResponse {
   id: number;
   status: string;
   payId: string | null;

@@ -1,18 +1,18 @@
 import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { Button } from '../../Buttons/Button';
+import { Button } from '../Buttons/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useCreateOrderMutation } from '../../../services/OrderService/createOrder';
-import { useAppSelector } from '../../../store/store';
-import { useOrderIdAction } from '../../../store/checkout/checkoutOrderId.slice';
-import { getRouteThanksYou } from '../../../app/routerConfig.tsx';
+import { useCreateOrderMutation } from '../../services/OrderService/createOrder.ts';
+import { useAppSelector } from '../../store/store.ts';
+import { useOrderIdAction } from '../../store/checkout/checkoutOrderId.slice.ts';
+import { getRouteThanksYou } from '../../app/routerConfig.tsx';
 
 export interface IPayWithCash {}
 
 export const PayWithCash: FC<IPayWithCash> = () => {
   const { t } = useTranslation();
-  const navgigation = useNavigate();
+  const navigation = useNavigate();
 
   const [createOrder, { data }] = useCreateOrderMutation();
   const [isChecked, setChecked] = useState(false);
@@ -49,9 +49,9 @@ export const PayWithCash: FC<IPayWithCash> = () => {
   useEffect(() => {
     if (data) {
       setOrderId(data.id);
-      navgigation(getRouteThanksYou());
+      navigation(getRouteThanksYou());
     }
-  }, [data, navgigation, setOrderId]);
+  }, [data, navigation, setOrderId]);
 
   return (
     <div className={styles.container}>

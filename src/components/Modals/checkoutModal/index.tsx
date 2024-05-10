@@ -1,33 +1,31 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
-import { Button } from '../Buttons/Button';
-import arrow from '../../assets/image/arrow.png';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { Dialog, DialogPanel } from '@headlessui/react';
+import arrow from '../../../assets/image/arrow.png';
+import { Button } from '../../Buttons/Button.tsx';
 import {
   getRouteLogin,
   getRouteRegistration
-} from '../../app/routerConfig.tsx';
+} from '../../../app/routerConfig.tsx';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-export interface ICheckOutPopUp {
-  setVisible: (visible: boolean) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ref: any;
+export interface ICheckoutModal {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-export const CheckOutPopUp: FC<ICheckOutPopUp> = ({ setVisible, ref }) => {
+export const CheckoutModal: FC<ICheckoutModal> = ({ setIsOpen, isOpen }) => {
   const { t } = useTranslation();
   const navigation = useNavigate();
   return (
-    <div
-      onClick={() => {
-        setVisible(false);
-      }}
-      ref={ref}
+    <Dialog
+      open={isOpen}
+      onClose={() => setIsOpen(false)}
       className={styles.blur}
     >
-      <div onClick={(e) => e.stopPropagation()} className={styles.popUp}>
-        <button onClick={() => setVisible(false)} className={styles.popUp__btn}>
+      <DialogPanel className={styles.popUp}>
+        <button onClick={() => setIsOpen(false)} className={styles.popUp__btn}>
           <img src={arrow} alt={'arrow'} />
           {t('checkout.modal.btn3')}
         </button>
@@ -37,18 +35,20 @@ export const CheckOutPopUp: FC<ICheckOutPopUp> = ({ setVisible, ref }) => {
           <Button
             onClick={() => {
               navigation(getRouteLogin());
+              setIsOpen(false);
             }}
             text={`${t('checkout.modal.btn1')}`}
           />
           <Button
             onClick={() => {
               navigation(getRouteRegistration());
+              setIsOpen(false);
             }}
             colorMode={'white'}
             text={`${t('checkout.modal.btn2')}`}
           />
         </div>
-      </div>
-    </div>
+      </DialogPanel>
+    </Dialog>
   );
 };

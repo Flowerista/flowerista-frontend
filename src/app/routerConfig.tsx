@@ -9,10 +9,6 @@ import { Login } from '../pages/Login';
 import { Registration } from '../pages/Registration';
 import { RestoringAccess } from '../pages/RestoringAccess';
 import { RestoringAccessSuccess } from '../pages/RestoringAccess/RestoringAccessSuccess/RestoringAccessSuccess';
-import { ProfileLayout } from '../layouts/ProfileLayout';
-import { PersonalInformation } from '../pages/Profile/PersonalInformation';
-import { ProfileOrders } from '../pages/Profile/Orders';
-import { Wishlist } from '../pages/Profile/Wishlist';
 import { ProductPage } from '../pages/ProductPage';
 import { CheckOutPage } from '../pages/CheckOutPage';
 import { PasswordRecovery } from '../pages/PasswordRecovery';
@@ -20,20 +16,19 @@ import { CheckOutPendingPage } from '../pages/CheckOutPendingPage';
 import { CheckOutThanksPage } from '../pages/CheckOutThanksPage';
 import { PaymentErrorPage } from '../pages/PaymentErrorPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { ProfilePage } from '../pages/Profile/index.tsx';
 
 export enum AppRoutes {
   NOT_FOUND = 'not_found',
   Home = 'home',
   Catalog = 'catalog',
   AboutUs = 'about-us',
+  Profile = 'profile',
   DeliveryAndPayment = 'delivery-payment',
   Login = 'login',
   Registration = 'registration',
   RestoringAccess = 'restoring-access',
   RestoringAccessSuccess = 'restoring-access/success',
-  PersonalInformation = 'profile/personal-information',
-  Orders = 'profile/orders',
-  Wishlist = 'profile/wishlist',
   ProductId = 'product/:productId',
   CheckOut = 'checkout',
   ChangePassword = 'changePassword',
@@ -50,19 +45,23 @@ export const getRouteLogin = () => '/login';
 export const getRouteRegistration = () => '/registration';
 export const getRouteRestoringAccess = () => '/restoring-access';
 export const getRouteRestoringAccessSuccess = () => '/restoring-access/success';
-export const getRoutePersonalInformation = () =>
-  '/profile/personal-information';
-export const getRouteOrders = () => '/profile/orders';
-export const getRouteWishlist = () => '/profile/wishlist';
 export const getRouteProductId = (id: string) => `/product/${id}`;
 export const getRouteCheckOut = () => '/checkout';
 export const getRouteChangePassword = () => '/changePassword';
 export const getRouteCheckOutPending = () => '/capture';
 export const getRouteThanksYou = () => '/thanks-you';
 export const getRouteErrorAfterPayment = () => '/error-after-payment';
+export const getRouteTest = () => '/test';
+export const getRouteProfile = () => '/profile';
+
+export type AppRoutesProps = RouteProps & {
+  authOnly?: boolean;
+  // roles?: UserRole[];
+};
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Home]: '/',
+  [AppRoutes.Profile]: '/profile',
   [AppRoutes.Catalog]: '/catalog',
   [AppRoutes.AboutUs]: '/about-us',
   [AppRoutes.DeliveryAndPayment]: '/delivery-payment',
@@ -70,9 +69,6 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Registration]: '/registration',
   [AppRoutes.RestoringAccess]: '/restoring-access',
   [AppRoutes.RestoringAccessSuccess]: '/restoring-access/success',
-  [AppRoutes.PersonalInformation]: '/profile/personal-information',
-  [AppRoutes.Orders]: '/profile/orders',
-  [AppRoutes.Wishlist]: '/profile/wishlist',
   [AppRoutes.ProductId]: '/product/:productId',
   [AppRoutes.CheckOut]: '/checkout',
   [AppRoutes.ChangePassword]: '/changePassword',
@@ -82,7 +78,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.NOT_FOUND]: '*'
 };
 
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Catalog]: {
     path: getRouteCatalog(),
     element: (
@@ -147,29 +143,14 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
       </SecondLayout>
     )
   },
-  [AppRoutes.PersonalInformation]: {
-    path: getRoutePersonalInformation(),
+  [AppRoutes.Profile]: {
+    path: getRouteProfile(),
     element: (
-      <ProfileLayout pageName="Profile">
-        <PersonalInformation />
-      </ProfileLayout>
-    )
-  },
-  [AppRoutes.Orders]: {
-    path: getRouteOrders(),
-    element: (
-      <ProfileLayout pageName="Orders history">
-        <ProfileOrders></ProfileOrders>
-      </ProfileLayout>
-    )
-  },
-  [AppRoutes.Wishlist]: {
-    path: getRouteWishlist(),
-    element: (
-      <ProfileLayout pageName="Wishlist">
-        <Wishlist></Wishlist>
-      </ProfileLayout>
-    )
+      <MainLayout>
+        <ProfilePage />
+      </MainLayout>
+    ),
+    authOnly: true
   },
   [AppRoutes.ProductId]: {
     path: getRouteProductId(':productId'),

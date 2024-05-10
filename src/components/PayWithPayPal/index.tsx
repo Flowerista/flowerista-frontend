@@ -4,10 +4,10 @@ import {
   PayPalButtons,
   PayPalButtonsComponentProps
 } from '@paypal/react-paypal-js';
-import { useAppSelector } from '../../store/store';
+import { useAppSelector } from '../../store/store.ts';
 import { useTranslation } from 'react-i18next';
-import { useCreateOrderMutation } from '../../services/OrderService/createOrder';
-import { usePaymentInitMutation } from '../../services/OrderService/paymentInit/paymentInit';
+import { useCreateOrderMutation } from '../../services/OrderService/createOrder.ts';
+import { usePaymentInitMutation } from '../../services/OrderService/paymentInit/paymentInit.ts';
 
 export interface IPayWithPayPal {}
 

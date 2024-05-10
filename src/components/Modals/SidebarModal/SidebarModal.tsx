@@ -10,10 +10,7 @@ import { Sidebar } from '../../Sidebar/Sidebar';
 interface SidebarModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export const SidebarModal: FC<SidebarModalProps> = ({
-  className,
-  ...props
-}) => {
+export const SidebarModal: FC<SidebarModalProps> = ({ className }) => {
   const { modals } = useAppSelector((state) => state.modals);
   const { setSidebarModalOpen } = useModalActions();
   const onClose = () => {
@@ -45,7 +42,6 @@ export const SidebarModal: FC<SidebarModalProps> = ({
       <div
         className={classNames(styles.modal__wrapper, className)}
         onClick={(e) => e.stopPropagation()}
-        {...props}
       >
         <h3 className={styles.modal__title}>Profile</h3>
         <button onClick={onClose} className={styles.modal__close}>

@@ -11,7 +11,7 @@ import {
   InputsWrapper,
   PasswordInput
 } from '../../components/AppForm';
-import { Button } from '../../components/Buttons/Button';
+import { Button } from '../../components';
 import { Title } from '../../components/Title/Title';
 
 import Flower from '../../assets/image/login/login_flower.png';
@@ -20,10 +20,11 @@ import { useTranslation } from 'react-i18next';
 import { useLazyGetCheckEmailQuery } from '../../services/AuthService/checkEmail/checkEmail';
 import { useLoginMutation } from '../../services/AuthService/login/login';
 import {
-  getRoutePersonalInformation,
+  getRouteProfile,
   getRouteRegistration,
   getRouteRestoringAccess
 } from '../../app/routerConfig.tsx';
+import { useProfileActions } from '../../store/profile/profile.slice.ts';
 
 type Inputs = {
   password: string;
@@ -33,9 +34,9 @@ type Inputs = {
 const Login: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { setProfile } = useProfileActions();
   const [setLogin, { data, isLoading, error }] = useLoginMutation();
   const [checkEmail] = useLazyGetCheckEmailQuery();
-
   const {
     register,
     handleSubmit,
@@ -66,11 +67,13 @@ const Login: FC = () => {
         message: 'Login failed. Wrong password or email not confirmed'
       });
     } else if (data) {
+      setProfile(data.user);
       localStorage.setItem('token', data.access_token);
+      localStorage.setItem('refresh', data.refresh_token);
       reset();
-      navigate(getRoutePersonalInformation());
+      navigate(getRouteProfile());
     }
-  }, [data, error, setError]);
+  }, [data, error, navigate, reset, setError, setProfile]);
 
   return (
     <div className={styles.login}>

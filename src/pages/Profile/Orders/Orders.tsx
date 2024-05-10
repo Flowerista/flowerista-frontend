@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
-import { useGetOrderHistory } from '../../../services/UserService/getOrderHistory/getOrderHistory';
-import { Loader } from '../../../components/shared/Loading';
+import { OrderResponse } from '../../../services/UserService/getOrderHistory/getOrderHistory';
 import {
   Disclosure,
   DisclosureButton,
@@ -61,25 +60,13 @@ export interface IOrderItem {
   };
 }
 
-const ProfileOrders: FC = () => {
-  const { data, isLoading, error } = useGetOrderHistory();
+const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const onNavigateToProduct = (id: string) => {
     return navigate(getRouteProductId(id));
   };
-
-  if (isLoading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
-  if (error) {
-    return <div>erorr</div>;
-  }
 
   const OrderItem: FC<IOrderItem> = ({ item }) => {
     return (
@@ -257,12 +244,12 @@ const ProfileOrders: FC = () => {
       </Disclosure>
     );
   };
-
+  console.log([].length);
   return (
     <article>
-      {data ? (
+      {order?.length ? (
         <div>
-          {data.map((item, index) => (
+          {order.map((item, index) => (
             <OrderItem key={index} item={item} />
           ))}
         </div>

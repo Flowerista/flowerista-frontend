@@ -9,6 +9,7 @@ import { useFiltrationActions } from '../../../../store/filtration/filtration.sl
 import { HeadlessDialog } from '../../../../components/headlessuiDialog';
 import { useGetFlowers } from '../../../../services/bouquete-api/getFlowers/getFlowers.ts';
 import { useGetColors } from '../../../../services/bouquete-api/getColors/getColors.ts';
+import { useAppSelector } from '../../../../store/store.ts';
 
 export interface IFilters {
   min: number;
@@ -26,7 +27,9 @@ export const Filters: FC<IFilters> = (props) => {
     useFiltrationActions();
   const { data: flowers } = useGetFlowers();
   const { data: colors } = useGetColors();
-
+  const { flowerIds, colorIds } = useAppSelector(
+    (state) => state.filtration.filters
+  );
   const handleClose = () => {
     setIsOpen();
   };
@@ -55,6 +58,7 @@ export const Filters: FC<IFilters> = (props) => {
             name={t('mobileFilters.filter.modal.nameFlower')}
             removeItem={removeFlowerId}
             addItem={addFlowersId}
+            array={flowerIds}
           />
           <PriceAccordion
             min={min}
@@ -67,6 +71,7 @@ export const Filters: FC<IFilters> = (props) => {
             name={t('mobileFilters.filter.modal.nameColor')}
             removeItem={removeColorId}
             addItem={addColorsId}
+            array={colorIds}
           />
         </div>
         <div className={styles.button}>

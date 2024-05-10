@@ -25,7 +25,9 @@ export const Search: FC<SearchProps> = ({ className, type }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearch = useDebounce(searchTerm, 500);
   const ref = useRef<HTMLDivElement | null>(null);
-  const { data } = useSearchBouquetes(debouncedSearch);
+  const { data } = useSearchBouquetes(debouncedSearch, {
+    skip: debouncedSearch === ''
+  });
 
   useEffect(() => {
     if (type === 'menu') {

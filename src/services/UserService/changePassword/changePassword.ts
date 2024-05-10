@@ -8,7 +8,8 @@ const changePasswordApi = rtkApiAuth.injectEndpoints({
         url: `/user/changePassword`,
         method: 'PATCH',
         body: passwords
-      })
+      }),
+      invalidatesTags: ['User']
     })
   })
 });

@@ -18,7 +18,7 @@ const initialState: IInitialState = {
 };
 
 export const modalsSlice = buildSlice({
-  name: 'filtration',
+  name: 'modals',
   initialState,
   reducers: {
     setCartModalOpen: (state, { payload }: PayloadAction<boolean>) => {

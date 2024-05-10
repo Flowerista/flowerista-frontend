@@ -1,11 +1,9 @@
 
-.accordion {
-}
-
 .title {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	cursor: pointer;
 
 	span {
 		font-family: var(--font-family-main);
@@ -37,18 +35,35 @@
 }
 
 
-.accordion .content {
-	display: none;
-}
-
-
-.accordion.open .content {
-	display: block;
-}
-
 .blocked {
 	user-select: none;
 	opacity: 0.3;
+	pointer-events: none;
+	cursor: default;
+}
+
+
+.tabs {
+	margin-top: 37px;
+	width: 500px;
+
+	.nav {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.tabItem {
+	font-family: var(--font-family-main);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 23px;
+	color: #231104;
+	cursor: pointer;
+}
+
+.active {
+	color: #B4B4B4;
 }
 
 
@@ -65,6 +80,14 @@
 			line-height: 21px;
 		}
 	}
+
+	.tabs {
+		margin-top: 30px;
+		width: 100%;
+	}
+	.tabItem {
+		font-size: 20px;
+	}
 }
 
 
@@ -74,5 +97,12 @@
 			font-size: 20px;
 			line-height: 27px;
 		}
+	}
+
+	.tabs {
+		margin-top: 20px;
+	}
+	.tabItem {
+		font-size: 16px;
 	}
 }

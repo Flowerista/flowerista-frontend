@@ -5,6 +5,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query/react';
+import { logoutAll } from '../store/profile/profile.slice.ts';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}/api`,
@@ -26,27 +27,27 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  // if (result?.error?.originalStatus === 403) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  if (result?.error?.originalStatus === 401) {
+  // originalStatus or status depends on your api
+  if (result?.error?.status === 401) {
     console.log('sending refresh token');
     // send refresh token to get new access token
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const refreshResult: any = await baseQuery('/refresh-token', api, {
+    const refreshResult = await baseQuery('/refresh-token', api, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('refresh')}`
       }
     });
 
-    console.log(refreshResult);
-
     if (refreshResult?.data) {
-      localStorage.setItem('token', refreshResult.data.refresh_token);
-      localStorage.setItem('refresh', refreshResult.data.refresh_token);
+      const refreshData = refreshResult.data as {
+        refresh_token: string;
+        access_token: string;
+      };
+      localStorage.setItem('token', refreshData.access_token);
+      localStorage.setItem('refresh', refreshData.refresh_token);
       result = await baseQuery(args, api, extraOptions);
     } else {
-      // api.dispatch(logOut())
+      api.dispatch(logoutAll());
       console.log('Not authorized');
     }
   }
@@ -56,6 +57,7 @@ const baseQueryWithReauth: BaseQueryFn<
 
 export const rtkApiAuth = createApi({
   reducerPath: 'api/auth',
+  tagTypes: ['User'],
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({})
 });

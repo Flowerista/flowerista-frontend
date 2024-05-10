@@ -5,27 +5,17 @@ import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Flower from '../../../assets/image/wishlist/img.png';
 import { useTranslation } from 'react-i18next';
-import { Loader } from '../../../components/shared/Loading';
-import { useGetWishlistQuery } from '../../../services/wishlistService/getWishlist/getWishlist';
 import { getRouteCatalog } from '../../../app/routerConfig.tsx';
+import { IFlowerCard } from '../../../interface/flower.ts';
 
-const Wishlist: FC = () => {
+const Wishlist: FC<{ wishlist?: IFlowerCard[] }> = ({ wishlist }) => {
   const { t } = useTranslation();
-  const { data, isLoading, error } = useGetWishlistQuery();
   const navigate = useNavigate();
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <h1>Error...</h1>;
-  }
-
-  if (data && data.length > 0) {
+  if (wishlist && wishlist.length > 0) {
     return (
       <div className={styles.wishlist}>
-        {data.map((item) => (
+        {wishlist.map((item) => (
           <Card
             key={item.id}
             id={item.id}

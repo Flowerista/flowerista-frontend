@@ -6,7 +6,8 @@ const getProfileApi = rtkApiAuth.injectEndpoints({
     getProfile: build.query<IUser, void>({
       query: () => ({
         url: `/user/profile`
-      })
+      }),
+      providesTags: ['User']
     })
   })
 });

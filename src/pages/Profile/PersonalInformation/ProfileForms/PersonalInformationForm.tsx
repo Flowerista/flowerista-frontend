@@ -45,7 +45,7 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({ onOpen }) => {
   useEffect(() => {
     setValue('name', user.firstName);
     setValue('surname', user.lastName);
-  }, [user]);
+  }, [setValue, user]);
 
   const onSubmit: SubmitHandler<Inputs> = async ({ name, surname }) => {
     const newFirstName = upFirstChar(name);

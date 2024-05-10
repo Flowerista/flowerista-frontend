@@ -8,7 +8,8 @@ const changePersonalInformationApi = rtkApiAuth.injectEndpoints({
         url: `/user/changePersonalInfo`,
         method: 'PATCH',
         body: personalInfo
-      })
+      }),
+      invalidatesTags: ['User']
     })
   })
 });

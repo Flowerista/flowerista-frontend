@@ -4,6 +4,7 @@ export interface PropsStyleAndClass {
   className?: string;
   style?: CSSProperties;
 }
+
 export interface PropsChildren extends PropsStyleAndClass {
   children?: ReactNode;
 }
@@ -18,7 +19,7 @@ export interface IUser {
   lastName: string;
   email: string;
   phoneNumber: number;
-  address: IAddress;
+  address?: IAddress;
 }
 
 export interface IAddress {

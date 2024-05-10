@@ -1,76 +1,47 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { DetailedHTMLProps, FC, Fragment, HTMLAttributes } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { BsArrowRight } from 'react-icons/bs';
 
 import styles from './styles.module.scss';
 import { useProfileActions } from '../../store/profile/profile.slice';
-import {
-  getRouteLogin,
-  getRouteOrders,
-  getRoutePersonalInformation,
-  getRouteWishlist
-} from '../../app/routerConfig.tsx';
+import { getRouteLogin } from '../../app/routerConfig.tsx';
+import { Tab, TabList } from '@headlessui/react';
+import { profileLinks } from '../../data/consts/profileLinks';
 
 interface SidebarPrors
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export const Sidebar: FC<SidebarPrors> = ({ className, ...props }) => {
+export const Sidebar: FC<SidebarPrors> = ({ className }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { clearDataUser, logout } = useProfileActions();
+  const { logoutAll } = useProfileActions();
 
   const onLogout = () => {
-    clearDataUser();
-    logout();
+    logoutAll();
     navigate(getRouteLogin());
   };
+
   return (
-    <div className={`${styles.sidebar} ${className}`} {...props}>
+    <TabList as={'div'} className={`${styles.sidebar} ${className}`}>
       <ul className={styles.sidebar__menu}>
-        <li>
-          <NavLink to={getRoutePersonalInformation()}>
-            {({ isActive }) => (
-              <div className={styles.sidebar__item}>
-                {isActive ? (
-                  <BsArrowRight className={styles.arrow} />
-                ) : (
-                  <div className={styles.arrow}></div>
-                )}
-                <p>{t('profile.links.link1')}</p>
-              </div>
-            )}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={getRouteOrders()}>
-            {({ isActive }) => (
-              <div className={styles.sidebar__item}>
-                {isActive ? (
-                  <BsArrowRight className={styles.arrow} />
-                ) : (
-                  <div className={styles.arrow}></div>
-                )}
-                <p>{t('profile.links.link2')}</p>
-              </div>
-            )}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={getRouteWishlist()}>
-            {({ isActive }) => (
-              <div className={styles.sidebar__item}>
-                {isActive ? (
-                  <BsArrowRight className={styles.arrow} />
-                ) : (
-                  <div className={styles.arrow}></div>
-                )}
-                <p>{t('profile.links.link3')}</p>
-              </div>
-            )}
-          </NavLink>
-        </li>
+        {profileLinks.map((link) => (
+          <li key={link.id}>
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <button className={styles.sidebar__item}>
+                  {selected ? (
+                    <BsArrowRight className={styles.arrow} />
+                  ) : (
+                    <div className={styles.arrow}></div>
+                  )}
+                  <p>{link.name}</p>
+                </button>
+              )}
+            </Tab>
+          </li>
+        ))}
       </ul>
       <div className={styles.sidebar__item}>
         <div className={styles.arrow}></div>
@@ -78,6 +49,6 @@ export const Sidebar: FC<SidebarPrors> = ({ className, ...props }) => {
           {t('profile.links.link4')}
         </button>
       </div>
-    </div>
+    </TabList>
   );
 };

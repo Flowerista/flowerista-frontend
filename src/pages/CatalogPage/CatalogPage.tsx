@@ -1,9 +1,9 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, memo, useEffect, useMemo, useState } from 'react';
 import styles from './styles.module.scss';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Filters } from './Filters';
 import { IFetchAllFlowers } from '../../interface/flower';
-import { Card } from '../../components/Card/Card';
+import { Card } from '../../components';
 import { SkeletonCard } from '../../components/Skeletons/SkeletonCard/SkeletonCard';
 import { useAppSelector } from '../../store/store';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -19,6 +19,7 @@ const CatalogPage: FC<ICatalogPage> = () => {
   const { filters, sorting } = useAppSelector((state) => state.filtration);
   const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500);
   const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500);
+
   const dataFetch: IFetchAllFlowers = useMemo(() => {
     return {
       flowerIds: filters.flowerIds.map((item) => item.id).join(',') ?? '',
@@ -43,13 +44,16 @@ const CatalogPage: FC<ICatalogPage> = () => {
       max: filters.max
     };
   }, [filters, sorting, debouncedMinPrice, debouncedMaxPrice]);
+
   const [dataState, setDataState] = useState(dataFetch);
 
   useEffect(() => {
     setDataState(dataFetch);
   }, [debouncedMaxPrice, debouncedMinPrice, dataFetch]);
 
-  const { data, error } = useGetAllFlowers(dataState);
+  const { data, error } = useGetAllFlowers(dataState, {
+    refetchOnFocus: true
+  });
 
   const handlePageClick = (event: { selected: number }) => {
     const newPage = event.selected + 1;
@@ -111,4 +115,4 @@ const CatalogPage: FC<ICatalogPage> = () => {
   );
 };
 
-export default CatalogPage;
+export default memo(CatalogPage);

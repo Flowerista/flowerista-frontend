@@ -150,6 +150,9 @@ export const filtrationSlice = buildSlice({
     clearFilters: (state, { payload }: PayloadAction<[]>) => {
       state.filters.flowerIds = payload;
       state.filters.colorIds = payload;
+    },
+    setPage: (state, { payload }: PayloadAction<number>) => {
+      state.filters.page = payload;
     }
   }
 });

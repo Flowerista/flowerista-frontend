@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import App from './app/App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './store/store';
@@ -10,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { PayPalScriptOptions } from '@paypal/paypal-js';
+import App from './app/App.tsx';
 
 const initialOptions: PayPalScriptOptions = {
   clientId: `${import.meta.env.VITE_PAYPAL_ID}`,

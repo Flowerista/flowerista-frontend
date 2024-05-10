@@ -1,4 +1,4 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import topArrow from '../../assets/image/dropDown/top_arrow.png';
 import bottomArrow from '../../assets/image/dropDown/botton_arrow.png';
@@ -16,15 +16,22 @@ export interface IFlower {
   name: string;
 }
 
+interface IItem {
+  item: string;
+  menu: string;
+  id: number;
+}
+
 interface IDropDown {
   items: IFlower[];
   name: string;
   addItem: (item: ItemInterface) => void;
   removeItem: (id: number) => void;
+  array: IItem[];
 }
 
 export const DropDownFilter: FC<IDropDown> = (props) => {
-  const { items, addItem, name, removeItem } = props;
+  const { items, addItem, name, removeItem, array } = props;
   const [query, setQuery] = useState('');
   const [selectedItems, setSelectedItems] = useState<IFlower[]>([]);
 
@@ -34,6 +41,17 @@ export const DropDownFilter: FC<IDropDown> = (props) => {
       : items.filter((item) => {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
+
+  useEffect(() => {
+    const removedItems = selectedItems.filter(
+      (item) => !array.some((arrayId) => arrayId.id === item.id)
+    );
+    removedItems.forEach((removedItem) => {
+      setSelectedItems((prevSelectedItems) =>
+        prevSelectedItems.filter((item) => item.id !== removedItem.id)
+      );
+    });
+  }, [array]);
 
   return (
     <>

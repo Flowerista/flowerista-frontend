@@ -1,6 +1,7 @@
 import { buildSlice } from '../buildSlice.ts';
+import { PayloadAction } from '@reduxjs/toolkit';
 
-interface IInitialState {
+export interface IInitialStateCheckout {
   city: string;
   street: string;
   house: string;
@@ -11,7 +12,7 @@ interface IInitialState {
   type: string;
 }
 
-const initialState: IInitialState = {
+const initialState: IInitialStateCheckout = {
   city: '',
   street: '',
   house: '',
@@ -19,36 +20,46 @@ const initialState: IInitialState = {
   entrance: '',
   date: '',
   time: '',
-  type: ''
+  type: 'mail'
 };
 
 export const checkOutSlice = buildSlice({
   name: 'checkout',
   initialState,
   reducers: {
-    setDate: (state, { payload }) => {
+    setDate: (state, { payload }: PayloadAction<string>) => {
       state.date = payload;
     },
-    setTime: (state, { payload }) => {
+    setTime: (state, { payload }: PayloadAction<string>) => {
       state.time = payload;
     },
-    setCity: (state, { payload }) => {
+    setCity: (state, { payload }: PayloadAction<string>) => {
       state.city = payload;
     },
-    setStreet: (state, { payload }) => {
+    setStreet: (state, { payload }: PayloadAction<string>) => {
       state.street = payload;
     },
-    setHouse: (state, { payload }) => {
+    setHouse: (state, { payload }: PayloadAction<string>) => {
       state.house = payload;
     },
-    setFlat: (state, { payload }) => {
+    setFlat: (state, { payload }: PayloadAction<string>) => {
       state.flat = payload;
     },
-    setEntrance: (state, { payload }) => {
+    setEntrance: (state, { payload }: PayloadAction<string>) => {
       state.entrance = payload;
     },
-    setTypeToCheckout: (state, { payload }) => {
+    setTypeToCheckout: (state, { payload }: PayloadAction<string>) => {
       state.type = payload;
+    },
+    resetAllState: (state) => {
+      state.date = '';
+      state.city = '';
+      state.street = '';
+      state.time = '';
+      state.house = '';
+      state.flat = '';
+      state.entrance = '';
+      state.type = 'mail';
     }
   }
 });

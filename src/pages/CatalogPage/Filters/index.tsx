@@ -1,5 +1,4 @@
 import { FC, useEffect, useRef } from 'react';
-import x from '../../../assets/image/hresik.png';
 import { useAppSelector } from '../../../store/store';
 import styles from '../styles.module.scss';
 import { DropDownSorting } from '../../../components/DropDownSorting';
@@ -12,6 +11,7 @@ import { useGetRangePrice } from '../../../services/bouquete-api/getRangePrice/g
 import { useFiltrationActions } from '../../../store/filtration/filtration.slice.ts';
 import { DropDownFilter } from '../../../components/DropDownFilter';
 import DropDownPrice from '../../../components/DropDownPrice';
+import { SelectedItems } from './SelectedItems';
 
 export interface ItemInterface {
   item: string;
@@ -26,14 +26,10 @@ export const Filters: FC = () => {
     setMaxValue,
     setMinValue,
     setMiNumber,
-    removeMinMaxValues,
     removeFlowerId,
     removeColorId,
     addFlowersId,
-    clearFilters,
-    addColorsId,
-    removeHandler,
-    resetSorting
+    addColorsId
   } = useFiltrationActions();
 
   const { data: priceRange } = useGetRangePrice();
@@ -45,7 +41,7 @@ export const Filters: FC = () => {
 
   const { data: colors, isLoading: colorsLoading } = useGetColors();
   const { data: flowers, isLoading: flowersLoading } = useGetFlowers();
-  const { flowerIds, colorIds, maxPrice, minPrice, min, max } = useAppSelector(
+  const { flowerIds, colorIds, min, max } = useAppSelector(
     (state) => state.filtration.filters
   );
 
@@ -74,18 +70,6 @@ export const Filters: FC = () => {
     }
   };
 
-  const resetFilters = () => {
-    clearFilters([]);
-    removeMinMaxValues();
-    resetSorting();
-    resetPrice();
-  };
-
-  useEffect(() => {
-    return () => {
-      resetFilters();
-    };
-  }, []);
   return (
     <div className={styles.container}>
       {flowersLoading || colorsLoading ? (
@@ -98,12 +82,14 @@ export const Filters: FC = () => {
               items={flowers || []}
               addItem={addFlowersId}
               removeItem={removeFlowerId}
+              array={flowerIds}
             />
             <DropDownFilter
               name={`${t('catalog.filters.colors')}`}
               items={colors || []}
               addItem={addColorsId}
               removeItem={removeColorId}
+              array={colorIds}
             />
             <DropDownPrice
               min={min}
@@ -125,52 +111,7 @@ export const Filters: FC = () => {
         />
       )}
 
-      <div className={styles.catalog__selectedItemsContainer}>
-        {[
-          ...flowerIds,
-          ...colorIds,
-          { item: `${minPrice}-${maxPrice}`, menu: 'minMax', id: 42 }
-        ].map((item) =>
-          item.menu === 'minMax' ? (
-            minPrice > min || maxPrice < max ? (
-              <div
-                className={styles.catalog__selectedItem}
-                key={item.item}
-                onClick={() => {
-                  removeHandler(item);
-                  resetPrice();
-                }}
-              >
-                {item.item}{' '}
-                <span>
-                  <img src={x} alt="" />
-                </span>
-              </div>
-            ) : (
-              ''
-            )
-          ) : (
-            <div
-              className={styles.catalog__selectedItem}
-              key={item.item}
-              onClick={() => {
-                removeHandler(item);
-                resetPrice();
-              }}
-            >
-              {item.item}{' '}
-              <span>
-                <img src={x} alt="" />
-              </span>
-            </div>
-          )
-        )}
-        {[...flowerIds, ...colorIds].length > 0 && (
-          <button className={styles.catalog__resetBtn} onClick={resetFilters}>
-            {t('catalog.filters.clear')}
-          </button>
-        )}
-      </div>
+      <SelectedItems resetPrice={resetPrice} />
     </div>
   );
 };

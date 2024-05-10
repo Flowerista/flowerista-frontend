@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import { CartModal } from '../Modals/CartModal/CartModal';
 import {
   getRouteLogin,
-  getRoutePersonalInformation,
+  getRouteProfile,
   getRouteRegistration
 } from '../../app/routerConfig.tsx';
 
@@ -30,10 +30,7 @@ export const Header = () => {
       </div>
       <NavBar type="header" />
       <div className={s.parametersMenu__wrp}>
-        <Link
-          to={getRoutePersonalInformation()}
-          className={s.parametersMenu__profile}
-        >
+        <Link to={getRouteProfile()} className={s.parametersMenu__profile}>
           <BsFillPersonFill style={{ fontSize: '28px' }} />
         </Link>
         <CartIcon />
@@ -53,7 +50,7 @@ const ProfileRender: FC = () => {
   if (localStorage.getItem('token')) {
     return (
       <div className={s.profile}>
-        <Link to={getRoutePersonalInformation()}>
+        <Link to={getRouteProfile()}>
           <BsFillPersonFill style={{ fontSize: '21px' }} />
           <span>Profile</span>
         </Link>

@@ -23,11 +23,7 @@ export interface Inputs {
 export const AddressForm: FC = () => {
   const { t } = useTranslation();
 
-  const {
-    user: {
-      address: { city, street, house, entrance, flat }
-    }
-  } = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user.user);
 
   const [changeAddress, { isLoading, error }] = useChangeAddress();
   const {
@@ -41,12 +37,15 @@ export const AddressForm: FC = () => {
   });
 
   useEffect(() => {
-    setValue('city', city ? city : '');
-    setValue('street', street ? street : '');
-    setValue('house', house ? house : '');
-    setValue('entrance', entrance ? entrance : '');
-    setValue('flat', flat ? flat : '');
-  }, [city, entrance, flat, house, setValue, street]);
+    if (user) {
+      const { city, street, house, entrance, flat } = user.address || {};
+      setValue('city', city ? city : '');
+      setValue('street', street ? street : '');
+      setValue('house', house ? house : '');
+      setValue('entrance', entrance ? entrance : '');
+      setValue('flat', flat ? flat : '');
+    }
+  }, [user, setValue]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { city, street, house, entrance, flat } = data;

@@ -96,13 +96,13 @@ const Registration: FC = () => {
   };
 
   useEffect(() => {
-    if (data === null) {
+    if (data || data === null) {
       setShowRegisterCompleted(true);
       reset();
     } else if (isError) {
       setShowRegisterError(true);
     }
-  }, [data, isError]);
+  }, [data, isError, reset]);
 
   return (
     <div className={styles.registration}>

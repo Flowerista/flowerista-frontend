@@ -1,4 +1,4 @@
-.blur{
+.blur {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -9,7 +9,7 @@
 	overflow: hidden;
 }
 
-.popUp{
+.popUp {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -19,24 +19,28 @@
 	width: 470px;
 	height: 704px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-	&__btn{
+
+	&__btn {
 		background: transparent;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		margin-top: 25px;
 		margin-left: 340px;
-		img{
+
+		img {
 			margin-right: 10px;
 		}
 	}
-	&__content{
+
+	&__content {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		margin-top: 150px;
-		h1{
+
+		h1 {
 			font-family: var(--font-family-main);
 			font-size: 32px;
 			font-weight: 400;
@@ -44,7 +48,8 @@
 			color: #231104;
 			margin-bottom: 30px;
 		}
-		li{
+
+		li {
 			font-family: var(--font-family-main);
 			font-size: 16px;
 			font-weight: 400;
@@ -54,7 +59,8 @@
 			list-style-type: disc;
 			margin-bottom: 50px;
 		}
-		button:first-of-type{
+
+		button:first-of-type {
 			margin-bottom: 20px;
 		}
 	}
