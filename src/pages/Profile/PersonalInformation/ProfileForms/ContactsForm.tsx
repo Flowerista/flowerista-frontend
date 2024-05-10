@@ -23,7 +23,7 @@ interface Inputs {
 export const ContactsForm: FC = () => {
   const { t } = useTranslation();
 
-  const { email, phoneNumber } = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.user.user);
   const {
     register,
     formState: { errors },
@@ -35,9 +35,12 @@ export const ContactsForm: FC = () => {
   });
 
   useEffect(() => {
-    setValue('email', email);
-    setValue('phone', `${phoneNumber}`);
-  }, [email, phoneNumber, setValue]);
+    if (user) {
+      const { email, phoneNumber } = user;
+      setValue('email', email ? email : '');
+      setValue('phone', `${phoneNumber ? phoneNumber : ''}`);
+    }
+  }, [setValue, user]);
 
   return (
     <div className={styles.form__wrapper}>
