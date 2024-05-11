@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
-import { Header } from '../../components/Header';
-import { Footer } from '../../components/Footer';
-import WishlistModal from '../../components/Modals/WishlistModal/Wishlist';
+import { Header } from '../../widgets/header';
+import { Footer } from '../../widgets/footer';
+import WishlistModal from '../../shared/ui/modals/WishlistModal/Wishlist';
 
 export interface IMainLayout {
   children?: ReactNode;

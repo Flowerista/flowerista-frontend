@@ -1,5 +1,5 @@
-import { IPersonalInfo } from '../../../interface/global';
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { IPersonalInfo } from '../../../shared/types/global.ts';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const changePersonalInformationApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

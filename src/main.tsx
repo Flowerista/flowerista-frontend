@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+import './app/styles/index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { persistor, store } from './store/store';
@@ -9,7 +9,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { PayPalScriptOptions } from '@paypal/paypal-js';
-import App from './app/App.tsx';
+import AppRouter from './app/providers/router/ui/AppRouter.tsx';
+import { ErrorBoundary } from './app/providers/ErrorBoundary';
 
 const initialOptions: PayPalScriptOptions = {
   clientId: `${import.meta.env.VITE_PAYPAL_ID}`,
@@ -24,7 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <App />
+              <ErrorBoundary>
+                <AppRouter />
+              </ErrorBoundary>
             </LocalizationProvider>
           </PersistGate>
         </Provider>

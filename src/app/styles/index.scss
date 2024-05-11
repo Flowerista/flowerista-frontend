@@ -1,0 +1,61 @@
+@import "reset";
+@import "fonts";
+@import "variables";
+@import "common.css";
+
+body {
+	overflow-x: hidden;
+}
+
+.container {
+	max-width: 1276px;
+	margin: 0 auto;
+}
+
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+	width: 40px !important;
+	height: 4px !important;
+	border-radius: 0 !important;
+}
+
+.swiper-pagination-bullet-active {
+	background: #FFFFFF !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 200px !important;
+}
+
+.swiper-button-prev {
+	background-image: url("../../shared/assets/image/swiper/arrow_2.svg");
+	margin-left: 40px !important;
+}
+
+.swiper-button-next {
+	background-image: url("../../shared/assets/image/swiper/arrow_1.svg");
+	margin-right: 40px !important;
+
+}

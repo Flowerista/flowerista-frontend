@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { buildSlice } from '../buildSlice.ts';
-import { ItemInterface } from '../../pages/CatalogPage/Filters';
+import { ItemInterface } from '../../widgets/filters';
 
 interface IItem {
   item: string;

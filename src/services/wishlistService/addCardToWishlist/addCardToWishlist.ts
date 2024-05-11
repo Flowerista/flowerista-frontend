@@ -1,4 +1,4 @@
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const addCardToWishlist = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

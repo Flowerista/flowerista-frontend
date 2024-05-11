@@ -1,5 +1,5 @@
-import { rtkApi } from '../../../http/rtkApi';
-import { IAllFlower, IFetchAllFlowers } from '../../../interface/flower';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
+import { IAllFlower, IFetchAllFlowers } from '../../../shared/types/flower.ts';
 
 const getAllFlowersApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

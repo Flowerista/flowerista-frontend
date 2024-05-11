@@ -1,4 +1,4 @@
-import { rtkApi } from '../../../http/rtkApi';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
 
 const getSubscription = rtkApi.injectEndpoints({
   endpoints: (build) => ({

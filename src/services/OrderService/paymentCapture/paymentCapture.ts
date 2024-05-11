@@ -1,4 +1,4 @@
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const paymentCaptureApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

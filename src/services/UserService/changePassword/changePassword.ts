@@ -1,5 +1,5 @@
-import { IChangePassword } from '../../../interface/global';
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { IChangePassword } from '../../../shared/types/global.ts';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const changePasswordApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

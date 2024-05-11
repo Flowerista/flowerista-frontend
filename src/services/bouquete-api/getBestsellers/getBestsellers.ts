@@ -1,5 +1,5 @@
-import { rtkApi } from '../../../http/rtkApi';
-import { IFlowerCard } from '../../../interface/flower';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
+import { IFlowerCard } from '../../../shared/types/flower.ts';
 
 const getBestsellersApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

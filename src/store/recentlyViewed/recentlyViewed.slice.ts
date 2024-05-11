@@ -1,4 +1,4 @@
-import { IFlowerCard } from '../../interface/flower';
+import { IFlowerCard } from '../../shared/types/flower.ts';
 import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {

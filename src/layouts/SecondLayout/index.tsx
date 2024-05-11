@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
-import { Footer } from '../../components/Footer';
-import { SecondHeader } from '../../components/SecondHeader';
+import { Footer } from '../../widgets/footer';
+import { SecondHeader } from '../../widgets/secondHeader';
 
 export interface IMainLayout {
   children?: ReactNode;

@@ -1,0 +1,164 @@
+@import "../../../app/styles/mixin";
+
+
+.dropDown {
+	width: 200px;
+	display: flex;
+	align-items: center;
+	border: 1px solid #e7a9a7;
+	margin: -1px;
+
+	&__btn {
+		width: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px;
+		background: #fcf7f0;
+		color: #2C1607;
+		font-weight: 500;
+	}
+
+	&__content__range {
+		position: relative;
+	}
+
+	&__content {
+		width: 200px;
+		height: 200px;
+		background: #fcf7f0;
+		border: 1px solid #e7a9a7;
+		padding-top: 20px;
+		padding-left: 10px;
+		padding-right: 10px;
+
+		&__inputs {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			div {
+				width: 16px;
+				height: 2px;
+				background: #231104;
+			}
+
+			input {
+				height: 50px;
+				width: 70px;
+				border: 1px solid #e7a9a7;
+				padding-left: 10px;
+				padding-right: 10px;
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 24px;
+				color: #231104;
+
+			}
+
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+			}
+		}
+
+		&__range {
+			width: 100%;
+			margin: 30px auto 0;
+		}
+	}
+}
+
+
+@include media768 {
+	.dropDown {
+		width: 183px;
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 24px;
+		letter-spacing: 0.02em;
+
+		&__btn {
+			padding: 20px 30px;
+			border-radius: 5px;
+		}
+
+		&__content {
+			width: 101%;
+			height: 237px;
+			font-size: 16px;
+			border-top: 0;
+			padding-right: 10px;
+			padding-left: 10px;
+
+
+			&__inputs {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+
+				div {
+					display: none;
+				}
+
+				input {
+					height: 40px;
+					width: 100%;
+					border: 1px solid #e7a9a7;
+					padding-left: 10px;
+					padding-right: 10px;
+					text-align: center;
+
+					&:last-child {
+						margin-top: 30px;
+					}
+
+				}
+
+			}
+
+			&__range {
+				width: 100%;
+				margin: 30px auto 0;
+				//padding: 0 10px;
+			}
+		}
+	}
+
+	.active {
+		opacity: 1;
+		display: block;
+		transition: all 1s ease;
+		animation-name: open;
+		animation-duration: 2s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+		animation-delay: 0s;
+	}
+
+}
+
+@media screen and (max-width: 750px) {
+	.dropDown {
+		border: 1px solid #e7a9a7;
+
+		&__content {
+			z-index: 888 !important;
+		}
+
+		&:nth-child(1) {
+			border-left: 1px solid #e7a9a7;
+			border-right: none;
+
+		}
+
+		&:nth-child(2) {
+			border-right: none;
+		}
+	}
+}
+

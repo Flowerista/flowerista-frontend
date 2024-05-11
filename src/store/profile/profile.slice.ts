@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../interface/global';
+import { IUser } from '../../shared/types/global.ts';
 import { buildSlice } from '../buildSlice.ts';
 
 interface IInitialState {

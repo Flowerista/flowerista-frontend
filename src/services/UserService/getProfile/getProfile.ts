@@ -1,5 +1,5 @@
-import { IUser } from '../../../interface/global';
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { IUser } from '../../../shared/types/global.ts';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const getProfileApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

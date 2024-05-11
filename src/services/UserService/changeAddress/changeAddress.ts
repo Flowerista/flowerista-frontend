@@ -1,5 +1,5 @@
-import { IAddress } from '../../../interface/global';
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { IAddress } from '../../../shared/types/global.ts';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const changeAddressApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

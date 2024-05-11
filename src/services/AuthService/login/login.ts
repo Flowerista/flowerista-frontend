@@ -1,5 +1,5 @@
-import { rtkApi } from '../../../http/rtkApi';
-import { AuthResponse } from '../../../interface/AuthResponse';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
+import { AuthResponse } from '../../../shared/types/AuthResponse.ts';
 
 const loginApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

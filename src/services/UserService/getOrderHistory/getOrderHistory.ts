@@ -1,9 +1,9 @@
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 import {
   AddressHistory,
   OrderItemHistory,
   UserHistory
-} from '../../../pages/Profile/Orders/Orders';
+} from '../../../widgets/profileOrders/ProfileOrders.tsx';
 
 export interface OrderResponse {
   id: number;

@@ -1,5 +1,5 @@
-import { rtkApi } from '../../../http/rtkApi';
-import { IBouquetId } from '../../../interface/flower';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
+import { IBouquetId } from '../../../shared/types/flower.ts';
 
 const getBouqueteByIdApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

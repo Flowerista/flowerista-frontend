@@ -1,6 +1,6 @@
-import { OrderInterface } from '../../interface/order/order-interface';
-import { OrderResponseInterface } from '../../interface/order/orderResponseInterface';
-import { rtkApiAuth } from '../../http/rtkApAuthi';
+import { OrderInterface } from '../../shared/types/order-interface.ts';
+import { OrderResponseInterface } from '../../shared/types/orderResponseInterface.ts';
+import { rtkApiAuth } from '../../shared/api/rtkApAuthi.ts';
 
 const createOrderApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({

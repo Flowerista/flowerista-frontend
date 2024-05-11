@@ -1,4 +1,4 @@
-import { generateCartID } from '../../utils/helpers/generateCartID';
+import { generateCartID } from '../../shared/lib/helpers/generateCartID';
 import { buildSlice } from '../buildSlice.ts';
 
 export type Size = 'SMALL' | 'MEDIUM' | 'LARGE';

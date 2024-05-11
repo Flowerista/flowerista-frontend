@@ -1,5 +1,5 @@
-import { rtkApi } from '../../../http/rtkApi';
-import { IRegister } from '../../../interface/register';
+import { rtkApi } from '../../../shared/api/rtkApi.ts';
+import { IRegister } from '../../../shared/types/register.ts';
 
 const postRegistrationApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

@@ -1,5 +1,5 @@
-import { IFlowerCard } from '../../../interface/flower';
-import { rtkApiAuth } from '../../../http/rtkApAuthi';
+import { IFlowerCard } from '../../../shared/types/flower.ts';
+import { rtkApiAuth } from '../../../shared/api/rtkApAuthi.ts';
 
 const getWishlistApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({
