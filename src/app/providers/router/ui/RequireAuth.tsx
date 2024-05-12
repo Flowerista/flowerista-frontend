@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../../../store/store.ts';
 import { getRouteLogin } from '../../../../shared/consts/router.ts';
+import { useUser } from '../../../../pages/profile/model/selectors/getUser.ts';
 
 interface RequireAuthProps {
   children: JSX.Element;
@@ -8,7 +8,7 @@ interface RequireAuthProps {
 }
 
 export function RequireAuth({ children }: RequireAuthProps) {
-  const auth = useAppSelector((state) => state.user.user);
+  const auth = useUser();
   const location = useLocation();
   // const userRoles = useSelector(getUserRoles);
 

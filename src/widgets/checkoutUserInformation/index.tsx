@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
 import userImage from '../../shared/assets/image/checkOut/user.png';
-import { IUser } from '../../shared/types/global.ts';
 import { useTranslation } from 'react-i18next';
+import { IUser } from '../../pages/login/model/types/AuthResponseInterface.ts';
 
 export interface IUserInformation {
   user: IUser;

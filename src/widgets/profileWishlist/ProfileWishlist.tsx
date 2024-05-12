@@ -4,12 +4,14 @@ import styles from './styles.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Flower from '../../shared/assets/image/wishlist/img.png';
 import { useTranslation } from 'react-i18next';
-import { IFlowerCard } from '../../shared/types/flower.ts';
 import { getRouteCatalog } from '../../shared/consts/router.ts';
-import { Button } from '../../shared/ui/Buttons/Button.tsx';
-import { Card } from '../../shared/ui/Card/Card.tsx';
+import { Button } from '../../shared/ui/button';
+import { Card } from '../../features/card';
+import { InterfaceFlowerCard } from '../../features/card/model/types/InterfaceFlowerCard.ts';
 
-const ProfileWishlist: FC<{ wishlist?: IFlowerCard[] }> = ({ wishlist }) => {
+const ProfileWishlist: FC<{ wishlist?: InterfaceFlowerCard[] }> = ({
+  wishlist
+}) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 

@@ -1,0 +1,125 @@
+@import "../../../app/styles/mixin";
+
+
+.dropDown {
+	width: 200px;
+	border: 1px none #e7a9a7;
+	border-left-style: solid;
+
+	&__btn {
+		width: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px;
+		background: #fcf7f0;
+		border-radius: 5px;
+		color: #2C1607;
+		font-weight: 500;
+	}
+
+	&__content {
+		width: 201px;
+		height: 130px;
+		background: #fcf7f0;
+		border: 1px solid #e7a9a7;
+		overflow-y: auto;
+
+		.item {
+			padding: 10px;
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			padding-right: 15px;
+
+			&:hover {
+				color: #9C5A58;
+			}
+		}
+	}
+}
+
+.dropDown__content::-webkit-scrollbar {
+	width: 5px;
+}
+
+.dropDown__content::-webkit-scrollbar-thumb {
+	background: #e7a9a7;
+	border-radius: 10px;
+}
+
+.selected {
+	color: #9C5A58;
+	background-image: url("../../../shared/assets/image/catalog/check.png");
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+
+@include media768 {
+	.dropDown {
+		width: 183px;
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 24px;
+		letter-spacing: 0.02em;
+
+
+		&__btn {
+			padding: 20px 30px;
+			border-radius: 5px;
+		}
+
+		&__content {
+			width: 101%;
+			height: 237px;
+			font-size: 16px;
+			border-top: 0;
+
+
+			.item {
+				padding: 10px;
+				padding-left: 30px;
+			}
+		}
+	}
+
+	.active {
+		opacity: 1;
+		display: block;
+		transition: all 1s ease;
+		animation-name: open;
+		animation-duration: 2s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+		animation-delay: 0s;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.dropDown {
+		border: 1px solid #e7a9a7;
+
+		&:nth-child(1) {
+			border-left: 1px solid #e7a9a7;
+			border-right: none;
+
+		}
+
+
+	}
+}
+
+@media screen and (max-width: 588px) {
+	.dropDown {
+		z-index: 89;
+
+		&:nth-child(1) {
+			border-left: 1px solid #e7a9a7;
+			border-right: 1px solid #e7a9a7;;
+		}
+	}
+}

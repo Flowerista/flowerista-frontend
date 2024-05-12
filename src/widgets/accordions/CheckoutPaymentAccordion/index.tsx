@@ -1,5 +1,5 @@
 import { FC, Fragment } from 'react';
-import styles from '../styles.module.scss';
+import styles from '../../../features/checkoutTabs/ui/styles.module.scss';
 import closeImage from '../../../shared/assets/image/checkOut/close.png';
 import openImage from '../../../shared/assets/image/checkOut/open.png';
 import {
@@ -13,15 +13,16 @@ import {
   TabPanels
 } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../../../store/store.ts';
-import { PayWithPayPal } from '../../../shared/ui/PayWithPayPal';
-import { PayWithCash } from '../../../shared/ui/PayWithCash';
+import { PayWithPayPal } from '../../../entities/payWithPayPal';
+import { PayWithCash } from '../../../entities/payWithCash';
+import { useCart } from '../../../entities/cart/model/selectors/getCart/getCart.ts';
+import { useCheckout } from '../../../pages/checkoutPage/model/selectors/getCheckout.ts';
 
 export const CheckoutPaymentAccordion: FC = () => {
   const { t } = useTranslation();
-  const cart = useAppSelector((state) => state.cart.cart);
-  const checkOut = useAppSelector((state) => state.checkout);
-  const checked = checkOut.date === '' || cart.length === 0;
+  const cart = useCart();
+  const checkout = useCheckout();
+  const checked = checkout?.date === '' || cart.length === 0;
   // є баг коли користувач вибрав дату та час але
   // і притому нажав на відкриття оплати і потім нажав на change то блокуєтся
   // оплата але вікно не закриваєтся {({ open, close }) => ( можна получити щоб закрити але хз як

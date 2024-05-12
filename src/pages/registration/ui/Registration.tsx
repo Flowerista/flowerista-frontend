@@ -2,20 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { RegisterSchema } from '../../../shared/lib/validations';
-
-import {
-  EmailInput,
-  Form,
-  FormLink,
-  InputsWrapper,
-  NameInput,
-  PasswordInput,
-  PhoneInput,
-  SurnameInput
-} from '../../../shared/ui/appForm';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
-import { IRegister } from '../../../shared/types/register.ts';
+import { Title } from '../../../shared/ui/Title';
 import RegistrationCompleted from '../../../widgets/modals/registrationCompleted/RegistrationCompleted.tsx';
 import RegistrationError from '../../../widgets/modals/registrationError/RegistrationError.tsx';
 
@@ -23,11 +10,21 @@ import Flower from '../../../shared/assets/image/registration/flower.png';
 import styles from './styles.module.scss';
 import { upFirstChar } from '../../../shared/lib/helpers';
 import { useTranslation } from 'react-i18next';
-import { usePostRegistration } from '../../../services/UserService/postRegistration/postRegistration.ts';
-import { useLazyGetCheckEmailQuery } from '../../../services/AuthService/checkEmail/checkEmail.ts';
-import { useLazyGetCheckPhoneQuery } from '../../../services/AuthService/checkPhone/checkPhone.ts';
+import { usePostRegistration } from '../api/postRegistration/postRegistration.ts';
+import { useLazyGetCheckEmailQuery } from '../api/checkEmail/checkEmail.ts';
+import { useLazyGetCheckPhoneQuery } from '../api/checkPhone/checkPhone.ts';
 import { getRouteLogin } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
+import { InputsWrapper } from '../../../shared/ui/InputsWrapper';
+import { Form } from '../../../shared/ui/form';
+import { NameInput } from '../../../shared/ui/NameInput';
+import { SurnameInput } from '../../../shared/ui/SurnameInput';
+import { EmailInput } from '../../../shared/ui/emailInput';
+import { PhoneInput } from '../../../shared/ui/PhoneInput';
+import { PasswordInput } from '../../../shared/ui/PasswordInput';
+import { FormLink } from '../../../shared/ui/FormLink';
+import { RegisterInterface } from '../types/registerInterface.ts';
+import { RegisterSchema } from '../validators/registerSchema.ts';
 
 type Inputs = {
   name: string;
@@ -71,7 +68,7 @@ const Registration: FC = () => {
     const newName = upFirstChar(name);
     const newSurname = upFirstChar(surname);
     const newPhone = +phone.slice(4).replace(/\D/g, '');
-    const newData: IRegister = {
+    const newData: RegisterInterface = {
       password,
       email,
       firstName: newName,

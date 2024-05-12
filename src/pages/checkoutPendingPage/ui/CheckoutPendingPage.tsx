@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { SecondHeader } from '../../../widgets/secondHeader';
 import { CheckOutFooter } from '../../../widgets/checkoutFooter';
 import loader from '../../../shared/assets/image/checkOut/loader.gif';
-import { usePaymentCaptureMutation } from '../../../services/OrderService/paymentCapture/paymentCapture.ts';
+import { usePaymentCaptureMutation } from '../model/api/paymentCapture/paymentCapture.ts';
 import {
   getRouteErrorAfterPayment,
   getRouteThanksYou

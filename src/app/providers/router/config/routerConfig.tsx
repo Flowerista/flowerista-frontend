@@ -1,9 +1,9 @@
 import { CatalogPage } from '../../../../pages/catalogPage';
-import { MainLayout } from '../../../../layouts/MainLayout';
+import { MainLayout } from '../../../layouts/MainLayout';
 import { DeliveryAndPaymentPage } from '../../../../pages/deliveryAndPaymentPage';
 import { HomePage } from '../../../../pages/homePage';
 import { AboutUs } from '../../../../pages/aboutUs';
-import { SecondLayout } from '../../../../layouts/SecondLayout';
+import { SecondLayout } from '../../../layouts/SecondLayout';
 import { Login } from '../../../../pages/login';
 import { Registration } from '../../../../pages/registration';
 import { RestoringAccess } from '../../../../pages/restoringAccess';

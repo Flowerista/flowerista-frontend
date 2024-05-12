@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
-import { OrderResponse } from '../../services/UserService/getOrderHistory/getOrderHistory.ts';
 import {
   Disclosure,
   DisclosureButton,
@@ -12,53 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import empty from '../../shared/assets/image/profile/order/empty.png';
 import { getRouteProductId } from '../../shared/consts/router.ts';
-import { Button } from '../../shared/ui/Buttons/Button.tsx';
-
-export interface OrderItemHistory {
-  productId: number;
-  name: string;
-  quantity: number;
-  sizeId: number;
-  size: string;
-  price: number;
-  imageUrls: {
-    [key: number]: string;
-  };
-}
-
-export interface AddressHistory {
-  city: string;
-  street: string;
-  house: string;
-  entrance: string;
-  flat: string;
-  date: string | null;
-  time: string | null;
-  type: string | null;
-}
-
-export interface UserHistory {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: number;
-}
-
-export interface IOrderItem {
-  item: {
-    id: number;
-    status: string;
-    payId: string | null;
-    userId: number;
-    sum: number;
-    orderItems: OrderItemHistory[];
-    address: AddressHistory;
-    user: UserHistory;
-    created: number | null;
-    updated: number | null;
-  };
-}
+import { Button } from '../../shared/ui/button';
+import { OrderResponse } from '../../pages/profile/model/types/orderHistoryInterface.ts';
 
 const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
   const { t } = useTranslation();
@@ -68,7 +22,7 @@ const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
     return navigate(getRouteProductId(id));
   };
 
-  const OrderItem: FC<IOrderItem> = ({ item }) => {
+  const OrderItem: FC<{ item: OrderResponse }> = ({ item }) => {
     return (
       <Disclosure>
         {({ open }) => (
@@ -244,7 +198,6 @@ const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
       </Disclosure>
     );
   };
-  console.log([].length);
   return (
     <article>
       {order?.length ? (

@@ -1,0 +1,70 @@
+@import "../../../../app/styles/mixin";
+
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 101;
+	padding: 0 20px;
+
+	&__wrapper {
+		position: relative;
+		width: 100%;
+		max-width: 470px;
+		padding: 64px 20px 40px 20px;
+		background-color: var(--white);
+		color: var(--brown);
+	}
+
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		color: var(--brown);
+
+		.btn_big {
+			display: none;
+			align-items: center;
+			gap: 10px;
+			font: var(--body-1-400);
+			letter-spacing: 0.32px;
+		}
+
+		.btn_small {}
+	}
+}
+
+@media screen and (min-width: 450px) {
+	.modal {
+		&__wrapper {
+			padding: 105px 50px 60px 50px;
+		}
+
+		&__close {
+			top: 30px;
+			right: 50px;
+
+			.btn_big {
+				display: flex;
+			}
+
+			.btn_small {
+				display: none;
+			}
+		}
+	}
+}
+
+@include media375 {
+	.modal {
+		&__wrapper {
+			width: 350px;
+		}
+	}
+}

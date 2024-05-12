@@ -1,49 +1,73 @@
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import styles from './styles.module.scss';
 import { Pagination } from '../../../widgets/Pagination/Pagination.tsx';
-import { Filters } from '../../../widgets/filters';
-import { IFetchAllFlowers } from '../../../shared/types/flower.ts';
-import { SkeletonCard } from '../../../shared/ui/skeletons/SkeletonCard/SkeletonCard.tsx';
-import { useAppSelector } from '../../../store/store.ts';
+import { SkeletonCard } from '../../../shared/ui/SkeletonCard';
 import { useDebounce } from '../../../shared/lib/hooks/useDebounce.tsx';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGetAllFlowers } from '../../../services/bouquete-api/getAllFlowers/getAllFlowers.ts';
+import { useGetAllFlowers } from '../model/api/getAllFlowers/getAllFlowers.ts';
 import { getRouteHome } from '../../../shared/consts/router.ts';
-import { Card } from '../../../shared/ui/Card/Card.tsx';
+import { Card } from '../../../features/card';
+import { InterfaceFetchAllFlowers } from '../model/types/flowers.ts';
+import { CatalogFilters } from '../../../widgets/catalogFilters';
+import {
+  useColorsIds,
+  useFlowersIds,
+  useMax,
+  useMaxPrice,
+  useMin,
+  useMinPrice,
+  usePage,
+  useSorting
+} from '../model/selectors/getCatalog.ts';
 
-export interface ICatalogPage {}
-
-const CatalogPage: FC<ICatalogPage> = () => {
+const CatalogPage: FC = () => {
   const { t } = useTranslation();
-  const { filters, sorting } = useAppSelector((state) => state.filtration);
-  const debouncedMinPrice = useDebounce<number>(filters.minPrice, 500);
-  const debouncedMaxPrice = useDebounce<number>(filters.maxPrice, 500);
+  const minPrice = useMinPrice();
+  const maxPrice = useMaxPrice();
+  const flowerIds = useFlowersIds();
+  const colorIds = useColorsIds();
+  const page = usePage();
+  const min = useMin();
+  const max = useMax();
+  const sorting = useSorting();
 
-  const dataFetch: IFetchAllFlowers = useMemo(() => {
+  const debouncedMinPrice = useDebounce<number>(minPrice, 500);
+  const debouncedMaxPrice = useDebounce<number>(maxPrice, 500);
+
+  const dataFetch: InterfaceFetchAllFlowers = useMemo(() => {
     return {
-      flowerIds: filters.flowerIds.map((item) => item.id).join(',') ?? '',
-      colorIds: filters.colorIds.map((item) => item.id).join(',') ?? '',
+      flowerIds: flowerIds?.map((item) => item.id).join(',') ?? '',
+      colorIds: colorIds?.map((item) => item.id).join(',') ?? '',
       minPrice: debouncedMinPrice,
       maxPrice: debouncedMaxPrice,
       sortByNewest: Boolean(
-        sorting.find((sort) => sort.sort && sort.item === 'sortByNewest')?.sort
+        sorting?.find((sort) => sort.sort && sort.item === 'sortByNewest')?.sort
       ),
       sortByPriceHighToLow: Boolean(
-        sorting.find(
+        sorting?.find(
           (sort) => sort.sort && sort.item === 'sortByPriceHighToLow'
         )?.sort
       ),
       sortByPriceLowToHigh: Boolean(
-        sorting.find(
+        sorting?.find(
           (sort) => sort.sort && sort.item === 'sortByPriceLowToHigh'
         )?.sort
       ),
-      page: filters.page,
-      min: filters.min,
-      max: filters.max
+      page: page,
+      min: min,
+      max: max
     };
-  }, [filters, sorting, debouncedMinPrice, debouncedMaxPrice]);
+  }, [
+    flowerIds,
+    colorIds,
+    debouncedMinPrice,
+    debouncedMaxPrice,
+    sorting,
+    page,
+    min,
+    max
+  ]);
 
   const [dataState, setDataState] = useState(dataFetch);
 
@@ -71,7 +95,7 @@ const CatalogPage: FC<ICatalogPage> = () => {
         <Link to={getRouteHome()}>{t('catalog.link')}</Link>
         {t('catalog.link2')}
       </div>
-      <Filters />
+      <CatalogFilters />
       {data ? (
         <div className={styles.flower__wrapper}>
           {data &&
@@ -114,5 +138,4 @@ const CatalogPage: FC<ICatalogPage> = () => {
     </div>
   );
 };
-
 export default memo(CatalogPage);

@@ -4,38 +4,41 @@ import { Link } from 'react-router-dom';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { Sidebar } from '../../../widgets/Sidebar/Sidebar.tsx';
 import { SidebarModal } from '../../../widgets/SidebarModal/SidebarModal.tsx';
-import { useModalActions } from '../../../store/modals/modals.slice.ts';
+import { useModalActions } from '../../../entities/modals/model/slice/modals.slice.ts';
 import { TabGroup, TabPanel, TabPanels } from '@headlessui/react';
 import { profileLinks } from '../../../shared/consts/profileLinks.ts';
-import ProfilePersonalInformation from '../../../widgets/profilePersonalInformation/ProfilePersonalInformation.tsx';
 import ProfileWishlist from '../../../widgets/profileWishlist/ProfileWishlist.tsx';
-import { useGetProfile } from '../../../services/UserService/getProfile/getProfile.ts';
-import { Loader } from '../../../shared/ui/Loading';
-import { useGetOrderHistory } from '../../../services/UserService/getOrderHistory/getOrderHistory.ts';
-import { useGetWishlistQuery } from '../../../services/wishlistService/getWishlist/getWishlist.ts';
-import { useProfileActions } from '../../../store/profile/profile.slice.ts';
+import { useGetProfile } from '../model/api/getProfile/getProfile.ts';
+import { useGetOrderHistory } from '../model/api/getOrderHistory/getOrderHistory.ts';
+import { useGetWishlistQuery } from '../../../features/card/model/api/getWishlist/getWishlist.ts';
+import { useProfileActions } from '../model/slice/profile/profile.slice.ts';
 import { getRouteHome } from '../../../shared/consts/router.ts';
 import ProfileOrders from '../../../widgets/profileOrders/ProfileOrders.tsx';
+import { ProfilePersonalInformation } from '../../../widgets/profilePersonalInformation';
+import { Loader } from '../../../shared/ui/loading';
 
 const ProfilePage: FC = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const { data: orders, isLoading: isLoadingOrder } = useGetOrderHistory();
+
   const {
     data: profile,
     isLoading: isLoadingProfile,
     error: errorProfile
   } = useGetProfile();
-  const { data: orders, isLoading: isLoadingOrder } = useGetOrderHistory();
+
   const {
     data: wishlist,
     isLoading: isLoadingWishlist,
     error: errorWishlist
   } = useGetWishlistQuery();
+
   const { setSidebarModalOpen } = useModalActions();
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const { setProfile } = useProfileActions();
+
   const onOpen = () => {
     setSidebarModalOpen(true);
   };
-
-  const { setProfile } = useProfileActions();
 
   useEffect(() => {
     if (profile) {

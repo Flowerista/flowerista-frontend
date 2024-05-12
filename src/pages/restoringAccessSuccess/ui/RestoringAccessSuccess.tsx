@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
+import { Title } from '../../../shared/ui/Title';
 
 import Flower from '../../../shared/assets/image/restoring_access/restoring_success.png';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 import { getRouteHome } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
 
 export const RestoringAccessSuccess: FC = () => {
   const { t } = useTranslation();

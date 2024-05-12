@@ -8,7 +8,7 @@ import {
   getRouteCatalog,
   getRouteHome
 } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
 
 export const NotFoundPage: FC = () => {
   const { t } = useTranslation();

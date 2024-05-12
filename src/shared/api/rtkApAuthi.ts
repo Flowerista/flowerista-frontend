@@ -5,7 +5,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query/react';
-import { logoutAll } from '../../store/profile/profile.slice.ts';
+import { logoutAll } from '../../pages/profile/model/slice/profile/profile.slice.ts';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}/api`,
@@ -56,7 +56,7 @@ const baseQueryWithReauth: BaseQueryFn<
 };
 
 export const rtkApiAuth = createApi({
-  reducerPath: 'api/auth',
+  reducerPath: 'rtkApiAuth',
   tagTypes: ['User'],
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({})

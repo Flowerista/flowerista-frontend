@@ -2,10 +2,10 @@ import { FC } from 'react';
 import styles from './styles.module.scss';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import ReactPaginate from 'react-paginate';
-import { IAllFlower } from '../../shared/types/flower.ts';
+import { InterfaceAllFlower } from '../../pages/catalogPage/model/types/flowers.ts';
 
 interface IPagination {
-  data: IAllFlower | undefined;
+  data: InterfaceAllFlower | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handlePageClick: any;
 }

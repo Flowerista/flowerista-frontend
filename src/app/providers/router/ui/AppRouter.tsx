@@ -1,12 +1,12 @@
 import { memo, Suspense, useCallback, useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import PageTransition from '../../../../shared/ui/PageTransition';
 import '../../../../shared/config/i18n/i18n.ts';
 import i18next from 'i18next';
-import { Loader } from '../../../../shared/ui/Loading';
 import { RequireAuth } from './RequireAuth.tsx';
 import { AppRoutesProps } from '../../../../shared/types/router.ts';
 import { routeConfig } from '../config/routerConfig.tsx';
+import { PageTransition } from '../../../../shared/ui/PageTransition';
+import { Loader } from '../../../../shared/ui/loading';
 
 const AppRouter = () => {
   useEffect(() => {

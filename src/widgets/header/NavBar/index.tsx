@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
 import { NavLink } from 'react-router-dom';
-import { ParametersMenu } from '../../../shared/ui/parametersMenu';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import {
@@ -9,6 +8,7 @@ import {
   getRouteCatalog,
   getRouteDeliveryAndPayment
 } from '../../../shared/consts/router.ts';
+import { ParametersMenu } from '../../../shared/ui/parametersMenu';
 
 export interface INavBar {
   className?: string;

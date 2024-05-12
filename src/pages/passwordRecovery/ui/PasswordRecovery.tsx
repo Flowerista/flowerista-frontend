@@ -2,17 +2,19 @@ import { FC } from 'react';
 
 import Flower from '../../../shared/assets/image/restoring_access/restoring_success.png';
 import styles from './styles.module.scss';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
-import { Form, InputsWrapper, PasswordInput } from '../../../shared/ui/appForm';
+import { Title } from '../../../shared/ui/Title';
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ResetPassword } from '../../../shared/lib/validations';
 
 import { useTranslation } from 'react-i18next';
-import { useAuthChangePassword } from '../../../services/AuthService/changePassword/authChangePassword.ts';
+import { useAuthChangePassword } from '../model/api/changePassword/authChangePassword.ts';
 import { getRouteHome } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
+import { InputsWrapper } from '../../../shared/ui/InputsWrapper';
+import { Form } from '../../../shared/ui/form';
+import { PasswordInput } from '../../../shared/ui/PasswordInput';
+import { ResetPassword } from '../model/validation/resetPasswordSchema.ts';
 
 const PasswordRecovery: FC = () => {
   const { t } = useTranslation();

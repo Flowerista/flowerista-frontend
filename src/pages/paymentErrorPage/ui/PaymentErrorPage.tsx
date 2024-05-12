@@ -5,7 +5,7 @@ import { CheckOutFooter } from '../../../widgets/checkoutFooter';
 import errorImage from '../../../shared/assets/image/checkOut/error.png';
 import { useNavigate } from 'react-router-dom';
 import { getRouteCheckOut } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
 
 export interface IPaymentErrorPage {}
 

@@ -5,15 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { BsArrowRight } from 'react-icons/bs';
 
 import styles from './styles.module.scss';
-import { useProfileActions } from '../../store/profile/profile.slice.ts';
+import { useProfileActions } from '../../pages/profile/model/slice/profile/profile.slice.ts';
 import { Tab, TabList } from '@headlessui/react';
 import { profileLinks } from '../../shared/consts/profileLinks.ts';
 import { getRouteLogin } from '../../shared/consts/router.ts';
 
-interface SidebarPrors
+interface SidebarPros
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
-export const Sidebar: FC<SidebarPrors> = ({ className }) => {
+export const Sidebar: FC<SidebarPros> = ({ className }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { logoutAll } = useProfileActions();

@@ -6,19 +6,20 @@ import {
 import openImage from '../../../shared/assets/image/checkOut/open.png';
 import closeImage from '../../../shared/assets/image/checkOut/close.png';
 import { useTranslation } from 'react-i18next';
-import styles from '../styles.module.scss';
-import { CheckoutAddressInformation } from '../../checkoutAddressInformation';
-import { useAppSelector } from '../../../store/store.ts';
+import styles from '../../../features/checkoutTabs/ui/styles.module.scss';
 import { FC, useEffect, useState } from 'react';
-import { useCheckoutActions } from '../../../store/checkout/checkout.slice.ts';
-import { Tabs } from '../tabs';
+import { useCheckoutActions } from '../../../pages/checkoutPage/model/slice/checkout.slice.ts';
+import { CheckoutTabs } from '../../../features/checkoutTabs';
+import { CheckoutAddressInformation } from '../../../features/checkoutAddressInformation';
+import { useCheckout } from '../../../pages/checkoutPage/model/selectors/getCheckout.ts';
+import { useUser } from '../../../pages/profile/model/selectors/getUser.ts';
 
 export const CheckoutDeliveryAccordion: FC = () => {
   const { t } = useTranslation();
-  const user = useAppSelector((state) => state.user);
+  const user = useUser();
   const [isActive, setIsActive] = useState<boolean>(false);
   const { resetAllState } = useCheckoutActions();
-  const checkout = useAppSelector((state) => state.checkout);
+  const checkout = useCheckout();
 
   useEffect(() => {}, [checkout]);
 
@@ -43,7 +44,7 @@ export const CheckoutDeliveryAccordion: FC = () => {
           </DisclosureButton>
           <DisclosurePanel className={styles.content}>
             {isActive && <CheckoutAddressInformation />}
-            {!isActive && <Tabs setIsActive={setIsActive} />}
+            {!isActive && <CheckoutTabs setIsActive={setIsActive} />}
           </DisclosurePanel>
         </>
       )}

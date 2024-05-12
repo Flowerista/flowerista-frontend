@@ -2,20 +2,20 @@ import s from './styles.module.scss';
 import { NavBar } from './NavBar';
 import { Logo } from './Logo';
 import { HeaderButton } from './HeaderButton';
-import { CartIcon } from '../../shared/ui/parametersMenu/CartIcon';
+import { CartIcon } from '../cartIcon';
 import { Link } from 'react-router-dom';
 
 import { BsFillPersonFill } from 'react-icons/bs';
-import { Search } from '../../shared/ui/parametersMenu/Search';
-import { Languages } from '../../shared/ui/parametersMenu/Languages';
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { CartModal } from '../../shared/ui/modals/CartModal/CartModal.tsx';
+import { CartModal } from '../../entities/cartModal';
 import {
   getRouteLogin,
   getRouteProfile,
   getRouteRegistration
 } from '../../shared/consts/router.ts';
+import { Languages } from '../../features/Languages';
+import { Search } from '../../entities/search';
 
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);

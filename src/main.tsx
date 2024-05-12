@@ -1,37 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './app/styles/index.scss';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { persistor, store } from './store/store';
-import { PersistGate } from 'redux-persist/integration/react';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { PayPalScriptProvider } from '@paypal/react-paypal-js';
-import { PayPalScriptOptions } from '@paypal/paypal-js';
 import AppRouter from './app/providers/router/ui/AppRouter.tsx';
 import { ErrorBoundary } from './app/providers/ErrorBoundary';
-
-const initialOptions: PayPalScriptOptions = {
-  clientId: `${import.meta.env.VITE_PAYPAL_ID}`,
-  currency: 'USD',
-  intent: 'capture'
-};
+import { PayPalProvider } from './app/providers/PayPalProvider';
+import { LocalizationProvider } from './app/providers/LocalizationProvider';
+import { StoreProvider } from './app/providers/StoreProvider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <PayPalScriptProvider options={initialOptions}>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <ErrorBoundary>
-                <AppRouter />
-              </ErrorBoundary>
-            </LocalizationProvider>
-          </PersistGate>
-        </Provider>
-      </PayPalScriptProvider>
+      <StoreProvider>
+        <PayPalProvider>
+          <LocalizationProvider>
+            <ErrorBoundary>
+              <AppRouter />
+            </ErrorBoundary>
+          </LocalizationProvider>
+        </PayPalProvider>
+      </StoreProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

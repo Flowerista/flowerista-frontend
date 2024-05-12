@@ -1,6 +1,6 @@
-import { ICartItem } from '../../../store/cart/cart.slice.ts';
+import { InterfaceCardItem } from '../../../features/card/model/types/IntefaceCardItem.ts';
 
-export const getTotalPrice = (cart: ICartItem[]) => {
+export const getTotalPrice = (cart: InterfaceCardItem[]) => {
   if (cart.length > 0) {
     return cart
       .map(

@@ -3,25 +3,22 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import {
-  EmailInput,
-  Form,
-  FormLink,
-  InputsWrapper
-} from '../../../shared/ui/appForm';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
-
-import { RestoringAccessSchema } from '../../../shared/lib/validations';
+import { Title } from '../../../shared/ui/Title';
 
 import Flower from '../../../shared/assets/image/restoring_access/restoring_access.png';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useResetPasswordMutation } from '../../../services/AuthService/resetPassword/resetPassword.ts';
+import { useResetPasswordMutation } from '../model/api/resetPassword/resetPassword.ts';
 import {
   getRouteLogin,
   getRouteRestoringAccessSuccess
 } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
+import { InputsWrapper } from '../../../shared/ui/InputsWrapper';
+import { Form } from '../../../shared/ui/form';
+import { EmailInput } from '../../../shared/ui/emailInput';
+import { FormLink } from '../../../shared/ui/FormLink';
+import { RestoringAccessSchema } from '../model/validators/RestoringAccessSchema.ts';
 
 interface Inputs {
   email: string;

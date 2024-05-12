@@ -2,9 +2,6 @@ import { FC, Fragment, useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { useAppSelector } from '../../../store/store.ts';
-
-import { Loader } from '../../../shared/ui/Loading';
 import { SectionFlower } from '../../../widgets/sectionFlower/SectionFlower.tsx';
 
 import { ISize } from '../../../shared/types/flower.ts';
@@ -14,10 +11,10 @@ import styles from './styles.module.scss';
 import { BsArrowRight } from 'react-icons/bs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import { useGetBouqueteById } from '../../../services/bouquete-api/getBouqueteById/getBouqueteById.ts';
-import { ICartItem, useCartActions } from '../../../store/cart/cart.slice.ts';
-import { useModalActions } from '../../../store/modals/modals.slice.ts';
-import { useRecentlyViewedActions } from '../../../store/recentlyViewed/recentlyViewed.slice.ts';
+import { useGetBouqueteById } from '../model/api/getBouqueteById/getBouqueteById.ts';
+import { useCartActions } from '../../../entities/cart/model/slice/cart.slice.ts';
+import { useModalActions } from '../../../entities/modals/model/slice/modals.slice.ts';
+import { useRecentlyViewedActions } from '../../../entities/recentlyViewed/model/slice/recentlyViewed.slice.ts';
 
 import { Radio, RadioGroup } from '@headlessui/react';
 import second from '../../../shared/assets/image/productItem/second_flower.png';
@@ -28,7 +25,10 @@ import {
   getRouteDeliveryAndPayment,
   getRouteHome
 } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
+import { InterfaceCardItem } from '../../../features/card/model/types/IntefaceCardItem.ts';
+import { Loader } from '../../../shared/ui/loading';
+import { useRecentlyViewed } from '../../../entities/recentlyViewed/model/selectors/getRecentlyViewed.ts';
 
 export interface IProductPage {}
 
@@ -41,7 +41,7 @@ const ProductPage: FC<IProductPage> = () => {
   const { addCartItem } = useCartActions();
   const { setCartModalOpen } = useModalActions();
   const { addToRecentlyViewed } = useRecentlyViewedActions();
-  const { recentlyViewed } = useAppSelector((state) => state.recentlyViewed);
+  const recentlyViewed = useRecentlyViewed().recentlyViewed;
 
   const [selectedSize, setSelectedSize] = useState<ISize | null>(null);
 
@@ -49,7 +49,7 @@ const ProductPage: FC<IProductPage> = () => {
     if (data && productId && selectedSize) {
       const { id, name, imageUrls, sizes } = data;
       const cartID = generateCartID(id, selectedSize.size);
-      const flower: ICartItem = {
+      const flower: InterfaceCardItem = {
         cartID,
         id,
         name,

@@ -3,14 +3,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import classNames from 'classnames';
 
-import { Card } from '../../shared/ui/Card/Card.tsx';
-import { IFlowerCard } from '../../shared/types/flower.ts';
+import { Card } from '../../features/card';
 
 import styles from './styles.module.scss';
 import { useResize } from '../../shared/lib/hooks/useResize.ts';
+import { InterfaceFlowerCard } from '../../features/card/model/types/InterfaceFlowerCard.ts';
 
 export interface ISectionsFlower {
-  data: IFlowerCard[] | undefined;
+  data: InterfaceFlowerCard[] | undefined;
   style?: CSSProperties;
   className?: string;
   pagination?: boolean;

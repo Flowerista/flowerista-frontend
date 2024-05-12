@@ -2,27 +2,27 @@ import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { CheckOutHeader } from '../../../widgets/checkoutHeader';
 import { CheckOutFooter } from '../../../widgets/checkoutFooter';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
+import { Title } from '../../../shared/ui/Title';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../../../store/store.ts';
 import { getTotalPrice } from '../../../shared/lib/helpers';
 import { CheckoutUserInformation } from '../../../widgets/checkoutUserInformation';
 import { CheckOutUserInformationUnregistered } from '../../../widgets/checkoutUserInformationUnregistered';
-import { CheckoutModal } from '../../../shared/ui/modals/checkoutModal';
 import { CheckoutPaymentAccordion } from '../../../widgets/accordions/CheckoutPaymentAccordion';
 import { CheckoutDeliveryAccordion } from '../../../widgets/accordions/CheckoutDeliveryAccordion';
-import { useCheckoutActions } from '../../../store/checkout/checkout.slice.ts';
-import { Cart } from '../../../shared/ui/cart/Cart/Cart.tsx';
+import { useCheckoutActions } from '../model/slice/checkout.slice.ts';
+import { Cart } from '../../../widgets/cart';
+import { CheckoutModal } from '../../../widgets/checkoutModal';
+import { useUser } from '../../profile/model/selectors/getUser.ts';
+import { useCart } from '../../../entities/cart/model/selectors/getCart/getCart.ts';
 
-export interface ICheckOutPage {}
-
-const CheckoutPage: FC<ICheckOutPage> = () => {
+const CheckoutPage: FC = () => {
   const { t } = useTranslation();
-  const { cart } = useAppSelector((store) => store.cart);
+  const cart = useCart();
+
   const totalPrice = getTotalPrice(cart);
   const [isShow, setIsShow] = useState<boolean>(false);
   const { resetAllState } = useCheckoutActions();
-  const user = useAppSelector((state) => state.user.user);
+  const user = useUser();
 
   useEffect(() => {
     return () => {

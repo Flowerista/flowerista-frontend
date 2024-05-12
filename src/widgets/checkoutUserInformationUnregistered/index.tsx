@@ -7,9 +7,7 @@ import {
   getRouteRegistration
 } from '../../shared/consts/router.ts';
 
-export interface IUnregistered {}
-
-export const CheckOutUserInformationUnregistered: FC<IUnregistered> = () => {
+export const CheckOutUserInformationUnregistered: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.Unregistered}>

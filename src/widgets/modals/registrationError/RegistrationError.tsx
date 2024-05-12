@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Modal from '../../../shared/ui/modals/Modal.tsx';
 
 import styles from './styles.module.scss';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Title } from '../../../shared/ui/Title';
+import { Button } from '../../../shared/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getRouteHome } from '../../../shared/consts/router.ts';
+import { Modal } from '../../../shared/ui/modal';
 
 interface RegistrationErrorProps {
   isOpen: boolean;

@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { AboutUs } from '../../../widgets/homeAboutUs/AboutUs.tsx';
 import { Reviews } from '../../../widgets/reviews/Reviews.tsx';
 import { HomeSwiper } from '../../../widgets/homeSwiper';
-import { CatalogBox } from '../../../shared/ui/CatalogBox';
 import styles from './styles.module.scss';
-import { Bestsellers } from '../../../store/bestsellers/Bestsellers.tsx';
-import { Sale } from '../../../store/sale/Sale.tsx';
+import { Bestsellers } from '../../../widgets/bestsellers';
+import { Sale } from '../../../widgets/sale';
 import { useTranslation } from 'react-i18next';
+import { CatalogBox } from '../../../widgets/catalogBox';
 
 const HomePage: FC = () => {
   const { t } = useTranslation();

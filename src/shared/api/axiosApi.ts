@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { AuthResponse } from '../types/AuthResponse.ts';
+import { AuthResponseInterface } from '../../pages/login/model/types/AuthResponseInterface.ts';
 
 const $api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
@@ -26,7 +26,7 @@ $api.interceptors.response.use(
       // @ts-ignore
       originalRequest._isRetry = true;
       try {
-        const response = await axios.post<AuthResponse>(
+        const response = await axios.post<AuthResponseInterface>(
           `${import.meta.env.VITE_API_URL}/api/auth/refresh-token`,
           {},
           {

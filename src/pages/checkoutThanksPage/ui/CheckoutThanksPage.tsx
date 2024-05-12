@@ -2,29 +2,26 @@ import { FC, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { CheckOutFooter } from '../../../widgets/checkoutFooter';
 import { SecondHeader } from '../../../widgets/secondHeader';
-import { useAppSelector } from '../../../store/store.ts';
 import flower from '../../../shared/assets/image/checkOut/thanks_you_flower.png';
 import { useNavigate } from 'react-router-dom';
 
-import { useCartActions } from '../../../store/cart/cart.slice.ts';
+import { useCartActions } from '../../../entities/cart/model/slice/cart.slice.ts';
 import {
   getRouteCatalog,
   getRouteHome
 } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
 
 export interface ICheckOutThanksPage {}
 
 const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
-  const orderId = useAppSelector((state) => state.checkoutOrderId.orderId);
   const navigation = useNavigate();
   const { cleanCart } = useCartActions();
 
   useEffect(() => {
-    cleanCart();
-    // return () => {
-    // 	setOrderId(0)
-    // };
+    return () => {
+      cleanCart();
+    };
   }, [cleanCart]);
 
   return (
@@ -37,7 +34,9 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
               <h1>Thank you </h1>
               <h1>For choosing Us!</h1>
             </div>
-            <p>We have received your order № {orderId}.</p>
+            <p>
+              We have received your order № {localStorage.getItem('orderId')}.
+            </p>
             <p>A confirmation email has been sent to your email address.</p>
             <span className={styles.span}>
               Our manager will contact you soon.
@@ -47,6 +46,7 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
                 <Button
                   onClick={() => {
                     navigation(getRouteCatalog());
+                    localStorage.removeItem('orderId');
                   }}
                   text={'Go to Catalog '}
                 />
@@ -55,6 +55,7 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
                 <Button
                   onClick={() => {
                     navigation(getRouteHome());
+                    localStorage.removeItem('orderId');
                   }}
                   colorMode={'white'}
                   text={'Go to main page'}

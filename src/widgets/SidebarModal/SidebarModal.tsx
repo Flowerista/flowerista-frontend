@@ -1,17 +1,17 @@
 import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from 'react';
 import classNames from 'classnames';
-import { useAppSelector } from '../../store/store.ts';
 import { BsXLg } from 'react-icons/bs';
-import { useModalActions } from '../../store/modals/modals.slice.ts';
+import { useModalActions } from '../../entities/modals/model/slice/modals.slice.ts';
 
 import styles from './styles.module.scss';
 import { Sidebar } from '../Sidebar/Sidebar.tsx';
+import { useModals } from '../../entities/modals/model/selectors/getModals.ts';
 
 interface SidebarModalProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 
 export const SidebarModal: FC<SidebarModalProps> = ({ className }) => {
-  const { modals } = useAppSelector((state) => state.modals);
+  const modals = useModals();
   const { setSidebarModalOpen } = useModalActions();
   const onClose = () => {
     setSidebarModalOpen(false);

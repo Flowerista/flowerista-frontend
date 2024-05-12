@@ -3,29 +3,27 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { LoginSchema } from '../../../shared/lib/validations';
-import {
-  EmailInput,
-  Form,
-  FormLink,
-  InputsWrapper,
-  PasswordInput
-} from '../../../shared/ui/appForm';
-import { Title } from '../../../shared/ui/Title/Title.tsx';
+import { Title } from '../../../shared/ui/Title';
 
 import Flower from '../../../shared/assets/image/login/login_flower.png';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
-import { useLazyGetCheckEmailQuery } from '../../../services/AuthService/checkEmail/checkEmail.ts';
-import { useLoginMutation } from '../../../services/AuthService/login/login.ts';
+import { useLazyGetCheckEmailQuery } from '../../registration/api/checkEmail/checkEmail.ts';
+import { useLoginMutation } from '../model/api/login/login.ts';
 
-import { useProfileActions } from '../../../store/profile/profile.slice.ts';
+import { useProfileActions } from '../../profile/model/slice/profile/profile.slice.ts';
 import {
   getRouteProfile,
   getRouteRegistration,
   getRouteRestoringAccess
 } from '../../../shared/consts/router.ts';
-import { Button } from '../../../shared/ui/Buttons/Button.tsx';
+import { Button } from '../../../shared/ui/button';
+import { Form } from '../../../shared/ui/form';
+import { InputsWrapper } from '../../../shared/ui/InputsWrapper';
+import { EmailInput } from '../../../shared/ui/emailInput';
+import { PasswordInput } from '../../../shared/ui/PasswordInput';
+import { FormLink } from '../../../shared/ui/FormLink';
+import { LoginSchema } from '../model/validators/LoginSchema.ts';
 
 type Inputs = {
   password: string;
@@ -53,7 +51,7 @@ const Login: FC = () => {
     const { data: checkedEmail } = await checkEmail(data.email);
     if (!checkedEmail) {
       setError('email', {
-        type: 'chackEmail',
+        type: 'checkEmail',
         message: 'This email is not registered'
       });
     } else {
