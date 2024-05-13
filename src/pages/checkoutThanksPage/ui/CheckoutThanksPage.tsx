@@ -11,12 +11,14 @@ import {
   getRouteHome
 } from '../../../shared/consts/router.ts';
 import { Button } from '../../../shared/ui/button';
+import { useTranslation } from 'react-i18next';
 
 export interface ICheckOutThanksPage {}
 
 const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
   const navigation = useNavigate();
   const { cleanCart } = useCartActions();
+  const { t } = useTranslation();
 
   useEffect(() => {
     return () => {
@@ -31,16 +33,15 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
         <main className={styles.main}>
           <div className={styles.info}>
             <div className={styles.header}>
-              <h1>Thank you </h1>
-              <h1>For choosing Us!</h1>
+              <h1>{t('thanks.title')} </h1>
+              <h1>{t('thanks.title2')}</h1>
             </div>
             <p>
-              We have received your order № {localStorage.getItem('orderId')}.
+              {t('thanks.order')}
+              {localStorage.getItem('orderId')}.
             </p>
-            <p>A confirmation email has been sent to your email address.</p>
-            <span className={styles.span}>
-              Our manager will contact you soon.
-            </span>
+            <p>{t('thanks.text')}</p>
+            <span className={styles.span}>{t('thanks.text2')}</span>
             <div className={styles.buttons}>
               <form target={'_top'}>
                 <Button
@@ -48,7 +49,7 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
                     navigation(getRouteCatalog());
                     localStorage.removeItem('orderId');
                   }}
-                  text={'Go to Catalog '}
+                  text={t('thanks.btn')}
                 />
               </form>
               <form target={'_top'}>
@@ -58,7 +59,7 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
                     localStorage.removeItem('orderId');
                   }}
                   colorMode={'white'}
-                  text={'Go to main page'}
+                  text={t('thanks.btn2')}
                 />
               </form>
             </div>

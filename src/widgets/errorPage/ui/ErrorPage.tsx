@@ -1,30 +1,28 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
-import { SecondHeader } from '../../../widgets/secondHeader';
-import { CheckOutFooter } from '../../../widgets/checkoutFooter';
+import { SecondHeader } from '../../secondHeader';
+import { CheckOutFooter } from '../../checkoutFooter';
 import errorImage from '../../../shared/assets/image/checkOut/error.png';
-import { useNavigate } from 'react-router-dom';
-import { getRouteCheckOut } from '../../../shared/consts/router.ts';
 import { Button } from '../../../shared/ui/button';
 import { useTranslation } from 'react-i18next';
 
-export const PaymentErrorPage: FC = () => {
-  const navigation = useNavigate();
+export const ErrorPage: FC = () => {
   const { t } = useTranslation();
+  const reloadPage = () => {
+    location.reload();
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <SecondHeader />
         <main className={styles.main}>
           <div className={styles.info}>
-            <h1>{t('errorPayment.title')}</h1>
-            <h1>{t('errorPayment.text1')}</h1>
-            <p>{t('errorPayment.text2')}</p>
+            <h1>{t('error.title')}</h1>
+            <h1>{t('error.text1')}</h1>
+            <p>{t('error.text2')}</p>
             <form target={'_top'} className={styles.button}>
-              <Button
-                onClick={() => navigation(getRouteCheckOut())}
-                text={t('errorPayment.text3')}
-              />
+              <Button onClick={reloadPage} text={t('error.text3')} />
             </form>
           </div>
           <div className={styles.image}>

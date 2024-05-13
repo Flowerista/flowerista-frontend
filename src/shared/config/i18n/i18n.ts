@@ -34,6 +34,14 @@ import { inputsEn } from './en/inputs/inputs.ts';
 import { inputsUa } from './ua/inputs';
 import { MobileFiltersEn } from './en/mobileFilters/mobileFilters.ts';
 import { MobileFiltersUa } from './ua/mobileFilters/mobileFilters.ts';
+import { errorPageEn } from './en/errorPage/errorPageEn.ts';
+import { errorPageUa } from './ua/errorPage/errorPageUa.ts';
+import { errorPaymentPageUa } from './ua/errorPaymentPage/errorPaymentPageUa.ts';
+import { errorPaymentPageEn } from './en/errorPaymentPage/errorPaymentPageEn.ts';
+import { thanksPageEn } from './en/thanksPage/thanksPageEn.ts';
+import { thanksPageUA } from './ua/thanksPage/thanksPageUA.ts';
+import { pendingUa } from './ua/pending/pendingUa.ts';
+import { pendingEn } from './en/pending/pendingEn.ts';
 
 const resources = {
   [Language.EN]: {
@@ -53,7 +61,11 @@ const resources = {
       profile: profileEn,
       checkout: checkoutPageEn,
       inputs: inputsEn,
-      mobileFilters: MobileFiltersEn
+      mobileFilters: MobileFiltersEn,
+      error: errorPageEn,
+      errorPayment: errorPaymentPageEn,
+      thanks: thanksPageEn,
+      pending: pendingEn
     }
   },
   [Language.UA]: {
@@ -73,7 +85,11 @@ const resources = {
       profile: profileUa,
       checkout: checkoutPageUa,
       inputs: inputsUa,
-      mobileFilters: MobileFiltersUa
+      mobileFilters: MobileFiltersUa,
+      error: errorPageUa,
+      errorPayment: errorPaymentPageUa,
+      thanks: thanksPageUA,
+      pending: pendingUa
     }
   }
 };

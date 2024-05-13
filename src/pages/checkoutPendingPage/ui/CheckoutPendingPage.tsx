@@ -10,6 +10,7 @@ import {
   getRouteErrorAfterPayment,
   getRouteThanksYou
 } from '../../../shared/consts/router.ts';
+import { useTranslation } from 'react-i18next';
 
 export interface ICheckOutPendingPage {}
 
@@ -17,6 +18,7 @@ const CheckoutPendingPage: FC<ICheckOutPendingPage> = () => {
   const token = new URLSearchParams(window.location.search).get('token');
   const navigate = useNavigate();
   const [createCapture, { data }] = usePaymentCaptureMutation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (token) {
@@ -41,8 +43,8 @@ const CheckoutPendingPage: FC<ICheckOutPendingPage> = () => {
       <div className={styles.container}>
         <SecondHeader />
         <div className={styles.main}>
-          <h1>Your payment is now being processed</h1>
-          <p>Please wait a few seconds to confirm your payment.</p>
+          <h1>{t('pending.text')}</h1>
+          <p>{t('pending.text1')}</p>
           <div className={styles.image}>
             <img src={loader} alt="" />
           </div>

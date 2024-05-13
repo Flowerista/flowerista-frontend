@@ -10,6 +10,7 @@ import { CatalogBox } from '../../../widgets/catalogBox';
 
 const HomePage: FC = () => {
   const { t } = useTranslation();
+
   return (
     <main className={styles.home}>
       <HomeSwiper />

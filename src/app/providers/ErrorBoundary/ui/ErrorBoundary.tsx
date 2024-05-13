@@ -1,5 +1,5 @@
 import React, { ErrorInfo, ReactNode, Suspense } from 'react';
-import { PaymentErrorPage } from '../../../../pages/paymentErrorPage';
+import { ErrorPage } from '../../../../widgets/errorPage';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -37,7 +37,7 @@ class ErrorBoundary extends React.Component<
       return (
         <Suspense fallback="">
           {/*потім поміняти на сторінку на нормальну сторінку еррор*/}
-          <PaymentErrorPage />
+          <ErrorPage />
         </Suspense>
       );
     }

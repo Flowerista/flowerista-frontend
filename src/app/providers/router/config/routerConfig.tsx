@@ -1,9 +1,9 @@
 import { CatalogPage } from '../../../../pages/catalogPage';
-import { MainLayout } from '../../../layouts/MainLayout';
+import { MainLayout } from '../../../../shared/layouts/MainLayout';
 import { DeliveryAndPaymentPage } from '../../../../pages/deliveryAndPaymentPage';
 import { HomePage } from '../../../../pages/homePage';
 import { AboutUs } from '../../../../pages/aboutUs';
-import { SecondLayout } from '../../../layouts/SecondLayout';
+import { SecondLayout } from '../../../../shared/layouts/SecondLayout';
 import { Login } from '../../../../pages/login';
 import { Registration } from '../../../../pages/registration';
 import { RestoringAccess } from '../../../../pages/restoringAccess';
@@ -34,7 +34,7 @@ import {
   getRouteThanksYou
 } from '../../../../shared/consts/router.ts';
 import { AppRoutesProps } from '../../../../shared/types/router.ts';
-import { RestoringAccessSuccess } from '../../../../pages/restoringAccessSuccess/ui/RestoringAccessSuccess.tsx';
+import { RestoringAccessSuccess } from '../../../../pages/restoringAccessSuccess';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Catalog]: {
