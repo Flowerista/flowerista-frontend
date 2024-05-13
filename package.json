@@ -72,8 +72,7 @@
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "prettier --list-different --write",
-      "eslint \"**/*.{ts,tsx}\" --fix",
-      "npx stylelint \"**/*.scss\" --fix"
+      "eslint \"**/*.{ts,tsx}\" --fix"
     ]
   }
 }
