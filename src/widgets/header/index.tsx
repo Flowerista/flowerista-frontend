@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { CartModal } from '../../entities/cartModal';
+import { CartModal } from '../../entities/cart';
 import {
   getRouteLogin,
   getRouteProfile,
   getRouteRegistration
 } from '../../shared/consts/router.ts';
 import { Languages } from '../../features/Languages';
-import { Search } from '../../entities/search';
+import { Search } from '../../features/search';
 
 export const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 
 import { CartIcon } from '../../../../widgets/cartIcon';
-import { CartModal } from '../../../../entities/cartModal';
+import { CartModal } from '../../../../entities/cart';
 import { getRouteProfile } from '../../../consts/router.ts';
 import { Languages } from '../../../../features/Languages';
-import { Search } from '../../../../entities/search';
+import { Search } from '../../../../features/search';
 
 export const ParametersMenu: FC = () => {
   return (

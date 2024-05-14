@@ -3,8 +3,10 @@ import styles from './styles.module.scss';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 import { useCheckoutActions } from '../../../pages/checkoutPage/model/slice/checkout.slice.ts';
-import { CheckoutPickUpFromTheStore } from '../../../entities/checkoutPickUpFromTheStore';
-import { CheckoutPickUpByDelivery } from '../../../entities/checkoutPickUpByDelivery';
+import {
+  CheckoutPickUpByDelivery,
+  CheckoutPickUpFromTheStore
+} from '../../../entities/checkout';
 
 interface InterfaceCheckoutTabs {
   setIsActive: (isActive: boolean) => void;

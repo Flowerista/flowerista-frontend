@@ -13,9 +13,8 @@ import {
   TabPanels
 } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
-import { PayWithPayPal } from '../../../entities/payWithPayPal';
-import { PayWithCash } from '../../../entities/payWithCash';
-import { useCart } from '../../../entities/cart/model/selectors/getCart/getCart.ts';
+import { PayWithCash, PayWithPayPal } from '../../../entities/payment';
+import { useCart } from '../../../entities/cart';
 import { useCheckout } from '../../../pages/checkoutPage/model/selectors/getCheckout.ts';
 
 export const CheckoutPaymentAccordion: FC = () => {

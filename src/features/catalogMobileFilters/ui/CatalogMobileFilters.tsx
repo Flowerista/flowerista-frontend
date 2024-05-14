@@ -3,8 +3,7 @@ import styles from './styles.module.scss';
 import openImage from '../../../shared/assets/image/catalog/mobile/sorting_open.png';
 import { useTranslation } from 'react-i18next';
 import filtersOpen from '../../../shared/assets/image/catalog/mobile/filters_open.png';
-import { MobileSorting } from '../../../entities/mobileSorting';
-import { MobileFilters } from '../../../entities/mobileFilters';
+import { MobileFilters, MobileSorting } from '../../../entities/catalog';
 
 export interface IMobileFilters {
   min: number;
