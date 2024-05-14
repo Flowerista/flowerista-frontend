@@ -124,15 +124,14 @@ const ProductPage: FC<IProductPage> = () => {
             spaceBetween={0}
             modules={[Pagination]}
             slidesPerView={1}
+            nested={true}
           >
             {data &&
               data.imageUrls &&
               Object.values(data.imageUrls).map((imageUrl, index) => (
-                <>
-                  <SwiperSlide className={styles.sectionSlider} key={index}>
-                    <img src={imageUrl} alt="flowers" />
-                  </SwiperSlide>
-                </>
+                <SwiperSlide className={styles.sectionSlider} key={index}>
+                  <img src={imageUrl} alt="flowers" />
+                </SwiperSlide>
               ))}
           </Swiper>
         </div>
