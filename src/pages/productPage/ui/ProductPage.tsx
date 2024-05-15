@@ -29,6 +29,7 @@ import { Button } from '../../../shared/ui/button';
 import { InterfaceCardItem } from '../../../features/card/model/types/IntefaceCardItem.ts';
 import { Loader } from '../../../shared/ui/loading';
 import { useRecentlyViewed } from '../../../entities/recentlyViewed/model/selectors/getRecentlyViewed.ts';
+import 'swiper/scss';
 
 export interface IProductPage {}
 
