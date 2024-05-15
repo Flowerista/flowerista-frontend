@@ -12,7 +12,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { useGetBouqueteById } from '../model/api/getBouqueteById/getBouqueteById.ts';
-import { useCartActions } from '../../../entities/cart/model/slice/cart.slice.ts';
+import { useCartActions } from '../../../entities/cart';
 import { useModalActions } from '../../../entities/modals/model/slice/modals.slice.ts';
 import { useRecentlyViewedActions } from '../../../entities/recentlyViewed/model/slice/recentlyViewed.slice.ts';
 
@@ -20,11 +20,13 @@ import { Radio, RadioGroup } from '@headlessui/react';
 import second from '../../../shared/assets/image/productItem/second_flower.png';
 import first from '../../../shared/assets/image/productItem/first_flower.png';
 import { normalizeWord } from '../../../shared/lib/helpers/normalizeWord.ts';
+
 import {
   getRouteCatalog,
   getRouteDeliveryAndPayment,
   getRouteHome
 } from '../../../shared/consts/router.ts';
+
 import { Button } from '../../../shared/ui/button';
 import { InterfaceCardItem } from '../../../features/card/model/types/IntefaceCardItem.ts';
 import { Loader } from '../../../shared/ui/loading';
@@ -37,7 +39,6 @@ const ProductPage: FC<IProductPage> = () => {
   const { productId } = useParams<{ productId: string }>();
   const { data, isLoading, error } = useGetBouqueteById(`${productId}`);
   const [quantity, setQuantity] = useState<number>(1);
-
   const { addCartItem } = useCartActions();
   const { setCartModalOpen } = useModalActions();
   const { addToRecentlyViewed } = useRecentlyViewedActions();
@@ -84,6 +85,7 @@ const ProductPage: FC<IProductPage> = () => {
       });
     }
   }, [addToRecentlyViewed, data]);
+
   const increaseQuantity = useCallback(() => {
     if (data && quantity < data.stockQuantity) {
       setQuantity((prevQuantity) => prevQuantity + 1);

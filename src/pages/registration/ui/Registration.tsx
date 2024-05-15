@@ -3,8 +3,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Title } from '../../../shared/ui/Title';
-import RegistrationCompleted from '../../../widgets/modals/registrationCompleted/RegistrationCompleted.tsx';
-import RegistrationError from '../../../widgets/modals/registrationError/RegistrationError.tsx';
 
 import Flower from '../../../shared/assets/image/registration/flower.png';
 import styles from './styles.module.scss';
@@ -25,6 +23,10 @@ import { PasswordInput } from '../../../shared/ui/PasswordInput';
 import { FormLink } from '../../../shared/ui/FormLink';
 import { RegisterInterface } from '../types/registerInterface.ts';
 import { RegisterSchema } from '../validators/registerSchema.ts';
+import {
+  RegistrationCompleted,
+  RegistrationError
+} from '../../../widgets/modals';
 
 type Inputs = {
   name: string;

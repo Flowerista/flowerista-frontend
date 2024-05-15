@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './styles.module.scss';
-import { Logo } from '../../../widgets/header/Logo';
+import { Logo } from '../../../widgets/header/ui/Logo';
 import { useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';

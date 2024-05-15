@@ -7,15 +7,15 @@ import { SidebarModal } from '../../../widgets/SidebarModal/SidebarModal.tsx';
 import { useModalActions } from '../../../entities/modals/model/slice/modals.slice.ts';
 import { TabGroup, TabPanel, TabPanels } from '@headlessui/react';
 import { profileLinks } from '../../../shared/consts/profileLinks.ts';
-import ProfileWishlist from '../../../widgets/profileWishlist/ProfileWishlist.tsx';
 import { useGetProfile } from '../model/api/getProfile/getProfile.ts';
 import { useGetOrderHistory } from '../model/api/getOrderHistory/getOrderHistory.ts';
 import { useGetWishlistQuery } from '../../../features/card/model/api/getWishlist/getWishlist.ts';
 import { useProfileActions } from '../model/slice/profile/profile.slice.ts';
 import { getRouteHome } from '../../../shared/consts/router.ts';
-import ProfileOrders from '../../../widgets/profileOrders/ProfileOrders.tsx';
 import { ProfilePersonalInformation } from '../../../widgets/profilePersonalInformation';
 import { Loader } from '../../../shared/ui/loading';
+import { ProfileOrders } from '../../../widgets/profileOrders/ProfileOrders.tsx';
+import { ProfileWishlist } from '../../../widgets/profileWishlist';
 
 const ProfilePage: FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
