@@ -1,6 +1,6 @@
 import { FC, memo, useEffect, useMemo, useState } from 'react';
 import styles from './styles.module.scss';
-import { Pagination } from '../../../widgets/Pagination/Pagination.tsx';
+import { Pagination } from '../../../widgets/pagination';
 import { SkeletonCard } from '../../../shared/ui/SkeletonCard';
 import { useDebounce } from '../../../shared/lib/hooks/useDebounce.tsx';
 import { Link } from 'react-router-dom';

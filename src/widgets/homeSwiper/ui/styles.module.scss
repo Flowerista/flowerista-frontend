@@ -1,0 +1,269 @@
+.swiper {
+	max-width: 1276px;
+}
+
+.slide {
+	width: 100%;
+	height: 420px;
+	&_1 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+		padding-top: 150px;
+		gap: 10px;
+		color: var(--brown);
+		background: url('../../../shared/assets/image/swiper/first.png') center (center/cover) no-repeat;
+		h3 {
+			font: var(--body-1-400);
+		}
+		p {
+			width: 271px;
+			font-family: var(--font-family-second);
+			font-size: 40px;
+			font-weight: 500;
+			line-height: 100%;
+		}
+	}
+	&_2 {
+		display: flex;
+		flex-direction: column;
+		color: var(--white);
+		.block_1 {
+			height: 168px;
+			object-fit: cover;
+		}
+		.block_2 {
+			flex: 1;
+			padding: 16px 35px 0 35px;
+			background-color: var(--rose);
+			text-align: center;
+			h2 {
+				font-family: var(--font-family-second);
+				font-size: 38px;
+				font-weight: 500;
+				line-height: 100%;
+				letter-spacing: normal;
+			}
+			p {
+				margin-top: 10px;
+				font: var(--body-2-400);
+				letter-spacing: 0.28px;
+			}
+		}
+	}
+	&_3 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+		padding: 130px 37px 0 37px;
+		gap: 10px;
+		color: var(--brown);
+		background: url('../../../shared/assets/image/swiper/fourth_swiper.png') center (center/cover) no-repeat;
+		h3 {
+			padding: 0;
+			font-family: var(--font-family-second);
+			font-size: 34px;
+			font-weight: 500;
+			line-height: 100%;
+		}
+		p {
+			font: var(--body-1-400);
+			letter-spacing: 0.28px;
+		}
+	}
+	&_4 {
+		display: flex;
+		flex-direction: column;
+		color: var(--white);
+		.block_1 {
+			height: 168px;
+			object-fit: cover;
+		}
+		.block_2 {
+			flex: 1;
+			padding: 16px 20px 0 20px;
+			background-color: var(--gold);
+			text-align: center;
+			h2 {
+				font-family: var(--font-family-second);
+				font-size: 36px;
+				font-weight: 500;
+				line-height: 100%;
+				letter-spacing: normal;
+			}
+			p {
+				margin-top: 10px;
+				font: var(--body-2-400);
+				letter-spacing: 0.28px;
+			}
+		}
+	}
+}
+
+.horizontalClass {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+	padding: 10px;
+}
+.bulletClass {
+    width: 3px;
+    height: 3px;
+	border-radius: 14px;
+	opacity: 0.5;
+    background-color: var(--white);
+}
+.bulletActiveClass {
+    width: 16px;
+    opacity: 1;
+    border-radius: 14px;
+}
+
+@media screen and (min-width: 375px) {
+	.slide {
+		&_1 {
+			padding-top: 143px;
+		}
+		&_2 {
+			.block_2 {
+				padding: 16px 60px 0 60px;
+				text-align: left;
+			}
+		}
+		&_3 {
+			padding: 166px 37px 0 37px;
+			h3 {
+				padding: 0 20px;
+			}
+		}
+		&_4 {
+			.block_2 {
+				padding: 16px 60px 0 60px;
+				text-align: left;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 500px) {
+}
+
+@media screen and (min-width: 768px) {
+	.slide {
+		&_1 {
+			padding-top: 156px;
+			gap: 0;
+			h3 {
+				font: var(--subtitle-2-400);
+				letter-spacing: 0.4px;
+			}
+			p {
+				width: auto;
+				font-size: 60px;
+			}
+		}
+		&_2 {
+			flex-direction: row;
+			.block_1 {
+				height: 100%;
+				width: 50%;
+			}
+			.block_2 {
+				padding: 125px 64px 0 19px;
+				h2 {
+					font-size: 44px;
+				}
+				p {
+					font: var(--body-1-500);
+					letter-spacing: 0.32px;
+				}
+			}
+		}
+		&_3 {
+			padding: 128px 37px 0 37px;
+			gap: 20px;
+			h3 {
+				padding: 0;
+				font-size: 60px;
+			}
+			p {
+				letter-spacing: 0.32px;
+			}
+		}
+		&_4 {
+			flex-direction: row-reverse;
+			.block_1 {
+				height: 100%;
+				width: 50%;
+			}
+			.block_2 {
+				padding: 129px 13px 0 70px;
+				h2 {
+					font-size: 40px;
+				}
+				p {
+					font: var(--body-1-500);
+					letter-spacing: 0.32px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1024px) {}
+
+@media screen and (min-width: 1276px) {
+	.slide {
+		height: 539px;
+		&_1 {
+			padding-top: 171px;
+			h3 {
+				font: var(--subtitle-1-400);
+				letter-spacing: 0.48px;
+			}
+			p {
+				font-size: 90px;
+			}
+		}
+		&_2 {
+			.block_2 {
+				padding: 166px 51px;
+				h2 {
+					font-size: 70px;
+				}
+				p {
+					margin-top: 10px;
+					width: 450px;
+				}
+			}
+		}
+		&_3 {
+			padding: 167.5px 300px;
+			h3 {
+				font-size: 80px;
+			}
+		}
+		&_4 {
+			.block_2 {
+				padding: 173px 26px 0 135px;
+				h2 {
+					font-size: 62px;
+				}
+				p {
+					margin-top: 10px;
+					width: 420px;
+					font: var(--body-1-400);
+				}
+			}
+		}
+	}
+
+	.bulletClass {
+		width: 40px;
+	}
+	.bulletActiveClass {
+		width: 40px;
+	}
+}

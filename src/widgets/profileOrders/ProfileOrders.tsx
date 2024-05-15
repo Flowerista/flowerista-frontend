@@ -14,7 +14,7 @@ import { getRouteProductId } from '../../shared/consts/router.ts';
 import { Button } from '../../shared/ui/button';
 import { OrderResponse } from '../../pages/profile/model/types/orderHistoryInterface.ts';
 
-const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
+export const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -224,5 +224,3 @@ const ProfileOrders: FC<{ order?: OrderResponse[] }> = ({ order }) => {
     </article>
   );
 };
-
-export default ProfileOrders;

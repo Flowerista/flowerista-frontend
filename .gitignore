@@ -25,3 +25,5 @@ package-lock.json
 
 .idea
 /.idea
+
+*storybook.log

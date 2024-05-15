@@ -5,7 +5,7 @@ import { BsBagFill, BsHeart, BsHeartFill } from 'react-icons/bs';
 import styles from './styles.module.scss';
 import { useGetWishlistQuery } from '../model/api/getWishlist/getWishlist.ts';
 import { useModalActions } from '../../../entities/modals/model/slice/modals.slice.ts';
-import { useCartActions } from '../../../entities/cart/model/slice/cart.slice.ts';
+import { useCartActions } from '../../../entities/cart';
 import { useAddWishlistMutation } from '../model/api/addCardToWishlist/addCardToWishlist.ts';
 import { useRemoveCardFromWishlist } from '../model/api/deleteFromWishlist/deleteFromWishlist.ts';
 import { generateCartID } from '../../../shared/lib/helpers';

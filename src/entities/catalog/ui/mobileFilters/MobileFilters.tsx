@@ -7,12 +7,12 @@ import { HeadlessDialog } from '../../../../shared/ui/headlessuiDialog';
 import { useGetFlowers } from '../../../../widgets/catalogFilters/model/api/getFlowers/getFlowers.ts';
 import { useGetColors } from '../../../../widgets/catalogFilters/model/api/getColors/getColors.ts';
 import { Button } from '../../../../shared/ui/button';
-import { SmallAccordion } from '../../../smallAccordion';
 import {
   useColorsIds,
   useFlowersIds
 } from '../../../../pages/catalogPage/model/selectors/getCatalog.ts';
 import { MobilePriceAccordion } from '../mobilePriceAccordion/MobilePriceAccordion.tsx';
+import { SmallAccordion } from '../smallAccordion/SmallAccordion.tsx';
 
 export interface IFilters {
   min: number;

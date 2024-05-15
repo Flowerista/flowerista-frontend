@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from '../../../../widgets/footer/ui/styles.module.scss';
-import { Logo } from '../../../../widgets/header/Logo';
+import { Logo } from '../../../../widgets/header/ui/Logo';
 import { Copyright } from '../../copyright';
 
 export const Name: FC = () => {
