@@ -1,68 +1,61 @@
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import classNames from 'classnames';
-
 import { Card } from '../../features/card';
-
-import styles from './styles.module.scss';
-import { useResize } from '../../shared/lib/hooks/useResize.ts';
 import { InterfaceFlowerCard } from '../../features/card/model/types/InterfaceFlowerCard.ts';
+import cn from 'classnames';
+import s from './styles.module.scss';
 
-export interface ISectionsFlower {
+export interface ISectionsFlower
+  extends DetailedHTMLProps<
+    HTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {
   data: InterfaceFlowerCard[] | undefined;
-  style?: CSSProperties;
-  className?: string;
   pagination?: boolean;
 }
 
 export const SectionFlower: FC<ISectionsFlower> = ({
   data,
-  style,
   className,
-  pagination = true
+  pagination = true,
+  ...otherProps
 }) => {
-  const { width } = useResize();
-
-  const [showSlide, setShowSlide] = useState(2);
-  const [gapSlide, setGapSlide] = useState(9);
-
-  useEffect(() => {
-    if (width >= 1276) {
-      setShowSlide(5);
-      setGapSlide(3);
-    } else if (width >= 1024) {
-      setShowSlide(4);
-      setGapSlide(20);
-    } else if (width >= 768) {
-      setShowSlide(3);
-      setGapSlide(20);
-    } else if (width >= 500) {
-      setShowSlide(3);
-      setGapSlide(9);
-    } else {
-      setShowSlide(2);
-      setGapSlide(9);
-    }
-  }, [width]);
-
   return (
-    <section className={classNames(styles.section, className)} style={style}>
-      <div className={styles.swiper}>
+    <section className={cn(s.section, className)} {...otherProps}>
+      <div className={s.swiper}>
         <Swiper
           pagination={{
             clickable: true,
-            bulletActiveClass: `${styles.bulletActiveClass}`,
-            bulletClass: `${styles.bulletClass}`,
-            horizontalClass: `${styles.horizontalClass}`
+            bulletActiveClass: `${s.bulletActiveClass}`,
+            bulletClass: `${s.bulletClass}`,
+            horizontalClass: `${s.horizontalClass}`
           }}
-          spaceBetween={gapSlide}
+          spaceBetween={9}
           modules={pagination ? [Pagination] : []}
-          slidesPerView={showSlide}
+          slidesPerView={2}
+          breakpoints={{
+            500: {
+              slidesPerView: 3,
+              spaceBetween: 9
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20
+            },
+            1276: {
+              slidesPerView: 5,
+              spaceBetween: 3
+            }
+          }}
         >
           {data &&
             data.map((item) => (
-              <SwiperSlide className={styles.sectionSlider} key={item.id}>
+              <SwiperSlide className={s.sectionSlider} key={item.id}>
                 <Card
                   id={item.id}
                   name={item.name}
