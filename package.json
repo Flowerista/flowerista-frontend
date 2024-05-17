@@ -43,6 +43,8 @@
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "test:ui": "npx loki test",
+    "test:ui:ok": "npx loki approve",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -74,6 +76,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
+    "loki": "^0.35.0",
     "prettier": "^3.2.5",
     "storybook": "^8.1.0",
     "storybook-addon-mock": "^5.0.0",
@@ -100,5 +103,25 @@
       "not dead",
       "not op_mini all"
     ]
+  },
+  "loki": {
+    "chromeSelector": "body > *",
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7",
+        "width": 375,
+        "height": 667,
+        "deviceScaleFactor": 2,
+        "mobile": true
+      }
+    }
   }
 }

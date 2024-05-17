@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CartModal } from './CartModal.tsx';
 import { StoreDecorator } from '../../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'entities/CartModal',
@@ -10,6 +11,11 @@ const meta = {
   },
   decorators: [
     StoreDecorator({
+      modals: {
+        modals: {
+          cartModalOpen: true
+        }
+      },
       cart: {
         cart: [
           {
@@ -51,7 +57,8 @@ const meta = {
           }
         ]
       }
-    })
+    }),
+    RouterDecorator
   ],
   tags: ['autodocs'],
   argTypes: {}

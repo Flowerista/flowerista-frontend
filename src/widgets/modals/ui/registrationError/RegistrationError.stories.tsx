@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { RegistrationError } from './RegistrationError.tsx';
+import { RouterDecorator } from '../../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/RegistrationError',
   component: RegistrationError,
+  decorators: [RouterDecorator],
   parameters: {
     layout: 'centered'
   },

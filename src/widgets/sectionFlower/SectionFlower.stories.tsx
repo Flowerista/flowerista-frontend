@@ -1,16 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SectionFlower } from './SectionFlower.tsx';
 import { StoreDecorator } from '../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
+import { storybookMockData } from '../../shared/config/storybook/storybookMockData/sotrybookMockData.ts';
 
 const meta = {
   title: 'widgets/SectionFlower',
   component: SectionFlower,
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
+    mockData: [storybookMockData.getUserWishlist()]
   },
   tags: ['autodocs'],
 
-  decorators: [StoreDecorator({})],
+  decorators: [StoreDecorator({}), RouterDecorator],
   argTypes: {}
 } satisfies Meta<typeof SectionFlower>;
 

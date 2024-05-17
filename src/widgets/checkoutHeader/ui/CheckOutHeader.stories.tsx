@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CheckOutHeader } from './CheckOutHeader.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/CheckOutHeader',
   component: CheckOutHeader,
+  decorators: [RouterDecorator],
   parameters: {
     layout: 'centered'
   },

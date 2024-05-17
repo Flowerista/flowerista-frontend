@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { Footer } from './Footer.tsx';
 import { StoreDecorator } from '../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/Footer',
@@ -11,6 +12,7 @@ const meta = {
   },
   tags: ['autodocs'],
   decorators: [
+    RouterDecorator,
     StoreDecorator({
       user: {
         user: {

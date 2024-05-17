@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SecondHeader } from './SecondHeader.tsx';
 import { StoreDecorator } from '../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/SecondHeader',
@@ -10,7 +11,7 @@ const meta = {
   },
   tags: ['autodocs'],
 
-  decorators: [StoreDecorator({})],
+  decorators: [StoreDecorator({}), RouterDecorator],
   argTypes: {}
 } satisfies Meta<typeof SecondHeader>;
 

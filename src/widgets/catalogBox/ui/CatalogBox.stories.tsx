@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CatalogBox } from './CatalogBox.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/CatalogBox',
   component: CatalogBox,
+  decorators: [RouterDecorator],
   parameters: {
     layout: 'centered'
   },

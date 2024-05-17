@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { FormLink } from './FormLink.tsx';
+import { RouterDecorator } from '../../../config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'shared/FormLink',
   component: FormLink,
+  decorators: [RouterDecorator],
   parameters: {
     layout: 'centered'
   },

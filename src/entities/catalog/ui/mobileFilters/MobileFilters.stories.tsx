@@ -2,12 +2,17 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MobileFilters } from './MobileFilters.tsx';
 import { StoreDecorator } from '../../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
 import { createRef } from 'react';
+import { storybookMockData } from '../../../../shared/config/storybook/storybookMockData/sotrybookMockData.ts';
 
 const meta = {
   title: 'entities/Catalog/MobileFilters',
   component: MobileFilters,
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
+    mockData: [
+      storybookMockData.getFlowerApi(),
+      storybookMockData.getColorApi()
+    ]
   },
   tags: ['autodocs'],
   decorators: [StoreDecorator({})],

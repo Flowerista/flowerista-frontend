@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ProfileOrders } from './ProfileOrders.tsx';
+import { RouterDecorator } from '../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/ProfileOrders',
   component: ProfileOrders,
+  decorators: [RouterDecorator],
   parameters: {
     layout: 'centered'
   },

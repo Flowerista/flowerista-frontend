@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ProfilePersonalInformation } from './ProfilePersonalInformation.tsx';
 import { StoreDecorator } from '../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'widgets/ProfilePersonalInformation',
@@ -10,6 +11,7 @@ const meta = {
   },
   tags: ['autodocs'],
   decorators: [
+    RouterDecorator,
     StoreDecorator({
       user: {
         user: {

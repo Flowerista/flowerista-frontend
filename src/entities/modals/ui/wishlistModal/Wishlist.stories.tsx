@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { WishlistModal } from './Wishlist.tsx';
 import { StoreDecorator } from '../../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'entities/modals/WishlistModal',
@@ -9,7 +10,16 @@ const meta = {
     layout: 'centered'
   },
   tags: ['autodocs'],
-  decorators: [StoreDecorator({})],
+  decorators: [
+    StoreDecorator({
+      modals: {
+        modals: {
+          wishlistModalOpen: true
+        }
+      }
+    }),
+    RouterDecorator
+  ],
   argTypes: {}
 } satisfies Meta<typeof WishlistModal>;
 

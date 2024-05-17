@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import PasswordRecovery from './PasswordRecovery.tsx';
 import { StoreDecorator } from '../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'pages/PasswordRecovery',
@@ -8,7 +9,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  decorators: [StoreDecorator({})],
+  decorators: [StoreDecorator({}), RouterDecorator],
   tags: ['autodocs'],
   argTypes: {}
 } satisfies Meta<typeof PasswordRecovery>;

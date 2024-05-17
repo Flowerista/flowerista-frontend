@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ProfilePage from './ProfilePage.tsx';
 import { StoreDecorator } from '../../../shared/config/storybook/StoreDecorator/StoreDecorator.tsx';
+import { RouterDecorator } from '../../../shared/config/storybook/RouterDecorator/RouterDecorator.tsx';
 
 const meta = {
   title: 'pages/ProfilePage',
@@ -183,7 +184,8 @@ const meta = {
           phoneNumber: 123123213
         }
       }
-    })
+    }),
+    RouterDecorator
   ],
   tags: ['autodocs'],
   argTypes: {}
