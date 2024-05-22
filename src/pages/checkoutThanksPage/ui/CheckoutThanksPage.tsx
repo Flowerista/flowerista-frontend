@@ -27,7 +27,7 @@ const CheckoutThanksPage: FC<ICheckOutThanksPage> = () => {
   }, [cleanCart]);
 
   return (
-    <div className={styles.wrapper}>
+    <div data-testid="CheckoutThanksPage" className={styles.wrapper}>
       <div className={styles.container}>
         <SecondHeader />
         <main className={styles.main}>

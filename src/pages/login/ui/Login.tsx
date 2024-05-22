@@ -75,7 +75,7 @@ const Login: FC = () => {
   }, [data, error, navigate, reset, setError, setProfile]);
 
   return (
-    <div className={styles.login}>
+    <div data-testid="LoginPage" className={styles.login}>
       <div className={styles.login__container}>
         <Title text={`${t('login.title')}`} />
         <Form onSubmit={handleSubmit(onSubmit)}>

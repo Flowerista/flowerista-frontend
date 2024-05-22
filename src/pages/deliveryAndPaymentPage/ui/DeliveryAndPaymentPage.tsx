@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const DeliveryAndPaymentPage: FC = () => {
   const { t } = useTranslation();
   return (
-    <div className={styles.container}>
+    <div data-testid="DeliveryAndPaymentPage" className={styles.container}>
       <div className={styles.container__info}>
         <h1>{t('deliveryAndPayment.title')}</h1>
         <div className={styles.container__info_content}>

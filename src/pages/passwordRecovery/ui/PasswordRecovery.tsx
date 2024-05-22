@@ -53,7 +53,7 @@ const PasswordRecovery: FC = () => {
   };
 
   return (
-    <div className={styles.restoring}>
+    <div data-testid="PasswordRecoveryPage" className={styles.restoring}>
       <div className={styles.restoring__wrapper}>
         <Title text={`${t('restoring.info.title')}`} />
         <Form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: '50px' }}>

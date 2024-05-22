@@ -107,7 +107,7 @@ const ProductPage: FC<IProductPage> = () => {
     return <h1>Something Was Wrong</h1>;
   }
   return (
-    <div className={styles.productPage}>
+    <div data-testid="ProductPage" className={styles.productPage}>
       <div className={styles.nav}>
         <Link to={getRouteHome()}>{t('product.btn1')}</Link>
         <span>|</span>

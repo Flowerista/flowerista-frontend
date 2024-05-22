@@ -46,7 +46,7 @@ const RestoringAccess: FC = () => {
   };
 
   return (
-    <div className={styles.restoring}>
+    <div data-testid="RegistrationAccessPage" className={styles.restoring}>
       <div className={styles.restoring__wrapper}>
         <Title text={`${t('restoring.success.title')}`} />
         <div className={styles.restoring__descr}>

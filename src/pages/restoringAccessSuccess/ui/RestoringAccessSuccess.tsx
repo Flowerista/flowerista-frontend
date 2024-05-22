@@ -17,7 +17,7 @@ export const RestoringAccessSuccess: FC = () => {
     navigate(getRouteHome());
   };
   return (
-    <div className={styles.restoring}>
+    <div data-testid="RestoringAccessSuccess" className={styles.restoring}>
       <div className={styles.restoring__wrapper}>
         <Title text={`${t('restoring.recovery.title')}`} />
         <div className={styles.restoring__descr}>
