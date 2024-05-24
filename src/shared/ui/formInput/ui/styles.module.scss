@@ -1,5 +1,6 @@
 .label {
     position: relative;
+    display: block;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -16,6 +17,7 @@
         line-height: 150%;
         color: #C5B4B9;
         transition: 0.5s;
+        width: max-content;
     }
 
     input:valid~span,
