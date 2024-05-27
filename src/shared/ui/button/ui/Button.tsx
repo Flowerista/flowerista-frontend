@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
+  testId?: string;
   colorMode?: 'black' | 'white';
   sizeMode?: 'big' | 'small' | 'full';
   loading?: boolean;
@@ -18,6 +19,7 @@ export const Button: FC<ButtonProps> = (props) => {
     disabled,
     loading,
     className,
+    testId = '',
     ...otherProps
   } = props;
   const clazz = classNames(
@@ -29,7 +31,12 @@ export const Button: FC<ButtonProps> = (props) => {
   );
 
   return (
-    <button className={clazz} disabled={disabled || loading} {...otherProps}>
+    <button
+      data-testid={testId}
+      className={clazz}
+      disabled={disabled || loading}
+      {...otherProps}
+    >
       {loading ? <BsClockFill className={styles.clock} /> : text}
     </button>
   );

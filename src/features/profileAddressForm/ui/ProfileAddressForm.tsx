@@ -74,6 +74,7 @@ export const ProfileAddressForm: FC = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.inputs_wpr}>
             <TextInput
+              testId={'profile.address.city'}
               label={`${t('profile.address.city')}`}
               placeholder="City"
               register={register}
@@ -81,6 +82,7 @@ export const ProfileAddressForm: FC = () => {
               error={errors.city?.message}
             />
             <TextInput
+              testId={'profile.address.street'}
               label={`${t('profile.address.street')}`}
               placeholder="Street"
               register={register}
@@ -88,6 +90,7 @@ export const ProfileAddressForm: FC = () => {
               error={errors.street?.message}
             />
             <TextInput
+              testId={'profile.address.house'}
               label={`${t('profile.address.house')}`}
               placeholder="House"
               register={register}
@@ -95,6 +98,7 @@ export const ProfileAddressForm: FC = () => {
               error={errors.house?.message}
             />
             <TextInput
+              testId={'profile.address.entrance'}
               label={`${t('profile.address.entrance')}`}
               placeholder="Entrance"
               register={register}
@@ -102,6 +106,7 @@ export const ProfileAddressForm: FC = () => {
               error={errors.entrance?.message}
             />
             <TextInput
+              testId={'profile.address.flat'}
               label={`${t('profile.address.flat')}`}
               placeholder="Flat"
               register={register}
@@ -110,6 +115,7 @@ export const ProfileAddressForm: FC = () => {
             />
           </div>
           <Button
+            testId={'profile.address.button'}
             text={`${t('profile.address.btn1')}`}
             colorMode="white"
             sizeMode="full"

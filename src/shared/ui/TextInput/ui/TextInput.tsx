@@ -4,6 +4,7 @@ import { FormError } from '../../formError';
 
 interface IFormInput {
   error?: string;
+  testId?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
   label: string;
@@ -20,6 +21,7 @@ export const TextInput: FC<IFormInput> = ({
   placeholder,
   registerName,
   defaultValue,
+  testId = '',
   required
 }) => {
   return (
@@ -31,6 +33,7 @@ export const TextInput: FC<IFormInput> = ({
         defaultValue={defaultValue}
         placeholder={placeholder ? placeholder : ''}
         error={error}
+        testId={testId}
         register={register(registerName, {})}
       />
       {error && <FormError error={error} />}

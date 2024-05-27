@@ -32,6 +32,7 @@ export const profileSlice = buildSlice({
         path: '/',
         domain: 'floverista-011daa2eb6c3.herokuapp.com'
       });
+      // window.location.reload();
     }
   }
 });

@@ -7,6 +7,7 @@ export const getRouteRegistration = () => '/registration';
 export const getRouteRestoringAccess = () => '/restoring-access';
 export const getRouteRestoringAccessSuccess = () => '/restoring-access/success';
 export const getRouteProductId = (id: string) => `/product/${id}`;
+11;
 export const getRouteCheckOut = () => '/checkout';
 export const getRouteChangePassword = () => '/changePassword';
 export const getRouteCheckOutPending = () => '/capture';
