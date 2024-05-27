@@ -12,7 +12,7 @@ const HomePage: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <main className={styles.home}>
+    <main data-testid="HomePage" className={styles.home}>
       <HomeSwiper />
       <div className={styles.home__catalog}>
         <CatalogBox text={t('mainPage.box1')} />

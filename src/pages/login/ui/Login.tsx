@@ -24,6 +24,7 @@ import { EmailInput } from '../../../shared/ui/emailInput';
 import { PasswordInput } from '../../../shared/ui/PasswordInput';
 import { FormLink } from '../../../shared/ui/FormLink';
 import { LoginSchema } from '../model/validators/LoginSchema.ts';
+import Cookies from 'js-cookie';
 
 type Inputs = {
   password: string;
@@ -46,7 +47,7 @@ const Login: FC = () => {
     mode: 'onBlur',
     resolver: yupResolver(LoginSchema)
   });
-
+  console.log(Cookies.get('refreshToken'));
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { data: checkedEmail } = await checkEmail(data.email);
     if (!checkedEmail) {
@@ -67,15 +68,14 @@ const Login: FC = () => {
       });
     } else if (data) {
       setProfile(data.user);
-      localStorage.setItem('token', data.access_token);
-      localStorage.setItem('refresh', data.refresh_token);
+      Cookies.set('token', data.access_token);
       reset();
       navigate(getRouteProfile());
     }
   }, [data, error, navigate, reset, setError, setProfile]);
 
   return (
-    <div className={styles.login}>
+    <div data-testid="LoginPage" className={styles.login}>
       <div className={styles.login__container}>
         <Title text={`${t('login.title')}`} />
         <Form onSubmit={handleSubmit(onSubmit)}>

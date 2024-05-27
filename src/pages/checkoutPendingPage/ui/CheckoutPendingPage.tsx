@@ -39,7 +39,7 @@ const CheckoutPendingPage: FC<ICheckOutPendingPage> = () => {
   }, [data?.status, navigate]);
 
   return (
-    <main className={styles.wrapper}>
+    <main data-testid="CheckoutPendingPage" className={styles.wrapper}>
       <div className={styles.container}>
         <SecondHeader />
         <div className={styles.main}>

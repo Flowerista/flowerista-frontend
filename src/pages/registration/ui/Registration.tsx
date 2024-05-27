@@ -104,7 +104,7 @@ const Registration: FC = () => {
   }, [data, isError, reset]);
 
   return (
-    <div className={styles.registration}>
+    <div data-testid="RegistrationPage" className={styles.registration}>
       <div className={styles.registration__container}>
         <Title text={`${t('register.title')}`} />
 

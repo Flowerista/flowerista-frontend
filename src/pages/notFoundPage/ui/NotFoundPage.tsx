@@ -14,7 +14,7 @@ export const NotFoundPage: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <main className={styles.notFound}>
+    <main data-testid="NotFoundPage" className={styles.notFound}>
       <div className={styles.notFound__container}>
         <div className={styles.notFound__header}>
           <div className={styles.logo_wrp}>

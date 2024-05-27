@@ -60,7 +60,7 @@ const AboutUs: FC = () => {
   ];
 
   return (
-    <div className={styles.about_us}>
+    <div data-testid="AboutPage" className={styles.about_us}>
       <section className={styles.section_1}>
         <div className={styles.img__wrapper}>
           <img src={sectionImg1} alt="team" />
