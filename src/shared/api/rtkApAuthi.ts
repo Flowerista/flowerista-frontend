@@ -6,13 +6,13 @@ import {
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query/react';
 import { logoutAll } from '../../pages/profile/model/slice/profile/profile.slice.ts';
+import Cookies from 'js-cookie';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}/api`,
-  // включити коли на бекенді добавлять можливіть отримувати токени через cookie
-  // credentials: 'include',
+  credentials: 'include',
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem('token');
+    const token = Cookies.get('token');
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -27,24 +27,26 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // originalStatus or status depends on your api
   if (result?.error?.status === 401) {
-    console.log('sending refresh token');
-    // send refresh token to get new access token
-    const refreshResult = await baseQuery('/refresh-token', api, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('refresh')}`
-      }
-    });
+    console.log('Sending refresh token');
+    const refreshResult = await baseQuery(
+      {
+        url: '/refresh-token',
+        method: 'POST',
+        body: JSON.stringify({ refreshToken: Cookies.get('refreshToken') })
+      },
+      api,
+      extraOptions
+    );
 
     if (refreshResult?.data) {
       const refreshData = refreshResult.data as {
-        refresh_token: string;
         access_token: string;
       };
-      localStorage.setItem('token', refreshData.access_token);
-      localStorage.setItem('refresh', refreshData.refresh_token);
+      Cookies.set('token', refreshData.access_token, {
+        sameSite: 'Strict',
+        secure: true
+      });
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logoutAll());
