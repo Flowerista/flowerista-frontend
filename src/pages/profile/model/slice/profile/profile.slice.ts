@@ -26,6 +26,7 @@ export const profileSlice = buildSlice({
     },
     logoutAll: (state) => {
       state.user = null;
+      localStorage.removeItem('user');
       Cookies.remove('token');
       Cookies.remove('refreshToken', {
         path: '/',
