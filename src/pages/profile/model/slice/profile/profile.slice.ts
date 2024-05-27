@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { buildSlice } from '../../../../../shared/lib/store';
 import { InterfaceProfileInitialState } from '../../types/ProfileStateInterface.ts';
 import { IUser } from '../../../../login/model/types/AuthResponseInterface.ts';
+import Cookies from 'js-cookie';
 
 const getUserFromLocalStorage = (): IUser | null => {
   const userStr = localStorage.getItem('user');
@@ -25,9 +26,12 @@ export const profileSlice = buildSlice({
     },
     logoutAll: (state) => {
       state.user = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('refresh');
       localStorage.removeItem('user');
+      Cookies.remove('token');
+      Cookies.remove('refreshToken', {
+        path: '/',
+        domain: 'floverista-011daa2eb6c3.herokuapp.com'
+      });
     }
   }
 });

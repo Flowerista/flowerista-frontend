@@ -12,7 +12,7 @@ export const PaymentErrorPage: FC = () => {
   const navigation = useNavigate();
   const { t } = useTranslation();
   return (
-    <div className={styles.wrapper}>
+    <div data-testid="PaymentErrorPage" className={styles.wrapper}>
       <div className={styles.container}>
         <SecondHeader />
         <main className={styles.main}>

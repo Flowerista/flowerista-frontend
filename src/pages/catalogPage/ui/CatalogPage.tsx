@@ -90,7 +90,7 @@ const CatalogPage: FC = () => {
   }
 
   return (
-    <div className={styles.catalog}>
+    <div data-testid="CatalogPage" className={styles.catalog}>
       <div className={styles.catalog__name}>
         <Link to={getRouteHome()}>{t('catalog.link')}</Link>
         {t('catalog.link2')}

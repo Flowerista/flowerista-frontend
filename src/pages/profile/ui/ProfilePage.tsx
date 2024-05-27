@@ -47,7 +47,11 @@ const ProfilePage: FC = () => {
   }, [profile, setProfile]);
 
   if (isLoadingOrder || isLoadingProfile || isLoadingWishlist) {
-    return <Loader />;
+    return (
+      <div data-testid="ProfilePage">
+        <Loader />
+      </div>
+    );
   }
 
   if (errorProfile || errorWishlist) {
@@ -55,36 +59,38 @@ const ProfilePage: FC = () => {
   }
 
   return (
-    <TabGroup
-      selectedIndex={selectedIndex}
-      onChange={setSelectedIndex}
-      className={styles.page_wrp}
-    >
-      <SidebarModal />
-      <div className={styles.nav}>
-        <Link to={getRouteHome()}>Home</Link>|
-        <p>{profileLinks[selectedIndex].name}</p>
-      </div>
-      <button className={styles.btn} onClick={onOpen}>
-        {profileLinks[selectedIndex].name}
-        <BsChevronCompactDown size={24} />
-      </button>
-      <TabPanels className={styles.content}>
-        <TabPanel>
-          <ProfilePersonalInformation />
-        </TabPanel>
-        <TabPanel>
-          <ProfileOrders order={orders} />
-        </TabPanel>
-        <TabPanel>
-          <ProfileWishlist wishlist={wishlist} />
-        </TabPanel>
-      </TabPanels>
-      <div className={styles.sidebar_wrp}>
-        <Sidebar className={styles.sidebar} />
-        <div></div>
-      </div>
-    </TabGroup>
+    <main data-testid="ProfilePage">
+      <TabGroup
+        selectedIndex={selectedIndex}
+        onChange={setSelectedIndex}
+        className={styles.page_wrp}
+      >
+        <SidebarModal />
+        <div className={styles.nav}>
+          <Link to={getRouteHome()}>Home</Link>|
+          <p>{profileLinks[selectedIndex].name}</p>
+        </div>
+        <button className={styles.btn} onClick={onOpen}>
+          {profileLinks[selectedIndex].name}
+          <BsChevronCompactDown size={24} />
+        </button>
+        <TabPanels className={styles.content}>
+          <TabPanel>
+            <ProfilePersonalInformation />
+          </TabPanel>
+          <TabPanel>
+            <ProfileOrders order={orders} />
+          </TabPanel>
+          <TabPanel>
+            <ProfileWishlist wishlist={wishlist} />
+          </TabPanel>
+        </TabPanels>
+        <div className={styles.sidebar_wrp}>
+          <Sidebar className={styles.sidebar} />
+          <div></div>
+        </div>
+      </TabGroup>
+    </main>
   );
 };
 export default ProfilePage;

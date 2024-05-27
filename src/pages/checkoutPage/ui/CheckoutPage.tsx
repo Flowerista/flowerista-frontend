@@ -31,7 +31,7 @@ const CheckoutPage: FC = () => {
   }, [resetAllState]);
 
   return (
-    <main className={styles.wrapper}>
+    <main data-testid="CheckoutPage" className={styles.wrapper}>
       <CheckoutModal setIsOpen={setIsShow} isOpen={isShow} />
       <CheckOutHeader />
       <div className={styles.checkOut}>
