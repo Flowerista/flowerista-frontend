@@ -26,14 +26,15 @@ const baseQueryWithReauth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-
+  console.log(result);
   if (result?.error?.status === 401) {
     console.log('Sending refresh token');
     const refreshResult = await baseQuery(
       {
-        url: '/refresh-token',
+        url: '/auth/refresh-token',
         method: 'POST',
-        body: JSON.stringify({ refreshToken: Cookies.get('refreshToken') })
+        credentials: 'include',
+        mode: 'cors'
       },
       api,
       extraOptions
@@ -44,8 +45,8 @@ const baseQueryWithReauth: BaseQueryFn<
         access_token: string;
       };
       Cookies.set('token', refreshData.access_token, {
-        sameSite: 'Strict',
-        secure: true
+        path: '/',
+        domain: 'https://floverista-011daa2eb6c3.herokuapp.com'
       });
       result = await baseQuery(args, api, extraOptions);
     } else {
