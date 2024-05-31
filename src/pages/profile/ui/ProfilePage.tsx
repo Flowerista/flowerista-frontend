@@ -31,7 +31,7 @@ const ProfilePage: FC = () => {
     data: wishlist,
     isLoading: isLoadingWishlist,
     error: errorWishlist
-  } = useGetWishlistQuery();
+  } = useGetWishlistQuery('wishlist');
 
   const { setSidebarModalOpen } = useModalActions();
   const { setProfile } = useProfileActions();

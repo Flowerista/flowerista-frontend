@@ -3,9 +3,9 @@ import { InterfaceFlowerCard } from '../../types/InterfaceFlowerCard.ts';
 
 const getWishlistApi = rtkApiAuth.injectEndpoints({
   endpoints: (build) => ({
-    getWishlist: build.query<InterfaceFlowerCard[], void>({
-      query: () => ({
-        url: `/user/wishlist`
+    getWishlist: build.query<InterfaceFlowerCard[], string>({
+      query: (wishlist) => ({
+        url: `/user/${wishlist}`
       })
     })
   })
