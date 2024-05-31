@@ -28,9 +28,9 @@ export const profileSlice = buildSlice({
       state.user = null;
       localStorage.removeItem('user');
       Cookies.remove('token');
-      Cookies.remove('refreshToken', {
-        path: '/',
-        domain: 'floverista-011daa2eb6c3.herokuapp.com'
+      fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
+        method: 'POST',
+        credentials: 'include'
       });
     }
   }
