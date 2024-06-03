@@ -45,7 +45,7 @@ export const Card: FC<InterfaceFlowerCard> = (props) => {
   };
 
   const toLike = async (id: number) => {
-    if (!localStorage.getItem('token')) {
+    if (!user) {
       setWishlistModalOpen(true);
     } else {
       if (liked) {
