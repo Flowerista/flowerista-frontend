@@ -12,9 +12,13 @@ import { generateCartID } from '../../../shared/lib/helpers';
 import { getRouteProductId } from '../../../shared/consts/router.ts';
 import { InterfaceFlowerCard } from '../model/types/InterfaceFlowerCard.ts';
 import { InterfaceCardItem } from '../model/types/IntefaceCardItem.ts';
+import { useUser } from '../../../pages/profile/model/selectors/getUser.ts';
 
 export const Card: FC<InterfaceFlowerCard> = (props) => {
-  const { data: wishlist } = useGetWishlistQuery();
+  const user = useUser();
+  const { data: wishlist } = useGetWishlistQuery('wishlist', {
+    skip: !user
+  });
   const { setCartModalOpen, setWishlistModalOpen } = useModalActions();
   const { addCartItem } = useCartActions();
   const { id, name, imageUrls, defaultPrice, discount, discountPrice } = props;
@@ -41,7 +45,7 @@ export const Card: FC<InterfaceFlowerCard> = (props) => {
   };
 
   const toLike = async (id: number) => {
-    if (!localStorage.getItem('token')) {
+    if (!user) {
       setWishlistModalOpen(true);
     } else {
       if (liked) {

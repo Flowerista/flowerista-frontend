@@ -6,6 +6,7 @@ import {
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query/react';
 import { logoutAll } from '../../pages/profile/model/slice/profile/profile.slice.ts';
+import { Mutex } from 'async-mutex';
 import Cookies from 'js-cookie';
 
 const baseQuery = fetchBaseQuery({
@@ -20,40 +21,44 @@ const baseQuery = fetchBaseQuery({
   }
 });
 
+// create a new mutex
+const mutex = new Mutex();
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
-
   if (result?.error?.status === 401) {
-    console.log('Sending refresh token');
-    const refreshResult = await baseQuery(
-      {
-        url: '/refresh-token',
-        method: 'POST',
-        body: JSON.stringify({ refreshToken: Cookies.get('refreshToken') })
-      },
-      api,
-      extraOptions
-    );
-
-    if (refreshResult?.data) {
-      const refreshData = refreshResult.data as {
-        access_token: string;
-      };
-      Cookies.set('token', refreshData.access_token, {
-        sameSite: 'Strict',
-        secure: true
-      });
-      result = await baseQuery(args, api, extraOptions);
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire();
+      try {
+        const refreshResult = await baseQuery(
+          {
+            url: '/auth/refresh-token',
+            method: 'POST'
+          },
+          api,
+          extraOptions
+        );
+        if (refreshResult.meta?.response?.status === 200) {
+          const refreshData = refreshResult.data as {
+            access_token: string;
+          };
+          Cookies.set('token', refreshData.access_token);
+          result = await baseQuery(args, api, extraOptions);
+        } else {
+          api.dispatch(logoutAll());
+        }
+      } finally {
+        release();
+      }
     } else {
-      api.dispatch(logoutAll());
-      console.log('Not authorized');
+      await mutex.waitForUnlock();
+      result = await baseQuery(args, api, extraOptions);
     }
   }
-
   return result;
 };
 

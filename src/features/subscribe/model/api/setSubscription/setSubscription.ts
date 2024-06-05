@@ -6,7 +6,9 @@ const setSubscription = rtkApi.injectEndpoints({
       query: (data) => ({
         url: `/subscription`,
         method: 'POST',
-        body: data
+        body: {
+          email: data
+        }
       })
     })
   })
