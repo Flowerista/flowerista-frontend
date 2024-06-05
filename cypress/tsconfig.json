@@ -12,7 +12,7 @@
     "allowJs": true,
     "isolatedModules": false,
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "node"
   },
   "extends": "../tsconfig.json",
   "include": [
