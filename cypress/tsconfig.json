@@ -1,11 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
-    "types": ["cypress", "node"],
+    "target": "es2020",
+    // Зміна на es2020 для сумісності з основним проектом
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    // Зміна на es2020
+    "types": [
+      "cypress",
+      "node"
+    ],
     "allowJs": true,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "module": "esnext",
+    // Зміна на esnext для сумісності
+    "moduleResolution": "node"
+    // Зміна на node
   },
   "extends": "../tsconfig.json",
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
