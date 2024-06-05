@@ -1,22 +1,18 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    // Зміна на es2020 для сумісності з основним проектом
     "lib": [
       "es2020",
       "dom"
     ],
-    // Зміна на es2020
     "types": [
       "cypress",
       "node"
     ],
     "allowJs": true,
     "isolatedModules": false,
-    "module": "esnext",
-    // Зміна на esnext для сумісності
-    "moduleResolution": "node"
-    // Зміна на node
+    "module": "ESNext",
+    "moduleResolution": "bundler"
   },
   "extends": "../tsconfig.json",
   "include": [
