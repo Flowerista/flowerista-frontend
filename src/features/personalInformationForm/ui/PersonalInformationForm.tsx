@@ -66,8 +66,16 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({ onOpen }) => {
       <div className={styles.form__body}>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <InputsWrapper>
-            <NameInput register={register} error={errors.name?.message} />
-            <SurnameInput register={register} error={errors.surname?.message} />
+            <NameInput
+              testId={'PersonalInformationForm.name'}
+              register={register}
+              error={errors.name?.message}
+            />
+            <SurnameInput
+              testId={'PersonalInformationForm.lastName'}
+              register={register}
+              error={errors.surname?.message}
+            />
             <div className={styles.password} onClick={onOpen}>
               {t('profile.personal.btn1')}
             </div>
@@ -78,6 +86,7 @@ export const PersonalInformationForm: FC<PersonalFormProps> = ({ onOpen }) => {
             sizeMode="full"
             className={styles.personal_btn}
             loading={isLoading}
+            testId={'PersonalInformationForm.button'}
           />
         </Form>
       </div>

@@ -11,6 +11,7 @@ interface InputProps {
   error?: string;
   children?: ReactNode;
   required?: boolean;
+  testId?: string;
 }
 
 export const FormInput: FC<InputProps> = ({
@@ -19,7 +20,8 @@ export const FormInput: FC<InputProps> = ({
   register,
   error,
   children,
-  required = true
+  required = true,
+  testId = ''
 }) => {
   return (
     <label className={styles.label}>
@@ -29,6 +31,7 @@ export const FormInput: FC<InputProps> = ({
         // placeholder={placeholder || ''}
         required={required}
         {...register}
+        data-testid={testId}
       />
       <span>{label}</span>
       {children}

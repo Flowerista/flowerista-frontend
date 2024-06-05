@@ -32,6 +32,7 @@ export const profileSlice = buildSlice({
         method: 'POST',
         credentials: 'include'
       });
+      // window.location.reload();
     }
   }
 });

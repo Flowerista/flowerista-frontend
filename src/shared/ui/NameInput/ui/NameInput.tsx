@@ -5,11 +5,12 @@ import { FormError } from '../../formError';
 
 interface IFormInput {
   error?: string;
+  testId?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
 }
 
-export const NameInput: FC<IFormInput> = ({ error, register }) => {
+export const NameInput: FC<IFormInput> = ({ error, register, testId }) => {
   const { t } = useTranslation();
   return (
     <div>
@@ -19,6 +20,7 @@ export const NameInput: FC<IFormInput> = ({ error, register }) => {
         defaultValue=""
         placeholder="Name"
         error={error}
+        testId={testId}
         register={register('name')}
       />
       {error && <FormError error={error} />}

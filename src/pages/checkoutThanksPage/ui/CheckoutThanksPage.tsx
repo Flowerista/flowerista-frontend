@@ -5,7 +5,7 @@ import { SecondHeader } from '../../../widgets/secondHeader';
 import flower from '../../../shared/assets/image/checkOut/thanks_you_flower.png';
 import { useNavigate } from 'react-router-dom';
 
-import { useCartActions } from '../../../entities/cart/model/slice/cart.slice.ts';
+import { useCartActions } from '../../../entities/cart';
 import {
   getRouteCatalog,
   getRouteHome
