@@ -12,7 +12,8 @@
     "allowJs": true,
     "isolatedModules": false,
     "module": "ESNext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "extends": "../tsconfig.json",
   "include": [
